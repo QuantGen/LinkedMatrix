@@ -2,7 +2,7 @@
 NULL
 
 
-setClassUnion('mmMatrix',c('cmmMatrix','rmmMatrix'))
+setClassUnion('LinkedMatrix',c('ColumnLinkedMatrix','RowLinkedMatrix'))
 
 
 show<-function(object){
@@ -12,12 +12,12 @@ show<-function(object){
 }
 
 #' @export
-setMethod("show",signature(object="mmMatrix"),show)
+setMethod("show",signature(object="LinkedMatrix"),show)
 
 
-apply.mmMatrix<-function(X,MARGIN,FUN,chunkSize=1e3,verbose=FALSE,...){
+apply.LinkedMatrix<-function(X,MARGIN,FUN,chunkSize=1e3,verbose=FALSE,...){
     FUN<-match.fun(FUN)
-    if(!(class(X)%in%c('rmmMatrix','cmmMatrix'))){ stop('X must be either mmMatrix or rMatrix') }
+    if(!(class(X)%in%c('ColumnLinkedMatrix','RowLinkedMatrix'))){ stop('X must be either LinkedMatrix or rMatrix') }
     
     n<-ifelse(MARGIN==1,nrow(X),ncol(X))
  
@@ -62,70 +62,70 @@ apply.mmMatrix<-function(X,MARGIN,FUN,chunkSize=1e3,verbose=FALSE,...){
     return(ANS[,,drop=TRUE])
 }
 
-#' Apply function for \code{\linkS4class{rmmMatrix}} or 
-#' \code{\linkS4class{cmmMatrix}} objects.
+#' Apply function for \code{\linkS4class{ColumnLinkedMatrix}} or 
+#' \code{\linkS4class{RowLinkedMatrix}} objects.
 #' 
 #' This function brings chunks of data (of size \code{chunkSize}) from the 
 #' distributed array into RAM as \code{matrix} objects and calls \code{apply} of
 #' the base package to obtain the summaries for the chunk. Results from all the 
 #' chunks are collected and returned.
 #' 
-#' @param X Either an \code{\linkS4class{rmmMatrix}} or a 
-#'   \code{\linkS4class{cmmMatrix}} object.
+#' @param X Either an \code{\linkS4class{ColumnLinkedMatrix}} or a 
+#'   \code{\linkS4class{RowLinkedMatrix}} object.
 #' @param MARGIN Use 1 to obtain row summaries or 2 to obtain column summaries.
 #' @param chunkSize The number of columns or rows that are processed at a time 
 #'   (see Details).
 #' @return Returns a \code{matrix} or a \code{list} with results from FUN.
 #' @export
-setMethod("apply",signature("mmMatrix"),apply.mmMatrix)
+setMethod("apply",signature("LinkedMatrix"),apply.LinkedMatrix)
 
 
-colMeans.mmMatrix<-function(x,na.rm=TRUE,chunkSize=1e3,...){
+colMeans.LinkedMatrix<-function(x,na.rm=TRUE,chunkSize=1e3,...){
     if(na.rm){
         warning('Ignoring missing values')
     }
-    ANS<-apply.mmMatrix(X=x,MARGIN=2,FUN=mean,chunkSize=chunkSize,na.rm=na.rm,...)
+    ANS<-apply.LinkedMatrix(X=x,MARGIN=2,FUN=mean,chunkSize=chunkSize,na.rm=na.rm,...)
     return(ANS)
 }
 
 #' @export
-setMethod("colMeans",signature("mmMatrix"),colMeans.mmMatrix)
+setMethod("colMeans",signature("LinkedMatrix"),colMeans.LinkedMatrix)
 
 
-colSums.mmMatrix<-function(x,na.rm=TRUE,chunkSize=1e3,...){
+colSums.LinkedMatrix<-function(x,na.rm=TRUE,chunkSize=1e3,...){
     if(na.rm){
         warning('Ignoring missing values')
     }
-    ANS<-apply.mmMatrix(X=x,MARGIN=2,FUN=sum,chunkSize=chunkSize,na.rm=na.rm,...)
+    ANS<-apply.LinkedMatrix(X=x,MARGIN=2,FUN=sum,chunkSize=chunkSize,na.rm=na.rm,...)
     return(ANS)
 }
 
 #' @export
-setMethod("colSums",signature("mmMatrix"),colSums.mmMatrix)
+setMethod("colSums",signature("LinkedMatrix"),colSums.LinkedMatrix)
 
 
-rowMeans.mmMatrix<-function(x,na.rm=TRUE,chunkSize=1e3,...){
+rowMeans.LinkedMatrix<-function(x,na.rm=TRUE,chunkSize=1e3,...){
     if(na.rm){
         warning('Ignoring missing values')
     }
-    ANS<-apply.mmMatrix(X=x,MARGIN=1,FUN=mean,chunkSize=chunkSize,na.rm=na.rm,...)
+    ANS<-apply.LinkedMatrix(X=x,MARGIN=1,FUN=mean,chunkSize=chunkSize,na.rm=na.rm,...)
     return(ANS)
 }
 
 #' @export
-setMethod("rowMeans",signature("mmMatrix"),rowMeans.mmMatrix)
+setMethod("rowMeans",signature("LinkedMatrix"),rowMeans.LinkedMatrix)
 
 
-rowSums.mmMatrix<-function(x,na.rm=TRUE,chunkSize=1e3,...){
+rowSums.LinkedMatrix<-function(x,na.rm=TRUE,chunkSize=1e3,...){
     if(na.rm){
         warning('Ignoring missing values')
     }
-    ANS<-apply.mmMatrix(X=x,MARGIN=1,FUN=sum,chunkSize=chunkSize,na.rm=na.rm,...)
+    ANS<-apply.LinkedMatrix(X=x,MARGIN=1,FUN=sum,chunkSize=chunkSize,na.rm=na.rm,...)
     return(ANS)
 }
 
 #' @export
-setMethod("rowSums",signature("mmMatrix"),rowSums.mmMatrix)
+setMethod("rowSums",signature("LinkedMatrix"),rowSums.LinkedMatrix)
 
 
 summary.num<-function(x){
@@ -140,15 +140,15 @@ summary.char<-function(x){
     return(out)
 }
 
-summary.mmMatrix<-function(object,MARGIN=2,chunkSize=1e3,...){
+summary.LinkedMatrix<-function(object,MARGIN=2,chunkSize=1e3,...){
     # If MARGIN==1 summaries of columns are provided, this is the default, otherwise, row-summaries are returned.
     if(is.numeric(object[1,1])){
-        ANS<-apply.mmMatrix(X=object,MARGIN=MARGIN,FUN=summary.num,chunkSize=chunkSize,...)
+        ANS<-apply.LinkedMatrix(X=object,MARGIN=MARGIN,FUN=summary.num,chunkSize=chunkSize,...)
     }else{
        if(is.character(object[1,1])|is.logical(object[1,1])){
-           ANS<-apply.mmMatrix(X=object,MARGIN=MARGIN,FUN=summary.char,chunkSize=chunkSize,...)
+           ANS<-apply.LinkedMatrix(X=object,MARGIN=MARGIN,FUN=summary.char,chunkSize=chunkSize,...)
        }else{
-           ANS<-apply.mmMatrix(X=object,MARGIN=MARGIN,FUN=summary,chunkSize=chunkSize,...)
+           ANS<-apply.LinkedMatrix(X=object,MARGIN=MARGIN,FUN=summary,chunkSize=chunkSize,...)
        }
 
     }
@@ -156,19 +156,19 @@ summary.mmMatrix<-function(object,MARGIN=2,chunkSize=1e3,...){
 }
 
 #' @export
-setMethod("summary",signature("mmMatrix"),summary.mmMatrix)
+setMethod("summary",signature("LinkedMatrix"),summary.LinkedMatrix)
 
 
 #' Provides information about how data is distributed into binary files.
 #' 
-#' Row-distributed (\code{\linkS4class{rmmMatrix}}) and column-distributed 
-#' matrices (\code{\linkS4class{cmmMatrix}}) have the content of the array mapped
+#' Column-distributed (\code{\linkS4class{ColumnLinkedMatrix}}) and row-distributed 
+#' matrices (\code{\linkS4class{RowLinkedMatrix}}) have the content of the array mapped
 #' to possibly multiple binary files. Each chunk is an \code{ff_matrix} object. 
 #' \code{chunks} gives, for each chunk, the row or column indexes at which each 
 #' chunk start and ends.
 #' 
-#' @param x Either an \code{\linkS4class{rmmMatrix}} or a 
-#'   \code{\linkS4class{cmmMatrix}} object
+#' @param x Either an \code{\linkS4class{ColumnLinkedMatrix}} or a 
+#'   \code{\linkS4class{RowLinkedMatrix}} object
 #' @return A matrix with information per chunk in rows.
 #' @export
 chunks<-function(x){
@@ -176,7 +176,7 @@ chunks<-function(x){
 }
 
 
-#' Finds the position of a set of rows or columns in an rmmMatrix or cmmMatrix object.
+#' Finds the position of a set of rows or columns in an ColumnLinkedMatrix or RowLinkedMatrix object.
 index<-function(x){
     UseMethod('index')
 }

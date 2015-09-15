@@ -1,14 +1,14 @@
 #' An S4 class to represent a row-distributed \code{mmMatrix}
 #'
-#' \code{rmmMatrix} inherits from \code{\link{list}}. Each element of the list is
+#' \code{RowLinkedMatrix} inherits from \code{\link{list}}. Each element of the list is
 #' an \code{ff_matrix} object.
 #'
-#' @export rmmMatrix
-#' @exportClass rmmMatrix
-rmmMatrix<-setClass('rmmMatrix',contains='list')
+#' @export RowLinkedMatrix
+#' @exportClass RowLinkedMatrix
+RowLinkedMatrix<-setClass('RowLinkedMatrix',contains='list')
 
 #' @export
-setMethod('initialize','rmmMatrix',function(.Object,nrow=1,ncol=1,nChunks=NULL){
+setMethod('initialize','RowLinkedMatrix',function(.Object,nrow=1,ncol=1,nChunks=NULL){
     if(is.null(nChunks)){
         chunkSize<-min(nrow,floor(.Machine$integer.max/ncol/1.2))
         nChunks<-ceiling(nrow/chunkSize)
@@ -30,7 +30,7 @@ setMethod('initialize','rmmMatrix',function(.Object,nrow=1,ncol=1,nChunks=NULL){
 })
 
 
-subset.rmmMatrix<-function(x,i,j,drop){
+subset.RowLinkedMatrix<-function(x,i,j,drop){
     if(missing(i)){
         i<-1:nrow(x)
     }
@@ -87,10 +87,10 @@ subset.rmmMatrix<-function(x,i,j,drop){
 }
 
 #' @export
-setMethod("[",signature(x="rmmMatrix"),subset.rmmMatrix)
+setMethod("[",signature(x="RowLinkedMatrix"),subset.RowLinkedMatrix)
 
 
-replace.rmmMatrix<-function(x,i,j,...,value){
+replace.RowLinkedMatrix<-function(x,i,j,...,value){
     if(missing(i)){
         i<-1:nrow(x)
     }
@@ -114,11 +114,11 @@ replace.rmmMatrix<-function(x,i,j,...,value){
 }
 
 #' @export
-setReplaceMethod("[",signature(x="rmmMatrix"),replace.rmmMatrix)
+setReplaceMethod("[",signature(x="RowLinkedMatrix"),replace.RowLinkedMatrix)
 
 
 #' @export
-dim.rmmMatrix<-function(x){
+dim.RowLinkedMatrix<-function(x){
     p<-ncol(x[[1]])
     n<-0
     for(i in 1:length(x)){
@@ -129,7 +129,7 @@ dim.rmmMatrix<-function(x){
 
 
 # This function looks like an S3 method, but isn't one.
-rownames.rmmMatrix<-function(x){
+rownames.RowLinkedMatrix<-function(x){
     out<-NULL
     if(!is.null(rownames(x[[1]]))){
         n<-dim(x)[1]
@@ -143,19 +143,19 @@ rownames.rmmMatrix<-function(x){
 }
 
 # This function looks like an S3 method, but isn't one.
-colnames.rmmMatrix<-function(x){
+colnames.RowLinkedMatrix<-function(x){
     out<-colnames(x[[1]])
     return(out)
 }
 
 #' @export
-dimnames.rmmMatrix<-function(x){
-    list(rownames.rmmMatrix(x),colnames.rmmMatrix(x))
+dimnames.RowLinkedMatrix<-function(x){
+    list(rownames.RowLinkedMatrix(x),colnames.RowLinkedMatrix(x))
 }
 
 
 # This function looks like an S3 method, but isn't one.
-`rownames<-.rmmMatrix`<-function(x,value){
+`rownames<-.RowLinkedMatrix`<-function(x,value){
     TMP<-chunks(x)
     for(i in 1:nrow(TMP)){
         rownames(x[[i]])<-value[(TMP[i,2]:TMP[i,3])]
@@ -164,7 +164,7 @@ dimnames.rmmMatrix<-function(x){
 }
 
 # This function looks like an S3 method, but isn't one.
-`colnames<-.rmmMatrix`<-function(x,value){
+`colnames<-.RowLinkedMatrix`<-function(x,value){
     for(i in 1:length(x)){
         colnames(x[[i]])<-value
     }
@@ -172,27 +172,27 @@ dimnames.rmmMatrix<-function(x){
 }
 
 #' @export
-`dimnames<-.rmmMatrix`<-function(x,value){
+`dimnames<-.RowLinkedMatrix`<-function(x,value){
     d<-dim(x)
     rownames<-value[[1]]
     colnames<-value[[2]]
     if(!is.list(value)||length(value)!=2||!(is.null(rownames)||length(rownames)==d[1])||!(is.null(colnames)||length(colnames)==d[2])){
         stop('invalid dimnames')
     }
-    x<-`rownames<-.rmmMatrix`(x,rownames)
-    x<-`colnames<-.rmmMatrix`(x,colnames)
+    x<-`rownames<-.RowLinkedMatrix`(x,rownames)
+    x<-`colnames<-.RowLinkedMatrix`(x,colnames)
     return(x)
 }
 
 
 #' @export
-as.matrix.rmmMatrix<-function(x,...){
+as.matrix.RowLinkedMatrix<-function(x,...){
     x[,,drop=FALSE]
 }
 
 
 #' @export
-chunks.rmmMatrix<-function(x){
+chunks.RowLinkedMatrix<-function(x){
     n<-length(x)
     OUT<-matrix(nrow=n,ncol=3,NA)
     colnames(OUT)<-c('chunk','row.ini','row.end')
@@ -206,7 +206,7 @@ chunks.rmmMatrix<-function(x){
 }
 
 
-index.rmmMatrix<-function(x){
+index.RowLinkedMatrix<-function(x){
     CHUNKS<-chunks(x)
     nRowIndex<-CHUNKS[nrow(CHUNKS),3]
     INDEX<-matrix(nrow=nRowIndex,ncol=3)

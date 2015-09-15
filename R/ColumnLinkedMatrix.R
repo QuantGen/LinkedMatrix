@@ -1,14 +1,14 @@
 #' An S4 class to represent a column-distributed \code{mmMatrix}.
 #'
-#' \code{cmmMatrix} inherits from \code{\link{list}}. Each element of the list is
+#' \code{ColumnLinkedMatrix} inherits from \code{\link{list}}. Each element of the list is
 #' an \code{ff_matrix} object.
 #'
-#' @export cmmMatrix
-#' @exportClass cmmMatrix
-cmmMatrix<-setClass('cmmMatrix',contains='list')
+#' @export ColumnLinkedMatrix
+#' @exportClass ColumnLinkedMatrix
+ColumnLinkedMatrix<-setClass('ColumnLinkedMatrix',contains='list')
 
 #' @export
-setMethod('initialize','cmmMatrix',function(.Object,nrow=1,ncol=1,nChunks=NULL){
+setMethod('initialize','ColumnLinkedMatrix',function(.Object,nrow=1,ncol=1,nChunks=NULL){
     if(is.null(nChunks)){
         chunkSize<-min(ncol,floor(.Machine$integer.max/nrow/1.2))
         nChunks<-ceiling(ncol/chunkSize)
@@ -30,7 +30,7 @@ setMethod('initialize','cmmMatrix',function(.Object,nrow=1,ncol=1,nChunks=NULL){
 })
 
 
-subset.cmmMatrix<-function(x,i,j,drop){
+subset.ColumnLinkedMatrix<-function(x,i,j,drop){
     if(missing(i)){
         i<-1:nrow(x)
     }
@@ -87,10 +87,10 @@ subset.cmmMatrix<-function(x,i,j,drop){
 }
 
 #' @export
-setMethod("[",signature(x="cmmMatrix"),subset.cmmMatrix)
+setMethod("[",signature(x="ColumnLinkedMatrix"),subset.ColumnLinkedMatrix)
 
 
-replace.cmmMatrix<-function(x,i,j,...,value){
+replace.ColumnLinkedMatrix<-function(x,i,j,...,value){
     if(missing(i)){
         i<-1:nrow(x)
     }
@@ -114,11 +114,11 @@ replace.cmmMatrix<-function(x,i,j,...,value){
 }
 
 #' @export
-setReplaceMethod("[",signature(x="cmmMatrix"),replace.cmmMatrix)
+setReplaceMethod("[",signature(x="ColumnLinkedMatrix"),replace.ColumnLinkedMatrix)
 
 
 #' @export
-dim.cmmMatrix<-function(x){
+dim.ColumnLinkedMatrix<-function(x){
     n<-nrow(x[[1]])
     p<-0
     for(i in 1:length(x)){
@@ -129,13 +129,13 @@ dim.cmmMatrix<-function(x){
 
 
 # This function looks like an S3 method, but isn't one.
-rownames.cmmMatrix<-function(x){
+rownames.ColumnLinkedMatrix<-function(x){
     out<-rownames(x[[1]])
     return(out)
 }
 
 # This function looks like an S3 method, but isn't one.
-colnames.cmmMatrix<-function(x){
+colnames.ColumnLinkedMatrix<-function(x){
     out<-NULL
     if(!is.null(colnames(x[[1]]))){
         p<-dim(x)[2]
@@ -149,13 +149,13 @@ colnames.cmmMatrix<-function(x){
 }
 
 #' @export
-dimnames.cmmMatrix<-function(x){
-    list(rownames.cmmMatrix(x),colnames.cmmMatrix(x))
+dimnames.ColumnLinkedMatrix<-function(x){
+    list(rownames.ColumnLinkedMatrix(x),colnames.ColumnLinkedMatrix(x))
 }
 
 
 # This function looks like an S3 method, but isn't one.
-`rownames<-.cmmMatrix`<-function(x,value){
+`rownames<-.ColumnLinkedMatrix`<-function(x,value){
     for(i in 1:length(x)){
         rownames(x[[i]])<-value
     }
@@ -163,7 +163,7 @@ dimnames.cmmMatrix<-function(x){
 }
 
 # This function looks like an S3 method, but isn't one.
-`colnames<-.cmmMatrix`<-function(x,value){
+`colnames<-.ColumnLinkedMatrix`<-function(x,value){
     TMP<-chunks(x)
     for(i in 1:nrow(TMP)){
         colnames(x[[i]])<-value[(TMP[i,2]:TMP[i,3])]
@@ -172,27 +172,27 @@ dimnames.cmmMatrix<-function(x){
 }
 
 #' @export
-`dimnames<-.cmmMatrix`<-function(x,value){
+`dimnames<-.ColumnLinkedMatrix`<-function(x,value){
     d<-dim(x)
     rownames<-value[[1]]
     colnames<-value[[2]]
     if(!is.list(value)||length(value)!=2||!(is.null(rownames)||length(rownames)==d[1])||!(is.null(colnames)||length(colnames)==d[2])){
         stop('invalid dimnames')
     }
-    x<-`rownames<-.cmmMatrix`(x,rownames)
-    x<-`colnames<-.cmmMatrix`(x,colnames)
+    x<-`rownames<-.ColumnLinkedMatrix`(x,rownames)
+    x<-`colnames<-.ColumnLinkedMatrix`(x,colnames)
     return(x)
 }
 
 
 #' @export
-as.matrix.cmmMatrix<-function(x,...){
+as.matrix.ColumnLinkedMatrix<-function(x,...){
     x[,,drop=FALSE]
 }
 
 
 #' @export
-chunks.cmmMatrix<-function(x){
+chunks.ColumnLinkedMatrix<-function(x){
     n<-length(x)
     OUT<-matrix(nrow=n,ncol=3,NA)
     colnames(OUT)<-c('chunk','col.ini','col.end')
@@ -206,7 +206,7 @@ chunks.cmmMatrix<-function(x){
 }
 
 
-index.cmmMatrix<-function(x){
+index.ColumnLinkedMatrix<-function(x){
     CHUNKS<-chunks(x)
     nColIndex<-CHUNKS[nrow(CHUNKS),3]
     INDEX<-matrix(nrow=nColIndex,ncol=3)
