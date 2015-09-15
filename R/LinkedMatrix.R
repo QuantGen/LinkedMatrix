@@ -1,4 +1,4 @@
-#' @include cmmMatrix.R rmmMatrix.R
+#' @include ColumnLinkedMatrix.R RowLinkedMatrix.R
 NULL
 
 
