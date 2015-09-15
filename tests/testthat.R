@@ -1,4 +1,4 @@
 library(testthat)
-library(BGData)
+library(LinkedMatrix)
 
-test_check("BGData")
+test_check("LinkedMatrix")
