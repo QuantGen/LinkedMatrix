@@ -8,24 +8,13 @@
 ColumnLinkedMatrix <- setClass("ColumnLinkedMatrix", contains = "list")
 
 #' @export
-setMethod("initialize", "ColumnLinkedMatrix", function(.Object, nrow = 1, ncol = 1, nChunks = NULL) {
-    if (is.null(nChunks)) {
-        chunkSize <- min(ncol, floor(.Machine$integer.max/nrow/1.2))
-        nChunks <- ceiling(ncol/chunkSize)
-    } else {
-        chunkSize <- ceiling(ncol/nChunks)
-        if (chunkSize * nrow >= .Machine$integer.max/1.2) {
-            stop("More chunks are needed")
-        }
+setMethod("initialize", "ColumnLinkedMatrix", function(.Object, ...) {
+    list <- list(...)
+    # Append at least one matrix
+    if (length(list) == 0) {
+        list[[1]] <- matrix()
     }
-    ffList <- list()
-    end <- 0
-    for (i in 1:nChunks) {
-        ini <- end + 1
-        end <- min(ncol, ini + chunkSize - 1)
-        ffList[[i]] <- matrix(nrow = nrow, ncol = (end - ini + 1))
-    }
-    .Object <- callNextMethod(.Object, ffList)
+    .Object <- callNextMethod(.Object, list)
     return(.Object)
 })
 

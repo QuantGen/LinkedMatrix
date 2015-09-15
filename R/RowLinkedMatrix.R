@@ -8,24 +8,13 @@
 RowLinkedMatrix <- setClass("RowLinkedMatrix", contains = "list")
 
 #' @export
-setMethod("initialize", "RowLinkedMatrix", function(.Object, nrow = 1, ncol = 1, nChunks = NULL) {
-    if (is.null(nChunks)) {
-        chunkSize <- min(nrow, floor(.Machine$integer.max/ncol/1.2))
-        nChunks <- ceiling(nrow/chunkSize)
-    } else {
-        chunkSize <- ceiling(nrow/nChunks)
-        if (chunkSize * ncol >= .Machine$integer.max/1.2) {
-            stop("More chunks are needed")
-        }
+setMethod("initialize", "RowLinkedMatrix", function(.Object, ...) {
+    list <- list(...)
+    # Append at least one matrix
+    if (length(list) == 0) {
+        list[[1]] <- matrix()
     }
-    ffList <- list()
-    end <- 0
-    for (i in 1:nChunks) {
-        ini <- end + 1
-        end <- min(nrow, ini + chunkSize - 1)
-        ffList[[i]] <- matrix(nrow = (end - ini + 1), ncol = ncol)
-    }
-    .Object <- callNextMethod(.Object, ffList)
+    .Object <- callNextMethod(.Object, list)
     return(.Object)
 })
 
