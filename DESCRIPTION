@@ -24,9 +24,6 @@ Authors@R: c(
     person("Paulino Perez", email = "perpdgo@gmail.com", role = c("ctb")),
     person("Alexander", "Grüneberg", email = "alexander.grueneberg@googlemail.com", role = c("ctb")))
 Encoding: UTF-8
-Depends:
-    R (>= 3.0.0),
-    ff
 Imports:
     methods
 Suggests:

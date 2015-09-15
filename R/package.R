@@ -5,5 +5,4 @@
 #' @docType package
 #' @name LinkedMatrix
 #' @import methods
-#' @import ff
 NULL

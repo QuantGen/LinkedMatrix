@@ -8,14 +8,7 @@
 cmmMatrix<-setClass('cmmMatrix',contains='list')
 
 #' @export
-setMethod('initialize','cmmMatrix',function(.Object,nrow=1,ncol=1,vmode='byte',folderOut=NULL,nChunks=NULL,dimorder=c(2,1)){
-    if(is.null(folderOut)){
-        folderOut<-paste0(tempdir(),'/mmMatrix-',randomString())
-    }
-    if(file.exists(folderOut)){
-        stop(paste('Output folder',folderOut,'already exists. Please move it or pick a different one.'))
-    }
-    dir.create(folderOut)
+setMethod('initialize','cmmMatrix',function(.Object,nrow=1,ncol=1,nChunks=NULL){
     if(is.null(nChunks)){
         chunkSize<-min(ncol,floor(.Machine$integer.max/nrow/1.2))
         nChunks<-ceiling(ncol/chunkSize)
@@ -30,11 +23,7 @@ setMethod('initialize','cmmMatrix',function(.Object,nrow=1,ncol=1,vmode='byte',f
     for(i in 1:nChunks){
         ini<-end+1
         end<-min(ncol,ini+chunkSize-1)
-        filename=paste0('geno_',i,'.bin')
-        ffList[[i]]<-ff(vmode=vmode,dim=c(nrow,(end-ini+1)),dimorder=dimorder,filename=paste0(folderOut,.Platform$file.sep,filename))
-        # Change ff path to a relative one
-        physical(ffList[[i]])$pattern<-'ff'
-        physical(ffList[[i]])$filename<-filename
+        ffList[[i]]<-matrix(nrow=nrow,ncol=(end-ini+1))
     }
     .Object<-callNextMethod(.Object,ffList)
     return(.Object)
