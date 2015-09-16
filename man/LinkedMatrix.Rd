@@ -4,8 +4,8 @@
 \name{LinkedMatrix}
 \alias{LinkedMatrix}
 \alias{LinkedMatrix-package}
-\title{LinkedMatrix: Memory Mapped Matrices and Data-Structures for Genomic Data for R}
+\title{LinkedMatrix: Column-Linked and Row-Linked Matrices}
 \description{
-More info in the wiki: \url{https://github.com/QuantGen/BGData/wiki}
+LinkedMatrix: Column-Linked and Row-Linked Matrices
 }
 

@@ -23,7 +23,7 @@ Returns a \code{matrix} or a \code{list} with results from FUN.
 }
 \description{
 This function brings chunks of data (of size \code{chunkSize}) from the
-distributed array into RAM as \code{matrix} objects and calls \code{apply} of
+distributed list into RAM as \code{matrix} objects and calls \code{apply} of
 the base package to obtain the summaries for the chunk. Results from all the
 chunks are collected and returned.
 }

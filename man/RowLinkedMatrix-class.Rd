@@ -4,9 +4,8 @@
 \name{RowLinkedMatrix-class}
 \alias{RowLinkedMatrix}
 \alias{RowLinkedMatrix-class}
-\title{An S4 class to represent a row-distributed \code{mmMatrix}}
+\title{An S4 class to represent a row-linked \code{LinkedMatrix}}
 \description{
-\code{RowLinkedMatrix} inherits from \code{\link{list}}. Each element of the list is
-an \code{ff_matrix} object.
+\code{RowLinkedMatrix} inherits from \code{\link{list}}.
 }
 

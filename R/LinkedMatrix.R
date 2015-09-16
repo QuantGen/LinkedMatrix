@@ -72,7 +72,7 @@ apply.LinkedMatrix <- function(X, MARGIN, FUN, chunkSize = 1000, verbose = FALSE
 #' \code{\linkS4class{RowLinkedMatrix}} objects.
 #' 
 #' This function brings chunks of data (of size \code{chunkSize}) from the 
-#' distributed array into RAM as \code{matrix} objects and calls \code{apply} of
+#' distributed list into RAM as \code{matrix} objects and calls \code{apply} of
 #' the base package to obtain the summaries for the chunk. Results from all the 
 #' chunks are collected and returned.
 #' 
@@ -166,13 +166,10 @@ summary.LinkedMatrix <- function(object, MARGIN = 2, chunkSize = 1000, ...) {
 setMethod("summary", signature("LinkedMatrix"), summary.LinkedMatrix)
 
 
-#' Provides information about how data is distributed into binary files.
+#' Provides information about how data is distributed.
 #' 
-#' Column-distributed (\code{\linkS4class{ColumnLinkedMatrix}}) and row-distributed 
-#' matrices (\code{\linkS4class{RowLinkedMatrix}}) have the content of the array mapped
-#' to possibly multiple binary files. Each chunk is an \code{ff_matrix} object. 
 #' \code{chunks} gives, for each chunk, the row or column indexes at which each 
-#' chunk start and ends.
+#' chunk starts and ends.
 #' 
 #' @param x Either an \code{\linkS4class{ColumnLinkedMatrix}} or a 
 #'   \code{\linkS4class{RowLinkedMatrix}} object

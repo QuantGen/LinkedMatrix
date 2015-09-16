@@ -2,7 +2,7 @@
 % Please edit documentation in R/LinkedMatrix.R
 \name{chunks}
 \alias{chunks}
-\title{Provides information about how data is distributed into binary files.}
+\title{Provides information about how data is distributed.}
 \usage{
 chunks(x)
 }
@@ -14,10 +14,7 @@ chunks(x)
 A matrix with information per chunk in rows.
 }
 \description{
-Column-distributed (\code{\linkS4class{ColumnLinkedMatrix}}) and row-distributed
-matrices (\code{\linkS4class{RowLinkedMatrix}}) have the content of the array mapped
-to possibly multiple binary files. Each chunk is an \code{ff_matrix} object.
 \code{chunks} gives, for each chunk, the row or column indexes at which each
-chunk start and ends.
+chunk starts and ends.
 }
 

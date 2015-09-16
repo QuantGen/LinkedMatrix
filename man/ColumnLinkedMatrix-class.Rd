@@ -4,9 +4,8 @@
 \name{ColumnLinkedMatrix-class}
 \alias{ColumnLinkedMatrix}
 \alias{ColumnLinkedMatrix-class}
-\title{An S4 class to represent a column-distributed \code{mmMatrix}.}
+\title{An S4 class to represent a column-linked \code{LinkedMatrix}.}
 \description{
-\code{ColumnLinkedMatrix} inherits from \code{\link{list}}. Each element of the list is
-an \code{ff_matrix} object.
+\code{ColumnLinkedMatrix} inherits from \code{\link{list}}.
 }
 

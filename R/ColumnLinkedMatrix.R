@@ -1,7 +1,6 @@
-#' An S4 class to represent a column-distributed \code{mmMatrix}.
+#' An S4 class to represent a column-linked \code{LinkedMatrix}.
 #'
-#' \code{ColumnLinkedMatrix} inherits from \code{\link{list}}. Each element of the list is
-#' an \code{ff_matrix} object.
+#' \code{ColumnLinkedMatrix} inherits from \code{\link{list}}.
 #'
 #' @export ColumnLinkedMatrix
 #' @exportClass ColumnLinkedMatrix
