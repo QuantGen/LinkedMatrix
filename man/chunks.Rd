@@ -7,7 +7,7 @@
 chunks(x)
 }
 \arguments{
-\item{x}{Either an \code{\linkS4class{ColumnLinkedMatrix}} or a
+\item{x}{Either a \code{\linkS4class{ColumnLinkedMatrix}} or a
 \code{\linkS4class{RowLinkedMatrix}} object}
 }
 \value{

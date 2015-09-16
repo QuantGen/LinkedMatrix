@@ -2,13 +2,14 @@
 % Please edit documentation in R/LinkedMatrix.R
 \name{index}
 \alias{index}
-\title{Finds the position of a set of rows or columns in a ColumnLinkedMatrix or an
-RowLinkedMatrix object.}
+\title{Finds the position of a set of rows or columns in a
+\code{\linkS4class{ColumnLinkedMatrix}} or a
+\code{\linkS4class{RowLinkedMatrix}} object.}
 \usage{
 index(x)
 }
 \arguments{
-\item{x}{Either an \code{\linkS4class{ColumnLinkedMatrix}} or a
+\item{x}{Either a \code{\linkS4class{ColumnLinkedMatrix}} or a
 \code{\linkS4class{RowLinkedMatrix}} object}
 }
 \value{
@@ -16,7 +17,8 @@ A matrix with information in which chunks each row and column of the
   matrix is located.
 }
 \description{
-Finds the position of a set of rows or columns in a ColumnLinkedMatrix or an
-RowLinkedMatrix object.
+Finds the position of a set of rows or columns in a
+\code{\linkS4class{ColumnLinkedMatrix}} or a
+\code{\linkS4class{RowLinkedMatrix}} object.
 }
 

@@ -10,7 +10,7 @@
   verbose = FALSE, ...)
 }
 \arguments{
-\item{X}{Either an \code{\linkS4class{ColumnLinkedMatrix}} or a
+\item{X}{Either a \code{\linkS4class{ColumnLinkedMatrix}} or a
 \code{\linkS4class{RowLinkedMatrix}} object.}
 
 \item{MARGIN}{Use 1 to obtain row summaries or 2 to obtain column summaries.}

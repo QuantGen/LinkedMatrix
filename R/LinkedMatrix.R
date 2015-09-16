@@ -77,7 +77,7 @@ apply.LinkedMatrix <- function(X, MARGIN, FUN, chunkSize = 1000, verbose = FALSE
 #' the base package to obtain the summaries for the chunk. Results from all the 
 #' chunks are collected and returned.
 #' 
-#' @param X Either an \code{\linkS4class{ColumnLinkedMatrix}} or a 
+#' @param X Either a \code{\linkS4class{ColumnLinkedMatrix}} or a
 #'   \code{\linkS4class{RowLinkedMatrix}} object.
 #' @param MARGIN Use 1 to obtain row summaries or 2 to obtain column summaries.
 #' @param chunkSize The number of columns or rows that are processed at a time 
@@ -172,7 +172,7 @@ setMethod("summary", signature("LinkedMatrix"), summary.LinkedMatrix)
 #' \code{chunks} gives, for each chunk, the row or column indexes at which each 
 #' chunk starts and ends.
 #' 
-#' @param x Either an \code{\linkS4class{ColumnLinkedMatrix}} or a 
+#' @param x Either a \code{\linkS4class{ColumnLinkedMatrix}} or a
 #'   \code{\linkS4class{RowLinkedMatrix}} object
 #' @return A matrix with information per chunk in rows.
 #' @export
@@ -181,10 +181,11 @@ chunks <- function(x) {
 }
 
 
-#' Finds the position of a set of rows or columns in a ColumnLinkedMatrix or an
-#' RowLinkedMatrix object.
+#' Finds the position of a set of rows or columns in a
+#' \code{\linkS4class{ColumnLinkedMatrix}} or a
+#' \code{\linkS4class{RowLinkedMatrix}} object.
 #'
-#' @param x Either an \code{\linkS4class{ColumnLinkedMatrix}} or a
+#' @param x Either a \code{\linkS4class{ColumnLinkedMatrix}} or a
 #'   \code{\linkS4class{RowLinkedMatrix}} object
 #' @return A matrix with information in which chunks each row and column of the
 #'   matrix is located.
