@@ -2,6 +2,7 @@
 NULL
 
 
+#' @exportClass LinkedMatrix
 setClassUnion("LinkedMatrix", c("ColumnLinkedMatrix", "RowLinkedMatrix"))
 
 
