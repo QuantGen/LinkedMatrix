@@ -181,7 +181,14 @@ chunks <- function(x) {
 }
 
 
-#' Finds the position of a set of rows or columns in an ColumnLinkedMatrix or RowLinkedMatrix object.
+#' Finds the position of a set of rows or columns in a ColumnLinkedMatrix or an
+#' RowLinkedMatrix object.
+#'
+#' @param x Either an \code{\linkS4class{ColumnLinkedMatrix}} or a
+#'   \code{\linkS4class{RowLinkedMatrix}} object
+#' @return A matrix with information in which chunks each row and column of the
+#'   matrix is located.
+#' @export
 index <- function(x) {
     UseMethod("index")
 } 
