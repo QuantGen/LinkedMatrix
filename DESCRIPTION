@@ -11,10 +11,7 @@ Encoding: UTF-8
 Imports:
     methods
 Suggests:
-    testthat,
-    lme4,
-    SKAT,
-    BEDMatrix
+    testthat
 LazyData: true
 Collate:
     'ColumnLinkedMatrix.R'
