@@ -191,6 +191,7 @@ chunks.ColumnLinkedMatrix <- function(x) {
 }
 
 
+#' @export
 index.ColumnLinkedMatrix <- function(x) {
     CHUNKS <- chunks(x)
     nColIndex <- CHUNKS[nrow(CHUNKS), 3]

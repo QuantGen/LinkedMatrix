@@ -191,6 +191,7 @@ chunks.RowLinkedMatrix <- function(x) {
 }
 
 
+#' @export
 index.RowLinkedMatrix <- function(x) {
     CHUNKS <- chunks(x)
     nRowIndex <- CHUNKS[nrow(CHUNKS), 3]
