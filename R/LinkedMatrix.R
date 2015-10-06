@@ -18,9 +18,6 @@ setMethod("show", signature(object = "LinkedMatrix"), show)
 
 apply.LinkedMatrix <- function(X, MARGIN, FUN, chunkSize = 1000, verbose = FALSE, ...) {
     FUN <- match.fun(FUN)
-    if (!(class(X) %in% c("ColumnLinkedMatrix", "RowLinkedMatrix"))) {
-        stop("X must be either LinkedMatrix or rMatrix")
-    }
     n <- ifelse(MARGIN == 1, nrow(X), ncol(X))
     if (MARGIN == 1) {
         x <- X[1, ]
