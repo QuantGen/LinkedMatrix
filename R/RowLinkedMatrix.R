@@ -6,6 +6,10 @@
 #' @exportClass RowLinkedMatrix
 RowLinkedMatrix <- setClass("RowLinkedMatrix", contains = "list")
 
+#' Creates a new RowLinkedMatrix instance.
+#' 
+#' @inheritParams base::list
+#' @param .Object The \code{RowLinkedMatrix} instance to be initialized.
 #' @export
 setMethod("initialize", "RowLinkedMatrix", function(.Object, ...) {
     list <- list(...)
