@@ -2,6 +2,13 @@
 NULL
 
 
+#' An abstract S4 class to represent linked matrices.
+#' 
+#' @name LinkedMatrix-class
+#' @docType class
+#' @seealso \code{\linkS4class{ColumnLinkedMatrix}} or
+#'   \code{\linkS4class{RowLinkedMatrix}} for implementations of column-linked
+#'   matrices or row-linked matrices, respectively.
 #' @exportClass LinkedMatrix
 setClassUnion("LinkedMatrix", c("ColumnLinkedMatrix", "RowLinkedMatrix"))
 
