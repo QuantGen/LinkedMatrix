@@ -133,6 +133,11 @@ rowMeans.LinkedMatrix <- function(x, na.rm = TRUE, chunkSize = 1000, ...) {
     return(ANS)
 }
 
+#' Form row means.
+#' 
+#' @inheritParams base::rowMeans
+#' @param chunkSize The number of rows that are processed at a time.
+#' @param ... Optional arguments to \code{mean}.
 #' @export
 setMethod("rowMeans", signature("LinkedMatrix"), rowMeans.LinkedMatrix)
 
