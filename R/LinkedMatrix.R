@@ -12,6 +12,11 @@ show <- function(object) {
     NULL
 }
 
+
+#' Show a LinkedMatrix object.
+#' 
+#' @param object Either a \code{\linkS4class{ColumnLinkedMatrix}} or a 
+#'   \code{\linkS4class{RowLinkedMatrix}} object.
 #' @export
 setMethod("show", signature(object = "LinkedMatrix"), show)
 
