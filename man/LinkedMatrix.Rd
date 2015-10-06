@@ -6,6 +6,6 @@
 \alias{LinkedMatrix-package}
 \title{LinkedMatrix: Column-Linked and Row-Linked Matrices}
 \description{
-LinkedMatrix: Column-Linked and Row-Linked Matrices
+Matrices implemented as collections of matrix-like nodes, linked by columns or rows.
 }
 
