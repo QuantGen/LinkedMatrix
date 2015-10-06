@@ -150,6 +150,11 @@ rowSums.LinkedMatrix <- function(x, na.rm = TRUE, chunkSize = 1000, ...) {
     return(ANS)
 }
 
+#' Form row sums.
+#' 
+#' @inheritParams base::rowSums
+#' @param chunkSize The number of rows that are processed at a time.
+#' @param ... Optional arguments to \code{sum}.
 #' @export
 setMethod("rowSums", signature("LinkedMatrix"), rowSums.LinkedMatrix)
 
