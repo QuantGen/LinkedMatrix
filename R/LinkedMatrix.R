@@ -8,7 +8,7 @@ setClassUnion("LinkedMatrix", c("ColumnLinkedMatrix", "RowLinkedMatrix"))
 
 show <- function(object) {
     d <- dim(object)
-    cat(d[1], "x", d[2], "distributed matrix of class", class(object))
+    cat(d[1], "x", d[2], "linked matrix of class", class(object))
     NULL
 }
 
