@@ -24,15 +24,12 @@ setMethod("show", signature(object = "LinkedMatrix"), show)
 apply.LinkedMatrix <- function(X, MARGIN, FUN, chunkSize = 1000, verbose = FALSE, ...) {
     FUN <- match.fun(FUN)
     n <- ifelse(MARGIN == 1, nrow(X), ncol(X))
-    if (MARGIN == 1) {
-        x <- X[1, ]
-    } else {
-        x <- X[, 1]
-    }
-    tmp <- FUN(x, ...)
-    if (is.atomic(tmp)) {
-        ANS <- matrix(nrow = length(tmp), ncol = n, NA)
-        rownames(ANS) <- names(tmp)
+    # Apply function on first element to check output type.
+    x <- ifelse(MARGIN == 1, X[1, ], X[, 1])
+    outputType <- FUN(x, ...)
+    if (is.atomic(outputType)) {
+        ANS <- matrix(nrow = length(outputType), ncol = n, NA)
+        rownames(ANS) <- names(outputType)
         if (MARGIN == 1) {
             colnames(ANS) <- rownames(X)
         } else {
@@ -74,16 +71,21 @@ apply.LinkedMatrix <- function(X, MARGIN, FUN, chunkSize = 1000, verbose = FALSE
 #' Apply function for \code{\linkS4class{ColumnLinkedMatrix}} or 
 #' \code{\linkS4class{RowLinkedMatrix}} objects.
 #' 
-#' This function brings chunks of data (of size \code{chunkSize}) from the 
-#' distributed list into RAM as \code{matrix} objects and calls \code{apply} of
-#' the base package to obtain the summaries for the chunk. Results from all the 
-#' chunks are collected and returned.
+#' This function brings chunks (of size \code{chunkSize}) of rows (if 
+#' \code{MARGIN} is 1) or columns (if \code{MARGIN} is 2) of the 
+#' \code{LinkedMatrix} instance into RAM as \code{matrix} objects and calls the 
+#' \code{apply} function of the base package for each chunk. Results from all
+#' the chunks are collected and returned.
 #' 
-#' @param X Either a \code{\linkS4class{ColumnLinkedMatrix}} or a
+#' @param X Either a \code{\linkS4class{ColumnLinkedMatrix}} or a 
 #'   \code{\linkS4class{RowLinkedMatrix}} object.
-#' @param MARGIN Use 1 to obtain row summaries or 2 to obtain column summaries.
+#' @param MARGIN Use 1 to apply function over rows or 2 to apply function over
+#'   columns.
+#' @param FUN The function to be applied.
 #' @param chunkSize The number of columns or rows that are processed at a time 
 #'   (see Details).
+#' @param verbose Whether to print additional information.
+#' @param ... Optional arguments to FUN.
 #' @return Returns a \code{matrix} or a \code{list} with results from FUN.
 #' @export
 setMethod("apply", signature("LinkedMatrix"), apply.LinkedMatrix)

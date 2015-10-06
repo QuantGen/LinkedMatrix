@@ -13,18 +13,26 @@
 \item{X}{Either a \code{\linkS4class{ColumnLinkedMatrix}} or a
 \code{\linkS4class{RowLinkedMatrix}} object.}
 
-\item{MARGIN}{Use 1 to obtain row summaries or 2 to obtain column summaries.}
+\item{MARGIN}{Use 1 to apply function over rows or 2 to apply function over
+columns.}
+
+\item{FUN}{The function to be applied.}
 
 \item{chunkSize}{The number of columns or rows that are processed at a time
 (see Details).}
+
+\item{verbose}{Whether to print additional information.}
+
+\item{...}{Optional arguments to FUN.}
 }
 \value{
 Returns a \code{matrix} or a \code{list} with results from FUN.
 }
 \description{
-This function brings chunks of data (of size \code{chunkSize}) from the
-distributed list into RAM as \code{matrix} objects and calls \code{apply} of
-the base package to obtain the summaries for the chunk. Results from all the
-chunks are collected and returned.
+This function brings chunks (of size \code{chunkSize}) of rows (if
+\code{MARGIN} is 1) or columns (if \code{MARGIN} is 2) of the
+\code{LinkedMatrix} instance into RAM as \code{matrix} objects and calls the
+\code{apply} function of the base package for each chunk. Results from all
+the chunks are collected and returned.
 }
 
