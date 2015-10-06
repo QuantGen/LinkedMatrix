@@ -105,6 +105,11 @@ replace.ColumnLinkedMatrix <- function(x, i, j, ..., value) {
     return(x)
 }
 
+#' Replace parts of a \code{ColumnLinkedMatrix}.
+#' 
+#' @inheritParams base::`[<-`
+#' @param j Column indices.
+#' @param ... Optional arguments.
 #' @export
 setReplaceMethod("[", signature(x = "ColumnLinkedMatrix"), replace.ColumnLinkedMatrix)
 
