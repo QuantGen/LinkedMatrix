@@ -2,9 +2,8 @@
 % Please edit documentation in R/LinkedMatrix.R
 \name{index}
 \alias{index}
-\title{Finds the position of a set of rows or columns in a
-\code{\linkS4class{ColumnLinkedMatrix}} or a
-\code{\linkS4class{RowLinkedMatrix}} object.}
+\title{Maps each column or row index of a linked matrix to the column or row index
+of its corresponding node.}
 \usage{
 index(x)
 }
@@ -13,12 +12,10 @@ index(x)
 \code{\linkS4class{RowLinkedMatrix}} object}
 }
 \value{
-A matrix with information in which chunks each row and column of the
-  matrix is located.
+A matrix.
 }
 \description{
-Finds the position of a set of rows or columns in a
-\code{\linkS4class{ColumnLinkedMatrix}} or a
-\code{\linkS4class{RowLinkedMatrix}} object.
+Maps each column or row index of a linked matrix to the column or row index
+of its corresponding node.
 }
 

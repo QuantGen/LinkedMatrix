@@ -161,28 +161,23 @@ summary.LinkedMatrix <- function(object, MARGIN = 2, chunkSize = 1000, ...) {
 setMethod("summary", signature("LinkedMatrix"), summary.LinkedMatrix)
 
 
-#' Provides information about how data is distributed.
+#' Returns the column or row indexes at which each node starts and ends.
 #' 
-#' \code{chunks} gives, for each chunk, the row or column indexes at which each 
-#' chunk starts and ends.
-#' 
-#' @param x Either a \code{\linkS4class{ColumnLinkedMatrix}} or a
+#' @param x Either a \code{\linkS4class{ColumnLinkedMatrix}} or a 
 #'   \code{\linkS4class{RowLinkedMatrix}} object
-#' @return A matrix with information per chunk in rows.
+#' @return A matrix.
 #' @export
-chunks <- function(x) {
-    UseMethod("chunks")
+nodes <- function(x) {
+    UseMethod("nodes")
 }
 
 
-#' Finds the position of a set of rows or columns in a
-#' \code{\linkS4class{ColumnLinkedMatrix}} or a
-#' \code{\linkS4class{RowLinkedMatrix}} object.
-#'
-#' @param x Either a \code{\linkS4class{ColumnLinkedMatrix}} or a
+#' Maps each column or row index of a linked matrix to the column or row index
+#' of its corresponding node.
+#' 
+#' @param x Either a \code{\linkS4class{ColumnLinkedMatrix}} or a 
 #'   \code{\linkS4class{RowLinkedMatrix}} object
-#' @return A matrix with information in which chunks each row and column of the
-#'   matrix is located.
+#' @return A matrix.
 #' @export
 index <- function(x) {
     UseMethod("index")

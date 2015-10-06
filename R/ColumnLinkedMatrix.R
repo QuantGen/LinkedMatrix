@@ -82,15 +82,15 @@ replace.ColumnLinkedMatrix <- function(x, i, j, ..., value) {
         j <- 1:ncol(x)
     }
     Z <- matrix(nrow = length(i), ncol = length(j), data = value)
-    CHUNKS <- chunks(x)
+    nodes <- nodes(x)
     ellipsis <- list(...)
     if (is.null(ellipsis$index)) {
         index <- index(x)
     } else {
         index <- ellipsis$index
     }
-    for (k in 1:nrow(CHUNKS)) {
-        col_z <- (j >= CHUNKS[k, 2]) & (j <= CHUNKS[k, 3])
+    for (k in 1:nrow(nodes)) {
+        col_z <- (j >= nodes[k, 2]) & (j <= nodes[k, 3])
         colLocal <- index[j[col_z], 3]
         x[[k]][i, colLocal] <- Z[, col_z]
     }
@@ -124,9 +124,9 @@ colnames.ColumnLinkedMatrix <- function(x) {
     if (!is.null(colnames(x[[1]]))) {
         p <- dim(x)[2]
         out <- rep("", p)
-        TMP <- chunks(x)
-        for (i in 1:nrow(TMP)) {
-            out[(TMP[i, 2]:TMP[i, 3])] <- colnames(x[[i]])
+        nodes <- nodes(x)
+        for (i in 1:nrow(nodes)) {
+            out[(nodes[i, 2]:nodes[i, 3])] <- colnames(x[[i]])
         }
     }
     return(out)
@@ -148,9 +148,9 @@ dimnames.ColumnLinkedMatrix <- function(x) {
 
 # This function looks like an S3 method, but isn't one.
 `colnames<-.ColumnLinkedMatrix` <- function(x, value) {
-    TMP <- chunks(x)
-    for (i in 1:nrow(TMP)) {
-        colnames(x[[i]]) <- value[(TMP[i, 2]:TMP[i, 3])]
+    nodes <- nodes(x)
+    for (i in 1:nrow(nodes)) {
+        colnames(x[[i]]) <- value[(nodes[i, 2]:nodes[i, 3])]
     }
     return(x)
 }
@@ -177,10 +177,10 @@ as.matrix.ColumnLinkedMatrix <- function(x, ...) {
 
 
 #' @export
-chunks.ColumnLinkedMatrix <- function(x) {
+nodes.ColumnLinkedMatrix <- function(x) {
     n <- length(x)
     OUT <- matrix(nrow = n, ncol = 3, NA)
-    colnames(OUT) <- c("chunk", "col.ini", "col.end")
+    colnames(OUT) <- c("node", "col.ini", "col.end")
     end <- 0
     for (i in 1:n) {
         ini <- end + 1
@@ -193,14 +193,14 @@ chunks.ColumnLinkedMatrix <- function(x) {
 
 #' @export
 index.ColumnLinkedMatrix <- function(x) {
-    CHUNKS <- chunks(x)
-    nColIndex <- CHUNKS[nrow(CHUNKS), 3]
+    nodes <- nodes(x)
+    nColIndex <- nodes[nrow(nodes), 3]
     INDEX <- matrix(nrow = nColIndex, ncol = 3)
-    colnames(INDEX) <- c("chunk", "col.global", "col.local")
+    colnames(INDEX) <- c("node", "col.global", "col.local")
     INDEX[, 2] <- 1:nColIndex
     end <- 0
-    for (i in 1:nrow(CHUNKS)) {
-        nColChunk <- CHUNKS[i, 3] - CHUNKS[i, 2] + 1
+    for (i in 1:nrow(nodes)) {
+        nColChunk <- nodes[i, 3] - nodes[i, 2] + 1
         ini <- end + 1
         end <- ini + nColChunk - 1
         INDEX[ini:end, 1] <- i
