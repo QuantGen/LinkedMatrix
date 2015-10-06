@@ -99,6 +99,11 @@ colMeans.LinkedMatrix <- function(x, na.rm = TRUE, chunkSize = 1000, ...) {
     return(ANS)
 }
 
+#' Form column means.
+#' 
+#' @inheritParams base::colMeans
+#' @param chunkSize The number of columns that are processed at a time.
+#' @param ... Optional arguments to \code{mean}.
 #' @export
 setMethod("colMeans", signature("LinkedMatrix"), colMeans.LinkedMatrix)
 
