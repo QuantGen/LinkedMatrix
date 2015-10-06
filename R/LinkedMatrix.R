@@ -116,6 +116,11 @@ colSums.LinkedMatrix <- function(x, na.rm = TRUE, chunkSize = 1000, ...) {
     return(ANS)
 }
 
+#' Form column sums.
+#' 
+#' @inheritParams base::colSums
+#' @param chunkSize The number of columns that are processed at a time.
+#' @param ... Optional arguments to \code{mean}.
 #' @export
 setMethod("colSums", signature("LinkedMatrix"), colSums.LinkedMatrix)
 
