@@ -74,6 +74,10 @@ subset.ColumnLinkedMatrix <- function(x, i, j, drop) {
     }
 }
 
+#' Extract parts of a \code{ColumnLinkedMatrix}.
+#' 
+#' @inheritParams base::`[`
+#' @param j Column indices.
 #' @export
 setMethod("[", signature(x = "ColumnLinkedMatrix"), subset.ColumnLinkedMatrix)
 
