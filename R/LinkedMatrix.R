@@ -149,18 +149,15 @@ summary.char <- function(x) {
 
 summary.LinkedMatrix <- function(object, MARGIN = 2, chunkSize = 1000, ...) {
     # If MARGIN==1 summaries of columns are provided, this is the default, otherwise, row-summaries are returned.
-    if (is.numeric(object[1, 1])) {
-        ANS <- apply.LinkedMatrix(X = object, MARGIN = MARGIN, FUN = summary.num, chunkSize = chunkSize, ...)
+    sample <- object[1, 1]
+    if (is.numeric()) {
+        fun <- summary.num
+    } else if (is.character(sample) | is.logical(sample)) {
+        fun <- summary.char
     } else {
-        if (is.character(object[1, 1]) | is.logical(object[1, 1])) {
-            ANS <- apply.LinkedMatrix(X = object, MARGIN = MARGIN, FUN = summary.char, chunkSize = chunkSize, 
-                ...)
-        } else {
-            ANS <- apply.LinkedMatrix(X = object, MARGIN = MARGIN, FUN = summary, chunkSize = chunkSize, ...)
-        }
-        
+        fun <- summary
     }
-    return(ANS)
+    apply.LinkedMatrix(X = object, MARGIN = MARGIN, FUN = fun, chunkSize = chunkSize, ...)
 }
 
 #' @export
