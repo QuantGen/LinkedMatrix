@@ -172,7 +172,6 @@ summary.char <- function(x) {
 }
 
 summary.LinkedMatrix <- function(object, MARGIN = 2, chunkSize = 1000, ...) {
-    # If MARGIN==1 summaries of columns are provided, this is the default, otherwise, row-summaries are returned.
     sample <- object[1, 1]
     if (is.numeric()) {
         fun <- summary.num
@@ -184,6 +183,22 @@ summary.LinkedMatrix <- function(object, MARGIN = 2, chunkSize = 1000, ...) {
     apply.LinkedMatrix(X = object, MARGIN = MARGIN, FUN = fun, chunkSize = chunkSize, ...)
 }
 
+#' Summary function for \code{\linkS4class{ColumnLinkedMatrix}} or 
+#' \code{\linkS4class{RowLinkedMatrix}} objects.
+#' 
+#' This function brings chunks (of size \code{chunkSize}) of rows (if 
+#' \code{MARGIN} is 1) or columns (if \code{MARGIN} is 2) of the 
+#' \code{LinkedMatrix} instance into RAM as \code{matrix} objects and calls an
+#' appropriate summary function based on the type of the matrix for each chunk.
+#' Results from all the chunks are collected and returned.
+#' 
+#' @param object Either a \code{\linkS4class{ColumnLinkedMatrix}} or a 
+#'   \code{\linkS4class{RowLinkedMatrix}} object.
+#' @param MARGIN Use 1 to obtain row summaries or 2 to obtain column summaries.
+#' @param chunkSize The number of rows or columns that are processed at a time 
+#'   (see Details).
+#' @param ... Optional arguments to summary functions.
+#' @return Returns a \code{matrix} of summaries.
 #' @export
 setMethod("summary", signature("LinkedMatrix"), summary.LinkedMatrix)
 
