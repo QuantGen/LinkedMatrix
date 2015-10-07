@@ -2,30 +2,11 @@
 NULL
 
 
-#' An abstract S4 class to represent linked matrices.
-#' 
-#' @name LinkedMatrix-class
-#' @docType class
-#' @seealso \code{\linkS4class{ColumnLinkedMatrix}} or
-#'   \code{\linkS4class{RowLinkedMatrix}} for implementations of column-linked
-#'   matrices or row-linked matrices, respectively.
-#' @exportClass LinkedMatrix
-setClassUnion("LinkedMatrix", c("ColumnLinkedMatrix", "RowLinkedMatrix"))
-
-
 show <- function(object) {
     d <- dim(object)
     cat(d[1], "x", d[2], "linked matrix of class", class(object))
     NULL
 }
-
-
-#' Show a LinkedMatrix object.
-#' 
-#' @param object Either a \code{\linkS4class{ColumnLinkedMatrix}} or a 
-#'   \code{\linkS4class{RowLinkedMatrix}} object.
-#' @export
-setMethod("show", signature(object = "LinkedMatrix"), show)
 
 
 apply.LinkedMatrix <- function(X, MARGIN, FUN, chunkSize = 1000, verbose = FALSE, ...) {
@@ -75,6 +56,112 @@ apply.LinkedMatrix <- function(X, MARGIN, FUN, chunkSize = 1000, verbose = FALSE
     return(ANS[, , drop = TRUE])
 }
 
+
+colMeans.LinkedMatrix <- function(x, na.rm = TRUE, chunkSize = 1000, ...) {
+    if (na.rm) {
+        warning("Ignoring missing values")
+    }
+    ANS <- apply.LinkedMatrix(X = x, MARGIN = 2, FUN = mean, chunkSize = chunkSize, na.rm = na.rm, ...)
+    return(ANS)
+}
+
+
+colSums.LinkedMatrix <- function(x, na.rm = TRUE, chunkSize = 1000, ...) {
+    if (na.rm) {
+        warning("Ignoring missing values")
+    }
+    ANS <- apply.LinkedMatrix(X = x, MARGIN = 2, FUN = sum, chunkSize = chunkSize, na.rm = na.rm, ...)
+    return(ANS)
+}
+
+
+rowMeans.LinkedMatrix <- function(x, na.rm = TRUE, chunkSize = 1000, ...) {
+    if (na.rm) {
+        warning("Ignoring missing values")
+    }
+    ANS <- apply.LinkedMatrix(X = x, MARGIN = 1, FUN = mean, chunkSize = chunkSize, na.rm = na.rm, ...)
+    return(ANS)
+}
+
+
+rowSums.LinkedMatrix <- function(x, na.rm = TRUE, chunkSize = 1000, ...) {
+    if (na.rm) {
+        warning("Ignoring missing values")
+    }
+    ANS <- apply.LinkedMatrix(X = x, MARGIN = 1, FUN = sum, chunkSize = chunkSize, na.rm = na.rm, ...)
+    return(ANS)
+}
+
+
+summary.num <- function(x) {
+    out <- c(range(x, na.rm = T), mean(x, na.rm = T), sd(x, na.rm = T), mean(is.na(x)))
+    names(out) <- c("min", "max", "mean", "sd", "prop NAs")
+    return(out)
+}
+
+
+summary.char <- function(x) {
+    out <- table(x, useNA = "always")
+    out <- out/length(x)
+    return(out)
+}
+
+
+summary.LinkedMatrix <- function(object, MARGIN = 2, chunkSize = 1000, ...) {
+    sample <- object[1, 1]
+    if (is.numeric()) {
+        fun <- summary.num
+    } else if (is.character(sample) | is.logical(sample)) {
+        fun <- summary.char
+    } else {
+        fun <- summary
+    }
+    apply.LinkedMatrix(X = object, MARGIN = MARGIN, FUN = fun, chunkSize = chunkSize, ...)
+}
+
+
+#' Returns the column or row indexes at which each node starts and ends.
+#' 
+#' @param x Either a \code{\linkS4class{ColumnLinkedMatrix}} or a 
+#'   \code{\linkS4class{RowLinkedMatrix}} object
+#' @return A matrix.
+#' @export
+nodes <- function(x) {
+    UseMethod("nodes")
+}
+
+
+#' Maps each column or row index of a linked matrix to the column or row index
+#' of its corresponding node.
+#' 
+#' @param x Either a \code{\linkS4class{ColumnLinkedMatrix}} or a 
+#'   \code{\linkS4class{RowLinkedMatrix}} object
+#' @return A matrix.
+#' @export
+index <- function(x) {
+    UseMethod("index")
+}
+
+
+#' An abstract S4 class to represent linked matrices.
+#' 
+#' @name LinkedMatrix-class
+#' @docType class
+#' @seealso \code{\linkS4class{ColumnLinkedMatrix}} or
+#'   \code{\linkS4class{RowLinkedMatrix}} for implementations of column-linked
+#'   matrices or row-linked matrices, respectively.
+#' @exportClass LinkedMatrix
+setClassUnion("LinkedMatrix", c("ColumnLinkedMatrix", "RowLinkedMatrix"))
+
+
+#' Show a LinkedMatrix object.
+#' 
+#' @param object Either a \code{\linkS4class{ColumnLinkedMatrix}} or a 
+#'   \code{\linkS4class{RowLinkedMatrix}} object.
+#' @export
+setMethod("show", signature(object = "LinkedMatrix"), show)
+
+
 #' Apply function for \code{\linkS4class{ColumnLinkedMatrix}} or 
 #' \code{\linkS4class{RowLinkedMatrix}} objects.
 #' 
@@ -98,14 +185,6 @@ apply.LinkedMatrix <- function(X, MARGIN, FUN, chunkSize = 1000, verbose = FALSE
 setMethod("apply", signature("LinkedMatrix"), apply.LinkedMatrix)
 
 
-colMeans.LinkedMatrix <- function(x, na.rm = TRUE, chunkSize = 1000, ...) {
-    if (na.rm) {
-        warning("Ignoring missing values")
-    }
-    ANS <- apply.LinkedMatrix(X = x, MARGIN = 2, FUN = mean, chunkSize = chunkSize, na.rm = na.rm, ...)
-    return(ANS)
-}
-
 #' Form column means.
 #' 
 #' @inheritParams base::colMeans
@@ -114,14 +193,6 @@ colMeans.LinkedMatrix <- function(x, na.rm = TRUE, chunkSize = 1000, ...) {
 #' @export
 setMethod("colMeans", signature("LinkedMatrix"), colMeans.LinkedMatrix)
 
-
-colSums.LinkedMatrix <- function(x, na.rm = TRUE, chunkSize = 1000, ...) {
-    if (na.rm) {
-        warning("Ignoring missing values")
-    }
-    ANS <- apply.LinkedMatrix(X = x, MARGIN = 2, FUN = sum, chunkSize = chunkSize, na.rm = na.rm, ...)
-    return(ANS)
-}
 
 #' Form column sums.
 #' 
@@ -132,14 +203,6 @@ colSums.LinkedMatrix <- function(x, na.rm = TRUE, chunkSize = 1000, ...) {
 setMethod("colSums", signature("LinkedMatrix"), colSums.LinkedMatrix)
 
 
-rowMeans.LinkedMatrix <- function(x, na.rm = TRUE, chunkSize = 1000, ...) {
-    if (na.rm) {
-        warning("Ignoring missing values")
-    }
-    ANS <- apply.LinkedMatrix(X = x, MARGIN = 1, FUN = mean, chunkSize = chunkSize, na.rm = na.rm, ...)
-    return(ANS)
-}
-
 #' Form row means.
 #' 
 #' @inheritParams base::rowMeans
@@ -149,14 +212,6 @@ rowMeans.LinkedMatrix <- function(x, na.rm = TRUE, chunkSize = 1000, ...) {
 setMethod("rowMeans", signature("LinkedMatrix"), rowMeans.LinkedMatrix)
 
 
-rowSums.LinkedMatrix <- function(x, na.rm = TRUE, chunkSize = 1000, ...) {
-    if (na.rm) {
-        warning("Ignoring missing values")
-    }
-    ANS <- apply.LinkedMatrix(X = x, MARGIN = 1, FUN = sum, chunkSize = chunkSize, na.rm = na.rm, ...)
-    return(ANS)
-}
-
 #' Form row sums.
 #' 
 #' @inheritParams base::rowSums
@@ -165,30 +220,6 @@ rowSums.LinkedMatrix <- function(x, na.rm = TRUE, chunkSize = 1000, ...) {
 #' @export
 setMethod("rowSums", signature("LinkedMatrix"), rowSums.LinkedMatrix)
 
-
-summary.num <- function(x) {
-    out <- c(range(x, na.rm = T), mean(x, na.rm = T), sd(x, na.rm = T), mean(is.na(x)))
-    names(out) <- c("min", "max", "mean", "sd", "prop NAs")
-    return(out)
-}
-
-summary.char <- function(x) {
-    out <- table(x, useNA = "always")
-    out <- out/length(x)
-    return(out)
-}
-
-summary.LinkedMatrix <- function(object, MARGIN = 2, chunkSize = 1000, ...) {
-    sample <- object[1, 1]
-    if (is.numeric()) {
-        fun <- summary.num
-    } else if (is.character(sample) | is.logical(sample)) {
-        fun <- summary.char
-    } else {
-        fun <- summary
-    }
-    apply.LinkedMatrix(X = object, MARGIN = MARGIN, FUN = fun, chunkSize = chunkSize, ...)
-}
 
 #' Summary function for \code{\linkS4class{ColumnLinkedMatrix}} or 
 #' \code{\linkS4class{RowLinkedMatrix}} objects.
@@ -208,26 +239,3 @@ summary.LinkedMatrix <- function(object, MARGIN = 2, chunkSize = 1000, ...) {
 #' @return Returns a \code{matrix} of summaries.
 #' @export
 setMethod("summary", signature("LinkedMatrix"), summary.LinkedMatrix)
-
-
-#' Returns the column or row indexes at which each node starts and ends.
-#' 
-#' @param x Either a \code{\linkS4class{ColumnLinkedMatrix}} or a 
-#'   \code{\linkS4class{RowLinkedMatrix}} object
-#' @return A matrix.
-#' @export
-nodes <- function(x) {
-    UseMethod("nodes")
-}
-
-
-#' Maps each column or row index of a linked matrix to the column or row index
-#' of its corresponding node.
-#' 
-#' @param x Either a \code{\linkS4class{ColumnLinkedMatrix}} or a 
-#'   \code{\linkS4class{RowLinkedMatrix}} object
-#' @return A matrix.
-#' @export
-index <- function(x) {
-    UseMethod("index")
-} 
