@@ -53,3 +53,20 @@ The `LinkedMatrix` package is not available on [CRAN](http://cran.r-project.org/
 4. Load `LinkedMatrix` package: `library(LinkedMatrix)`
 
 Alternatively, you can download the most recent version as a bundle for [Windows](https://github.com/QuantGen/LinkedMatrix/archive/master.zip) or [Mac OS / Linux](https://github.com/QuantGen/LinkedMatrix/archive/master.tar.gz).
+
+## Example
+
+The following code generates two random memory-mapped matrices using `ff` and links them together by rows in a `RowLinkedMatrix`. The `LinkedMatrix` instance can then be treated like any other regular matrix.
+
+```R
+library(LinkedMatrix)
+library(ff)
+
+ff1 <- ff(vmode = 'double', dim = c(5, 10), initdata = rnorm(50))
+ff2 <- ff(vmode = 'double', dim = c(5, 10), initdata = rnorm(50))
+m <- RowLinkedMatrix(ff1, ff2)
+
+dim(m)
+m[1, ]
+m[, 1]
+```
