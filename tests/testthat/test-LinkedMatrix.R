@@ -7,13 +7,13 @@ rownames(genotypes) <- paste0("id_", 1:3)
 
 for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
     
-    for (nChunks in 1:2) {
+    for (nNodes in 1:2) {
         
-        context(paste0(class, " (nChunks: ", nChunks, ")"))
+        context(paste0(class, " (nNodes = ", nNodes, ")"))
         
         # Prepare LinkedMatrix object
         list <- new(class)
-        if (nChunks == 2) {
+        if (nNodes == 2) {
             if (class == "ColumnLinkedMatrix") {
                 list[[1]] <- genotypes[, 1:2, drop = FALSE] 
                 list[[2]] <- genotypes[, 3, drop = FALSE] 
