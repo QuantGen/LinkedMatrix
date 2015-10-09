@@ -58,10 +58,7 @@ replace.ColumnLinkedMatrix <- function(x, i, j, ..., value) {
     if (missing(j)) {
         j <- 1:ncol(x)
     }
-    # Expand single values such as NA
-    if (length(value) == 1) {
-        value <- matrix(nrow = length(i), ncol = length(j), data = value)
-    }
+    Z <- matrix(nrow = length(i), ncol = length(j), data = value)
     # Retrieve nodes and index from ... to speed up sequential writes
     ellipsis <- list(...)
     if (is.null(ellipsis$nodes)) {
@@ -77,7 +74,7 @@ replace.ColumnLinkedMatrix <- function(x, i, j, ..., value) {
     for (k in 1:nrow(nodes)) {
         col_z <- (j >= nodes[k, 2]) & (j <= nodes[k, 3])
         colLocal <- index[j[col_z], 3]
-        x[[k]][i, colLocal] <- value[, col_z]
+        x[[k]][i, colLocal] <- Z[, col_z]
     }
     return(x)
 }
