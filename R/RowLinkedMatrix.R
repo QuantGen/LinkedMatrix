@@ -62,8 +62,13 @@ replace.RowLinkedMatrix <- function(x, i, j, ..., value) {
     if (length(value) == 1) {
         value <- matrix(nrow = length(i), ncol = length(j), data = value)
     }
-    nodes <- nodes(x)
+    # Retrieve nodes and index from ... to speed up sequential writes
     ellipsis <- list(...)
+    if (is.null(ellipsis$nodes)) {
+        nodes <- nodes(x)
+    } else {
+        nodes <- ellipsis$nodes
+    }
     if (is.null(ellipsis$index)) {
         index <- index(x)
     } else {
