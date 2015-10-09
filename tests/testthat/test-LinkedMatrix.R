@@ -5,6 +5,25 @@ genotypes <- matrix(c(4, 4, 4, 3, 2, 3, 1, 2, 1), nrow = 3, ncol = 3)
 colnames(genotypes) <- paste0("mrk_", 1:3)
 rownames(genotypes) <- paste0("id_", 1:3)
 
+createLinkedMatrix <- function(class, nNodes) {
+    list <- new(class)
+    if (nNodes == 2) {
+        if (class == "ColumnLinkedMatrix") {
+            list[[1]] <- genotypes[, 1:2, drop = FALSE]
+            list[[2]] <- genotypes[, 3, drop = FALSE]
+        } else {
+            list[[1]] <- genotypes[1:2, , drop = FALSE]
+            list[[2]] <- genotypes[3, , drop = FALSE]
+        }
+    } else {
+        list[[1]] <- genotypes
+    }
+    list[] <- genotypes
+    colnames(list) <- paste0("mrk_", 1:3)
+    rownames(list) <- paste0("id_", 1:3)
+    return(list)
+}
+
 for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
     
     for (nNodes in 1:2) {
@@ -12,21 +31,7 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
         context(paste0(class, " (nNodes = ", nNodes, ")"))
         
         # Prepare LinkedMatrix object
-        list <- new(class)
-        if (nNodes == 2) {
-            if (class == "ColumnLinkedMatrix") {
-                list[[1]] <- genotypes[, 1:2, drop = FALSE] 
-                list[[2]] <- genotypes[, 3, drop = FALSE] 
-            } else {
-                list[[1]] <- genotypes[1:2, , drop = FALSE] 
-                list[[2]] <- genotypes[3, , drop = FALSE] 
-            }
-        } else {
-            list[[1]] <- genotypes
-        }
-        list[] <- genotypes
-        colnames(list) <- paste0("mrk_", 1:3)
-        rownames(list) <- paste0("id_", 1:3)
+        list <- createLinkedMatrix(class, nNodes)
         
         test_that("subsetting", {
             
@@ -112,7 +117,8 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
             
             testAndRestore <- function(label) {
                 expect_equal(all.equal(list[], comparison), TRUE, label = label)
-                assign("list", genotypes, parent.frame())
+                list <- createLinkedMatrix(class, nNodes)
+                assign("list", list, parent.frame())
                 assign("comparison", genotypes, parent.frame())
             }
             
