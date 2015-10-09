@@ -160,6 +160,16 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
             comparison[c(3, 1), c(3, 1)] <- replacement[c(3, 1), c(3, 1)]
             testAndRestore("[c(3, 1), c(3, 1)]")
             
+            list[1, ] <- NA
+            comparison[1, ] <- NA
+            testAndRestore("[1, ] <- NA")
+            list[, 1] <- NA
+            comparison[, 1] <- NA
+            testAndRestore("[, 1] <- NA")
+            list[1, 1] <- NA
+            comparison[1, 1] <- NA
+            testAndRestore("[1, 1] <- NA")
+            
         })
         
         test_that("dim", {
