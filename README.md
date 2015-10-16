@@ -5,6 +5,8 @@ LinkedMatrix
 
 Matrices implemented as collections of matrix-like nodes, linked by columns or rows.
 
+[![Travis-CI Build Status](https://travis-ci.org/QuantGen/LinkedMatrix.svg?branch=master)](https://travis-ci.org/QuantGen/LinkedMatrix)
+
 ## Classes & Methods
 
 ### Class `ColumnLinkedMatrix`
