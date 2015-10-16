@@ -1,13 +1,13 @@
 LinkedMatrix
 ============
 
-# Column-Linked and Row-Linked Matrices
+[![Travis-CI Build Status](https://travis-ci.org/QuantGen/LinkedMatrix.svg?branch=master)](https://travis-ci.org/QuantGen/LinkedMatrix)
 
 Matrices implemented as collections of matrix-like nodes, linked by columns or rows.
 
-[![Travis-CI Build Status](https://travis-ci.org/QuantGen/LinkedMatrix.svg?branch=master)](https://travis-ci.org/QuantGen/LinkedMatrix)
 
-## Classes & Methods
+Classes & Methods
+-----------------
 
 ### Class `ColumnLinkedMatrix`
 
@@ -45,7 +45,9 @@ All methods described below are available on both `ColumnLinkedMatrix` and `RowL
 - `length(x)` return the number of nodes
 - `[[` and `[[<-` for subsetting and replacing nodes
 
-## Installation
+
+Installation
+------------
 
 The `LinkedMatrix` package is not available on [CRAN](http://cran.r-project.org/) yet. However, it can be installed directly from GitHub using the [devtools](https://github.com/hadley/devtools) package.
 
@@ -56,7 +58,9 @@ The `LinkedMatrix` package is not available on [CRAN](http://cran.r-project.org/
 
 Alternatively, you can download the most recent version as a bundle for [Windows](https://github.com/QuantGen/LinkedMatrix/archive/master.zip) or [Mac OS / Linux](https://github.com/QuantGen/LinkedMatrix/archive/master.tar.gz).
 
-## Example
+
+Example
+-------
 
 The following code generates two random memory-mapped matrices using `ff` and links them together by rows in a `RowLinkedMatrix`. The `LinkedMatrix` instance can then be treated like any other regular matrix.
 
