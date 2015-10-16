@@ -1,5 +1,3 @@
-library(LinkedMatrix)
-
 # Prepare dummy data
 genotypes <- matrix(c(4, 4, 4, 3, 2, 3, 1, 2, 1), nrow = 3, ncol = 3)
 colnames(genotypes) <- paste0("mrk_", 1:3)
