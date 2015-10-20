@@ -6,7 +6,7 @@ Description: Matrices implemented as collections of matrix-like nodes, linked by
     columns or rows.
 Authors@R: c(
     person("Gustavo", "de los Campos", email = "gcampos@uab.edu", role = c("aut")),
-    person("Alexander", "Grueneberg", email = "alexander.grueneberg@googlemail.com", role = c("cre")))
+    person("Alexander", "Grueneberg", email = "alexander.grueneberg@googlemail.com", role = c("aut", "cre")))
 Imports:
     methods
 Suggests:
