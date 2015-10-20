@@ -12,7 +12,6 @@ Imports:
     methods
 Suggests:
     testthat
-LazyData: true
 Collate:
     'ColumnLinkedMatrix.R'
     'RowLinkedMatrix.R'
