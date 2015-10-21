@@ -3,18 +3,33 @@ genotypes <- matrix(c(4, 4, 4, 3, 2, 3, 1, 2, 1), nrow = 3, ncol = 3)
 colnames(genotypes) <- paste0("mrk_", 1:3)
 rownames(genotypes) <- paste0("id_", 1:3)
 
+nodes <- function(dim, nNodes) {
+    chunkSizes <- vector(mode = "integer", length = nNodes)
+    for (node in 1:nNodes) {
+        chunkSizes[node] <- floor(dim / nNodes)
+    }
+    for (node in seq_len(dim %% nNodes)) {
+        chunkSizes[node] <- chunkSizes[node] + 1
+    }
+    nodes <- matrix(nrow = nNodes, ncol = 2, NA)
+    idx <- 1
+    for (node in 1:nNodes) {
+        nodes[node, 1] <- idx
+        idx <- idx + chunkSizes[node]
+        nodes[node, 2] <- idx - 1
+    }
+    return(nodes)
+}
+
 createLinkedMatrix <- function(class, nNodes) {
     list <- new(class)
-    if (nNodes == 2) {
+    nodes <- nodes(3, nNodes)
+    for (node in 1:nNodes) {
         if (class == "ColumnLinkedMatrix") {
-            list[[1]] <- genotypes[, 1:2, drop = FALSE]
-            list[[2]] <- genotypes[, 3, drop = FALSE]
+            list[[node]] <- genotypes[, nodes[node, 1]:nodes[node, 2], drop = FALSE]
         } else {
-            list[[1]] <- genotypes[1:2, , drop = FALSE]
-            list[[2]] <- genotypes[3, , drop = FALSE]
+            list[[node]] <- genotypes[nodes[node, 1]:nodes[node, 2], , drop = FALSE]
         }
-    } else {
-        list[[1]] <- genotypes
     }
     list[] <- genotypes
     colnames(list) <- paste0("mrk_", 1:3)
