@@ -7,6 +7,8 @@ Description: Matrices implemented as collections of matrix-like nodes, linked by
 Authors@R: c(
     person("Gustavo", "de los Campos", email = "gustavoc@msu.edu", role = c("aut")),
     person("Alexander", "Grueneberg", email = "alexander.grueneberg@googlemail.com", role = c("aut", "cre")))
+URL: https://github.com/QuantGen/LinkedMatrix
+BugReports: https://github.com/QuantGen/LinkedMatrix/issues
 Imports:
     methods
 Suggests:
