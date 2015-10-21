@@ -39,9 +39,27 @@ createLinkedMatrix <- function(class, nNodes) {
 
 for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
 
+    context(class)
+
+    test_that("creation", {
+
+        linkedMatrix <- new(class)
+        expect_equal(length(linkedMatrix), 1)
+        expect_equal(linkedMatrix[1, 1], NA)
+
+        linkedMatrix <- new(class, matrix(nrow = 1, ncol = 1, 0))
+        expect_equal(length(linkedMatrix), 1)
+        expect_equal(linkedMatrix[1, 1], 0)
+
+        linkedMatrix <- new(class, matrix(nrow = 1, ncol = 1, 0), matrix(nrow = 1, ncol = 1, 0))
+        expect_equal(length(linkedMatrix), 2)
+        expect_equal(linkedMatrix[1, 1], 0)
+
+    })
+
     for (nNodes in 1:ifelse(class == "ColumnLinkedMatrix", ncol(genotypes), nrow(genotypes))) {
 
-        context(paste0(class, " (nNodes = ", nNodes, ")"))
+        context(paste0(class, " with ", nNodes, " nodes"))
 
         # Prepare LinkedMatrix object
         linkedMatrix <- createLinkedMatrix(class, nNodes)
