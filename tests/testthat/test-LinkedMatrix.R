@@ -42,18 +42,18 @@ createLinkedMatrix <- function(class, nNodes) {
 }
 
 for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
-    
+
     for (nNodes in 1:2) {
-        
+
         context(paste0(class, " (nNodes = ", nNodes, ")"))
-        
+
         # Prepare LinkedMatrix object
         linkedMatrix <- createLinkedMatrix(class, nNodes)
-        
+
         test_that("subsetting", {
-            
+
             expect_true(all.equal(linkedMatrix[], genotypes))
-            
+
             # expect_true(all.equal(linkedMatrix[1], genotypes[1])) Not implemented yet
             expect_true(all.equal(linkedMatrix[1, ], genotypes[1, ]))
             expect_true(all.equal(linkedMatrix[, 1], genotypes[, 1]))
@@ -61,7 +61,7 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
             expect_true(all.equal(linkedMatrix[1, , drop = FALSE], genotypes[1, , drop = FALSE]))
             expect_true(all.equal(linkedMatrix[, 1, drop = FALSE], genotypes[, 1, drop = FALSE]))
             expect_true(all.equal(linkedMatrix[1, 1, drop = FALSE], genotypes[1, 1, drop = FALSE]))
-            
+
             # expect_true(all.equal(linkedMatrix[1:2], genotypes[1:2])) Not implemented yet
             expect_true(all.equal(linkedMatrix[1:2, ], genotypes[1:2, ]))
             expect_true(all.equal(linkedMatrix[, 1:2], genotypes[, 1:2]))
@@ -69,7 +69,7 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
             expect_true(all.equal(linkedMatrix[1:2, , drop = FALSE], genotypes[1:2, , drop = FALSE]))
             expect_true(all.equal(linkedMatrix[, 1:2, drop = FALSE], genotypes[, 1:2, drop = FALSE]))
             expect_true(all.equal(linkedMatrix[1:2, 1:2, drop = FALSE], genotypes[1:2, 1:2, drop = FALSE]))
-            
+
             # expect_true(all.equal(linkedMatrix[2:1], genotypes[2:1])) Not implemented yet
             expect_true(all.equal(linkedMatrix[2:1, ], genotypes[2:1, ]))
             expect_true(all.equal(linkedMatrix[, 2:1], genotypes[, 2:1]))
@@ -77,7 +77,7 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
             expect_true(all.equal(linkedMatrix[2:1, , drop = FALSE], genotypes[2:1, , drop = FALSE]))
             expect_true(all.equal(linkedMatrix[, 2:1, drop = FALSE], genotypes[, 2:1, drop = FALSE]))
             expect_true(all.equal(linkedMatrix[2:1, 2:1, drop = FALSE], genotypes[2:1, 2:1, drop = FALSE]))
-            
+
             # expect_true(all.equal(linkedMatrix[c(3, 1)], genotypes[c(3, 1)])) Not implemented yet
             expect_true(all.equal(linkedMatrix[c(3, 1), ], genotypes[c(3, 1), ]))
             expect_true(all.equal(linkedMatrix[, c(3, 1)], genotypes[, c(3, 1)]))
@@ -85,7 +85,7 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
             expect_true(all.equal(linkedMatrix[c(3, 1), , drop = FALSE], genotypes[c(3, 1), , drop = FALSE]))
             expect_true(all.equal(linkedMatrix[, c(3, 1), drop = FALSE], genotypes[, c(3, 1), drop = FALSE]))
             expect_true(all.equal(linkedMatrix[c(3, 1), c(3, 1), drop = FALSE], genotypes[c(3, 1), c(3, 1), drop = FALSE]))
-            
+
             # expect_true(all.equal(linkedMatrix[genotypes > 1], genotypes[genotypes > 1])) Not implemented yet
             expect_true(all.equal(linkedMatrix[c(TRUE, FALSE, TRUE), ], genotypes[c(TRUE, FALSE, TRUE), ]))
             expect_true(all.equal(linkedMatrix[, c(TRUE, FALSE, TRUE)], genotypes[, c(TRUE, FALSE, TRUE)]))
@@ -93,56 +93,56 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
             expect_true(all.equal(linkedMatrix[c(TRUE, FALSE, TRUE), , drop = FALSE], genotypes[c(TRUE, FALSE, TRUE), , drop = FALSE]))
             expect_true(all.equal(linkedMatrix[, c(TRUE, FALSE, TRUE), drop = FALSE], genotypes[, c(TRUE, FALSE, TRUE), drop = FALSE]))
             expect_true(all.equal(linkedMatrix[c(TRUE, FALSE, TRUE), c(TRUE, FALSE, TRUE), drop = FALSE], genotypes[c(TRUE, FALSE, TRUE), c(TRUE, FALSE, TRUE), drop = FALSE]))
-            
+
             expect_true(all.equal(linkedMatrix["id_1", ], genotypes["id_1", ]))
             expect_true(all.equal(linkedMatrix[, "mrk_1"], genotypes[, "mrk_1"]))
             expect_true(all.equal(linkedMatrix["id_1", "mrk_1"], genotypes["id_1", "mrk_1"]))
             expect_true(all.equal(linkedMatrix["id_1", , drop = FALSE], genotypes["id_1", , drop = FALSE]))
             expect_true(all.equal(linkedMatrix[, "mrk_1", drop = FALSE], genotypes[, "mrk_1", drop = FALSE]))
             expect_true(all.equal(linkedMatrix["id_1", "mrk_1", drop = FALSE], genotypes["id_1", "mrk_1", drop = FALSE]))
-            
+
             expect_true(all.equal(linkedMatrix[c("id_1", "id_2"), ], genotypes[c("id_1", "id_2"), ]))
             expect_true(all.equal(linkedMatrix[, c("mrk_1", "mrk_2")], genotypes[, c("mrk_1", "mrk_2")]))
             expect_true(all.equal(linkedMatrix[c("id_1", "id_2"), c("mrk_1", "mrk_2")], genotypes[c("id_1", "id_2"), c("mrk_1", "mrk_2")]))
             expect_true(all.equal(linkedMatrix[c("id_1", "id_2"), , drop = FALSE], genotypes[c("id_1", "id_2"), , drop = FALSE]))
             expect_true(all.equal(linkedMatrix[, c("mrk_1", "mrk_2"), drop = FALSE], genotypes[, c("mrk_1", "mrk_2"), drop = FALSE]))
             expect_true(all.equal(linkedMatrix[c("id_1", "id_2"), c("mrk_1", "mrk_2"), drop = FALSE], genotypes[c("id_1", "id_2"), c("mrk_1", "mrk_2"), drop = FALSE]))
-            
+
             expect_true(all.equal(linkedMatrix[c("id_2", "id_1"), ], genotypes[c("id_2", "id_1"), ]))
             expect_true(all.equal(linkedMatrix[, c("mrk_2", "mrk_1")], genotypes[, c("mrk_2", "mrk_1")]))
             expect_true(all.equal(linkedMatrix[c("id_2", "id_1"), c("mrk_2", "mrk_1")], genotypes[c("id_2", "id_1"), c("mrk_2", "mrk_1")]))
             expect_true(all.equal(linkedMatrix[c("id_2", "id_1"), , drop = FALSE], genotypes[c("id_2", "id_1"), , drop = FALSE]))
             expect_true(all.equal(linkedMatrix[, c("mrk_2", "mrk_1"), drop = FALSE], genotypes[, c("mrk_2", "mrk_1"), drop = FALSE]))
             expect_true(all.equal(linkedMatrix[c("id_2", "id_1"), c("mrk_2", "mrk_1"), drop = FALSE], genotypes[c("id_2", "id_1"), c("mrk_2", "mrk_1"), drop = FALSE]))
-            
+
             expect_true(all.equal(linkedMatrix[c("id_3", "id_1"), ], genotypes[c("id_3", "id_1"), ]))
             expect_true(all.equal(linkedMatrix[, c("mrk_3", "mrk_1")], genotypes[, c("mrk_3", "mrk_1")]))
             expect_true(all.equal(linkedMatrix[c("id_3", "id_1"), c("mrk_3", "mrk_1")], genotypes[c("id_3", "id_1"), c("mrk_3", "mrk_1")]))
             expect_true(all.equal(linkedMatrix[c("id_3", "id_1"), , drop = FALSE], genotypes[c("id_3", "id_1"), , drop = FALSE]))
             expect_true(all.equal(linkedMatrix[, c("mrk_3", "mrk_1"), drop = FALSE], genotypes[, c("mrk_3", "mrk_1"), drop = FALSE]))
             expect_true(all.equal(linkedMatrix[c("id_3", "id_1"), c("mrk_3", "mrk_1"), drop = FALSE], genotypes[c("id_3", "id_1"), c("mrk_3", "mrk_1"), drop = FALSE]))
-            
+
         })
-        
+
         test_that("replacement", {
-            
+
             # Generate new genotypes for replacement
             replacement <- matrix(c(3, 1, 3, 2, 4, 3, 1, 1, 2), nrow = 3, ncol = 3)
             colnames(replacement) <- paste0("mrk_", 1:3)
             rownames(replacement) <- paste0("id_", 1:3)
             comparison <- genotypes
-            
+
             testAndRestore <- function(label) {
                 expect_equal(all.equal(linkedMatrix[], comparison), TRUE, label = label)
                 linkedMatrix <- createLinkedMatrix(class, nNodes)
                 assign("linkedMatrix", linkedMatrix, parent.frame())
                 assign("comparison", genotypes, parent.frame())
             }
-            
+
             linkedMatrix[] <- replacement
             comparison[] <- replacement
             testAndRestore("[]")
-            
+
             linkedMatrix[1, ] <- replacement[1, ]
             comparison[1, ] <- replacement[1, ]
             testAndRestore("[1, ]")
@@ -152,7 +152,7 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
             linkedMatrix[1, 1] <- replacement[1, 1]
             comparison[1, 1] <- replacement[1, 1]
             testAndRestore("[1, 1]")
-            
+
             linkedMatrix[1:2, ] <- replacement[1:2, ]
             comparison[1:2, ] <- replacement[1:2, ]
             testAndRestore("[1:2, ]")
@@ -162,7 +162,7 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
             linkedMatrix[1:2, 1:2] <- replacement[1:2, 1:2]
             comparison[1:2, 1:2] <- replacement[1:2, 1:2]
             testAndRestore("[1:2, 1:2]")
-            
+
             linkedMatrix[2:1, ] <- replacement[2:1, ]
             comparison[2:1, ] <- replacement[2:1, ]
             testAndRestore("[2:1, ]")
@@ -172,7 +172,7 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
             linkedMatrix[2:1, 2:1] <- replacement[2:1, 2:1]
             comparison[2:1, 2:1] <- replacement[2:1, 2:1]
             testAndRestore("[2:1, 2:1]")
-            
+
             linkedMatrix[c(3, 1), ] <- replacement[c(3, 1), ]
             comparison[c(3, 1), ] <- replacement[c(3, 1), ]
             testAndRestore("[c(3, 1), ]")
@@ -182,7 +182,7 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
             linkedMatrix[c(3, 1), c(3, 1)] <- replacement[c(3, 1), c(3, 1)]
             comparison[c(3, 1), c(3, 1)] <- replacement[c(3, 1), c(3, 1)]
             testAndRestore("[c(3, 1), c(3, 1)]")
-            
+
             linkedMatrix[1, ] <- NA
             comparison[1, ] <- NA
             testAndRestore("[1, ] <- NA")
@@ -192,45 +192,45 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
             linkedMatrix[1, 1] <- NA
             comparison[1, 1] <- NA
             testAndRestore("[1, 1] <- NA")
-            
+
         })
-        
+
         test_that("dim", {
             expect_equal(dim(linkedMatrix), dim(genotypes))
         })
-        
+
         test_that("apply", {
-            
+
             expect_true(all.equal(colMeans(linkedMatrix), colMeans(genotypes)))
             expect_true(all.equal(colSums(linkedMatrix), colSums(genotypes)))
             expect_true(all.equal(rowMeans(linkedMatrix), rowMeans(genotypes)))
             expect_true(all.equal(rowSums(linkedMatrix), rowSums(genotypes)))
-            
+
             # Introduce NA
             genotypes_na <- genotypes
             genotypes_na[1, 1] <- NA
             linkedMatrix[1, 1] <- NA
-            
+
             expect_warning(colMeans(linkedMatrix))
             expect_warning(colSums(linkedMatrix))
             expect_warning(rowMeans(linkedMatrix))
             expect_warning(rowSums(linkedMatrix))
-            
+
             expect_true(all.equal(colMeans(linkedMatrix, na.rm = FALSE), colMeans(genotypes_na, na.rm = FALSE)))
             expect_true(all.equal(colSums(linkedMatrix, na.rm = FALSE), colSums(genotypes_na, na.rm = FALSE)))
             expect_true(all.equal(rowMeans(linkedMatrix, na.rm = FALSE), rowMeans(genotypes_na, na.rm = FALSE)))
             expect_true(all.equal(rowSums(linkedMatrix, na.rm = FALSE), rowSums(genotypes_na, na.rm = FALSE)))
-            
+
             expect_true(all.equal(colMeans(linkedMatrix, na.rm = TRUE), colMeans(genotypes_na, na.rm = TRUE)))
             expect_true(all.equal(colSums(linkedMatrix, na.rm = TRUE), colSums(genotypes_na, na.rm = TRUE)))
             expect_true(all.equal(rowMeans(linkedMatrix, na.rm = TRUE), rowMeans(genotypes_na, na.rm = TRUE)))
             expect_true(all.equal(rowSums(linkedMatrix, na.rm = TRUE), rowSums(genotypes_na, na.rm = TRUE)))
-            
+
             # Revert NA
             linkedMatrix[] <- genotypes
-            
+
         })
-        
+
     }
-    
+
 } 
