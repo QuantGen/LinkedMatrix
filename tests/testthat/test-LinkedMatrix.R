@@ -1,7 +1,7 @@
 # Prepare dummy data
 genotypes <- matrix(c(4, 4, 4, 3, 2, 3, 1, 2, 1), nrow = 3, ncol = 3)
-colnames(genotypes) <- paste0("mrk_", 1:3)
-rownames(genotypes) <- paste0("id_", 1:3)
+rownames(genotypes) <- paste0("id_", 1:nrow(genotypes))
+colnames(genotypes) <- paste0("mrk_", 1:ncol(genotypes))
 
 nodes <- function(dim, nNodes) {
     chunkSizes <- vector(mode = "integer", length = nNodes)
@@ -23,7 +23,11 @@ nodes <- function(dim, nNodes) {
 
 createLinkedMatrix <- function(class, nNodes) {
     list <- new(class)
-    nodes <- nodes(3, nNodes)
+    if (class == "ColumnLinkedMatrix") {
+        nodes <- nodes(ncol(genotypes), nNodes)
+    } else {
+        nodes <- nodes(nrow(genotypes), nNodes)
+    }
     for (node in 1:nNodes) {
         if (class == "ColumnLinkedMatrix") {
             list[[node]] <- genotypes[, nodes[node, 1]:nodes[node, 2], drop = FALSE]
@@ -32,8 +36,8 @@ createLinkedMatrix <- function(class, nNodes) {
         }
     }
     list[] <- genotypes
-    colnames(list) <- paste0("mrk_", 1:3)
-    rownames(list) <- paste0("id_", 1:3)
+    rownames(list) <- paste0("id_", 1:nrow(genotypes))
+    colnames(list) <- paste0("mrk_", 1:ncol(genotypes))
     return(list)
 }
 
