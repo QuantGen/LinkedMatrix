@@ -94,7 +94,7 @@ rowSums.LinkedMatrix <- function(x, na.rm = TRUE, chunkSize = 1000, ...) {
 
 
 summary.num <- function(x) {
-    out <- c(range(x, na.rm = T), mean(x, na.rm = T), sd(x, na.rm = T), mean(is.na(x)))
+    out <- c(range(x, na.rm = T), mean(x, na.rm = T), stats::sd(x, na.rm = T), mean(is.na(x)))
     names(out) <- c("min", "max", "mean", "sd", "prop NAs")
     return(out)
 }

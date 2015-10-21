@@ -2,7 +2,7 @@
 
 * Local Arch Linux install, R 3.2.2
 * Ubuntu 12.04 on Travis CI, R. 3.2.2
-* win-builder, R-release
+* win-builder, R-release and R-devel
 
 
 ## R CMD check results
