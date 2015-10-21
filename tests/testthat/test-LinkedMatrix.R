@@ -83,12 +83,14 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
             expect_true(all.equal(linkedMatrix[c(3, 1), c(3, 1), drop = FALSE], genotypes[c(3, 1), c(3, 1), drop = FALSE]))
 
             # expect_true(all.equal(linkedMatrix[genotypes > 1], genotypes[genotypes > 1])) Not implemented yet
-            expect_true(all.equal(linkedMatrix[c(TRUE, FALSE, TRUE), ], genotypes[c(TRUE, FALSE, TRUE), ]))
-            expect_true(all.equal(linkedMatrix[, c(TRUE, FALSE, TRUE)], genotypes[, c(TRUE, FALSE, TRUE)]))
-            expect_true(all.equal(linkedMatrix[c(TRUE, FALSE, TRUE), c(TRUE, FALSE, TRUE)], genotypes[c(TRUE, FALSE, TRUE), c(TRUE, FALSE, TRUE)]))
-            expect_true(all.equal(linkedMatrix[c(TRUE, FALSE, TRUE), , drop = FALSE], genotypes[c(TRUE, FALSE, TRUE), , drop = FALSE]))
-            expect_true(all.equal(linkedMatrix[, c(TRUE, FALSE, TRUE), drop = FALSE], genotypes[, c(TRUE, FALSE, TRUE), drop = FALSE]))
-            expect_true(all.equal(linkedMatrix[c(TRUE, FALSE, TRUE), c(TRUE, FALSE, TRUE), drop = FALSE], genotypes[c(TRUE, FALSE, TRUE), c(TRUE, FALSE, TRUE), drop = FALSE]))
+            logRow <- rep_len(c(TRUE, FALSE), nrow(genotypes))
+            logCol <- rep_len(c(TRUE, FALSE), ncol(genotypes))
+            expect_true(all.equal(linkedMatrix[logRow, ], genotypes[logRow, ]))
+            expect_true(all.equal(linkedMatrix[, logCol], genotypes[, logCol]))
+            expect_true(all.equal(linkedMatrix[logRow, logCol], genotypes[logRow, logCol]))
+            expect_true(all.equal(linkedMatrix[logRow, , drop = FALSE], genotypes[logRow, , drop = FALSE]))
+            expect_true(all.equal(linkedMatrix[, logCol, drop = FALSE], genotypes[, logCol, drop = FALSE]))
+            expect_true(all.equal(linkedMatrix[logRow, logCol, drop = FALSE], genotypes[logRow, logCol, drop = FALSE]))
 
             expect_true(all.equal(linkedMatrix["id_1", ], genotypes["id_1", ]))
             expect_true(all.equal(linkedMatrix[, "mrk_1"], genotypes[, "mrk_1"]))
