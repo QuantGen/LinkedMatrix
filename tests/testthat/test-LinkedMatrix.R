@@ -23,11 +23,7 @@ nodes <- function(dim, nNodes) {
 
 createLinkedMatrix <- function(class, nNodes) {
     linkedMatrix <- new(class)
-    if (class == "ColumnLinkedMatrix") {
-        nodes <- nodes(ncol(genotypes), nNodes)
-    } else {
-        nodes <- nodes(nrow(genotypes), nNodes)
-    }
+    nodes <- nodes(ifelse(class == "ColumnLinkedMatrix", ncol(genotypes), nrow(genotypes)), nNodes)
     for (node in 1:nNodes) {
         if (class == "ColumnLinkedMatrix") {
             linkedMatrix[[node]] <- genotypes[, nodes[node, 1]:nodes[node, 2], drop = FALSE]
@@ -43,7 +39,7 @@ createLinkedMatrix <- function(class, nNodes) {
 
 for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
 
-    for (nNodes in 1:2) {
+    for (nNodes in 1:ifelse(class == "ColumnLinkedMatrix", ncol(genotypes), nrow(genotypes))) {
 
         context(paste0(class, " (nNodes = ", nNodes, ")"))
 
