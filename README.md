@@ -30,14 +30,18 @@ m[, 1]
 Installation
 ------------
 
-The `LinkedMatrix` package is not available on [CRAN](http://cran.r-project.org/) yet. However, it can be installed directly from GitHub using the [devtools](https://github.com/hadley/devtools) package.
+To get the current released version from CRAN:
 
-1. Install `devtools` package: `install.packages('devtools')`
-2. Load `devtools` package: `library(devtools)`
-3. Install `LinkedMatrix` package from GitHub: `install_github('QuantGen/LinkedMatrix')`
-4. Load `LinkedMatrix` package: `library(LinkedMatrix)`
+```r
+install.packages("LinkedMatrix")
+```
 
-Alternatively, you can download the most recent version as a bundle for [Windows](https://github.com/QuantGen/LinkedMatrix/archive/master.zip) or [Mac OS / Linux](https://github.com/QuantGen/LinkedMatrix/archive/master.tar.gz).
+To get the current development version from GitHub:
+
+```r
+# install.packages("devtools")
+devtools::install_github("QuantGen/LinkedMatrix")
+```
 
 
 Classes & Methods
