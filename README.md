@@ -2,6 +2,7 @@ LinkedMatrix
 ============
 
 [![Travis-CI Build Status](https://travis-ci.org/QuantGen/LinkedMatrix.svg?branch=master)](https://travis-ci.org/QuantGen/LinkedMatrix)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/LinkedMatrix)](http://cran.r-project.org/package=LinkedMatrix)
 
 Matrices implemented as collections of matrix-like nodes, linked by columns or rows.
 
