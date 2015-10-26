@@ -36,7 +36,7 @@ apply.LinkedMatrix <- function(X, MARGIN, FUN, chunkSize = 1000, verbose = FALSE
             } else {
                 Z <- X[, ini:end]
             }
-            ANS[, ini:end] <- apply(FUN = FUN, MARGIN = MARGIN, X = Z, ...)
+            ANS[, ini:end] <- apply(Z, MARGIN, FUN, ...)
         }
     } else {
         ANS <- vector("list", n)
