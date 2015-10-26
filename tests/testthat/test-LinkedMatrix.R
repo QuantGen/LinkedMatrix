@@ -215,6 +215,13 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
             expect_equal(dim(linkedMatrix), dim(genotypes))
         })
 
+        test_that("apply", {
+            expect_equal(apply(linkedMatrix, 1, sum), base::apply(genotypes, 1, sum))
+            expect_equal(apply(linkedMatrix, 2, sum), base::apply(genotypes, 2, sum))
+            expect_equal(apply(linkedMatrix, 1, summary), base::apply(genotypes, 1, summary))
+            expect_equal(apply(linkedMatrix, 2, summary), base::apply(genotypes, 2, summary))
+        })
+
         test_that("colMeans", {
             expect_equal(colMeans(linkedMatrix), base::colMeans(genotypes))
 
