@@ -149,7 +149,7 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
             comparison <- genotypes
 
             testAndRestore <- function(label) {
-                expect_equal(all.equal(linkedMatrix[], comparison), TRUE, label = label)
+                expect_equal(linkedMatrix[], comparison, label = label)
                 linkedMatrix <- createLinkedMatrix(class, nNodes)
                 assign("linkedMatrix", linkedMatrix, parent.frame())
                 assign("comparison", genotypes, parent.frame())
@@ -216,7 +216,7 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
         })
 
         test_that("colMeans", {
-            expect_true(all.equal(colMeans(linkedMatrix), base::colMeans(genotypes)))
+            expect_equal(colMeans(linkedMatrix), base::colMeans(genotypes))
 
             # Introduce NA
             genotypes_na <- genotypes
@@ -224,15 +224,15 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
             linkedMatrix[1, 1] <- NA
 
             expect_warning(colMeans(linkedMatrix))
-            expect_true(all.equal(colMeans(linkedMatrix, na.rm = FALSE), base::colMeans(genotypes_na, na.rm = FALSE)))
-            expect_true(all.equal(colMeans(linkedMatrix, na.rm = TRUE), base::colMeans(genotypes_na, na.rm = TRUE)))
+            expect_equal(colMeans(linkedMatrix, na.rm = FALSE), base::colMeans(genotypes_na, na.rm = FALSE))
+            expect_equal(colMeans(linkedMatrix, na.rm = TRUE), base::colMeans(genotypes_na, na.rm = TRUE))
 
             # Revert NA
             linkedMatrix[] <- genotypes
         })
 
         test_that("colSums", {
-            expect_true(all.equal(colSums(linkedMatrix), base::colSums(genotypes)))
+            expect_equal(colSums(linkedMatrix), base::colSums(genotypes))
 
             # Introduce NA
             genotypes_na <- genotypes
@@ -240,30 +240,30 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
             linkedMatrix[1, 1] <- NA
 
             expect_warning(colSums(linkedMatrix))
-            expect_true(all.equal(colSums(linkedMatrix, na.rm = FALSE), base::colSums(genotypes_na, na.rm = FALSE)))
-            expect_true(all.equal(colSums(linkedMatrix, na.rm = TRUE), base::colSums(genotypes_na, na.rm = TRUE)))
+            expect_equal(colSums(linkedMatrix, na.rm = FALSE), base::colSums(genotypes_na, na.rm = FALSE))
+            expect_equal(colSums(linkedMatrix, na.rm = TRUE), base::colSums(genotypes_na, na.rm = TRUE))
 
             # Revert NA
             linkedMatrix[] <- genotypes
         })
 
         test_that("rowMeans", {
-            expect_true(all.equal(rowMeans(linkedMatrix), base::rowMeans(genotypes)))
+            expect_equal(rowMeans(linkedMatrix), base::rowMeans(genotypes))
 
             # Introduce NA
             genotypes_na <- genotypes
             genotypes_na[1, 1] <- NA
             linkedMatrix[1, 1] <- NA
             expect_warning(rowMeans(linkedMatrix))
-            expect_true(all.equal(rowMeans(linkedMatrix, na.rm = FALSE), base::rowMeans(genotypes_na, na.rm = FALSE)))
-            expect_true(all.equal(rowMeans(linkedMatrix, na.rm = TRUE), base::rowMeans(genotypes_na, na.rm = TRUE)))
+            expect_equal(rowMeans(linkedMatrix, na.rm = FALSE), base::rowMeans(genotypes_na, na.rm = FALSE))
+            expect_equal(rowMeans(linkedMatrix, na.rm = TRUE), base::rowMeans(genotypes_na, na.rm = TRUE))
 
             # Revert NA
             linkedMatrix[] <- genotypes
         })
 
         test_that("rowSums", {
-            expect_true(all.equal(rowSums(linkedMatrix), base::rowSums(genotypes)))
+            expect_equal(rowSums(linkedMatrix), base::rowSums(genotypes))
 
             # Introduce NA
             genotypes_na <- genotypes
@@ -271,8 +271,8 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
             linkedMatrix[1, 1] <- NA
 
             expect_warning(rowSums(linkedMatrix))
-            expect_true(all.equal(rowSums(linkedMatrix, na.rm = FALSE), base::rowSums(genotypes_na, na.rm = FALSE)))
-            expect_true(all.equal(rowSums(linkedMatrix, na.rm = TRUE), base::rowSums(genotypes_na, na.rm = TRUE)))
+            expect_equal(rowSums(linkedMatrix, na.rm = FALSE), base::rowSums(genotypes_na, na.rm = FALSE))
+            expect_equal(rowSums(linkedMatrix, na.rm = TRUE), base::rowSums(genotypes_na, na.rm = TRUE))
 
             # Revert NA
             linkedMatrix[] <- genotypes
