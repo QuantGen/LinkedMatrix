@@ -4,8 +4,7 @@ NULL
 
 show <- function(object) {
     d <- dim(object)
-    cat(d[1], "x", d[2], "linked matrix of class", class(object))
-    NULL
+    cat(d[1], "x", d[2], "linked matrix of class", class(object), "\n")
 }
 
 
