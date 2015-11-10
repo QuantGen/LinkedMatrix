@@ -108,7 +108,7 @@ summary.char <- function(x) {
 
 summary.LinkedMatrix <- function(object, MARGIN = 2, chunkSize = 1000, ...) {
     sample <- object[1, 1]
-    if (is.numeric()) {
+    if (is.numeric(sample)) {
         fun <- summary.num
     } else if (is.character(sample) | is.logical(sample)) {
         fun <- summary.char
