@@ -57,6 +57,13 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
 
         expect_error(new(class, c(1, 2, 3)), "*arguments need to be matrix-like*")
 
+        if (class == "ColumnLinkedMatrix") {
+            args <- list(matrix(nrow = 1, ncol = 1, 0), matrix(nrow = 2, ncol = 1, 0))
+        } else {
+            args <- list(matrix(nrow = 1, ncol = 1, 0), matrix(nrow = 1, ncol = 2, 0))
+        }
+        expect_error(do.call(class, args), "*arguments need the same number of*")
+
     })
 
     for (nNodes in 1:ifelse(class == "ColumnLinkedMatrix", ncol(genotypes), nrow(genotypes))) {

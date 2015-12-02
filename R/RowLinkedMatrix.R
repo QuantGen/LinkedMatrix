@@ -216,6 +216,10 @@ setMethod("initialize", "RowLinkedMatrix", function(.Object, ...) {
     if (any(sapply(list, function(x) length(dim(x)) != 2))) {
         stop("arguments need to be matrix-like")
     }
+    # Detect matrices that do not match in dimensions
+    if (ncol(unique(sapply(list, dim), MARGIN = 2)) != 1) {
+        stop("arguments need the same number of columns")
+    }
     .Object <- callNextMethod(.Object, list)
     return(.Object)
 })
