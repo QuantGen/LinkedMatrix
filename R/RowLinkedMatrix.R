@@ -212,6 +212,10 @@ setMethod("initialize", "RowLinkedMatrix", function(.Object, ...) {
     if (length(list) == 0) {
         list[[1]] <- matrix()
     }
+    # Detect non-matrix objects by checking dimensions
+    if (any(sapply(list, function(x) length(dim(x)) != 2))) {
+        stop("arguments need to be matrix-like")
+    }
     .Object <- callNextMethod(.Object, list)
     return(.Object)
 })

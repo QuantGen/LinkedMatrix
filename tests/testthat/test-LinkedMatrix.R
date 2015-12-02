@@ -55,6 +55,8 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
         expect_equal(length(linkedMatrix), 2)
         expect_equal(linkedMatrix[1, 1], 0)
 
+        expect_error(new(class, c(1, 2, 3)), "*arguments need to be matrix-like*")
+
     })
 
     for (nNodes in 1:ifelse(class == "ColumnLinkedMatrix", ncol(genotypes), nrow(genotypes))) {
