@@ -207,7 +207,7 @@ ColumnLinkedMatrix <- setClass("ColumnLinkedMatrix", contains = "list")
 #' @inheritParams base::list
 #' @param .Object The \code{ColumnLinkedMatrix} instance to be initialized.
 #' @export
-setMethod("initialize", "ColumnLinkedMatrix", function(.Object, ...) {
+setMethod("initialize", signature(.Object = "ColumnLinkedMatrix"), function(.Object, ...) {
     list <- list(...)
     # Append at least one matrix
     if (length(list) == 0) {

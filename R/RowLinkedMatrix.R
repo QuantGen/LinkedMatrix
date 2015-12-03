@@ -206,7 +206,7 @@ RowLinkedMatrix <- setClass("RowLinkedMatrix", contains = "list")
 #' @inheritParams base::list
 #' @param .Object The \code{RowLinkedMatrix} instance to be initialized.
 #' @export
-setMethod("initialize", "RowLinkedMatrix", function(.Object, ...) {
+setMethod("initialize", signature(.Object = "RowLinkedMatrix"), function(.Object, ...) {
     list <- list(...)
     # Append at least one matrix
     if (length(list) == 0) {
