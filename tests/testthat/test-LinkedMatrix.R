@@ -224,6 +224,14 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
             expect_equal(dim(linkedMatrix), dim(genotypes))
         })
 
+        test_that("length", {
+            expect_equal(length(linkedMatrix), length(genotypes))
+        })
+
+        test_that("nNodes", {
+            expect_equal(nNodes(linkedMatrix), nNodes)
+        })
+
     }
 
 } 

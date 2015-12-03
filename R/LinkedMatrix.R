@@ -8,6 +8,18 @@ show <- function(object) {
 }
 
 
+#' @export
+length.LinkedMatrix <- function(x) {
+    prod(dim(x))
+}
+
+
+#' @export
+nNodes <- function(x) {
+    length(slot(x, ".Data"))
+}
+
+
 #' Returns the column or row indexes at which each node starts and ends.
 #' 
 #' @param x Either a \code{\linkS4class{ColumnLinkedMatrix}} or a 

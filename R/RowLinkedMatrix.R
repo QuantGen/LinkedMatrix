@@ -84,7 +84,7 @@ replace.RowLinkedMatrix <- function(x, i, j, ..., value) {
 dim.RowLinkedMatrix <- function(x) {
     p <- ncol(x[[1]])
     n <- 0
-    for (i in 1:length(x)) {
+    for (i in 1:nNodes(x)) {
         n <- n + nrow(x[[i]])
     }
     return(c(n, p))
@@ -130,7 +130,7 @@ dimnames.RowLinkedMatrix <- function(x) {
 
 # This function looks like an S3 method, but isn't one.
 `colnames<-.RowLinkedMatrix` <- function(x, value) {
-    for (i in 1:length(x)) {
+    for (i in 1:nNodes(x)) {
         colnames(x[[i]]) <- value
     }
     return(x)
@@ -160,7 +160,7 @@ as.matrix.RowLinkedMatrix <- function(x, ...) {
 
 #' @export
 nodes.RowLinkedMatrix <- function(x) {
-    n <- length(x)
+    n <- nNodes(x)
     OUT <- matrix(nrow = n, ncol = 3, NA)
     colnames(OUT) <- c("node", "row.ini", "row.end")
     end <- 0
