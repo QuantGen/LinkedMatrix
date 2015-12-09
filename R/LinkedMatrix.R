@@ -13,7 +13,10 @@ length.LinkedMatrix <- function(x) {
     prod(dim(x))
 }
 
-
+#' Returns the number of nodes.
+#' 
+#' @param x Either a \code{\linkS4class{ColumnLinkedMatrix}} or a 
+#'   \code{\linkS4class{RowLinkedMatrix}} object
 #' @export
 nNodes <- function(x) {
     length(slot(x, ".Data"))
