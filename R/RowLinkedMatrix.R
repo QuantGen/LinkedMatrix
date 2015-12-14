@@ -105,6 +105,7 @@ rownames.RowLinkedMatrix <- function(x) {
     return(out)
 }
 
+
 # This function looks like an S3 method, but isn't one.
 colnames.RowLinkedMatrix <- function(x) {
     out <- colnames(x[[1]])

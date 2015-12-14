@@ -13,6 +13,7 @@ length.LinkedMatrix <- function(x) {
     prod(dim(x))
 }
 
+
 #' Returns the number of nodes.
 #' 
 #' @param x Either a \code{\linkS4class{ColumnLinkedMatrix}} or a 
