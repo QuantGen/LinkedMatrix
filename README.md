@@ -75,9 +75,6 @@ All methods described below are available on both `ColumnLinkedMatrix` and `RowL
 - `[` and `[<-` for subsetting and replacing matrix elements
 - `dim(x)`, `nrow(x)`, `ncol(x)`, `length(x)`
 - `dimnames(x)`, `colnames(x)`, `rownames(x)`
-- `colMeans(x)`, `colSums(x)`, `rowMeans(x)`, `rowSums(x)`
-- `summary(x)`
-- `apply(x, MARGIN, FUN)` with the same parameters and similar behavior than the `apply` function from the base package
 - `as.matrix(x)` converts a `LinkedMatrix` object to a matrix (if small enough)
 - `nNodes(x)` return the number iof nodes
 - `nodes(x)` returns the column or row indexes at which each node starts and ends
