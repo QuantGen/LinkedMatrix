@@ -41,7 +41,21 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
 
     context(class)
 
-    test_that("creation", {
+    linkedBy <- ifelse(class == "ColumnLinkedMatrix", "columns", "rows")
+
+    test_that("LinkedMatrix creation", {
+
+        for (nNodes in c(1, 2)) {
+
+            linkedMatrix <- LinkedMatrix(nrow = nrow(genotypes), ncol = ncol(genotypes), nNodes = nNodes, linkedBy = linkedBy, nodeInitializer = "matrixNodeInitializer")
+            expect_equal(nNodes(linkedMatrix), nNodes)
+            expect_is(linkedMatrix[[1]], "matrix")
+
+        }
+
+    })
+
+    test_that(paste(class, "creation"), {
 
         linkedMatrix <- new(class)
         expect_equal(length(linkedMatrix), 1)

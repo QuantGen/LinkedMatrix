@@ -18,4 +18,5 @@ Collate:
     'RowLinkedMatrix.R'
     'LinkedMatrix.R'
     'package.R'
+    'utils.R'
 RoxygenNote: 5.0.1

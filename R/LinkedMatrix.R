@@ -2,6 +2,45 @@
 NULL
 
 
+#' Initializes either a \code{\linkS4class{ColumnLinkedMatrix}} or
+#' \code{\linkS4class{RowLinkedMatrix}} of certain dimensions and of certain
+#' type.
+#' 
+#' @param nrow The number of rows.
+#' @param ncol The number of columns.
+#' @param nNodes The number of nodes.
+#' @param linkedBy Whether the matrix is linked by \code{rows} or
+#'   \code{columns}.
+#' @param nodeInitializer The name of a function or a function with four
+#'   parameters \code{nodeIndex}, \code{ncol}, \code{nrow}, and \code{...} that
+#'   initializes each node. Pre-defined node initializers include
+#'   \code{matrixNodeInitializer}.
+#' @param ... Additional arguments passed into \code{nodeInitializer}.
+#' @export
+LinkedMatrix <- function(nrow, ncol, nNodes, linkedBy, nodeInitializer, ...) {
+    class <- ifelse(linkedBy == "columns", "ColumnLinkedMatrix", "RowLinkedMatrix")
+    nodeInitializer <- match.fun(nodeInitializer)
+    linkedMatrix <- new(class)
+    ranges <- chunkRanges(ifelse(class == "ColumnLinkedMatrix", ncol, nrow), nNodes)
+    for (i in seq_len(nNodes)) {
+        if (class == "RowLinkedMatrix") {
+            n <- ranges[2, i] - ranges[1, i] + 1
+            p <- ncol
+        } else {
+            n <- nrow
+            p <- ranges[2, i] - ranges[1, i] + 1
+        }
+        linkedMatrix[[i]] <- nodeInitializer(nodeIndex = i, nrow = n, ncol = p, ...)
+    }
+    return(linkedMatrix)
+}
+
+
+matrixNodeInitializer <- function(nodeIndex, nrow, ncol, ...) {
+    matrix(nrow = nrow, ncol = ncol, ...)
+}
+
+
 show <- function(object) {
     d <- dim(object)
     cat(d[1], "x", d[2], "linked matrix of class", class(object), "\n")
