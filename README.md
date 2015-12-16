@@ -18,8 +18,8 @@ The following code generates two random memory-mapped matrices using `ff` and li
 library(LinkedMatrix)
 library(ff)
 
-ff1 <- ff(vmode = 'double', dim = c(5, 10), initdata = rnorm(50))
-ff2 <- ff(vmode = 'double', dim = c(5, 10), initdata = rnorm(50))
+ff1 <- ff(dim = c(5, 10), vmode = "double", initdata = rnorm(50))
+ff2 <- ff(dim = c(5, 10), vmode = "double", initdata = rnorm(50))
 m <- RowLinkedMatrix(ff1, ff2)
 
 dim(m)
