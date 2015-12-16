@@ -195,17 +195,17 @@ index.RowLinkedMatrix <- function(x) {
 
 #' An S4 class to represent a row-linked \code{LinkedMatrix}
 #'
-#' \code{RowLinkedMatrix} inherits from \code{\link{list}}.
+#' \code{\linkS4class{RowLinkedMatrix}} inherits from \code{\link{list}}.
 #'
 #' @export RowLinkedMatrix
 #' @exportClass RowLinkedMatrix
 RowLinkedMatrix <- setClass("RowLinkedMatrix", contains = "list")
 
 
-#' Creates a new RowLinkedMatrix instance.
+#' Creates a new \code{\linkS4class{RowLinkedMatrix}} instance.
 #' 
 #' @inheritParams base::list
-#' @param .Object The \code{RowLinkedMatrix} instance to be initialized.
+#' @param .Object The \code{\linkS4class{RowLinkedMatrix}} instance to be initialized.
 #' @export
 setMethod("initialize", signature(.Object = "RowLinkedMatrix"), function(.Object, ...) {
     list <- list(...)
@@ -226,7 +226,7 @@ setMethod("initialize", signature(.Object = "RowLinkedMatrix"), function(.Object
 })
 
 
-#' Extract parts of a \code{RowLinkedMatrix}.
+#' Extract parts of a \code{\linkS4class{RowLinkedMatrix}}.
 #' 
 #' @inheritParams base::`[`
 #' @param j Column indices.
@@ -234,7 +234,7 @@ setMethod("initialize", signature(.Object = "RowLinkedMatrix"), function(.Object
 setMethod("[", signature(x = "RowLinkedMatrix"), subset.RowLinkedMatrix)
 
 
-#' Replace parts of a ColumnLinkedMatrix.
+#' Replace parts of a \code{\linkS4class{RowLinkedMatrix}}.
 #' 
 #' @inheritParams base::`[<-`
 #' @param j Column indices.

@@ -3,16 +3,16 @@
 \docType{methods}
 \name{initialize,ColumnLinkedMatrix-method}
 \alias{initialize,ColumnLinkedMatrix-method}
-\title{Creates a new \code{ColumnLinkedMatrix} instance.}
+\title{Creates a new \code{\linkS4class{ColumnLinkedMatrix}} instance.}
 \usage{
 \S4method{initialize}{ColumnLinkedMatrix}(.Object, ...)
 }
 \arguments{
-\item{.Object}{The \code{ColumnLinkedMatrix} instance to be initialized.}
+\item{.Object}{The \code{\linkS4class{ColumnLinkedMatrix}} instance to be initialized.}
 
 \item{...}{objects, possibly named.}
 }
 \description{
-Creates a new \code{ColumnLinkedMatrix} instance.
+Creates a new \code{\linkS4class{ColumnLinkedMatrix}} instance.
 }
 

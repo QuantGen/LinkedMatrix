@@ -6,6 +6,6 @@
 \alias{RowLinkedMatrix-class}
 \title{An S4 class to represent a row-linked \code{LinkedMatrix}}
 \description{
-\code{RowLinkedMatrix} inherits from \code{\link{list}}.
+\code{\linkS4class{RowLinkedMatrix}} inherits from \code{\link{list}}.
 }
 

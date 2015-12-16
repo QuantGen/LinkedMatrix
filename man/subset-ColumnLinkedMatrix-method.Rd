@@ -3,7 +3,7 @@
 \docType{methods}
 \name{[<-,ColumnLinkedMatrix-method}
 \alias{[<-,ColumnLinkedMatrix-method}
-\title{Replace parts of a \code{ColumnLinkedMatrix}.}
+\title{Replace parts of a \code{\linkS4class{ColumnLinkedMatrix}}.}
 \usage{
 \S4method{[}{ColumnLinkedMatrix}(x, i, j, ...) <- value
 }
@@ -43,6 +43,6 @@
     \code{x}.}
 }
 \description{
-Replace parts of a \code{ColumnLinkedMatrix}.
+Replace parts of a \code{\linkS4class{ColumnLinkedMatrix}}.
 }
 
