@@ -68,6 +68,10 @@ An S4 class to represent row-linked matrices, inherits from `list`.
 
 An S4 class union of `ColumnLinkedMatrix` and `RowLinkedMatrix`.
 
+#### Functions
+
+- `LinkedMatrix(nrow, ncol, nNodes, linkedBy, nodeInitializer, ...)` is a convenience functions that creates either a `ColumnLinkedMatrix` or `RowLinkedMatrix` (controlled by `linkedBy`) of certain dimensions and of a certain type. `nrow` is the number of rows, `ncol` the number of columns, `nNodes` the number of nodes, `nodeInitializer` a function that creates individual nodes, and `...` additional arguments that are passed into `nodeInitializer`.
+
 #### Methods
 
 All methods described below are available on both `ColumnLinkedMatrix` and `RowLinkedMatrix` objects.
