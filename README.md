@@ -27,6 +27,20 @@ m[1, ]
 m[, 1]
 ```
 
+This can also be expressed as:
+
+```R
+library(LinkedMatrix)
+library(ff)
+
+m <- LinkedMatrix(nrow = 10, ncol = 10, nNodes = 2, linkedBy = "rows", nodeInitializer = "ffNodeInitializer", vmode = "double")
+m[] <- rnorm(100)
+
+dim(m)
+m[1, ]
+m[, 1]
+```
+
 
 Installation
 ------------
