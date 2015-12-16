@@ -33,7 +33,8 @@ This can also be expressed as:
 library(LinkedMatrix)
 library(ff)
 
-m <- LinkedMatrix(nrow = 10, ncol = 10, nNodes = 2, linkedBy = "rows", nodeInitializer = "ffNodeInitializer", vmode = "double")
+m <- LinkedMatrix(nrow = 10, ncol = 10, nNodes = 2, linkedBy = "rows",
+                  nodeInitializer = "ffNodeInitializer", vmode = "double")
 m[] <- rnorm(100)
 
 dim(m)
