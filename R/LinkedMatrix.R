@@ -13,8 +13,8 @@ NULL
 #'   \code{columns}.
 #' @param nodeInitializer The name of a function or a function with four
 #'   parameters \code{nodeIndex}, \code{ncol}, \code{nrow}, and \code{...} that
-#'   initializes each node. Pre-defined node initializers include
-#'   \code{matrixNodeInitializer}.
+#'   initializes each node by returning a matrix-like node. Pre-defined node
+#'   initializers include \code{matrixNodeInitializer}.
 #' @param ... Additional arguments passed into \code{nodeInitializer}.
 #' @export
 LinkedMatrix <- function(nrow, ncol, nNodes, linkedBy, nodeInitializer, ...) {
@@ -38,6 +38,14 @@ LinkedMatrix <- function(nrow, ncol, nNodes, linkedBy, nodeInitializer, ...) {
 
 matrixNodeInitializer <- function(nodeIndex, nrow, ncol, ...) {
     matrix(nrow = nrow, ncol = ncol, ...)
+}
+
+
+ffNodeInitializer <- function(nodeIndex, nrow, ncol, vmode, ...) {
+    if (!requireNamespace("ff", quietly = TRUE)) {
+        stop("The ff package is needed for this function to work. Please install it.", call. = FALSE)
+    }
+    ff::ff(dim = c(nrow, ncol), vmode = vmode, ...)
 }
 
 

@@ -22,8 +22,8 @@ LinkedMatrix(nrow, ncol, nNodes, linkedBy, nodeInitializer, ...)
 
 \item{nodeInitializer}{The name of a function or a function with four
 parameters \code{nodeIndex}, \code{ncol}, \code{nrow}, and \code{...} that
-initializes each node. Pre-defined node initializers include
-\code{matrixNodeInitializer}.}
+initializes each node by returning a matrix-like node. Pre-defined node
+initializers include \code{matrixNodeInitializer}.}
 
 \item{...}{Additional arguments passed into \code{nodeInitializer}.}
 }

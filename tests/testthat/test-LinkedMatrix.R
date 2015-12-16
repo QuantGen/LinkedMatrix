@@ -26,6 +26,12 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
             expect_equal(nNodes(linkedMatrix), nNodes)
             expect_is(linkedMatrix[[1]], "matrix")
 
+            if (requireNamespace("ff", quietly = TRUE)) {
+                linkedMatrix <- LinkedMatrix(nrow = nrow(genotypes), ncol = ncol(genotypes), nNodes = nNodes, linkedBy = linkedBy, nodeInitializer = "ffNodeInitializer", vmode = "integer")
+                expect_equal(nNodes(linkedMatrix), nNodes)
+                expect_is(linkedMatrix[[1]], "ff_matrix")
+            }
+
         }
 
     })

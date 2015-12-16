@@ -12,7 +12,8 @@ BugReports: https://github.com/QuantGen/LinkedMatrix/issues
 Imports:
     methods
 Suggests:
-    testthat
+    testthat,
+    ff
 Collate:
     'ColumnLinkedMatrix.R'
     'RowLinkedMatrix.R'
