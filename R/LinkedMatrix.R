@@ -19,7 +19,11 @@ NULL
 #' @export
 LinkedMatrix <- function(nrow, ncol, nNodes, linkedBy, nodeInitializer, ...) {
     class <- ifelse(linkedBy == "columns", "ColumnLinkedMatrix", "RowLinkedMatrix")
-    nodeInitializer <- match.fun(nodeInitializer)
+    # Look for an internal function first
+    ex <- try(nodeInitializer <- get(nodeInitializer), silent = TRUE)
+    if (class(ex) == "try-error") {
+        nodeInitializer <- match.fun(nodeInitializer)
+    }
     linkedMatrix <- new(class)
     ranges <- chunkRanges(ifelse(class == "ColumnLinkedMatrix", ncol, nrow), nNodes)
     for (i in seq_len(nNodes)) {
