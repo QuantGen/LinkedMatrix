@@ -6,7 +6,7 @@ LinkedMatrix
 
 LinkedMatrix is an R package that provides matrices implemented as collections of matrix-like nodes, linked by columns or rows.
 
-This was originally developed for the [BGData](https://github.com/QuantGen/BGData) package to address the 32-bit integer limit of [ff](https://cran.r-project.org/web/packages/ff/index.html) by chaining multiple `ff` objects together.
+It was originally developed for the [BGData](https://github.com/QuantGen/BGData) package to address the array size limit of [ff](https://cran.r-project.org/web/packages/ff/index.html) (`length must be between 1 and .Machine$integer.max`) by chaining multiple `ff` objects together.
 
 
 Example
