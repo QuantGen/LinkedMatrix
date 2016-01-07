@@ -7,8 +7,8 @@
 nodes(x)
 }
 \arguments{
-\item{x}{Either a \code{\linkS4class{ColumnLinkedMatrix}} or a 
-\code{\linkS4class{RowLinkedMatrix}} object}
+\item{x}{Either a \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}}
+or a \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} object.}
 }
 \value{
 A matrix.

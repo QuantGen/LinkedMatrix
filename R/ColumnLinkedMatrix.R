@@ -193,19 +193,24 @@ index.ColumnLinkedMatrix <- function(x) {
 }
 
 
-#' An S4 class to represent a column-linked \code{LinkedMatrix}.
+#' An S4 class to represent a column-linked
+#' \code{\link[=LinkedMatrix-class]{LinkedMatrix}}.
 #' 
-#' \code{\linkS4class{ColumnLinkedMatrix}} inherits from \code{\link{list}}.
+#' \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} inherits from
+#' \code{\link{list}}.
 #' 
 #' @export ColumnLinkedMatrix
 #' @exportClass ColumnLinkedMatrix
 ColumnLinkedMatrix <- setClass("ColumnLinkedMatrix", contains = "list")
 
 
-#' Creates a new \code{\linkS4class{ColumnLinkedMatrix}} instance.
+#' Creates a new \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}}
+#' instance.
 #' 
 #' @inheritParams base::list
-#' @param .Object The \code{\linkS4class{ColumnLinkedMatrix}} instance to be initialized.
+#' @param .Object The
+#'   \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} instance to be
+#'   initialized.
 #' @export
 setMethod("initialize", signature(.Object = "ColumnLinkedMatrix"), function(.Object, ...) {
     list <- list(...)
@@ -226,7 +231,8 @@ setMethod("initialize", signature(.Object = "ColumnLinkedMatrix"), function(.Obj
 })
 
 
-#' Extract parts of a \code{\linkS4class{ColumnLinkedMatrix}}.
+#' Extract parts of a
+#' \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}}.
 #' 
 #' @inheritParams base::`[`
 #' @param j Column indices.
@@ -234,7 +240,8 @@ setMethod("initialize", signature(.Object = "ColumnLinkedMatrix"), function(.Obj
 setMethod("[", signature(x = "ColumnLinkedMatrix"), subset.ColumnLinkedMatrix)
 
 
-#' Replace parts of a \code{\linkS4class{ColumnLinkedMatrix}}.
+#' Replace parts of a
+#' \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}}.
 #' 
 #' @inheritParams base::`[<-`
 #' @param j Column indices.

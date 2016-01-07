@@ -4,8 +4,10 @@
 \name{RowLinkedMatrix-class}
 \alias{RowLinkedMatrix}
 \alias{RowLinkedMatrix-class}
-\title{An S4 class to represent a row-linked \code{LinkedMatrix}}
+\title{An S4 class to represent a row-linked
+\code{\link[=LinkedMatrix-class]{LinkedMatrix}}.}
 \description{
-\code{\linkS4class{RowLinkedMatrix}} inherits from \code{\link{list}}.
+\code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} inherits from
+\code{\link{list}}.
 }
 

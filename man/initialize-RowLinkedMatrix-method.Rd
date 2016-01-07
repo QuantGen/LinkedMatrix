@@ -3,16 +3,17 @@
 \docType{methods}
 \name{initialize,RowLinkedMatrix-method}
 \alias{initialize,RowLinkedMatrix-method}
-\title{Creates a new \code{\linkS4class{RowLinkedMatrix}} instance.}
+\title{Creates a new \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} instance.}
 \usage{
 \S4method{initialize}{RowLinkedMatrix}(.Object, ...)
 }
 \arguments{
-\item{.Object}{The \code{\linkS4class{RowLinkedMatrix}} instance to be initialized.}
+\item{.Object}{The \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}}
+instance to be initialized.}
 
 \item{...}{objects, possibly named.}
 }
 \description{
-Creates a new \code{\linkS4class{RowLinkedMatrix}} instance.
+Creates a new \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} instance.
 }
 

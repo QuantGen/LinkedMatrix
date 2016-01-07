@@ -2,18 +2,19 @@
 NULL
 
 
-#' Initializes either a \code{\linkS4class{ColumnLinkedMatrix}} or
-#' \code{\linkS4class{RowLinkedMatrix}} of certain dimensions and of certain
-#' type.
+#' Initializes either a
+#' \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} or 
+#' \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} of certain dimensions
+#' and of certain type.
 #' 
 #' @param nrow The number of rows.
 #' @param ncol The number of columns.
 #' @param nNodes The number of nodes.
-#' @param linkedBy Whether the matrix is linked by \code{rows} or
+#' @param linkedBy Whether the matrix is linked by \code{rows} or 
 #'   \code{columns}.
-#' @param nodeInitializer The name of a function or a function with four
-#'   parameters \code{nodeIndex}, \code{ncol}, \code{nrow}, and \code{...} that
-#'   initializes each node by returning a matrix-like node. Pre-defined node
+#' @param nodeInitializer The name of a function or a function with four 
+#'   parameters \code{nodeIndex}, \code{ncol}, \code{nrow}, and \code{...} that 
+#'   initializes each node by returning a matrix-like node. Pre-defined node 
 #'   initializers include \code{matrixNodeInitializer}.
 #' @param ... Additional arguments passed into \code{nodeInitializer}.
 #' @export
@@ -67,8 +68,8 @@ length.LinkedMatrix <- function(x) {
 
 #' Returns the number of nodes.
 #' 
-#' @param x Either a \code{\linkS4class{ColumnLinkedMatrix}} or a 
-#'   \code{\linkS4class{RowLinkedMatrix}} object
+#' @param x Either a \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}}
+#'   or a \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} object.
 #' @export
 nNodes <- function(x) {
     length(slot(x, ".Data"))
@@ -77,8 +78,8 @@ nNodes <- function(x) {
 
 #' Returns the column or row indexes at which each node starts and ends.
 #' 
-#' @param x Either a \code{\linkS4class{ColumnLinkedMatrix}} or a 
-#'   \code{\linkS4class{RowLinkedMatrix}} object
+#' @param x Either a \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}}
+#'   or a \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} object.
 #' @return A matrix.
 #' @export
 nodes <- function(x) {
@@ -86,11 +87,11 @@ nodes <- function(x) {
 }
 
 
-#' Maps each column or row index of a linked matrix to the column or row index
+#' Maps each column or row index of a linked matrix to the column or row index 
 #' of its corresponding node.
 #' 
-#' @param x Either a \code{\linkS4class{ColumnLinkedMatrix}} or a 
-#'   \code{\linkS4class{RowLinkedMatrix}} object
+#' @param x Either a \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}}
+#'   or a \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} object.
 #' @return A matrix.
 #' @export
 index <- function(x) {
@@ -102,16 +103,17 @@ index <- function(x) {
 #' 
 #' @name LinkedMatrix-class
 #' @docType class
-#' @seealso \code{\linkS4class{ColumnLinkedMatrix}} or
-#'   \code{\linkS4class{RowLinkedMatrix}} for implementations of column-linked
-#'   matrices or row-linked matrices, respectively.
+#' @seealso \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} or 
+#'   \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} for implementations
+#'   of column-linked matrices or row-linked matrices, respectively.
 #' @exportClass LinkedMatrix
 setClassUnion("LinkedMatrix", c("ColumnLinkedMatrix", "RowLinkedMatrix"))
 
 
-#' Show a LinkedMatrix object.
+#' Show a \code{\link[=LinkedMatrix-class]{LinkedMatrix}} object.
 #' 
-#' @param object Either a \code{\linkS4class{ColumnLinkedMatrix}} or a 
-#'   \code{\linkS4class{RowLinkedMatrix}} object.
+#' @param object Either a
+#'   \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} or a 
+#'   \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} object.
 #' @export
 setMethod("show", signature(object = "LinkedMatrix"), show)

@@ -3,7 +3,7 @@
 \docType{methods}
 \name{[,RowLinkedMatrix-method}
 \alias{[,RowLinkedMatrix-method}
-\title{Extract parts of a \code{\linkS4class{RowLinkedMatrix}}.}
+\title{Extract parts of a \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}}.}
 \usage{
 \S4method{[}{RowLinkedMatrix}(x, i, j, drop)
 }
@@ -44,6 +44,6 @@
   }
 }
 \description{
-Extract parts of a \code{\linkS4class{RowLinkedMatrix}}.
+Extract parts of a \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}}.
 }
 

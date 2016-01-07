@@ -2,20 +2,20 @@
 % Please edit documentation in R/LinkedMatrix.R
 \name{index}
 \alias{index}
-\title{Maps each column or row index of a linked matrix to the column or row index
+\title{Maps each column or row index of a linked matrix to the column or row index 
 of its corresponding node.}
 \usage{
 index(x)
 }
 \arguments{
-\item{x}{Either a \code{\linkS4class{ColumnLinkedMatrix}} or a 
-\code{\linkS4class{RowLinkedMatrix}} object}
+\item{x}{Either a \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}}
+or a \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} object.}
 }
 \value{
 A matrix.
 }
 \description{
-Maps each column or row index of a linked matrix to the column or row index
+Maps each column or row index of a linked matrix to the column or row index 
 of its corresponding node.
 }
 

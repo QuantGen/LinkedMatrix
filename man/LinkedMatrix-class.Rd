@@ -8,8 +8,8 @@
 An abstract S4 class to represent linked matrices.
 }
 \seealso{
-\code{\linkS4class{ColumnLinkedMatrix}} or
-  \code{\linkS4class{RowLinkedMatrix}} for implementations of column-linked
-  matrices or row-linked matrices, respectively.
+\code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} or 
+  \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} for implementations
+  of column-linked matrices or row-linked matrices, respectively.
 }
 

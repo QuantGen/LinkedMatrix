@@ -4,9 +4,10 @@
 \name{LinkedMatrix}
 \alias{LinkedMatrix}
 \alias{LinkedMatrix-package}
-\title{Initializes either a \code{\linkS4class{ColumnLinkedMatrix}} or
-\code{\linkS4class{RowLinkedMatrix}} of certain dimensions and of certain
-type.}
+\title{Initializes either a
+\code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} or 
+\code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} of certain dimensions
+and of certain type.}
 \usage{
 LinkedMatrix(nrow, ncol, nNodes, linkedBy, nodeInitializer, ...)
 }
@@ -17,20 +18,21 @@ LinkedMatrix(nrow, ncol, nNodes, linkedBy, nodeInitializer, ...)
 
 \item{nNodes}{The number of nodes.}
 
-\item{linkedBy}{Whether the matrix is linked by \code{rows} or
+\item{linkedBy}{Whether the matrix is linked by \code{rows} or 
 \code{columns}.}
 
-\item{nodeInitializer}{The name of a function or a function with four
-parameters \code{nodeIndex}, \code{ncol}, \code{nrow}, and \code{...} that
-initializes each node by returning a matrix-like node. Pre-defined node
+\item{nodeInitializer}{The name of a function or a function with four 
+parameters \code{nodeIndex}, \code{ncol}, \code{nrow}, and \code{...} that 
+initializes each node by returning a matrix-like node. Pre-defined node 
 initializers include \code{matrixNodeInitializer}.}
 
 \item{...}{Additional arguments passed into \code{nodeInitializer}.}
 }
 \description{
-Initializes either a \code{\linkS4class{ColumnLinkedMatrix}} or
-\code{\linkS4class{RowLinkedMatrix}} of certain dimensions and of certain
-type.
+Initializes either a
+\code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} or 
+\code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} of certain dimensions
+and of certain type.
 
 Matrices implemented as collections of matrix-like nodes, linked by columns or rows.
 }

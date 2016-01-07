@@ -3,15 +3,16 @@
 \docType{methods}
 \name{show,LinkedMatrix-method}
 \alias{show,LinkedMatrix-method}
-\title{Show a LinkedMatrix object.}
+\title{Show a \code{\link[=LinkedMatrix-class]{LinkedMatrix}} object.}
 \usage{
 \S4method{show}{LinkedMatrix}(object)
 }
 \arguments{
-\item{object}{Either a \code{\linkS4class{ColumnLinkedMatrix}} or a 
-\code{\linkS4class{RowLinkedMatrix}} object.}
+\item{object}{Either a
+\code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} or a 
+\code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} object.}
 }
 \description{
-Show a LinkedMatrix object.
+Show a \code{\link[=LinkedMatrix-class]{LinkedMatrix}} object.
 }
 
