@@ -3,8 +3,9 @@
 #' Matrices implemented as collections of matrix-like nodes, linked by columns or rows.
 #' 
 #' @docType package
-#' @name LinkedMatrix
+#' @name LinkedMatrix-package
 #' @import methods
+#' @aliases NULL
 NULL
 
 
