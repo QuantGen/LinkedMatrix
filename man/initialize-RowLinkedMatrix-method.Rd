@@ -8,12 +8,17 @@
 \S4method{initialize}{RowLinkedMatrix}(.Object, ...)
 }
 \arguments{
-\item{.Object}{The \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}}
-instance to be initialized.}
+\item{.Object}{The \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} 
+instance to be initialized. This argument is passed in by R and can be
+ignored, but still needs to be documented.}
 
-\item{...}{objects, possibly named.}
+\item{...}{A sequence of matrix-like objects of the same column-dimension.}
 }
 \description{
-Creates a new \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} instance.
+This constructor accepts a list of matrix-like objects as \code{...}. A 
+matrix-like object is one that has two dimensions and implements at least 
+\code{dim} and \code{[}. Each object needs to have the same number of columns
+to be linked together. If no matrix-like objects are given, a single 1x1 node
+of type \code{matrix} filled with \code{NA} is returned.
 }
 

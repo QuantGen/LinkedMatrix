@@ -2,10 +2,10 @@
 NULL
 
 
-#' Initializes either a
+#' Initializes either a 
 #' \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} or 
-#' \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} of certain dimensions
-#' and of certain type.
+#' \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} instance of certain 
+#' dimensions with a configurable number and type of nodes.
 #' 
 #' @param nrow The number of rows.
 #' @param ncol The number of columns.
@@ -14,8 +14,9 @@ NULL
 #'   \code{columns}.
 #' @param nodeInitializer The name of a function or a function with four 
 #'   parameters \code{nodeIndex}, \code{ncol}, \code{nrow}, and \code{...} that 
-#'   initializes each node by returning a matrix-like node. Pre-defined node 
-#'   initializers include \code{matrixNodeInitializer}.
+#'   initializes each node by returning a matrix-like object Pre-defined node 
+#'   initializers include \code{matrixNodeInitializer} to initialize matrices 
+#'   and \code{ffNodeInitializer} to initialize \code{ff} objects.
 #' @param ... Additional arguments passed into \code{nodeInitializer}.
 #' @export
 LinkedMatrix <- function(nrow, ncol, nNodes, linkedBy, nodeInitializer, ...) {
