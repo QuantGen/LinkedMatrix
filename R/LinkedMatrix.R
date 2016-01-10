@@ -67,6 +67,12 @@ length.LinkedMatrix <- function(x) {
 }
 
 
+#' @export
+as.matrix.LinkedMatrix <- function(x, ...) {
+    x[, , drop = FALSE]
+}
+
+
 #' Returns the number of nodes.
 #' 
 #' @param x Either a \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}}

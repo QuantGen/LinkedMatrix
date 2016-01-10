@@ -2,8 +2,7 @@
 
 S3method("dimnames<-",ColumnLinkedMatrix)
 S3method("dimnames<-",RowLinkedMatrix)
-S3method(as.matrix,ColumnLinkedMatrix)
-S3method(as.matrix,RowLinkedMatrix)
+S3method(as.matrix,LinkedMatrix)
 S3method(dim,ColumnLinkedMatrix)
 S3method(dim,RowLinkedMatrix)
 S3method(dimnames,ColumnLinkedMatrix)

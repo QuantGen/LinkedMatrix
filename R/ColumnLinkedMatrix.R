@@ -154,12 +154,6 @@ dimnames.ColumnLinkedMatrix <- function(x) {
 
 
 #' @export
-as.matrix.ColumnLinkedMatrix <- function(x, ...) {
-    x[, , drop = FALSE]
-}
-
-
-#' @export
 nodes.ColumnLinkedMatrix <- function(x) {
     n <- nNodes(x)
     OUT <- matrix(nrow = n, ncol = 3, NA)

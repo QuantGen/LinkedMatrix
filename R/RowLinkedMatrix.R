@@ -154,12 +154,6 @@ dimnames.RowLinkedMatrix <- function(x) {
 
 
 #' @export
-as.matrix.RowLinkedMatrix <- function(x, ...) {
-    x[, , drop = FALSE]
-}
-
-
-#' @export
 nodes.RowLinkedMatrix <- function(x) {
     n <- nNodes(x)
     OUT <- matrix(nrow = n, ncol = 3, NA)
