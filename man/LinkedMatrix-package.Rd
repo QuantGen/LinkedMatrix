@@ -4,6 +4,7 @@
 \name{LinkedMatrix-package}
 \title{LinkedMatrix: Column-Linked and Row-Linked Matrices}
 \description{
-Matrices implemented as collections of matrix-like nodes, linked by columns or rows.
+Matrices implemented as lists of matrix-like nodes, linked by columns or
+rows.
 }
 

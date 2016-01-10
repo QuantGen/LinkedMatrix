@@ -4,7 +4,7 @@ LinkedMatrix
 [![Travis-CI Build Status](https://travis-ci.org/QuantGen/LinkedMatrix.svg?branch=master)](https://travis-ci.org/QuantGen/LinkedMatrix)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/LinkedMatrix)](http://cran.r-project.org/package=LinkedMatrix)
 
-LinkedMatrix is an R package that provides matrices implemented as collections of matrix-like nodes, linked by columns or rows.
+LinkedMatrix is an R package that provides matrices implemented as lists of matrix-like nodes, linked by columns or rows.
 
 It was originally developed for the [BGData](https://github.com/QuantGen/BGData) package to address the array size limit of [ff](https://cran.r-project.org/web/packages/ff/index.html) (`length must be between 1 and .Machine$integer.max`) by chaining multiple `ff` objects together.
 
