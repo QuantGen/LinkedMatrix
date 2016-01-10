@@ -67,6 +67,12 @@ length.LinkedMatrix <- function(x) {
 }
 
 
+#' Converts a \code{\link[=LinkedMatrix-class]{LinkedMatrix}} instance to a
+#' \code{matrix} (if small enough).
+#' 
+#' @param x Either a \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}}
+#'   or a \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} object.
+#' @param ... Additional arguments (unused).
 #' @export
 as.matrix.LinkedMatrix <- function(x, ...) {
     x[, , drop = FALSE]

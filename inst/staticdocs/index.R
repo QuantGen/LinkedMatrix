@@ -18,7 +18,8 @@ sd_section(
         "initialize,RowLinkedMatrix-method",
         "[<-,RowLinkedMatrix-method",
         "[,RowLinkedMatrix-method",
-        "show,LinkedMatrix-method"
+        "show,LinkedMatrix-method",
+        "as.matrix.LinkedMatrix"
     )
 )
 
