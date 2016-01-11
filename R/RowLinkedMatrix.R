@@ -143,7 +143,7 @@ dimnames.RowLinkedMatrix <- function(x) {
     d <- dim(x)
     rownames <- value[[1]]
     colnames <- value[[2]]
-    if (!is.list(value) || length(value) != 2 || !(is.null(rownames) || length(rownames) == d[1]) || !(is.null(colnames) || 
+    if (!is.list(value) || length(value) != 2 || !(is.null(rownames) || length(rownames) == d[1]) || !(is.null(colnames) ||
         length(colnames) == d[2])) {
         stop("invalid dimnames")
     }
@@ -187,9 +187,9 @@ index.RowLinkedMatrix <- function(x) {
 }
 
 
-#' An S4 class to represent a row-linked 
+#' An S4 class to represent a row-linked
 #' \code{\link[=LinkedMatrix-class]{LinkedMatrix}}.
-#' 
+#'
 #' This class treats a list of matrix-like objects that are linked together by
 #' rows and have the same number of columns similarly to a regular \code{matrix}
 #' by implementing key methods such as \code{[} and \code{[<-} for extracting
@@ -198,30 +198,30 @@ index.RowLinkedMatrix <- function(x) {
 #' element is called a node and can be extracted or replaced using \code{[[} and
 #' \code{[[<-}. A matrix-like object is one that has two dimensions and
 #' implements at least \code{dim} and \code{[}.
-#' 
-#' There are several ways to create an instance of this class: either by using 
-#' one of the constructors 
-#' \code{\link[=initialize,RowLinkedMatrix-method]{RowLinkedMatrix(...)}} or 
+#'
+#' There are several ways to create an instance of this class: either by using
+#' one of the constructors
+#' \code{\link[=initialize,RowLinkedMatrix-method]{RowLinkedMatrix(...)}} or
 #' \code{\link[=initialize,RowLinkedMatrix-method]{new("RowLinkedMatrix",...)}},
-#' or by using the more general \code{\link{LinkedMatrix}} function that 
-#' constructs objects of certain dimensions with a configurable number and type 
+#' or by using the more general \code{\link{LinkedMatrix}} function that
+#' constructs objects of certain dimensions with a configurable number and type
 #' of nodes.
-#' 
+#'
 #' @export RowLinkedMatrix
 #' @exportClass RowLinkedMatrix
 RowLinkedMatrix <- setClass("RowLinkedMatrix", contains = "list")
 
 
 #' Creates a new \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} instance.
-#' 
-#' This constructor accepts a list of matrix-like objects as \code{...}. A 
-#' matrix-like object is one that has two dimensions and implements at least 
+#'
+#' This constructor accepts a list of matrix-like objects as \code{...}. A
+#' matrix-like object is one that has two dimensions and implements at least
 #' \code{dim} and \code{[}. Each object needs to have the same number of columns
 #' to be linked together. If no matrix-like objects are given, a single 1x1 node
 #' of type \code{matrix} filled with \code{NA} is returned.
-#' 
+#'
 #' @inheritParams base::list
-#' @param .Object The \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} 
+#' @param .Object The \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}}
 #'   instance to be initialized. This argument is passed in by R and can be
 #'   ignored, but still needs to be documented.
 #' @param ... A sequence of matrix-like objects of the same column-dimension.
@@ -246,7 +246,7 @@ setMethod("initialize", signature(.Object = "RowLinkedMatrix"), function(.Object
 
 
 #' Extract parts of a \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}}.
-#' 
+#'
 #' @inheritParams base::`[`
 #' @param j Column indices.
 #' @export
@@ -254,7 +254,7 @@ setMethod("[", signature(x = "RowLinkedMatrix"), subset.RowLinkedMatrix)
 
 
 #' Replace parts of a \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}}.
-#' 
+#'
 #' @inheritParams base::`[<-`
 #' @param j Column indices.
 #' @param ... Optional arguments.
