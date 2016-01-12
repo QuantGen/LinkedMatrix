@@ -4,7 +4,7 @@
 \name{ColumnLinkedMatrix-class}
 \alias{ColumnLinkedMatrix}
 \alias{ColumnLinkedMatrix-class}
-\title{An S4 class to represent a column-linked 
+\title{An S4 class to represent a column-linked
 \code{\link[=LinkedMatrix-class]{LinkedMatrix}}.}
 \description{
 This class treats a list of matrix-like objects that are linked together by
@@ -17,13 +17,13 @@ element is called a node and can be extracted or replaced using \code{[[} and
 implements at least \code{dim} and \code{[}.
 }
 \details{
-There are several ways to create an instance of this class: either by using 
-one of the constructors 
-\code{\link[=initialize,ColumnLinkedMatrix-method]{ColumnLinkedMatrix(...)}} 
-or 
+There are several ways to create an instance of this class: either by using
+one of the constructors
+\code{\link[=initialize,ColumnLinkedMatrix-method]{ColumnLinkedMatrix(...)}}
+or
 \code{\link[=initialize,ColumnLinkedMatrix-method]{new("ColumnLinkedMatrix",...)}},
-or by using the more general \code{\link{LinkedMatrix}} function that 
-constructs objects of certain dimensions with a configurable number and type 
+or by using the more general \code{\link{LinkedMatrix}} function that
+constructs objects of certain dimensions with a configurable number and type
 of nodes.
 }
 

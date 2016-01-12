@@ -44,7 +44,7 @@
     \code{x}.}
 }
 \description{
-Replace parts of a
-\code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}}.
+This method is run when the \code{[]} operator is used in an assignment on a
+\code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} object.
 }
 

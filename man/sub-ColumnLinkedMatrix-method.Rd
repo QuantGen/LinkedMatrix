@@ -45,7 +45,7 @@
   }
 }
 \description{
-Extract parts of a
-\code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}}.
+This method is run when the \code{[]} operator is used on a
+\code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} object.
 }
 

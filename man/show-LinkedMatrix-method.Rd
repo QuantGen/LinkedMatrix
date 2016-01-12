@@ -9,10 +9,11 @@
 }
 \arguments{
 \item{object}{Either a
-\code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} or a 
+\code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} or a
 \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} object.}
 }
 \description{
-Show a \code{\link[=LinkedMatrix-class]{LinkedMatrix}} object.
+This method is run when a \code{\link[=LinkedMatrix-class]{LinkedMatrix}}
+object is printed.
 }
 

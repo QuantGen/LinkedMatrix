@@ -214,11 +214,15 @@ RowLinkedMatrix <- setClass("RowLinkedMatrix", contains = "list")
 
 #' Creates a new \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} instance.
 #'
-#' This constructor accepts a list of matrix-like objects as \code{...}. A
-#' matrix-like object is one that has two dimensions and implements at least
-#' \code{dim} and \code{[}. Each object needs to have the same number of columns
-#' to be linked together. If no matrix-like objects are given, a single 1x1 node
-#' of type \code{matrix} filled with \code{NA} is returned.
+#' This method is run when a
+#' \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} object is created using
+#' \code{\link[=initialize,RowLinkedMatrix-method]{RowLinkedMatrix(...)}} or
+#' \code{\link[=initialize,RowLinkedMatrix-method]{new("RowLinkedMatrix",...)}}
+#' and accepts a list of matrix-like objects as \code{...}. A matrix-like object
+#' is one that has two dimensions and implements at least \code{dim} and
+#' \code{[}. Each object needs to have the same number of columns to be linked
+#' together. If no matrix-like objects are given, a single 1x1 node of type
+#' \code{matrix} filled with \code{NA} is returned.
 #'
 #' @inheritParams base::list
 #' @param .Object The \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}}
@@ -247,6 +251,9 @@ setMethod("initialize", signature(.Object = "RowLinkedMatrix"), function(.Object
 
 #' Extract parts of a \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}}.
 #'
+#' This method is run when the \code{[]} operator is used on a
+#' \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}}.
+#'
 #' @inheritParams base::`[`
 #' @param j Column indices.
 #' @export
@@ -254,6 +261,9 @@ setMethod("[", signature(x = "RowLinkedMatrix"), subset.RowLinkedMatrix)
 
 
 #' Replace parts of a \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}}.
+#'
+#' This method is run when the \code{[]} operator is used in an assignment on a
+#' \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}}.
 #'
 #' @inheritParams base::`[<-`
 #' @param j Column indices.

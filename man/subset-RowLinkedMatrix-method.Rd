@@ -43,6 +43,7 @@
     \code{x}.}
 }
 \description{
-Replace parts of a \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}}.
+This method is run when the \code{[]} operator is used in an assignment on a
+\code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}}.
 }
 

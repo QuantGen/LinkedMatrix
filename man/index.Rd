@@ -2,7 +2,7 @@
 % Please edit documentation in R/LinkedMatrix.R
 \name{index}
 \alias{index}
-\title{Maps each column or row index of a linked matrix to the column or row index 
+\title{Maps each column or row index of a linked matrix to the column or row index
 of its corresponding node.}
 \usage{
 index(x)
@@ -15,7 +15,7 @@ or a \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} object.}
 A matrix.
 }
 \description{
-Maps each column or row index of a linked matrix to the column or row index 
+Maps each column or row index of a linked matrix to the column or row index
 of its corresponding node.
 }
 

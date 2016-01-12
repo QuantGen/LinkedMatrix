@@ -136,6 +136,9 @@ setClassUnion("LinkedMatrix", c("ColumnLinkedMatrix", "RowLinkedMatrix"))
 
 #' Show a \code{\link[=LinkedMatrix-class]{LinkedMatrix}} object.
 #'
+#' This method is run when a \code{\link[=LinkedMatrix-class]{LinkedMatrix}}
+#' object is printed.
+#'
 #' @param object Either a
 #'   \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} or a
 #'   \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} object.

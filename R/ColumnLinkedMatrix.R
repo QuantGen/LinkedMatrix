@@ -216,11 +216,17 @@ ColumnLinkedMatrix <- setClass("ColumnLinkedMatrix", contains = "list")
 #' Creates a new \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}}
 #' instance.
 #'
-#' This constructor accepts a list of matrix-like objects as \code{...}. A
-#' matrix-like object is one that has two dimensions and implements at least
-#' \code{dim} and \code{[}. Each object needs to have the same number of rows to
-#' be linked together. If no matrix-like objects are given, a single 1x1 node of
-#' type \code{matrix} filled with \code{NA} is returned.
+#' This method is run when a
+#' \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} object is created
+#' using
+#' \code{\link[=initialize,ColumnLinkedMatrix-method]{ColumnLinkedMatrix(...)}}
+#' or
+#' \code{\link[=initialize,ColumnLinkedMatrix-method]{new("ColumnLinkedMatrix",...)}}
+#' and accepts a list of matrix-like objects as \code{...}. A matrix-like object
+#' is one that has two dimensions and implements at least \code{dim} and
+#' \code{[}. Each object needs to have the same number of rows to be linked
+#' together. If no matrix-like objects are given, a single 1x1 node of type
+#' \code{matrix} filled with \code{NA} is returned.
 #'
 #' @inheritParams base::list
 #' @param .Object The
@@ -251,6 +257,9 @@ setMethod("initialize", signature(.Object = "ColumnLinkedMatrix"), function(.Obj
 #' Extract parts of a
 #' \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}}.
 #'
+#' This method is run when the \code{[]} operator is used on a
+#' \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} object.
+#'
 #' @inheritParams base::`[`
 #' @param j Column indices.
 #' @export
@@ -259,6 +268,9 @@ setMethod("[", signature(x = "ColumnLinkedMatrix"), subset.ColumnLinkedMatrix)
 
 #' Replace parts of a
 #' \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}}.
+#'
+#' This method is run when the \code{[]} operator is used in an assignment on a
+#' \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} object.
 #'
 #' @inheritParams base::`[<-`
 #' @param j Column indices.
