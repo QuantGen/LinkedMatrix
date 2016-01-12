@@ -44,6 +44,6 @@
 }
 \description{
 This method is run when the \code{[]} operator is used in an assignment on a
-\code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}}.
+\code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} object.
 }
 

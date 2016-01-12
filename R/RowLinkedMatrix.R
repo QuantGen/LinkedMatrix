@@ -252,7 +252,7 @@ setMethod("initialize", signature(.Object = "RowLinkedMatrix"), function(.Object
 #' Extract parts of a \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}}.
 #'
 #' This method is run when the \code{[]} operator is used on a
-#' \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}}.
+#' \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} object.
 #'
 #' @inheritParams base::`[`
 #' @param j Column indices.
@@ -263,7 +263,7 @@ setMethod("[", signature(x = "RowLinkedMatrix"), subset.RowLinkedMatrix)
 #' Replace parts of a \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}}.
 #'
 #' This method is run when the \code{[]} operator is used in an assignment on a
-#' \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}}.
+#' \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} object.
 #'
 #' @inheritParams base::`[<-`
 #' @param j Column indices.
