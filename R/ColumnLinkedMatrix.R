@@ -1,11 +1,14 @@
 subset.ColumnLinkedMatrix <- function(x, i, j, drop) {
+    nX <- nrow(x)
+    pX <- ncol(x)
     if (missing(i)) {
-        i <- 1:nrow(x)
+        i <- 1:nX
     }
     if (missing(j)) {
-        j <- 1:ncol(x)
+        j <- 1:pX
     }
     if (class(i) == "logical") {
+        i <- rep_len(i, nX)
         i <- which(i)
     } else if (class(i) == "character") {
         i <- sapply(i, function(name) {
@@ -13,6 +16,7 @@ subset.ColumnLinkedMatrix <- function(x, i, j, drop) {
         }, USE.NAMES = FALSE)
     }
     if (class(j) == "logical") {
+        j <- rep_len(j, pX)
         j <- which(j)
     } else if (class(j) == "character") {
         j <- sapply(j, function(name) {
@@ -23,8 +27,7 @@ subset.ColumnLinkedMatrix <- function(x, i, j, drop) {
     p <- length(j)
     originalOrder <- (1:p)[order(j)]
     sortedColumns <- sort(j)
-    dimX <- dim(x)
-    if (p > dimX[2] | n > dimX[1]) {
+    if (p > pX | n > nX) {
         stop("Either the number of columns or number of rows requested exceed the number of rows or columns in x, try dim(x)...")
     }
     Z <- matrix(nrow = n, ncol = p, NA)
