@@ -40,14 +40,17 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
 
         expect_error(new(class, c(1, 2, 3)), "*arguments need to be matrix-like*")
 
+        # No input
         linkedMatrix <- new(class)
         expect_equal(nNodes(linkedMatrix), 1)
         expect_equal(linkedMatrix[1, 1], NA)
 
+        # Single input
         linkedMatrix <- new(class, matrix(nrow = 1, ncol = 1, 0))
         expect_equal(nNodes(linkedMatrix), 1)
         expect_equal(dim(linkedMatrix), c(1, 1))
 
+        # Multiple inputs of same order
         linkedMatrix <- new(class, matrix(nrow = 1, ncol = 1, 0), matrix(nrow = 1, ncol = 1, 0))
         expect_equal(nNodes(linkedMatrix), 2)
         if (class == "ColumnLinkedMatrix") {
@@ -56,6 +59,19 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
             expect_equal(dim(linkedMatrix), c(2, 1))
         }
 
+        # Multiple conformable inputs of different order
+        if (class == "ColumnLinkedMatrix") {
+            args <- list(matrix(nrow = 1, ncol = 3, 0), matrix(nrow = 1, ncol = 5, 0))
+            dims <- c(1, 8)
+        } else {
+            args <- list(matrix(nrow = 3, ncol = 1, 0), matrix(nrow = 5, ncol = 1, 0))
+            dims <- c(8, 1)
+        }
+        linkedMatrix <- do.call(class, args)
+        expect_equal(nNodes(linkedMatrix), 2)
+        expect_equal(dim(linkedMatrix), dims)
+
+        # Multiple unconformable inputs
         if (class == "ColumnLinkedMatrix") {
             args <- list(matrix(nrow = 3, ncol = 1, 0), matrix(nrow = 5, ncol = 1, 0))
         } else {
