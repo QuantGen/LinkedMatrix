@@ -245,7 +245,7 @@ setMethod("initialize", signature(.Object = "ColumnLinkedMatrix"), function(.Obj
         nodes[[1]] <- matrix()
     } else {
         # Detect non-matrix objects by checking dimensions
-        if (any(unlist(lapply(nodes, function(x) length(dim(x)) != 2)))) {
+        if (any(sapply(nodes, function(x) length(dim(x)) != 2))) {
             stop("arguments need to be matrix-like")
         }
         # Detect matrices that do not match in dimensions
