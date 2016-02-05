@@ -3,6 +3,7 @@
 * Add `LinkedMatrix` constructor that creates either a `ColumnLinkedMatrix` or
   `RowLinkedMatrix` (controlled by `linkedBy`) of certain dimensions and of
   certain type.
+* Add `rbind` for `RowLinkedMatrix` and `cbind` for `ColumnLinkedMatrix`.
 * Remove `apply` and derivative functions to keep the package minimal.
 * Change `length` method to behave similarly to `length` for matrices.
 * Export `nNodes` function to get the number of nodes.

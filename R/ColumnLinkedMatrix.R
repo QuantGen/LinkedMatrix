@@ -156,6 +156,26 @@ dimnames.ColumnLinkedMatrix <- function(x) {
 }
 
 
+#' Combine matrix-like objects by columns.
+#'
+#' @param ... Matrix-like objects to be combined by columns.
+#' @param deparse.level Currently unused, defaults to 0.
+#' @export
+cbind.ColumnLinkedMatrix <- function(..., deparse.level = 0) {
+    do.call(ColumnLinkedMatrix, list(...))
+}
+
+
+#' Combine matrix-like objects by rows.
+#'
+#' @param ... Matrix-like objects to be combined by rows.
+#' @param deparse.level Currently unused, defaults to 0.
+#' @export
+rbind.ColumnLinkedMatrix <- function(..., deparse.level = 1) {
+    stop("rbind is currently undefined for ColumnLinkedMatrix")
+}
+
+
 #' @export
 nodes.ColumnLinkedMatrix <- function(x) {
     n <- nNodes(x)
@@ -227,9 +247,10 @@ ColumnLinkedMatrix <- setClass("ColumnLinkedMatrix", contains = "list")
 #' \code{\link[=initialize,ColumnLinkedMatrix-method]{new("ColumnLinkedMatrix",...)}}
 #' and accepts a list of matrix-like objects as \code{...}. A matrix-like object
 #' is one that has two dimensions and implements at least \code{dim} and
-#' \code{[}. Each object needs to have the same number of rows to be linked
-#' together. If no matrix-like objects are given, a single 1x1 node of type
-#' \code{matrix} filled with \code{NA} is returned.
+#' \code{[}. \code{\link[=LinkedMatrix-class]{LinkedMatrix}} objects can be
+#' nested as long as they are conformable. Each object needs to have the same
+#' number of rows to be linked together. If no matrix-like objects are given, a
+#' single 1x1 node of type \code{matrix} filled with \code{NA} is returned.
 #'
 #' @inheritParams base::list
 #' @param .Object The

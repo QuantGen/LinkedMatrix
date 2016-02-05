@@ -45,12 +45,17 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
         expect_equal(nNodes(linkedMatrix), 1)
         expect_equal(linkedMatrix[1, 1], NA)
 
-        # Single input
+        # Single matrix input
         linkedMatrix <- new(class, matrix(nrow = 1, ncol = 1, 0))
         expect_equal(nNodes(linkedMatrix), 1)
         expect_equal(dim(linkedMatrix), c(1, 1))
 
-        # Multiple inputs of same order
+        # Single LinkedMatrix input
+        linkedMatrix <- new(class, createLinkedMatrix(class, 2))
+        expect_equal(nNodes(linkedMatrix), 1)
+        expect_equal(dim(linkedMatrix), c(3, 3))
+
+        # Multiple matrix inputs of same order
         linkedMatrix <- new(class, matrix(nrow = 1, ncol = 1, 0), matrix(nrow = 1, ncol = 1, 0))
         expect_equal(nNodes(linkedMatrix), 2)
         if (class == "ColumnLinkedMatrix") {
@@ -59,7 +64,16 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
             expect_equal(dim(linkedMatrix), c(2, 1))
         }
 
-        # Multiple conformable inputs of different order
+        # Multiple LinkedMatrix inputs of same order
+        linkedMatrix <- new(class, createLinkedMatrix(class, 2), createLinkedMatrix(class, 2))
+        expect_equal(nNodes(linkedMatrix), 2)
+        if (class == "ColumnLinkedMatrix") {
+            expect_equal(dim(linkedMatrix), c(3, 6))
+        } else {
+            expect_equal(dim(linkedMatrix), c(6, 3))
+        }
+
+        # Multiple conformable matrix inputs of different order
         if (class == "ColumnLinkedMatrix") {
             args <- list(matrix(nrow = 1, ncol = 3, 0), matrix(nrow = 1, ncol = 5, 0))
             dims <- c(1, 8)
@@ -71,7 +85,7 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
         expect_equal(nNodes(linkedMatrix), 2)
         expect_equal(dim(linkedMatrix), dims)
 
-        # Multiple unconformable inputs
+        # Multiple unconformable matrix inputs
         if (class == "ColumnLinkedMatrix") {
             args <- list(matrix(nrow = 3, ncol = 1, 0), matrix(nrow = 5, ncol = 1, 0))
         } else {
@@ -245,6 +259,28 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
             expect_equal(nNodes(linkedMatrix), nNodes)
         })
 
+        test_that("bind", {
+
+            if (class == "RowLinkedMatrix") {
+
+                boundLinkedMatrix <- rbind(linkedMatrix, linkedMatrix)
+                expect_equal(dim(boundLinkedMatrix), c(6, 3))
+                expect_equal(nNodes(boundLinkedMatrix), 2)
+
+                expect_error(cbind(linkedMatrix, linkedMatrix))
+
+            } else {
+
+                boundLinkedMatrix <- cbind(linkedMatrix, linkedMatrix)
+                expect_equal(dim(boundLinkedMatrix), c(3, 6))
+                expect_equal(nNodes(boundLinkedMatrix), 2)
+
+                expect_error(rbind(linkedMatrix, linkedMatrix))
+
+            }
+
+        })
+
     }
 
-} 
+}

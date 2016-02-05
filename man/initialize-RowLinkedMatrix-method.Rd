@@ -22,7 +22,8 @@ This method is run when a
 and accepts a list of matrix-like objects as \code{...}. A matrix-like object
 is one that has two dimensions and implements at least \code{dim} and
 \code{[}. Each object needs to have the same number of columns to be linked
-together. If no matrix-like objects are given, a single 1x1 node of type
-\code{matrix} filled with \code{NA} is returned.
+together. \code{\link[=LinkedMatrix-class]{LinkedMatrix}} can be nested as
+long as they are conformable. If no matrix-like objects are given, a single
+1x1 node of type \code{matrix} filled with \code{NA} is returned.
 }
 
