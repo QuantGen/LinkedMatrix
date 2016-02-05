@@ -40,7 +40,8 @@ subset.ColumnLinkedMatrix <- function(x, i, j, drop) {
         TMP <- matrix(data = INDEX[INDEX[, 1] == k, ], ncol = 3)
         ini <- end + 1
         end <- ini + nrow(TMP) - 1
-        Z[, ini:end] <- x[[k]][i, TMP[, 3], drop = FALSE]
+        # Convert to matrix to support data frames
+        Z[, ini:end] <- as.matrix(x[[k]][i, TMP[, 3], drop = FALSE])
     }
     if (length(originalOrder) > 1) {
         Z[] <- Z[, originalOrder]

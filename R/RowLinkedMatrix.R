@@ -40,7 +40,8 @@ subset.RowLinkedMatrix <- function(x, i, j, drop) {
         TMP <- matrix(data = INDEX[INDEX[, 1] == k, ], ncol = 3)
         ini <- end + 1
         end <- ini + nrow(TMP) - 1
-        Z[ini:end, ] <- x[[k]][TMP[, 3], j, drop = FALSE]
+        # Convert to matrix to support data frames
+        Z[ini:end, ] <- as.matrix(x[[k]][TMP[, 3], j, drop = FALSE])
     }
     if (length(originalOrder) > 1) {
         Z[] <- Z[originalOrder, ]
