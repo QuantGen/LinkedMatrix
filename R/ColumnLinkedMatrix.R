@@ -239,20 +239,20 @@ ColumnLinkedMatrix <- setClass("ColumnLinkedMatrix", contains = "list")
 #' @param ... A sequence of matrix-like objects of the same row-dimension.
 #' @export
 setMethod("initialize", signature(.Object = "ColumnLinkedMatrix"), function(.Object, ...) {
-    list <- list(...)
+    nodes <- list(...)
     # Append at least one matrix
-    if (length(list) == 0) {
-        list[[1]] <- matrix()
+    if (length(nodes) == 0) {
+        nodes[[1]] <- matrix()
     }
     # Detect non-matrix objects by checking dimensions
-    if (any(unlist(lapply(list, function(x) length(dim(x)) != 2)))) {
+    if (any(unlist(lapply(nodes, function(x) length(dim(x)) != 2)))) {
         stop("arguments need to be matrix-like")
     }
     # Detect matrices that do not match in dimensions
-    if (ncol(unique(sapply(list, dim), MARGIN = 2)) != 1) {
+    if (ncol(unique(sapply(nodes, dim), MARGIN = 2)) != 1) {
         stop("arguments need the same number of rows")
     }
-    .Object <- callNextMethod(.Object, list)
+    .Object <- callNextMethod(.Object, nodes)
     return(.Object)
 })
 
