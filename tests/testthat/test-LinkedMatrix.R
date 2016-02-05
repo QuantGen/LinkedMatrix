@@ -38,19 +38,23 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
 
     test_that(paste(class, "creation"), {
 
+        expect_error(new(class, c(1, 2, 3)), "*arguments need to be matrix-like*")
+
         linkedMatrix <- new(class)
         expect_equal(nNodes(linkedMatrix), 1)
         expect_equal(linkedMatrix[1, 1], NA)
 
         linkedMatrix <- new(class, matrix(nrow = 1, ncol = 1, 0))
         expect_equal(nNodes(linkedMatrix), 1)
-        expect_equal(linkedMatrix[1, 1], 0)
+        expect_equal(dim(linkedMatrix), c(1, 1))
 
         linkedMatrix <- new(class, matrix(nrow = 1, ncol = 1, 0), matrix(nrow = 1, ncol = 1, 0))
         expect_equal(nNodes(linkedMatrix), 2)
-        expect_equal(linkedMatrix[1, 1], 0)
-
-        expect_error(new(class, c(1, 2, 3)), "*arguments need to be matrix-like*")
+        if (class == "ColumnLinkedMatrix") {
+            expect_equal(dim(linkedMatrix), c(1, 2))
+        } else {
+            expect_equal(dim(linkedMatrix), c(2, 1))
+        }
 
         if (class == "ColumnLinkedMatrix") {
             args <- list(matrix(nrow = 1, ncol = 1, 0), matrix(nrow = 2, ncol = 1, 0))
