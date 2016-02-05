@@ -57,9 +57,9 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
         }
 
         if (class == "ColumnLinkedMatrix") {
-            args <- list(matrix(nrow = 1, ncol = 1, 0), matrix(nrow = 2, ncol = 1, 0))
+            args <- list(matrix(nrow = 3, ncol = 1, 0), matrix(nrow = 5, ncol = 1, 0))
         } else {
-            args <- list(matrix(nrow = 1, ncol = 1, 0), matrix(nrow = 1, ncol = 2, 0))
+            args <- list(matrix(nrow = 1, ncol = 3, 0), matrix(nrow = 1, ncol = 5, 0))
         }
         expect_error(do.call(class, args), "*arguments need the same number of*")
 

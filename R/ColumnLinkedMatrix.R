@@ -249,7 +249,7 @@ setMethod("initialize", signature(.Object = "ColumnLinkedMatrix"), function(.Obj
             stop("arguments need to be matrix-like")
         }
         # Detect matrices that do not match in dimensions
-        if (ncol(unique(sapply(nodes, dim), MARGIN = 2)) != 1) {
+        if (length(unique(sapply(nodes, nrow))) != 1) {
             stop("arguments need the same number of rows")
         }
     }

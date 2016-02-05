@@ -244,7 +244,7 @@ setMethod("initialize", signature(.Object = "RowLinkedMatrix"), function(.Object
             stop("arguments need to be matrix-like")
         }
         # Detect matrices that do not match in dimensions
-        if (ncol(unique(sapply(nodes, dim), MARGIN = 2)) != 1) {
+        if (length(unique(sapply(nodes, ncol))) != 1) {
             stop("arguments need the same number of columns")
         }
     }
