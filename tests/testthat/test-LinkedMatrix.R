@@ -39,15 +39,15 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
     test_that(paste(class, "creation"), {
 
         linkedMatrix <- new(class)
-        expect_equal(length(linkedMatrix), 1)
+        expect_equal(nNodes(linkedMatrix), 1)
         expect_equal(linkedMatrix[1, 1], NA)
 
         linkedMatrix <- new(class, matrix(nrow = 1, ncol = 1, 0))
-        expect_equal(length(linkedMatrix), 1)
+        expect_equal(nNodes(linkedMatrix), 1)
         expect_equal(linkedMatrix[1, 1], 0)
 
         linkedMatrix <- new(class, matrix(nrow = 1, ncol = 1, 0), matrix(nrow = 1, ncol = 1, 0))
-        expect_equal(length(linkedMatrix), 2)
+        expect_equal(nNodes(linkedMatrix), 2)
         expect_equal(linkedMatrix[1, 1], 0)
 
         expect_error(new(class, c(1, 2, 3)), "*arguments need to be matrix-like*")
