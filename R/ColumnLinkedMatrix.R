@@ -243,14 +243,15 @@ setMethod("initialize", signature(.Object = "ColumnLinkedMatrix"), function(.Obj
     # Append at least one matrix
     if (length(nodes) == 0) {
         nodes[[1]] <- matrix()
-    }
-    # Detect non-matrix objects by checking dimensions
-    if (any(unlist(lapply(nodes, function(x) length(dim(x)) != 2)))) {
-        stop("arguments need to be matrix-like")
-    }
-    # Detect matrices that do not match in dimensions
-    if (ncol(unique(sapply(nodes, dim), MARGIN = 2)) != 1) {
-        stop("arguments need the same number of rows")
+    } else {
+        # Detect non-matrix objects by checking dimensions
+        if (any(unlist(lapply(nodes, function(x) length(dim(x)) != 2)))) {
+            stop("arguments need to be matrix-like")
+        }
+        # Detect matrices that do not match in dimensions
+        if (ncol(unique(sapply(nodes, dim), MARGIN = 2)) != 1) {
+            stop("arguments need the same number of rows")
+        }
     }
     .Object <- callNextMethod(.Object, nodes)
     return(.Object)
