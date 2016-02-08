@@ -163,7 +163,18 @@ dimnames.ColumnLinkedMatrix <- function(x) {
 #' @param deparse.level Currently unused, defaults to 0.
 #' @export
 cbind.ColumnLinkedMatrix <- function(..., deparse.level = 0) {
-    do.call(ColumnLinkedMatrix, list(...))
+    dotdotdot <- list(...)
+    nodes <- list()
+    for (i in seq_len(length(dotdotdot))) {
+        node <- dotdotdot[[i]]
+        if (is(node, "LinkedMatrix")) {
+            # Extract nodes from LinkedMatrix object
+            nodes <- append(nodes, slot(node, ".Data"))
+        } else {
+            nodes <- append(nodes, node)
+        }
+    }
+    do.call(ColumnLinkedMatrix, nodes)
 }
 
 

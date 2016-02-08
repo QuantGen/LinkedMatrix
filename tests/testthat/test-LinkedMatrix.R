@@ -268,7 +268,7 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
 
                 boundLinkedMatrix <- rbind(linkedMatrix, linkedMatrix)
                 expect_equal(dim(boundLinkedMatrix), c(6, 3))
-                expect_equal(nNodes(boundLinkedMatrix), 2)
+                expect_equal(nNodes(boundLinkedMatrix), nNodes * 2)
 
                 expect_error(cbind(linkedMatrix, linkedMatrix))
 
@@ -276,7 +276,7 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
 
                 boundLinkedMatrix <- cbind(linkedMatrix, linkedMatrix)
                 expect_equal(dim(boundLinkedMatrix), c(3, 6))
-                expect_equal(nNodes(boundLinkedMatrix), 2)
+                expect_equal(nNodes(boundLinkedMatrix), nNodes * 2)
 
                 expect_error(rbind(linkedMatrix, linkedMatrix))
 

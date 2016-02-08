@@ -176,7 +176,18 @@ cbind.RowLinkedMatrix <- function(..., deparse.level = 0) {
 #' @param deparse.level Currently unused, defaults to 0.
 #' @export
 rbind.RowLinkedMatrix <- function(..., deparse.level = 1) {
-    do.call(RowLinkedMatrix, list(...))
+    dotdotdot <- list(...)
+    nodes <- list()
+    for (i in seq_len(length(dotdotdot))) {
+        node <- dotdotdot[[i]]
+        if (is(node, "LinkedMatrix")) {
+            # Extract nodes from LinkedMatrix object
+            nodes <- append(nodes, slot(node, ".Data"))
+        } else {
+            nodes <- append(nodes, node)
+        }
+    }
+    do.call(RowLinkedMatrix, nodes)
 }
 
 
