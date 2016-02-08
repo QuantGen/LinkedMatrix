@@ -172,9 +172,13 @@ cbind.RowLinkedMatrix <- function(..., deparse.level = 0) {
 
 #' Combine matrix-like objects by rows.
 #'
-#' If \code{...} contains \code{\link[=LinkedMatrix-class]{LinkedMatrix}}
-#' objects, their nodes will be extracted and merged with the new
-#' \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} object.
+#' Compared to the
+#' \code{\link[=initialize,RowLinkedMatrix-method]{RowLinkedMatrix}}
+#' constructor, nested \code{\link[=LinkedMatrix-class]{LinkedMatrix}} objects
+#' that are passed via \code{...} will not be treated as matrix-like objects,
+#' but their nodes will be extracted and merged with the new
+#' \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} object for a more
+#' compact representation.
 #'
 #' @param ... Matrix-like objects to be combined by rows.
 #' @param deparse.level Currently unused, defaults to 0.
