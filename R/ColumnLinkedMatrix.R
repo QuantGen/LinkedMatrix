@@ -159,6 +159,10 @@ dimnames.ColumnLinkedMatrix <- function(x) {
 
 #' Combine matrix-like objects by columns.
 #'
+#' If \code{...} contains \code{\link[=LinkedMatrix-class]{LinkedMatrix}}
+#' objects, their nodes will be extracted and merged with the new
+#' \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} object.
+#'
 #' @param ... Matrix-like objects to be combined by columns.
 #' @param deparse.level Currently unused, defaults to 0.
 #' @export
