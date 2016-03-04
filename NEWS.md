@@ -1,4 +1,4 @@
-# LinkedMatrix 1.0.0.9000
+# LinkedMatrix 1.1.0
 
 * Add `LinkedMatrix` constructor that creates either a `ColumnLinkedMatrix` or
   `RowLinkedMatrix` (controlled by `linkedBy`) of certain dimensions and of

@@ -1,7 +1,7 @@
 ## Test environments
 
-* Local Arch Linux install, R 3.2.2
-* Ubuntu 12.04 on Travis CI, R. 3.2.2
+* Local Arch Linux install, R 3.2.3
+* Ubuntu 12.04.05 on Travis CI, R. 3.2.3
 * win-builder, R-release and R-devel
 
 
