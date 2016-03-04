@@ -5,7 +5,7 @@
 #'
 #' @docType package
 #' @name LinkedMatrix-package
-#' @importFrom methods setClass setClassUnion setMethod
+#' @import methods
 #' @aliases NULL
 NULL
 
