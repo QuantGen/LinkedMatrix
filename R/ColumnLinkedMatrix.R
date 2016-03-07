@@ -1,4 +1,4 @@
-subset.ColumnLinkedMatrix <- function(x, i, j, drop) {
+subset.ColumnLinkedMatrix <- function(x, i, j, ..., drop) {
     nX <- nrow(x)
     pX <- ncol(x)
     if (missing(i)) {
@@ -307,6 +307,7 @@ setMethod("initialize", signature(.Object = "ColumnLinkedMatrix"), function(.Obj
 #'
 #' @inheritParams base::`[`
 #' @param j Column indices.
+#' @param ... Additional arguments
 #' @export
 setMethod("[", signature(x = "ColumnLinkedMatrix"), subset.ColumnLinkedMatrix)
 
@@ -319,6 +320,6 @@ setMethod("[", signature(x = "ColumnLinkedMatrix"), subset.ColumnLinkedMatrix)
 #'
 #' @inheritParams base::`[<-`
 #' @param j Column indices.
-#' @param ... Optional arguments.
+#' @param ... Additional arguments
 #' @export
 setReplaceMethod("[", signature(x = "ColumnLinkedMatrix"), replace.ColumnLinkedMatrix)

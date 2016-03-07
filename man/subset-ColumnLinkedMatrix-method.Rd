@@ -38,7 +38,7 @@
 
 \item{j}{Column indices.}
 
-\item{...}{Optional arguments.}
+\item{...}{Additional arguments}
 
 \item{value}{typically an array-like \R object of a similar class as
     \code{x}.}

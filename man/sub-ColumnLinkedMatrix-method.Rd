@@ -6,7 +6,7 @@
 \title{Extract parts of a
 \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}}.}
 \usage{
-\S4method{[}{ColumnLinkedMatrix}(x, i, j, drop)
+\S4method{[}{ColumnLinkedMatrix}(x, i, j, ..., drop = TRUE)
 }
 \arguments{
 \item{x}{
@@ -37,6 +37,8 @@
   }
 
 \item{j}{Column indices.}
+
+\item{...}{Additional arguments}
 
 \item{drop}{For matrices and arrays.  If \code{TRUE} the result is
     coerced to the lowest possible dimension (see the examples).  This

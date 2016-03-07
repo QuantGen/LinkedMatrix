@@ -5,7 +5,7 @@
 \alias{[,RowLinkedMatrix-method}
 \title{Extract parts of a \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}}.}
 \usage{
-\S4method{[}{RowLinkedMatrix}(x, i, j, drop)
+\S4method{[}{RowLinkedMatrix}(x, i, j, ..., drop = TRUE)
 }
 \arguments{
 \item{x}{
@@ -36,6 +36,8 @@
   }
 
 \item{j}{Column indices.}
+
+\item{...}{Additional arguments}
 
 \item{drop}{For matrices and arrays.  If \code{TRUE} the result is
     coerced to the lowest possible dimension (see the examples).  This
