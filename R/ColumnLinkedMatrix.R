@@ -31,8 +31,8 @@ subset.ColumnLinkedMatrix <- function(x, i, j, ..., drop) {
     originalOrder <- (1:p)[order(j)]
     sortedColumns <- sort(j)
     Z <- matrix(nrow = n, ncol = p, NA)
-    colnames(Z) <- colnames(x)[j]
-    rownames(Z) <- rownames(x)[i]
+    # Use dimnames instead of rownames and colnames to avoid copy
+    dimnames(Z) <- list(rownames(x)[i], colnames(x)[j])
     INDEX <- index(x)[sortedColumns, , drop = FALSE]
     whatChunks <- unique(INDEX[, 1])
     end <- 0
