@@ -25,11 +25,11 @@ subset.ColumnLinkedMatrix <- function(x, i, j, ..., drop) {
     }
     n <- length(i)
     p <- length(j)
-    originalOrder <- (1:p)[order(j)]
-    sortedColumns <- sort(j)
     if (p > pX | n > nX) {
         stop("Either the number of columns or number of rows requested exceed the number of rows or columns in x, try dim(x)...")
     }
+    originalOrder <- (1:p)[order(j)]
+    sortedColumns <- sort(j)
     Z <- matrix(nrow = n, ncol = p, NA)
     colnames(Z) <- colnames(x)[j]
     rownames(Z) <- rownames(x)[i]
