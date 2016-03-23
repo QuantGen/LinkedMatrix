@@ -64,16 +64,16 @@ replace.RowLinkedMatrix <- function(x, i, j, ..., value) {
     }
     Z <- matrix(nrow = length(i), ncol = length(j), data = value)
     # Retrieve nodes and index from ... to speed up sequential writes
-    ellipsis <- list(...)
-    if (is.null(ellipsis$nodes)) {
+    dotdotdot <- list(...)
+    if (is.null(dotdotdot$nodes)) {
         nodes <- nodes(x)
     } else {
-        nodes <- ellipsis$nodes
+        nodes <- dotdotdot$nodes
     }
-    if (is.null(ellipsis$index)) {
+    if (is.null(dotdotdot$index)) {
         index <- index(x)
     } else {
-        index <- ellipsis$index
+        index <- dotdotdot$index
     }
     for (k in 1:nrow(nodes)) {
         rows_z <- (i >= nodes[k, 2]) & (i <= nodes[k, 3])
