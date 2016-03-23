@@ -30,7 +30,9 @@ subset.RowLinkedMatrix <- function(x, i, j, ..., drop) {
     }
     originalOrder <- (1:n)[order(i)]
     sortedRows <- sort(i)
-    Z <- matrix(nrow = n, ncol = p, NA)
+    # Initialize result matrix as integer matrix because it does not take up as
+    # much space as double() but is more useful than logical()
+    Z <- matrix(data = integer(), nrow = n, ncol = p)
     # Use dimnames instead of rownames and colnames to avoid copy
     dimnames(Z) <- list(rownames(x)[i], colnames(x)[j])
     INDEX <- index(x)[sortedRows, , drop = FALSE]

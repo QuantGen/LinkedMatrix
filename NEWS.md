@@ -1,6 +1,7 @@
 # LinkedMatrix 1.1.0.9000
 
-* Optimize subsetting by avoiding copies.
+* Optimize subsetting by initializing the return matrix as `integer()` instead
+  of `logical()` to avoid copies.
 
 # LinkedMatrix 1.1.0
 

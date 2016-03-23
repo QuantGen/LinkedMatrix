@@ -43,7 +43,7 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
         # No input
         linkedMatrix <- new(class)
         expect_equal(nNodes(linkedMatrix), 1)
-        expect_equal(linkedMatrix[1, 1], NA)
+        expect_true(is.na(linkedMatrix[1, 1]))
 
         # Single matrix input
         linkedMatrix <- new(class, matrix(nrow = 1, ncol = 1, 0))
