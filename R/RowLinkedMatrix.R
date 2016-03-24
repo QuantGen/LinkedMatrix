@@ -28,11 +28,6 @@ subset.RowLinkedMatrix <- function(x, i, j, ..., drop) {
     if (p > pX | n > nX) {
         stop("Either the number of columns or number of rows requested exceed the number of rows or columns in x, try dim(x)...")
     }
-    # Initialize result matrix as integer matrix because it does not take up as
-    # much space as double() but is more useful than logical()
-    Z <- matrix(data = integer(), nrow = n, ncol = p)
-    # Use dimnames instead of rownames and colnames to avoid copy
-    dimnames(Z) <- list(rownames(x)[i], colnames(x)[j])
     # Providing a sorted row index will eliminate the need to reorder the
     # result matrix later (avoiding a copy)
     isUnsorted <- is.unsorted(i)
@@ -45,16 +40,25 @@ subset.RowLinkedMatrix <- function(x, i, j, ..., drop) {
     }
     INDEX <- index(x)[sortedRows, , drop = FALSE]
     whatChunks <- unique(INDEX[, 1])
-    end <- 0
-    for (k in whatChunks) {
-        TMP <- matrix(data = INDEX[INDEX[, 1] == k, ], ncol = 3)
-        ini <- end + 1
-        end <- ini + nrow(TMP) - 1
-        # Convert to matrix to support data frames
-        Z[ini:end, ] <- as.matrix(x[[k]][TMP[, 3], j, drop = FALSE])
-    }
-    if (isUnsorted) {
-        Z[] <- Z[originalOrder, ]
+    if (length(whatChunks) > 1) {
+        # Initialize result matrix as integer matrix because it does not take up as
+        # much space as double() but is more useful than logical()
+        Z <- matrix(data = integer(), nrow = n, ncol = p)
+        # Use dimnames instead of rownames and colnames to avoid copy
+        dimnames(Z) <- list(rownames(x)[i], colnames(x)[j])
+        end <- 0
+        for (k in whatChunks) {
+            TMP <- matrix(data = INDEX[INDEX[, 1] == k, ], ncol = 3)
+            ini <- end + 1
+            end <- ini + nrow(TMP) - 1
+            # Convert to matrix to support data frames
+            Z[ini:end, ] <- as.matrix(x[[k]][TMP[, 3], j, drop = FALSE])
+        }
+        if (isUnsorted) {
+            Z[] <- Z[originalOrder, ]
+        }
+    } else {
+        Z <- as.matrix(x[[whatChunks]][i, j, drop = FALSE])
     }
     if (drop == TRUE && (n == 1 || p == 1)) {
         # Revert drop.
