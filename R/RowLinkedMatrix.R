@@ -28,13 +28,21 @@ subset.RowLinkedMatrix <- function(x, i, j, ..., drop) {
     if (p > pX | n > nX) {
         stop("Either the number of columns or number of rows requested exceed the number of rows or columns in x, try dim(x)...")
     }
-    originalOrder <- (1:n)[order(i)]
-    sortedRows <- sort(i)
     # Initialize result matrix as integer matrix because it does not take up as
     # much space as double() but is more useful than logical()
     Z <- matrix(data = integer(), nrow = n, ncol = p)
     # Use dimnames instead of rownames and colnames to avoid copy
     dimnames(Z) <- list(rownames(x)[i], colnames(x)[j])
+    # Providing a sorted row index will eliminate the need to reorder the
+    # result matrix later (avoiding a copy)
+    isUnsorted <- is.unsorted(i)
+    if (isUnsorted) {
+        # Reorder rows for sequential retrieval by chunk
+        originalOrder <- (1:n)[order(i)]
+        sortedRows <- sort(i)
+    } else {
+        sortedRows <- i
+    }
     INDEX <- index(x)[sortedRows, , drop = FALSE]
     whatChunks <- unique(INDEX[, 1])
     end <- 0
@@ -45,7 +53,7 @@ subset.RowLinkedMatrix <- function(x, i, j, ..., drop) {
         # Convert to matrix to support data frames
         Z[ini:end, ] <- as.matrix(x[[k]][TMP[, 3], j, drop = FALSE])
     }
-    if (length(originalOrder) > 1) {
+    if (isUnsorted) {
         Z[] <- Z[originalOrder, ]
     }
     if (drop == TRUE && (n == 1 || p == 1)) {
