@@ -1,4 +1,5 @@
 subset.ColumnLinkedMatrix <- function(x, i, j, ..., drop) {
+    # Check indices and dimensions
     nX <- nrow(x)
     pX <- ncol(x)
     if (missing(i)) {
@@ -38,8 +39,10 @@ subset.ColumnLinkedMatrix <- function(x, i, j, ..., drop) {
     } else {
         sortedColumns <- j
     }
-    INDEX <- index(x)[sortedColumns, , drop = FALSE]
-    whatChunks <- unique(INDEX[, 1])
+    globalIndex <- index(x)[sortedColumns, , drop = FALSE]
+    whatChunks <- unique(globalIndex[, 1])
+    # If there are several chunks involved, aggregate the result in a separate
+    # matrix, otherwise pass through result
     if (length(whatChunks) > 1) {
         # Initialize result matrix as integer matrix because it does not take up as
         # much space as double() but is more useful than logical()
@@ -48,20 +51,21 @@ subset.ColumnLinkedMatrix <- function(x, i, j, ..., drop) {
         dimnames(Z) <- list(rownames(x)[i], colnames(x)[j])
         end <- 0
         for (k in whatChunks) {
-            TMP <- matrix(data = INDEX[INDEX[, 1] == k, ], ncol = 3)
+            localIndex <- matrix(data = globalIndex[globalIndex[, 1] == k, ], ncol = 3)
             ini <- end + 1
-            end <- ini + nrow(TMP) - 1
+            end <- ini + nrow(localIndex) - 1
             # Convert to matrix to support data frames
-            Z[, ini:end] <- as.matrix(x[[k]][i, TMP[, 3], drop = FALSE])
+            Z[, ini:end] <- as.matrix(x[[k]][i, localIndex[, 3], drop = FALSE])
         }
         if (isUnsorted) {
+            # Return to original order
             Z[] <- Z[, originalOrder]
         }
     } else {
         Z <- as.matrix(x[[whatChunks]][i, j, drop = FALSE])
     }
     if (drop == TRUE && (n == 1 || p == 1)) {
-        # Revert drop.
+        # Let R handle drop behavior
         return(Z[, ])
     } else {
         return(Z)
