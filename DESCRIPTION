@@ -1,5 +1,5 @@
 Package: LinkedMatrix
-Version: 1.1.0
+Version: 1.1.0.9000
 License: MIT + file LICENSE
 Title: Column-Linked and Row-Linked Matrices
 Description: Matrices implemented as collections of matrix-like nodes, linked by
