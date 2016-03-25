@@ -34,7 +34,7 @@ subset.ColumnLinkedMatrix <- function(x, i, j, ..., drop) {
     isUnsorted <- is.unsorted(j)
     if (isUnsorted) {
         # Reorder columns for sequential retrieval by chunk
-        originalOrder <- (1:p)[rank(j, ties.method = "first")]
+        originalOrder <- rank(j, ties.method = "first")
         sortedColumns <- sort(j)
     } else {
         sortedColumns <- j
