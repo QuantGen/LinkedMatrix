@@ -34,7 +34,7 @@ subset.RowLinkedMatrix <- function(x, i, j, ..., drop) {
     isUnsorted <- is.unsorted(i)
     if (isUnsorted) {
         # Reorder rows for sequential retrieval by chunk
-        originalOrder <- (1:n)[order(i)]
+        originalOrder <- (1:n)[rank(i, ties.method = "first")]
         sortedRows <- sort(i)
     } else {
         sortedRows <- i
