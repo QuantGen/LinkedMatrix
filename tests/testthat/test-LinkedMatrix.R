@@ -1,14 +1,14 @@
 # Prepare dummy data
-genotypes <- matrix(c(4, 4, 4, 3, 2, 3, 1, 2, 1), nrow = 3, ncol = 3)
-rownames(genotypes) <- paste0("id_", 1:nrow(genotypes))
-colnames(genotypes) <- paste0("mrk_", 1:ncol(genotypes))
+dummy <- matrix(data = seq_len(16), nrow = 4, ncol = 4)
+rownames(dummy) <- paste0("row_", seq_len(nrow(dummy)))
+colnames(dummy) <- paste0("col_", seq_len(ncol(dummy)))
 
 createLinkedMatrix <- function(class, nNodes) {
     linkedBy <- ifelse(class == "ColumnLinkedMatrix", "columns", "rows")
-    linkedMatrix <- LinkedMatrix(nrow = nrow(genotypes), ncol = ncol(genotypes), nNodes = nNodes, linkedBy = linkedBy, nodeInitializer = "matrixNodeInitializer")
-    rownames(linkedMatrix) <- paste0("id_", 1:nrow(genotypes))
-    colnames(linkedMatrix) <- paste0("mrk_", 1:ncol(genotypes))
-    linkedMatrix[] <- genotypes
+    linkedMatrix <- LinkedMatrix(nrow = nrow(dummy), ncol = ncol(dummy), nNodes = nNodes, linkedBy = linkedBy, nodeInitializer = "matrixNodeInitializer")
+    rownames(linkedMatrix) <- paste0("row_", seq_len(nrow(dummy)))
+    colnames(linkedMatrix) <- paste0("col_", seq_len(ncol(dummy)))
+    linkedMatrix[] <- dummy
     return(linkedMatrix)
 }
 
@@ -22,12 +22,12 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
 
         for (nNodes in c(1, 2)) {
 
-            linkedMatrix <- LinkedMatrix(nrow = nrow(genotypes), ncol = ncol(genotypes), nNodes = nNodes, linkedBy = linkedBy, nodeInitializer = "matrixNodeInitializer")
+            linkedMatrix <- LinkedMatrix(nrow = nrow(dummy), ncol = ncol(dummy), nNodes = nNodes, linkedBy = linkedBy, nodeInitializer = "matrixNodeInitializer")
             expect_equal(nNodes(linkedMatrix), nNodes)
             expect_is(linkedMatrix[[1]], "matrix")
 
             if (requireNamespace("ff", quietly = TRUE)) {
-                linkedMatrix <- LinkedMatrix(nrow = nrow(genotypes), ncol = ncol(genotypes), nNodes = nNodes, linkedBy = linkedBy, nodeInitializer = "ffNodeInitializer", vmode = "integer")
+                linkedMatrix <- LinkedMatrix(nrow = nrow(dummy), ncol = ncol(dummy), nNodes = nNodes, linkedBy = linkedBy, nodeInitializer = "ffNodeInitializer", vmode = "integer")
                 expect_equal(nNodes(linkedMatrix), nNodes)
                 expect_is(linkedMatrix[[1]], "ff_matrix")
             }
@@ -46,17 +46,17 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
         expect_true(is.na(linkedMatrix[1, 1]))
 
         # Single matrix input
-        linkedMatrix <- new(class, matrix(nrow = 1, ncol = 1, 0))
+        linkedMatrix <- new(class, matrix(data = 0, nrow = 1, ncol = 1))
         expect_equal(nNodes(linkedMatrix), 1)
         expect_equal(dim(linkedMatrix), c(1, 1))
 
         # Single LinkedMatrix input
         linkedMatrix <- new(class, createLinkedMatrix(class, 2))
         expect_equal(nNodes(linkedMatrix), 1)
-        expect_equal(dim(linkedMatrix), c(3, 3))
+        expect_equal(dim(linkedMatrix), dim(dummy))
 
         # Multiple matrix inputs of same order
-        linkedMatrix <- new(class, matrix(nrow = 1, ncol = 1, 0), matrix(nrow = 1, ncol = 1, 0))
+        linkedMatrix <- new(class, matrix(data = 0, nrow = 1, ncol = 1), matrix(data = 0, nrow = 1, ncol = 1))
         expect_equal(nNodes(linkedMatrix), 2)
         if (class == "ColumnLinkedMatrix") {
             expect_equal(dim(linkedMatrix), c(1, 2))
@@ -68,17 +68,17 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
         linkedMatrix <- new(class, createLinkedMatrix(class, 2), createLinkedMatrix(class, 2))
         expect_equal(nNodes(linkedMatrix), 2)
         if (class == "ColumnLinkedMatrix") {
-            expect_equal(dim(linkedMatrix), c(3, 6))
+            expect_equal(dim(linkedMatrix), c(nrow(dummy), ncol(dummy) * 2))
         } else {
-            expect_equal(dim(linkedMatrix), c(6, 3))
+            expect_equal(dim(linkedMatrix), c(ncol(dummy) * 2, nrow(dummy)))
         }
 
         # Multiple conformable matrix inputs of different order
         if (class == "ColumnLinkedMatrix") {
-            args <- list(matrix(nrow = 1, ncol = 3, 0), matrix(nrow = 1, ncol = 5, 0))
+            args <- list(matrix(data = 0, nrow = 1, ncol = 3), matrix(data = 0, nrow = 1, ncol = 5))
             dims <- c(1, 8)
         } else {
-            args <- list(matrix(nrow = 3, ncol = 1, 0), matrix(nrow = 5, ncol = 1, 0))
+            args <- list(matrix(data = 0, nrow = 3, ncol = 1), matrix(data = 0, nrow = 5, ncol = 1))
             dims <- c(8, 1)
         }
         linkedMatrix <- do.call(class, args)
@@ -87,15 +87,15 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
 
         # Multiple unconformable matrix inputs
         if (class == "ColumnLinkedMatrix") {
-            args <- list(matrix(nrow = 3, ncol = 1, 0), matrix(nrow = 5, ncol = 1, 0))
+            args <- list(matrix(data = 0, nrow = 3, ncol = 1), matrix(data = 0, nrow = 5, ncol = 1))
         } else {
-            args <- list(matrix(nrow = 1, ncol = 3, 0), matrix(nrow = 1, ncol = 5, 0))
+            args <- list(matrix(data = 0, nrow = 1, ncol = 3), matrix(data = 0, nrow = 1, ncol = 5))
         }
         expect_error(do.call(class, args), "*arguments need the same number of*")
 
     })
 
-    for (nNodes in 1:ifelse(class == "ColumnLinkedMatrix", ncol(genotypes), nrow(genotypes))) {
+    for (nNodes in seq_len(ifelse(class == "ColumnLinkedMatrix", ncol(dummy), nrow(dummy)))) {
 
         context(paste0(class, " with ", nNodes, " nodes"))
 
@@ -104,158 +104,196 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
 
         test_that("subsetting", {
 
-            expect_equal(linkedMatrix[], genotypes)
+            idx2 <- expand.grid(seq_len(nrow(dummy)), seq_len(ncol(dummy)))
+            idx4r <- expand.grid(seq_len(nrow(dummy)), seq_len(nrow(dummy)), seq_len(nrow(dummy)), seq_len(nrow(dummy)))
+            idx4c <- expand.grid(seq_len(ncol(dummy)), seq_len(ncol(dummy)), seq_len(ncol(dummy)), seq_len(ncol(dummy)))
 
-            # expect_equal(linkedMatrix[1], genotypes[1]) Not implemented yet
-            expect_equal(linkedMatrix[1, ], genotypes[1, ])
-            expect_equal(linkedMatrix[, 1], genotypes[, 1])
-            expect_equal(linkedMatrix[1, 1], genotypes[1, 1])
-            expect_equal(linkedMatrix[1, , drop = FALSE], genotypes[1, , drop = FALSE])
-            expect_equal(linkedMatrix[, 1, drop = FALSE], genotypes[, 1, drop = FALSE])
-            expect_equal(linkedMatrix[1, 1, drop = FALSE], genotypes[1, 1, drop = FALSE])
+            expect_equal(linkedMatrix[], dummy)
 
-            # expect_equal(linkedMatrix[1:2], genotypes[1:2]) Not implemented yet
-            expect_equal(linkedMatrix[1:2, ], genotypes[1:2, ])
-            expect_equal(linkedMatrix[, 1:2], genotypes[, 1:2])
-            expect_equal(linkedMatrix[1:2, 1:2], genotypes[1:2, 1:2])
-            expect_equal(linkedMatrix[1:2, , drop = FALSE], genotypes[1:2, , drop = FALSE])
-            expect_equal(linkedMatrix[, 1:2, drop = FALSE], genotypes[, 1:2, drop = FALSE])
-            expect_equal(linkedMatrix[1:2, 1:2, drop = FALSE], genotypes[1:2, 1:2, drop = FALSE])
+            for (i in seq_len(nrow(dummy))) {
+                expect_equal(linkedMatrix[i, ], dummy[i, ])
+                expect_equal(linkedMatrix[i, , drop = FALSE], dummy[i, , drop = FALSE])
+            }
 
-            # expect_equal(linkedMatrix[2:1], genotypes[2:1]) Not implemented yet
-            expect_equal(linkedMatrix[2:1, ], genotypes[2:1, ])
-            expect_equal(linkedMatrix[, 2:1], genotypes[, 2:1])
-            expect_equal(linkedMatrix[2:1, 2:1], genotypes[2:1, 2:1])
-            expect_equal(linkedMatrix[2:1, , drop = FALSE], genotypes[2:1, , drop = FALSE])
-            expect_equal(linkedMatrix[, 2:1, drop = FALSE], genotypes[, 2:1, drop = FALSE])
-            expect_equal(linkedMatrix[2:1, 2:1, drop = FALSE], genotypes[2:1, 2:1, drop = FALSE])
+            for (i in seq_len(ncol(dummy))) {
+                expect_equal(linkedMatrix[, i], dummy[, i])
+                expect_equal(linkedMatrix[, i, drop = FALSE], dummy[, i, drop = FALSE])
+            }
 
-            # expect_equal(linkedMatrix[c(3, 1)], genotypes[c(3, 1)]) Not implemented yet
-            expect_equal(linkedMatrix[c(3, 1), ], genotypes[c(3, 1), ])
-            expect_equal(linkedMatrix[, c(3, 1)], genotypes[, c(3, 1)])
-            expect_equal(linkedMatrix[c(3, 1), c(3, 1)], genotypes[c(3, 1), c(3, 1)])
-            expect_equal(linkedMatrix[c(3, 1), , drop = FALSE], genotypes[c(3, 1), , drop = FALSE])
-            expect_equal(linkedMatrix[, c(3, 1), drop = FALSE], genotypes[, c(3, 1), drop = FALSE])
-            expect_equal(linkedMatrix[c(3, 1), c(3, 1), drop = FALSE], genotypes[c(3, 1), c(3, 1), drop = FALSE])
+            for (i in seq_len(nrow(idx2))) {
+                expect_equal(linkedMatrix[idx2[i, 1], idx2[i, 2]], dummy[idx2[i, 1], idx2[i, 2]])
+                expect_equal(linkedMatrix[idx2[i, 1], idx2[i, 2], drop = FALSE], dummy[idx2[i, 1], idx2[i, 2], drop = FALSE])
+            }
 
-            # expect_equal(linkedMatrix[genotypes > 1], genotypes[genotypes > 1]) Not implemented yet
-            expect_equal(linkedMatrix[c(TRUE, FALSE), ], genotypes[c(TRUE, FALSE), ])
-            expect_equal(linkedMatrix[, c(TRUE, FALSE)], genotypes[, c(TRUE, FALSE)])
-            expect_equal(linkedMatrix[c(TRUE, FALSE), c(TRUE, FALSE)], genotypes[c(TRUE, FALSE), c(TRUE, FALSE)])
-            expect_equal(linkedMatrix[c(TRUE, FALSE), , drop = FALSE], genotypes[c(TRUE, FALSE), , drop = FALSE])
-            expect_equal(linkedMatrix[, c(TRUE, FALSE), drop = FALSE], genotypes[, c(TRUE, FALSE), drop = FALSE])
-            expect_equal(linkedMatrix[c(TRUE, FALSE), c(TRUE, FALSE), drop = FALSE], genotypes[c(TRUE, FALSE), c(TRUE, FALSE), drop = FALSE])
+            for (i in seq_len(nrow(idx2))) {
 
-            expect_equal(linkedMatrix["id_1", ], genotypes["id_1", ])
-            expect_equal(linkedMatrix[, "mrk_1"], genotypes[, "mrk_1"])
-            expect_equal(linkedMatrix["id_1", "mrk_1"], genotypes["id_1", "mrk_1"])
-            expect_equal(linkedMatrix["id_1", , drop = FALSE], genotypes["id_1", , drop = FALSE])
-            expect_equal(linkedMatrix[, "mrk_1", drop = FALSE], genotypes[, "mrk_1", drop = FALSE])
-            expect_equal(linkedMatrix["id_1", "mrk_1", drop = FALSE], genotypes["id_1", "mrk_1", drop = FALSE])
+                expect_equal(linkedMatrix[idx2[i, 1]:idx2[i, 2], ], dummy[idx2[i, 1]:idx2[i, 2], ])
+                expect_equal(linkedMatrix[idx2[i, 1]:idx2[i, 2], , drop = FALSE], dummy[idx2[i, 1]:idx2[i, 2], , drop = FALSE])
 
-            expect_equal(linkedMatrix[c("id_1", "id_2"), ], genotypes[c("id_1", "id_2"), ])
-            expect_equal(linkedMatrix[, c("mrk_1", "mrk_2")], genotypes[, c("mrk_1", "mrk_2")])
-            expect_equal(linkedMatrix[c("id_1", "id_2"), c("mrk_1", "mrk_2")], genotypes[c("id_1", "id_2"), c("mrk_1", "mrk_2")])
-            expect_equal(linkedMatrix[c("id_1", "id_2"), , drop = FALSE], genotypes[c("id_1", "id_2"), , drop = FALSE])
-            expect_equal(linkedMatrix[, c("mrk_1", "mrk_2"), drop = FALSE], genotypes[, c("mrk_1", "mrk_2"), drop = FALSE])
-            expect_equal(linkedMatrix[c("id_1", "id_2"), c("mrk_1", "mrk_2"), drop = FALSE], genotypes[c("id_1", "id_2"), c("mrk_1", "mrk_2"), drop = FALSE])
+                expect_equal(linkedMatrix[, idx2[i, 1]:idx2[i, 2]], dummy[, idx2[i, 1]:idx2[i, 2]])
+                expect_equal(linkedMatrix[, idx2[i, 1]:idx2[i, 2], drop = FALSE], dummy[, idx2[i, 1]:idx2[i, 2], drop = FALSE])
 
-            expect_equal(linkedMatrix[c("id_2", "id_1"), ], genotypes[c("id_2", "id_1"), ])
-            expect_equal(linkedMatrix[, c("mrk_2", "mrk_1")], genotypes[, c("mrk_2", "mrk_1")])
-            expect_equal(linkedMatrix[c("id_2", "id_1"), c("mrk_2", "mrk_1")], genotypes[c("id_2", "id_1"), c("mrk_2", "mrk_1")])
-            expect_equal(linkedMatrix[c("id_2", "id_1"), , drop = FALSE], genotypes[c("id_2", "id_1"), , drop = FALSE])
-            expect_equal(linkedMatrix[, c("mrk_2", "mrk_1"), drop = FALSE], genotypes[, c("mrk_2", "mrk_1"), drop = FALSE])
-            expect_equal(linkedMatrix[c("id_2", "id_1"), c("mrk_2", "mrk_1"), drop = FALSE], genotypes[c("id_2", "id_1"), c("mrk_2", "mrk_1"), drop = FALSE])
+                expect_equal(linkedMatrix[idx2[i, 1]:idx2[i, 2], idx2[i, 1]:idx2[i, 2]], dummy[idx2[i, 1]:idx2[i, 2], idx2[i, 1]:idx2[i, 2]])
+                expect_equal(linkedMatrix[idx2[i, 1]:idx2[i, 2], idx2[i, 1]:idx2[i, 2], drop = FALSE], dummy[idx2[i, 1]:idx2[i, 2], idx2[i, 1]:idx2[i, 2], drop = FALSE])
 
-            expect_equal(linkedMatrix[c("id_3", "id_1"), ], genotypes[c("id_3", "id_1"), ])
-            expect_equal(linkedMatrix[, c("mrk_3", "mrk_1")], genotypes[, c("mrk_3", "mrk_1")])
-            expect_equal(linkedMatrix[c("id_3", "id_1"), c("mrk_3", "mrk_1")], genotypes[c("id_3", "id_1"), c("mrk_3", "mrk_1")])
-            expect_equal(linkedMatrix[c("id_3", "id_1"), , drop = FALSE], genotypes[c("id_3", "id_1"), , drop = FALSE])
-            expect_equal(linkedMatrix[, c("mrk_3", "mrk_1"), drop = FALSE], genotypes[, c("mrk_3", "mrk_1"), drop = FALSE])
-            expect_equal(linkedMatrix[c("id_3", "id_1"), c("mrk_3", "mrk_1"), drop = FALSE], genotypes[c("id_3", "id_1"), c("mrk_3", "mrk_1"), drop = FALSE])
+                expect_equal(linkedMatrix[c(idx2[i, 1], idx2[i, 2]), ], dummy[c(idx2[i, 1], idx2[i, 2]), ])
+                expect_equal(linkedMatrix[c(idx2[i, 1], idx2[i, 2]), , drop = FALSE], dummy[c(idx2[i, 1], idx2[i, 2]), , drop = FALSE])
+
+                expect_equal(linkedMatrix[, c(idx2[i, 1], idx2[i, 2])], dummy[, c(idx2[i, 1], idx2[i, 2])])
+                expect_equal(linkedMatrix[, c(idx2[i, 1], idx2[i, 2]), drop = FALSE], dummy[, c(idx2[i, 1], idx2[i, 2]), drop = FALSE])
+
+                expect_equal(linkedMatrix[c(idx2[i, 1], idx2[i, 2]), c(idx2[i, 1], idx2[i, 2])], dummy[c(idx2[i, 1], idx2[i, 2]), c(idx2[i, 1], idx2[i, 2])])
+                expect_equal(linkedMatrix[c(idx2[i, 1], idx2[i, 2]), c(idx2[i, 1], idx2[i, 2]), drop = FALSE], dummy[c(idx2[i, 1], idx2[i, 2]), c(idx2[i, 1], idx2[i, 2]), drop = FALSE])
+
+                expect_equal(linkedMatrix[c(idx2[i, 1], idx2[i, 2]), c(idx2[i, 1], idx2[i, 2])], dummy[c(idx2[i, 1], idx2[i, 2]), c(idx2[i, 1], idx2[i, 2])])
+                expect_equal(linkedMatrix[c(idx2[i, 1], idx2[i, 2]), c(idx2[i, 1], idx2[i, 2]), drop = FALSE], dummy[c(idx2[i, 1], idx2[i, 2]), c(idx2[i, 1], idx2[i, 2]), drop = FALSE])
+
+            }
+
+            for (i in seq_len(nrow(idx4r))) {
+                expect_equal(linkedMatrix[c(idx4r[i, 1], idx4r[i, 2], idx4r[i, 3], idx4r[i, 4]), ], dummy[c(idx4r[i, 1], idx4r[i, 2], idx4r[i, 3], idx4r[i, 4]), ], info = paste(idx4r[i, ], collapse = ", "))
+                expect_equal(linkedMatrix[c(idx4r[i, 1], idx4r[i, 2], idx4r[i, 3], idx4r[i, 4]), , drop = FALSE], dummy[c(idx4r[i, 1], idx4r[i, 2], idx4r[i, 3], idx4r[i, 4]), , drop = FALSE], info = paste(idx4r[i, ], collapse = ", "))
+            }
+
+            for (i in seq_len(nrow(idx4c))) {
+                expect_equal(linkedMatrix[, c(idx4c[i, 1], idx4c[i, 2], idx4c[i, 3], idx4c[i, 4])], dummy[, c(idx4c[i, 1], idx4c[i, 2], idx4c[i, 3], idx4c[i, 4])], info = paste(idx4r[i, ], collapse = ", "))
+                expect_equal(linkedMatrix[, c(idx4c[i, 1], idx4c[i, 2], idx4c[i, 3], idx4c[i, 4]), drop = FALSE], dummy[, c(idx4c[i, 1], idx4c[i, 2], idx4c[i, 3], idx4c[i, 4]), drop = FALSE], info = paste(idx4r[i, ], collapse = ", "))
+            }
+
+            expect_equal(linkedMatrix[c(TRUE, FALSE), ], dummy[c(TRUE, FALSE), ])
+            expect_equal(linkedMatrix[, c(TRUE, FALSE)], dummy[, c(TRUE, FALSE)])
+            expect_equal(linkedMatrix[c(TRUE, FALSE), c(TRUE, FALSE)], dummy[c(TRUE, FALSE), c(TRUE, FALSE)])
+            expect_equal(linkedMatrix[c(TRUE, FALSE), , drop = FALSE], dummy[c(TRUE, FALSE), , drop = FALSE])
+            expect_equal(linkedMatrix[, c(TRUE, FALSE), drop = FALSE], dummy[, c(TRUE, FALSE), drop = FALSE])
+            expect_equal(linkedMatrix[c(TRUE, FALSE), c(TRUE, FALSE), drop = FALSE], dummy[c(TRUE, FALSE), c(TRUE, FALSE), drop = FALSE])
+
+            expect_equal(linkedMatrix["row_1", ], dummy["row_1", ])
+            expect_equal(linkedMatrix[, "col_1"], dummy[, "col_1"])
+            expect_equal(linkedMatrix["row_1", "col_1"], dummy["row_1", "col_1"])
+            expect_equal(linkedMatrix["row_1", , drop = FALSE], dummy["row_1", , drop = FALSE])
+            expect_equal(linkedMatrix[, "col_1", drop = FALSE], dummy[, "col_1", drop = FALSE])
+            expect_equal(linkedMatrix["row_1", "col_1", drop = FALSE], dummy["row_1", "col_1", drop = FALSE])
+
+            expect_equal(linkedMatrix[c("row_1", "row_2"), ], dummy[c("row_1", "row_2"), ])
+            expect_equal(linkedMatrix[, c("col_1", "col_2")], dummy[, c("col_1", "col_2")])
+            expect_equal(linkedMatrix[c("row_1", "row_2"), c("col_1", "col_2")], dummy[c("row_1", "row_2"), c("col_1", "col_2")])
+            expect_equal(linkedMatrix[c("row_1", "row_2"), , drop = FALSE], dummy[c("row_1", "row_2"), , drop = FALSE])
+            expect_equal(linkedMatrix[, c("col_1", "col_2"), drop = FALSE], dummy[, c("col_1", "col_2"), drop = FALSE])
+            expect_equal(linkedMatrix[c("row_1", "row_2"), c("col_1", "col_2"), drop = FALSE], dummy[c("row_1", "row_2"), c("col_1", "col_2"), drop = FALSE])
+
+            expect_equal(linkedMatrix[c("row_2", "row_1"), ], dummy[c("row_2", "row_1"), ])
+            expect_equal(linkedMatrix[, c("col_2", "col_1")], dummy[, c("col_2", "col_1")])
+            expect_equal(linkedMatrix[c("row_2", "row_1"), c("col_2", "col_1")], dummy[c("row_2", "row_1"), c("col_2", "col_1")])
+            expect_equal(linkedMatrix[c("row_2", "row_1"), , drop = FALSE], dummy[c("row_2", "row_1"), , drop = FALSE])
+            expect_equal(linkedMatrix[, c("col_2", "col_1"), drop = FALSE], dummy[, c("col_2", "col_1"), drop = FALSE])
+            expect_equal(linkedMatrix[c("row_2", "row_1"), c("col_2", "col_1"), drop = FALSE], dummy[c("row_2", "row_1"), c("col_2", "col_1"), drop = FALSE])
+
+            expect_equal(linkedMatrix[c("row_3", "row_1"), ], dummy[c("row_3", "row_1"), ])
+            expect_equal(linkedMatrix[, c("col_3", "col_1")], dummy[, c("col_3", "col_1")])
+            expect_equal(linkedMatrix[c("row_3", "row_1"), c("col_3", "col_1")], dummy[c("row_3", "row_1"), c("col_3", "col_1")])
+            expect_equal(linkedMatrix[c("row_3", "row_1"), , drop = FALSE], dummy[c("row_3", "row_1"), , drop = FALSE])
+            expect_equal(linkedMatrix[, c("col_3", "col_1"), drop = FALSE], dummy[, c("col_3", "col_1"), drop = FALSE])
+            expect_equal(linkedMatrix[c("row_3", "row_1"), c("col_3", "col_1"), drop = FALSE], dummy[c("row_3", "row_1"), c("col_3", "col_1"), drop = FALSE])
 
             # data frame subset
             expect_equal(new(class, mtcars)[], as.matrix(mtcars))
+
+            # expect_equal(linkedMatrix[1], dummy[1]) Not implemented yet
+            # expect_equal(linkedMatrix[x:y], dummy[x:y]) Not implemented yet
+            # expect_equal(linkedMatrix[c(x, y)], dummy[c(x, y)]) Not implemented yet
+            # expect_equal(linkedMatrix[dummy > 1], dummy[dummy > 1]) Not implemented yet
 
         })
 
         test_that("replacement", {
 
-            # Generate new genotypes for replacement
-            replacement <- matrix(c(3, 1, 3, 2, 4, 3, 1, 1, 2), nrow = 3, ncol = 3)
-            colnames(replacement) <- paste0("mrk_", 1:3)
-            rownames(replacement) <- paste0("id_", 1:3)
-            comparison <- genotypes
+            # Generate new dummy for replacement
+            replacement <- matrix(data = seq_len(16) * 10, nrow = 4, ncol = 4)
+            rownames(replacement) <- paste0("row_", seq_len(nrow(replacement)))
+            colnames(replacement) <- paste0("col_", seq_len(ncol(replacement)))
+            comparison <- dummy
 
-            testAndRestore <- function(label) {
-                expect_equal(linkedMatrix[], comparison, label = label)
+            idx2 <- expand.grid(seq_len(nrow(dummy)), seq_len(ncol(dummy)))
+
+            testAndRestore <- function(info) {
+                expect_equal(linkedMatrix[], comparison, info = info)
                 linkedMatrix <- createLinkedMatrix(class, nNodes)
                 assign("linkedMatrix", linkedMatrix, parent.frame())
-                assign("comparison", genotypes, parent.frame())
+                assign("comparison", dummy, parent.frame())
             }
 
             linkedMatrix[] <- replacement
             comparison[] <- replacement
             testAndRestore("[]")
 
-            linkedMatrix[1, ] <- replacement[1, ]
-            comparison[1, ] <- replacement[1, ]
-            testAndRestore("[1, ]")
-            linkedMatrix[, 1] <- replacement[, 1]
-            comparison[, 1] <- replacement[, 1]
-            testAndRestore("[, 1]")
-            linkedMatrix[1, 1] <- replacement[1, 1]
-            comparison[1, 1] <- replacement[1, 1]
-            testAndRestore("[1, 1]")
+            for (i in seq_len(nrow(dummy))) {
 
-            linkedMatrix[1:2, ] <- replacement[1:2, ]
-            comparison[1:2, ] <- replacement[1:2, ]
-            testAndRestore("[1:2, ]")
-            linkedMatrix[, 1:2] <- replacement[, 1:2]
-            comparison[, 1:2] <- replacement[, 1:2]
-            testAndRestore("[, 1:2]")
-            linkedMatrix[1:2, 1:2] <- replacement[1:2, 1:2]
-            comparison[1:2, 1:2] <- replacement[1:2, 1:2]
-            testAndRestore("[1:2, 1:2]")
+                linkedMatrix[i, ] <- replacement[i, ]
+                comparison[i, ] <- replacement[i, ]
+                testAndRestore(paste0("[", i, ", ]"))
 
-            linkedMatrix[2:1, ] <- replacement[2:1, ]
-            comparison[2:1, ] <- replacement[2:1, ]
-            testAndRestore("[2:1, ]")
-            linkedMatrix[, 2:1] <- replacement[, 2:1]
-            comparison[, 2:1] <- replacement[, 2:1]
-            testAndRestore("[, 2:1]")
-            linkedMatrix[2:1, 2:1] <- replacement[2:1, 2:1]
-            comparison[2:1, 2:1] <- replacement[2:1, 2:1]
-            testAndRestore("[2:1, 2:1]")
+                linkedMatrix[i, ] <- NA
+                comparison[i, ] <- NA
+                testAndRestore(paste0("[", i, ", ] <- NA"))
 
-            linkedMatrix[c(3, 1), ] <- replacement[c(3, 1), ]
-            comparison[c(3, 1), ] <- replacement[c(3, 1), ]
-            testAndRestore("[c(3, 1), ]")
-            linkedMatrix[, c(3, 1)] <- replacement[, c(3, 1)]
-            comparison[, c(3, 1)] <- replacement[, c(3, 1)]
-            testAndRestore("[, c(3, 1)]")
-            linkedMatrix[c(3, 1), c(3, 1)] <- replacement[c(3, 1), c(3, 1)]
-            comparison[c(3, 1), c(3, 1)] <- replacement[c(3, 1), c(3, 1)]
-            testAndRestore("[c(3, 1), c(3, 1)]")
+            }
 
-            linkedMatrix[1, ] <- NA
-            comparison[1, ] <- NA
-            testAndRestore("[1, ] <- NA")
-            linkedMatrix[, 1] <- NA
-            comparison[, 1] <- NA
-            testAndRestore("[, 1] <- NA")
-            linkedMatrix[1, 1] <- NA
-            comparison[1, 1] <- NA
-            testAndRestore("[1, 1] <- NA")
+            for (i in seq_len(ncol(dummy))) {
+
+                linkedMatrix[, i] <- replacement[, i]
+                comparison[, i] <- replacement[, i]
+                testAndRestore(paste0("[, ", i, "]"))
+
+                linkedMatrix[, i] <- NA
+                comparison[, i] <- NA
+                testAndRestore(paste0("[, ", i, "] <- NA"))
+
+            }
+
+            for (i in seq_len(nrow(idx2))) {
+
+                linkedMatrix[idx2[i, 1], idx2[i, 2]] <- replacement[idx2[i, 1], idx2[i, 2]]
+                comparison[idx2[i, 1], idx2[i, 2]] <- replacement[idx2[i, 1], idx2[i, 2]]
+                testAndRestore(paste0("[", idx2[i, 1], ", ", idx2[i, 2], "]"))
+
+                linkedMatrix[idx2[i, 1]:idx2[i, 2], ] <- replacement[idx2[i, 1]:idx2[i, 2], ]
+                comparison[idx2[i, 1]:idx2[i, 2], ] <- replacement[idx2[i, 1]:idx2[i, 2], ]
+                testAndRestore(paste0("[", idx2[i, 1], ":", idx2[i, 2], ", ]"))
+
+                linkedMatrix[, idx2[i, 1]:idx2[i, 2]] <- replacement[, idx2[i, 1]:idx2[i, 2]]
+                comparison[, idx2[i, 1]:idx2[i, 2]] <- replacement[, idx2[i, 1]:idx2[i, 2]]
+                testAndRestore(paste0("[, ", idx2[i, 1], ":", idx2[i, 2], "]"))
+
+                linkedMatrix[idx2[i, 1]:idx2[i, 2], idx2[i, 1]:idx2[i, 2]] <- replacement[idx2[i, 1]:idx2[i, 2], idx2[i, 1]:idx2[i, 2]]
+                comparison[idx2[i, 1]:idx2[i, 2], idx2[i, 1]:idx2[i, 2]] <- replacement[idx2[i, 1]:idx2[i, 2], idx2[i, 1]:idx2[i, 2]]
+                testAndRestore(paste0("[", idx2[i, 1], ":", idx2[i, 2], ", ", idx2[i, 1], ":", idx2[i, 2], "]"))
+
+                linkedMatrix[c(idx2[i, 1], idx2[i, 2]), ] <- replacement[c(idx2[i, 1], idx2[i, 2]), ]
+                comparison[c(idx2[i, 1], idx2[i, 2]), ] <- replacement[c(idx2[i, 1], idx2[i, 2]), ]
+                testAndRestore(paste0("[c(", idx2[i, 1], ", ", idx2[i, 2], "), ]"))
+
+                linkedMatrix[, c(idx2[i, 1], idx2[i, 2])] <- replacement[, c(idx2[i, 1], idx2[i, 2])]
+                comparison[, c(idx2[i, 1], idx2[i, 2])] <- replacement[, c(idx2[i, 1], idx2[i, 2])]
+                testAndRestore(paste0("[, c(", idx2[i, 1], ", ", idx2[i, 2], ")]"))
+
+                linkedMatrix[c(idx2[i, 1], idx2[i, 2]), c(idx2[i, 1], idx2[i, 2])] <- replacement[c(idx2[i, 1], idx2[i, 2]), c(idx2[i, 1], idx2[i, 2])]
+                comparison[c(idx2[i, 1], idx2[i, 2]), c(idx2[i, 1], idx2[i, 2])] <- replacement[c(idx2[i, 1], idx2[i, 2]), c(idx2[i, 1], idx2[i, 2])]
+                testAndRestore(paste0("[c(", idx2[i, 1], ", ", idx2[i, 2], "), c(", idx2[i, 1], ", ", idx2[i, 2], ")]"))
+
+                linkedMatrix[idx2[i, 1]:idx2[i, 2], idx2[i, 1]:idx2[i, 2]] <- NA
+                comparison[idx2[i, 1]:idx2[i, 2], idx2[i, 1]:idx2[i, 2]] <- NA
+                testAndRestore(paste0("[", idx2[i, 1], ", ", idx2[i, 2], "] <- NA"))
+
+            }
 
         })
 
         test_that("dim", {
-            expect_equal(dim(linkedMatrix), dim(genotypes))
+            expect_equal(dim(linkedMatrix), dim(dummy))
         })
 
         test_that("length", {
-            expect_equal(length(linkedMatrix), length(genotypes))
+            expect_equal(length(linkedMatrix), length(dummy))
         })
 
         test_that("nNodes", {
@@ -267,7 +305,7 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
             if (class == "RowLinkedMatrix") {
 
                 boundLinkedMatrix <- rbind(linkedMatrix, linkedMatrix)
-                expect_equal(dim(boundLinkedMatrix), c(6, 3))
+                expect_equal(dim(boundLinkedMatrix), c(nrow(dummy) * 2, ncol(dummy)))
                 expect_equal(nNodes(boundLinkedMatrix), nNodes * 2)
 
                 expect_error(cbind(linkedMatrix, linkedMatrix))
@@ -275,7 +313,7 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
             } else {
 
                 boundLinkedMatrix <- cbind(linkedMatrix, linkedMatrix)
-                expect_equal(dim(boundLinkedMatrix), c(3, 6))
+                expect_equal(dim(boundLinkedMatrix), c(nrow(dummy), ncol(dummy) * 2))
                 expect_equal(nNodes(boundLinkedMatrix), nNodes * 2)
 
                 expect_error(rbind(linkedMatrix, linkedMatrix))
