@@ -52,7 +52,7 @@ subset.RowLinkedMatrix <- function(x, i, j, ..., drop) {
         dimnames(Z) <- list(rownames(x)[sortedRows], colnames(x)[j])
         end <- 0
         for (k in whatChunks) {
-            localIndex <- matrix(data = globalIndex[globalIndex[, 1] == k, ], ncol = 3)
+            localIndex <- globalIndex[globalIndex[, 1] == k, , drop = FALSE]
             ini <- end + 1
             end <- ini + nrow(localIndex) - 1
             # Convert to matrix to support data frames

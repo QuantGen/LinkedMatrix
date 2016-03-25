@@ -52,7 +52,7 @@ subset.ColumnLinkedMatrix <- function(x, i, j, ..., drop) {
         dimnames(Z) <- list(rownames(x)[i], colnames(x)[sortedColumns])
         end <- 0
         for (k in whatChunks) {
-            localIndex <- matrix(data = globalIndex[globalIndex[, 1] == k, ], ncol = 3)
+            localIndex <- globalIndex[globalIndex[, 1] == k, , drop = FALSE]
             ini <- end + 1
             end <- ini + nrow(localIndex) - 1
             # Convert to matrix to support data frames
