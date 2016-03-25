@@ -5,17 +5,20 @@
 \title{Maps each column or row index of a linked matrix to the column or row index
 of its corresponding node.}
 \usage{
-index(x)
+index(x, ...)
 }
 \arguments{
 \item{x}{Either a \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}}
 or a \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} object.}
+
+\item{...}{Additional arguments (see Details).}
 }
 \value{
 A matrix.
 }
 \description{
-Maps each column or row index of a linked matrix to the column or row index
-of its corresponding node.
+If \code{j} for \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}}
+or \code{i} for \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} is
+passed, it will only generate entries for the given indices.
 }
 

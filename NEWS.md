@@ -5,6 +5,8 @@
   * if row or column indices are sorted, do not resort return matrix
   * if data from a single node is requested, pass through result instead of
     buffering it in return matrix
+* Add `i` and `j` parameters in `index` to only generate entries for those
+  indexes.
 
 # LinkedMatrix 1.1.0
 

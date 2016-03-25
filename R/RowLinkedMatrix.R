@@ -40,7 +40,7 @@ subset.RowLinkedMatrix <- function(x, i, j, ..., drop) {
         sortedRows <- i
     }
     # Compute node inventory
-    globalIndex <- index(x)[sortedRows, , drop = FALSE]
+    globalIndex <- index(x, sortedRows)
     whatChunks <- unique(globalIndex[, 1])
     # If there are several chunks involved, aggregate the result in a separate
     # matrix, otherwise pass through result
@@ -222,34 +222,41 @@ rbind.RowLinkedMatrix <- function(..., deparse.level = 1) {
 #' @export
 nodes.RowLinkedMatrix <- function(x) {
     n <- nNodes(x)
-    OUT <- matrix(nrow = n, ncol = 3, NA)
-    colnames(OUT) <- c("node", "row.ini", "row.end")
+    OUT <- matrix(integer(), nrow = n, ncol = 3, dimnames = list(NULL, c("node", "row.ini", "row.end")))
     end <- 0
-    for (i in 1:n) {
+    for (node in seq_len(n)) {
         ini <- end + 1
-        end <- ini + nrow(x[[i]]) - 1
-        OUT[i, ] <- c(i, ini, end)
+        end <- ini + nrow(x[[node]]) - 1
+        OUT[node, ] <- c(node, ini, end)
     }
     return(OUT)
 }
 
 
 #' @export
-index.RowLinkedMatrix <- function(x) {
+index.RowLinkedMatrix <- function(x, i = NULL) {
     nodes <- nodes(x)
-    nRowIndex <- nodes[nrow(nodes), 3]
-    INDEX <- matrix(nrow = nRowIndex, ncol = 3)
-    colnames(INDEX) <- c("node", "row.global", "row.local")
-    INDEX[, 2] <- 1:nRowIndex
-    end <- 0
-    for (i in 1:nrow(nodes)) {
-        nRowChunk <- nodes[i, 3] - nodes[i, 2] + 1
-        ini <- end + 1
-        end <- ini + nRowChunk - 1
-        INDEX[ini:end, 1] <- i
-        INDEX[ini:end, 3] <- 1:nRowChunk
+    if (is.null(i)) {
+        n <- nodes[nrow(nodes), 3]
+        OUT <- matrix(nrow = n, ncol = 3, dimnames = list(NULL, c("node", "row.global", "row.local")))
+        OUT[, 2] <- seq_len(n)
+        end <- 0
+        for (node in 1:nrow(nodes)) {
+            nodeSize <- nodes[node, 3] - nodes[node, 2] + 1
+            ini <- end + 1
+            end <- ini + nodeSize - 1
+            OUT[ini:end, 1] <- node
+            OUT[ini:end, 3] <- seq_len(nodeSize)
+        }
+    } else {
+        OUT <- t(sapply(i, function(globalIndex) {
+            node <- which(globalIndex >= nodes[, 2] & globalIndex <= nodes[, 3])
+            localIndex <- globalIndex - nodes[node, 2] + 1
+            c(node, globalIndex, localIndex)
+        }))
+        dimnames(OUT) <- list(NULL, c("node", "row.global", "row.local"))
     }
-    return(INDEX)
+    return(OUT)
 }
 
 
