@@ -31,7 +31,7 @@ subset.ColumnLinkedMatrix <- function(x, i, j, ..., drop) {
     }
     # Providing a sorted column index will eliminate the need to reorder the
     # result matrix later (avoiding a copy)
-    isUnsorted <- is.unsorted(i)
+    isUnsorted <- is.unsorted(j)
     if (isUnsorted) {
         # Reorder columns for sequential retrieval by chunk
         originalOrder <- (1:p)[order(j)]
