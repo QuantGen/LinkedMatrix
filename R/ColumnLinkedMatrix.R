@@ -251,7 +251,7 @@ index.ColumnLinkedMatrix <- function(x, j = NULL) {
             localIndex <- globalIndex - nodes[node, 2] + 1
             c(node, globalIndex, localIndex)
         }))
-        dimnames(OUT) <- list(NULL, c("node", "row.global", "row.local"))
+        dimnames(OUT) <- list(NULL, c("node", "col.global", "col.local"))
     }
     return(OUT)
 }
