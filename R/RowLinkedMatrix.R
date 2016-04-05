@@ -233,7 +233,7 @@ nodes.RowLinkedMatrix <- function(x) {
 
 
 #' @export
-index.RowLinkedMatrix <- function(x, i = NULL) {
+index.RowLinkedMatrix <- function(x, i = NULL, ...) {
     nodes <- nodes(x)
     n <- nodes[nrow(nodes), 3]
     if (!is.null(i)) {

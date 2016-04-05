@@ -230,7 +230,7 @@ nodes.ColumnLinkedMatrix <- function(x) {
 
 
 #' @export
-index.ColumnLinkedMatrix <- function(x, j = NULL) {
+index.ColumnLinkedMatrix <- function(x, j = NULL, ...) {
     nodes <- nodes(x)
     p <- nodes[nrow(nodes), 3]
     if (!is.null(j)) {
