@@ -59,8 +59,7 @@ subset.ColumnLinkedMatrix <- function(x, i, j, ..., drop) {
             Z[, ini:end] <- as.matrix(x[[k]][i, localIndex[, 3], drop = FALSE])
         }
     } else {
-        localIndex <- matrix(data = globalIndex[globalIndex[, 1] == whatChunks, ], ncol = 3)
-        Z <- as.matrix(x[[whatChunks]][i, localIndex[, 3], drop = FALSE])
+        Z <- as.matrix(x[[whatChunks]][i, globalIndex[, 3], drop = FALSE])
     }
     if (isUnsorted) {
         # Return to original order

@@ -59,8 +59,7 @@ subset.RowLinkedMatrix <- function(x, i, j, ..., drop) {
             Z[ini:end, ] <- as.matrix(x[[k]][localIndex[, 3], j, drop = FALSE])
         }
     } else {
-        localIndex <- matrix(data = globalIndex[globalIndex[, 1] == whatChunks, ], ncol = 3)
-        Z <- as.matrix(x[[whatChunks]][localIndex[, 3], j, drop = FALSE])
+        Z <- as.matrix(x[[whatChunks]][globalIndex[, 3], j, drop = FALSE])
     }
     if (isUnsorted) {
         # Return to original order
