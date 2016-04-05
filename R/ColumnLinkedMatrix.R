@@ -232,25 +232,25 @@ nodes.ColumnLinkedMatrix <- function(x) {
 #' @export
 index.ColumnLinkedMatrix <- function(x, j = NULL) {
     nodes <- nodes(x)
-    if (is.null(j)) {
-        p <- nodes[nrow(nodes), 3]
-        OUT <- matrix(nrow = p, ncol = 3, dimnames = list(NULL, c("node", "col.global", "col.local")))
-        OUT[, 2] <- seq_len(ncol(x))
-        end <- 0
-        for (node in 1:nrow(nodes)) {
-            nodeSize <- nodes[node, 3] - nodes[node, 2] + 1
-            ini <- end + 1
-            end <- ini + nodeSize - 1
-            OUT[ini:end, 1] <- node
-            OUT[ini:end, 3] <- seq_len(nodeSize)
+    p <- nodes[nrow(nodes), 3]
+    if (!is.null(j)) {
+        if (is.unsorted(j)) {
+            j <- sort(j)
         }
     } else {
-        OUT <- t(sapply(j, function(globalIndex) {
-            node <- which(globalIndex >= nodes[, 2] & globalIndex <= nodes[, 3])
-            localIndex <- globalIndex - nodes[node, 2] + 1
-            c(node, globalIndex, localIndex)
-        }))
-        dimnames(OUT) <- list(NULL, c("node", "col.global", "col.local"))
+        j <- seq_len(p)
+    }
+    OUT <- matrix(nrow = length(j), ncol = 3, dimnames = list(NULL, c("node", "col.global", "col.local")))
+    OUT[, 2] <- j
+    for (node in 1:nrow(nodes)) {
+        globalIdx <- which(j >= nodes[node, 2] & j <= nodes[node, 3])
+        if (node > 1) {
+            localIdx <- j[globalIdx] - nodes[node - 1, 3]
+        } else {
+            localIdx <- j[globalIdx]
+        }
+        OUT[globalIdx, 1] <- node
+        OUT[globalIdx, 3] <- localIdx
     }
     return(OUT)
 }

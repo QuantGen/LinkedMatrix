@@ -235,25 +235,25 @@ nodes.RowLinkedMatrix <- function(x) {
 #' @export
 index.RowLinkedMatrix <- function(x, i = NULL) {
     nodes <- nodes(x)
-    if (is.null(i)) {
-        n <- nodes[nrow(nodes), 3]
-        OUT <- matrix(nrow = n, ncol = 3, dimnames = list(NULL, c("node", "row.global", "row.local")))
-        OUT[, 2] <- seq_len(n)
-        end <- 0
-        for (node in 1:nrow(nodes)) {
-            nodeSize <- nodes[node, 3] - nodes[node, 2] + 1
-            ini <- end + 1
-            end <- ini + nodeSize - 1
-            OUT[ini:end, 1] <- node
-            OUT[ini:end, 3] <- seq_len(nodeSize)
+    n <- nodes[nrow(nodes), 3]
+    if (!is.null(i)) {
+        if (is.unsorted(i)) {
+            i <- sort(i)
         }
     } else {
-        OUT <- t(sapply(i, function(globalIndex) {
-            node <- which(globalIndex >= nodes[, 2] & globalIndex <= nodes[, 3])
-            localIndex <- globalIndex - nodes[node, 2] + 1
-            c(node, globalIndex, localIndex)
-        }))
-        dimnames(OUT) <- list(NULL, c("node", "row.global", "row.local"))
+        i <- seq_len(n)
+    }
+    OUT <- matrix(nrow = length(i), ncol = 3, dimnames = list(NULL, c("node", "row.global", "row.local")))
+    OUT[, 2] <- i
+    for (node in 1:nrow(nodes)) {
+        globalIdx <- which(i >= nodes[node, 2] & i <= nodes[node, 3])
+        if (node > 1) {
+            localIdx <- i[globalIdx] - nodes[node - 1, 3]
+        } else {
+            localIdx <- i[globalIdx]
+        }
+        OUT[globalIdx, 1] <- node
+        OUT[globalIdx, 3] <- localIdx
     }
     return(OUT)
 }
