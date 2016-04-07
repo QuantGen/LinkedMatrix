@@ -7,6 +7,7 @@
     buffering it in return matrix
 * Add `i` and `j` parameters in `index` to only generate entries for those
   indexes.
+* Speed up character subsetting.
 
 # LinkedMatrix 1.1.0
 

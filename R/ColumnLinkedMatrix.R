@@ -12,17 +12,13 @@ subset.ColumnLinkedMatrix <- function(x, i, j, ..., drop) {
         i <- rep_len(i, nX)
         i <- which(i)
     } else if (class(i) == "character") {
-        i <- sapply(i, function(name) {
-            which(rownames(x) == name)
-        }, USE.NAMES = FALSE)
+        i <- match(i, rownames(x))
     }
     if (class(j) == "logical") {
         j <- rep_len(j, pX)
         j <- which(j)
     } else if (class(j) == "character") {
-        j <- sapply(j, function(name) {
-            which(colnames(x) == name)
-        }, USE.NAMES = FALSE)
+        j <- match(j, colnames(x))
     }
     n <- length(i)
     p <- length(j)
