@@ -43,7 +43,7 @@ dim(m)
 m[1, ]
 m[, 1]
 ```
-**[Further examples](https://github.com/QuantGen/BGData/blob/master/README.md)**
+
 
 Installation
 ------------
