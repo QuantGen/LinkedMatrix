@@ -1,4 +1,4 @@
-# LinkedMatrix 1.1.0.9000
+# LinkedMatrix 1.2.0
 
 * Fix wrong order in result when subsetting using unordered positive integers.
 * Add `i` and `j` parameters in `index` to only generate entries for those
