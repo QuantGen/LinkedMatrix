@@ -1,13 +1,9 @@
 # LinkedMatrix 1.1.0.9000
 
-* Optimize subsetting by avoiding copies:
-  * the return matrix is initialized as `integer()` instead of `logical()`
-  * if row or column indices are sorted, do not resort return matrix
-  * if data from a single node is requested, pass through result instead of
-    buffering it in return matrix
+* Fix wrong order in result when subsetting using unordered positive integers.
 * Add `i` and `j` parameters in `index` to only generate entries for those
   indexes.
-* Speed up character subsetting.
+* Various subsetting optimizations.
 
 # LinkedMatrix 1.1.0
 
