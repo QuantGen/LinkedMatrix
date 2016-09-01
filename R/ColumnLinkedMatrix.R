@@ -59,7 +59,7 @@ subset.ColumnLinkedMatrix <- function(x, i, j, ..., drop) {
     }
     if (isUnsorted) {
         # Return to original order
-        Z <- Z[, originalOrder]
+        Z <- Z[, originalOrder, drop = FALSE]
     }
     if (drop == TRUE && (n == 1 || p == 1)) {
         # Let R handle drop behavior
