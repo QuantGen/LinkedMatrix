@@ -22,7 +22,7 @@ subset.ColumnLinkedMatrix <- function(x, i, j, ..., drop) {
     }
     n <- length(i)
     p <- length(j)
-    if (p > pX | n > nX) {
+    if (p > pX || n > nX) {
         stop("Either the number of columns or number of rows requested exceed the number of rows or columns in x, try dim(x)...")
     }
     # Providing a sorted column index will eliminate the need to reorder the
