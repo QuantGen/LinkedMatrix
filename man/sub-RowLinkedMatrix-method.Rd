@@ -3,7 +3,7 @@
 \docType{methods}
 \name{[,RowLinkedMatrix-method}
 \alias{[,RowLinkedMatrix-method}
-\title{Extract parts of a \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}}.}
+\title{Extract parts of a \linkS4class{RowLinkedMatrix}.}
 \usage{
 \S4method{[}{RowLinkedMatrix}(x, i, j, ..., drop = TRUE)
 }
@@ -47,6 +47,5 @@
 }
 \description{
 This method is run when the \code{[]} operator is used on a
-\code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} object.
+\linkS4class{RowLinkedMatrix} object.
 }
-

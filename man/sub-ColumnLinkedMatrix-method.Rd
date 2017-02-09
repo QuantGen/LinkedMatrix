@@ -3,8 +3,7 @@
 \docType{methods}
 \name{[,ColumnLinkedMatrix-method}
 \alias{[,ColumnLinkedMatrix-method}
-\title{Extract parts of a
-\code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}}.}
+\title{Extract parts of a \linkS4class{ColumnLinkedMatrix}.}
 \usage{
 \S4method{[}{ColumnLinkedMatrix}(x, i, j, ..., drop = TRUE)
 }
@@ -48,6 +47,5 @@
 }
 \description{
 This method is run when the \code{[]} operator is used on a
-\code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} object.
+\linkS4class{ColumnLinkedMatrix} object.
 }
-

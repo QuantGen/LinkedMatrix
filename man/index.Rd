@@ -8,8 +8,8 @@ of its corresponding node.}
 index(x, ...)
 }
 \arguments{
-\item{x}{Either a \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}}
-or a \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} object.}
+\item{x}{Either a \linkS4class{ColumnLinkedMatrix} or a \linkS4class{RowLinkedMatrix}
+object.}
 
 \item{...}{Additional arguments (see Details).}
 }
@@ -17,8 +17,6 @@ or a \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} object.}
 A matrix.
 }
 \description{
-If \code{j} for \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}}
-or \code{i} for \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} is
+If \code{j} for \linkS4class{ColumnLinkedMatrix} or \code{i} for \linkS4class{RowLinkedMatrix} is
 passed, it will only generate entries for the given indices.
 }
-

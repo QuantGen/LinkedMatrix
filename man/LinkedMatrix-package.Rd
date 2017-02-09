@@ -7,4 +7,3 @@
 Matrices implemented as lists of matrix-like nodes, linked by columns or
 rows.
 }
-

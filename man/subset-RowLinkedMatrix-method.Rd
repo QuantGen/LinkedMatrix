@@ -3,7 +3,7 @@
 \docType{methods}
 \name{[<-,RowLinkedMatrix-method}
 \alias{[<-,RowLinkedMatrix-method}
-\title{Replace parts of a \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}}.}
+\title{Replace parts of a \linkS4class{RowLinkedMatrix}.}
 \usage{
 \S4method{[}{RowLinkedMatrix}(x, i, j, ...) <- value
 }
@@ -44,6 +44,5 @@
 }
 \description{
 This method is run when the \code{[]} operator is used in an assignment on a
-\code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} object.
+\linkS4class{RowLinkedMatrix} object.
 }
-

@@ -7,8 +7,8 @@
 nodes(x)
 }
 \arguments{
-\item{x}{Either a \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}}
-or a \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} object.}
+\item{x}{Either a \linkS4class{ColumnLinkedMatrix} or a \linkS4class{RowLinkedMatrix}
+object.}
 }
 \value{
 A matrix.
@@ -16,4 +16,3 @@ A matrix.
 \description{
 Returns the column or row indexes at which each node starts and ends.
 }
-

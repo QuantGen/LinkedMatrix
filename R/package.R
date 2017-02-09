@@ -5,8 +5,8 @@
 #'
 #' @docType package
 #' @name LinkedMatrix-package
-#' @import methods
 #' @aliases NULL
+#' @import methods
 NULL
 
 

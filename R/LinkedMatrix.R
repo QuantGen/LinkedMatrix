@@ -2,22 +2,19 @@
 NULL
 
 
-#' Initializes either a
-#' \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} or
-#' \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} instance of certain
-#' dimensions with a configurable number and type of nodes.
+#' Initializes either a [ColumnLinkedMatrix-class] or [RowLinkedMatrix-class]
+#' instance of certain dimensions with a configurable number and type of nodes.
 #'
 #' @param nrow The number of rows.
 #' @param ncol The number of columns.
 #' @param nNodes The number of nodes.
-#' @param linkedBy Whether the matrix is linked by \code{rows} or
-#'   \code{columns}.
+#' @param linkedBy Whether the matrix is linked by `rows` or `columns`.
 #' @param nodeInitializer The name of a function or a function with four
-#'   parameters \code{nodeIndex}, \code{ncol}, \code{nrow}, and \code{...} that
-#'   initializes each node by returning a matrix-like object Pre-defined node
-#'   initializers include \code{matrixNodeInitializer} to initialize matrices
-#'   and \code{ffNodeInitializer} to initialize \code{ff} objects.
-#' @param ... Additional arguments passed into \code{nodeInitializer}.
+#' parameters `nodeIndex`, `ncol`, `nrow`, and `...` that initializes each node
+#' by returning a matrix-like object Pre-defined node initializers include
+#' `matrixNodeInitializer` to initialize matrices and `ffNodeInitializer` to
+#' initialize `ff` objects.
+#' @param ... Additional arguments passed into `nodeInitializer`.
 #' @export
 LinkedMatrix <- function(nrow, ncol, nNodes, linkedBy, nodeInitializer, ...) {
     class <- ifelse(linkedBy == "columns", "ColumnLinkedMatrix", "RowLinkedMatrix")
@@ -67,11 +64,10 @@ length.LinkedMatrix <- function(x) {
 }
 
 
-#' Converts a \code{\link[=LinkedMatrix-class]{LinkedMatrix}} instance to a
-#' \code{matrix} (if small enough).
+#' Converts a LinkedMatrix instance to a matrix (if small enough).
 #'
-#' @param x Either a \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}}
-#'   or a \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} object.
+#' @param x Either a [ColumnLinkedMatrix-class] or a [RowLinkedMatrix-class]
+#' object.
 #' @param ... Additional arguments (unused).
 #' @export
 as.matrix.LinkedMatrix <- function(x, ...) {
@@ -81,8 +77,8 @@ as.matrix.LinkedMatrix <- function(x, ...) {
 
 #' Returns the number of nodes.
 #'
-#' @param x Either a \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}}
-#'   or a \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} object.
+#' @param x Either a [ColumnLinkedMatrix-class] or a [RowLinkedMatrix-class]
+#' object.
 #' @export
 nNodes <- function(x) {
     length(slot(x, ".Data"))
@@ -91,8 +87,8 @@ nNodes <- function(x) {
 
 #' Returns the column or row indexes at which each node starts and ends.
 #'
-#' @param x Either a \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}}
-#'   or a \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} object.
+#' @param x Either a [ColumnLinkedMatrix-class] or a [RowLinkedMatrix-class]
+#' object.
 #' @return A matrix.
 #' @export
 nodes <- function(x) {
@@ -103,12 +99,11 @@ nodes <- function(x) {
 #' Maps each column or row index of a linked matrix to the column or row index
 #' of its corresponding node.
 #'
-#' If \code{j} for \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}}
-#' or \code{i} for \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} is
+#' If `j` for [ColumnLinkedMatrix-class] or `i` for [RowLinkedMatrix-class] is
 #' passed, it will only generate entries for the given indices.
 #'
-#' @param x Either a \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}}
-#'   or a \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} object.
+#' @param x Either a [ColumnLinkedMatrix-class] or a [RowLinkedMatrix-class]
+#' object.
 #' @param ... Additional arguments (see Details).
 #' @return A matrix.
 #' @export
@@ -117,35 +112,29 @@ index <- function(x, ...) {
 }
 
 
-#' An abstract S4 class union of
-#' \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} and
-#' \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}}.
+#' An abstract S4 class union of [ColumnLinkedMatrix-class] and
+#' [RowLinkedMatrix-class].
 #'
 #' This class is a class union and can therefore not be initialized. It can be
-#' used to check whether an object is either of type
-#' \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} or of type
-#' \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} using \code{is(x,
-#' "LinkedMatrix")}, and to assign methods for both
-#' \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} and
-#' \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} classes, e.g.
-#' \code{\link[=show,LinkedMatrix-method]{show}}.
+#' used to check whether an object is either of type [ColumnLinkedMatrix-class]
+#' or of type [RowLinkedMatrix-class] using `is(x, "LinkedMatrix")` and to
+#' assign methods for both [ColumnLinkedMatrix-class] and
+#' [RowLinkedMatrix-class] classes, e.g.  `show`.
 #'
 #' @name LinkedMatrix-class
 #' @docType class
-#' @seealso \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} or
-#'   \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} for implementations
-#'   of column-linked matrices or row-linked matrices, respectively.
+#' @seealso [ColumnLinkedMatrix-class] or [RowLinkedMatrix-class] for
+#' implementations of column-linked matrices or row-linked matrices,
+#' respectively.
 #' @exportClass LinkedMatrix
 setClassUnion("LinkedMatrix", c("ColumnLinkedMatrix", "RowLinkedMatrix"))
 
 
-#' Show a \code{\link[=LinkedMatrix-class]{LinkedMatrix}} object.
+#' Show a [LinkedMatrix-class] object.
 #'
-#' This method is run when a \code{\link[=LinkedMatrix-class]{LinkedMatrix}}
-#' object is printed.
+#' This method is run when a [LinkedMatrix-class] object is printed.
 #'
-#' @param object Either a
-#'   \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} or a
-#'   \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} object.
+#' @param object Either a [ColumnLinkedMatrix-class] or a
+#' [RowLinkedMatrix-class] object.
 #' @export
 setMethod("show", signature(object = "LinkedMatrix"), show)

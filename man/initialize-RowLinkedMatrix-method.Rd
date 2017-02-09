@@ -3,27 +3,26 @@
 \docType{methods}
 \name{initialize,RowLinkedMatrix-method}
 \alias{initialize,RowLinkedMatrix-method}
-\title{Creates a new \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} instance.}
+\title{Creates a new \linkS4class{RowLinkedMatrix} instance.}
 \usage{
 \S4method{initialize}{RowLinkedMatrix}(.Object, ...)
 }
 \arguments{
-\item{.Object}{The \code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}}
-instance to be initialized. This argument is passed in by R and can be
-ignored, but still needs to be documented.}
+\item{.Object}{The \linkS4class{RowLinkedMatrix} instance to be initialized. This
+argument is passed in by R and can be ignored, but still needs to be
+documented.}
 
 \item{...}{A sequence of matrix-like objects of the same column-dimension.}
 }
 \description{
-This method is run when a
-\code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} object is created using
-\code{\link[=initialize,RowLinkedMatrix-method]{RowLinkedMatrix(...)}} or
-\code{\link[=initialize,RowLinkedMatrix-method]{new("RowLinkedMatrix",...)}}
-and accepts a list of matrix-like objects as \code{...}. A matrix-like object
-is one that has two dimensions and implements at least \code{dim} and
-\code{[}. Each object needs to have the same number of columns to be linked
-together. \code{\link[=LinkedMatrix-class]{LinkedMatrix}} can be nested as
-long as they are conformable. If no matrix-like objects are given, a single
-1x1 node of type \code{matrix} filled with \code{NA} is returned.
-}
+This method is run when a \linkS4class{RowLinkedMatrix} object is created using
+\code{RowLinkedMatrix(...)} or \code{new("RowLinkedMatrix", ...)} and accepts a list
+of matrix-like objects as \code{...}. A matrix-like object is one that has two
+dimensions and implements at least \code{dim} and \code{[}. Each object needs to have
+the same number of columns to be linked together. [LinkedMatrix] can be
+nested as long as they are conformable. If no matrix-like objects are given,
+a single 1x1 node of type \code{matrix} filled with \code{NA} is returned.
 
+[`. Each object needs to have
+the same number of columns to be linked together. [LinkedMatrix]: R:%60.%20Each%20object%20needs%20to%20have%0Athe%20same%20number%20of%20columns%20to%20be%20linked%20together.%20[LinkedMatrix
+}

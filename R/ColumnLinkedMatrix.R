@@ -174,12 +174,10 @@ dimnames.ColumnLinkedMatrix <- function(x) {
 
 #' Combine matrix-like objects by columns.
 #'
-#' Compared to the
-#' \code{\link[=initialize,ColumnLinkedMatrix-method]{ColumnLinkedMatrix}}
-#' constructor, nested \code{\link[=LinkedMatrix-class]{LinkedMatrix}} objects
-#' that are passed via \code{...} will not be treated as matrix-like objects,
-#' but their nodes will be extracted and merged with the new
-#' \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} object for a
+#' Compared to the `[ColumnLinkedMatrix][initialize,ColumnLinkedMatrix-method]`
+#' constructor, nested [LinkedMatrix-class] objects that are passed via `...`
+#' will not be treated as matrix-like objects, but their nodes will be
+#' extracted and merged with the new [ColumnLinkedMatrix-class] object for a
 #' more compact representation.
 #'
 #' @param ... Matrix-like objects to be combined by columns.
@@ -252,53 +250,42 @@ index.ColumnLinkedMatrix <- function(x, j = NULL, ...) {
 }
 
 
-#' An S4 class to represent a column-linked
-#' \code{\link[=LinkedMatrix-class]{LinkedMatrix}}.
+#' An S4 class to represent a column-linked [LinkedMatrix-class].
 #'
 #' This class treats a list of matrix-like objects that are linked together by
-#' columns and have the same number of rows similarly to a regular \code{matrix}
-#' by implementing key methods such as \code{[} and \code{[<-} for extracting
-#' and replacing matrix elements, \code{dim} to retrieve dimensions, and
-#' \code{dimnames} and \code{dimnames<-} to retrieve and set dimnames. Each list
-#' element is called a node and can be extracted or replaced using \code{[[} and
-#' \code{[[<-}. A matrix-like object is one that has two dimensions and
-#' implements at least \code{dim} and \code{[}.
+#' columns and have the same number of rows similarly to a regular `matrix` by
+#' implementing key methods such as `[` and `[<-` for extracting and replacing
+#' matrix elements, `dim` to retrieve dimensions, and `dimnames` and
+#' `dimnames<-` to retrieve and set dimnames. Each list element is called a
+#' node and can be extracted or replaced using `[[` and `[[<-`. A matrix-like
+#' object is one that has two dimensions and implements at least `dim` and `[`.
 #'
 #' There are several ways to create an instance of this class: either by using
 #' one of the constructors
-#' \code{\link[=initialize,ColumnLinkedMatrix-method]{ColumnLinkedMatrix(...)}}
-#' or
-#' \code{\link[=initialize,ColumnLinkedMatrix-method]{new("ColumnLinkedMatrix",...)}},
-#' or by using the more general \code{\link{LinkedMatrix}} function that
-#' constructs objects of certain dimensions with a configurable number and type
-#' of nodes.
+#' `[ColumnLinkedMatrix(...)][initialize,ColumnLinkedMatrix-method]` or
+#' `[new("ColumnLinkedMatrix", ...)][initialize,ColumnLinkedMatrix-method]`, or
+#' by using the more general [LinkedMatrix()] function that constructs objects
+#' of certain dimensions with a configurable number and type of nodes.
 #'
 #' @export ColumnLinkedMatrix
 #' @exportClass ColumnLinkedMatrix
 ColumnLinkedMatrix <- setClass("ColumnLinkedMatrix", contains = "list")
 
 
-#' Creates a new \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}}
-#' instance.
+#' Creates a new [ColumnLinkedMatrix-class] instance.
 #'
-#' This method is run when a
-#' \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} object is created
-#' using
-#' \code{\link[=initialize,ColumnLinkedMatrix-method]{ColumnLinkedMatrix(...)}}
-#' or
-#' \code{\link[=initialize,ColumnLinkedMatrix-method]{new("ColumnLinkedMatrix",...)}}
-#' and accepts a list of matrix-like objects as \code{...}. A matrix-like object
-#' is one that has two dimensions and implements at least \code{dim} and
-#' \code{[}. \code{\link[=LinkedMatrix-class]{LinkedMatrix}} objects can be
-#' nested as long as they are conformable. Each object needs to have the same
-#' number of rows to be linked together. If no matrix-like objects are given, a
-#' single 1x1 node of type \code{matrix} filled with \code{NA} is returned.
+#' This method is run when a [ColumnLinkedMatrix-class] object is created using
+#' `ColumnLinkedMatrix(...)` or `new("ColumnLinkedMatrix", ...)` and accepts a
+#' list of matrix-like objects as `...`. A matrix-like object is one that has
+#' two dimensions and implements at least `dim` and `[`. [LinkedMatrix] objects
+#' can be nested as long as they are conformable. Each object needs to have the
+#' same number of rows to be linked together. If no matrix-like objects are
+#' given, a single 1x1 node of type `matrix` filled with `NA` is returned.
 #'
 #' @inheritParams base::list
-#' @param .Object The
-#'   \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} instance to be
-#'   initialized. This argument is passed in by R and can be ignored, but still
-#'   needs to be documented.
+#' @param .Object The [ColumnLinkedMatrix-class] instance to be initialized.
+#' This argument is passed in by R and can be ignored, but still needs to be
+#' documented.
 #' @param ... A sequence of matrix-like objects of the same row-dimension.
 #' @export
 setMethod("initialize", signature(.Object = "ColumnLinkedMatrix"), function(.Object, ...) {
@@ -321,11 +308,10 @@ setMethod("initialize", signature(.Object = "ColumnLinkedMatrix"), function(.Obj
 })
 
 
-#' Extract parts of a
-#' \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}}.
+#' Extract parts of a [ColumnLinkedMatrix-class].
 #'
-#' This method is run when the \code{[]} operator is used on a
-#' \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} object.
+#' This method is run when the `[]` operator is used on a
+#' [ColumnLinkedMatrix-class] object.
 #'
 #' @inheritParams base::`[`
 #' @param j Column indices.
@@ -334,11 +320,10 @@ setMethod("initialize", signature(.Object = "ColumnLinkedMatrix"), function(.Obj
 setMethod("[", signature(x = "ColumnLinkedMatrix"), subset.ColumnLinkedMatrix)
 
 
-#' Replace parts of a
-#' \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}}.
+#' Replace parts of a [ColumnLinkedMatrix-class].
 #'
-#' This method is run when the \code{[]} operator is used in an assignment on a
-#' \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} object.
+#' This method is run when the `[]` operator is used in an assignment on a
+#' [ColumnLinkedMatrix-class] object.
 #'
 #' @inheritParams base::`[<-`
 #' @param j Column indices.

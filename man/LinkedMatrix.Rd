@@ -2,10 +2,8 @@
 % Please edit documentation in R/LinkedMatrix.R
 \name{LinkedMatrix}
 \alias{LinkedMatrix}
-\title{Initializes either a
-\code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} or
-\code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} instance of certain
-dimensions with a configurable number and type of nodes.}
+\title{Initializes either a \linkS4class{ColumnLinkedMatrix} or \linkS4class{RowLinkedMatrix}
+instance of certain dimensions with a configurable number and type of nodes.}
 \usage{
 LinkedMatrix(nrow, ncol, nNodes, linkedBy, nodeInitializer, ...)
 }
@@ -16,21 +14,17 @@ LinkedMatrix(nrow, ncol, nNodes, linkedBy, nodeInitializer, ...)
 
 \item{nNodes}{The number of nodes.}
 
-\item{linkedBy}{Whether the matrix is linked by \code{rows} or
-\code{columns}.}
+\item{linkedBy}{Whether the matrix is linked by \code{rows} or \code{columns}.}
 
 \item{nodeInitializer}{The name of a function or a function with four
-parameters \code{nodeIndex}, \code{ncol}, \code{nrow}, and \code{...} that
-initializes each node by returning a matrix-like object Pre-defined node
-initializers include \code{matrixNodeInitializer} to initialize matrices
-and \code{ffNodeInitializer} to initialize \code{ff} objects.}
+parameters \code{nodeIndex}, \code{ncol}, \code{nrow}, and \code{...} that initializes each node
+by returning a matrix-like object Pre-defined node initializers include
+\code{matrixNodeInitializer} to initialize matrices and \code{ffNodeInitializer} to
+initialize \code{ff} objects.}
 
 \item{...}{Additional arguments passed into \code{nodeInitializer}.}
 }
 \description{
-Initializes either a
-\code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} or
-\code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} instance of certain
-dimensions with a configurable number and type of nodes.
+Initializes either a \linkS4class{ColumnLinkedMatrix} or \linkS4class{RowLinkedMatrix}
+instance of certain dimensions with a configurable number and type of nodes.
 }
-

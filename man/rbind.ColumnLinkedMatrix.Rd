@@ -4,7 +4,7 @@
 \alias{rbind.ColumnLinkedMatrix}
 \title{Combine matrix-like objects by rows.}
 \usage{
-rbind.ColumnLinkedMatrix(..., deparse.level = 1)
+\method{rbind}{ColumnLinkedMatrix}(..., deparse.level = 1)
 }
 \arguments{
 \item{...}{Matrix-like objects to be combined by rows.}
@@ -14,4 +14,3 @@ rbind.ColumnLinkedMatrix(..., deparse.level = 1)
 \description{
 Combine matrix-like objects by rows.
 }
-

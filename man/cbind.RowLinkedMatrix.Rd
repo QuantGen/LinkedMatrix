@@ -4,7 +4,7 @@
 \alias{cbind.RowLinkedMatrix}
 \title{Combine matrix-like objects by columns.}
 \usage{
-cbind.RowLinkedMatrix(..., deparse.level = 0)
+\method{cbind}{RowLinkedMatrix}(..., deparse.level = 0)
 }
 \arguments{
 \item{...}{Matrix-like objects to be combined by columns.}
@@ -12,7 +12,5 @@ cbind.RowLinkedMatrix(..., deparse.level = 0)
 \item{deparse.level}{Currently unused, defaults to 0.}
 }
 \description{
-This method is currently undefined for
-\code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} objects.
+This method is currently undefined for \linkS4class{RowLinkedMatrix} objects.
 }
-

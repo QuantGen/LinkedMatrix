@@ -4,7 +4,7 @@
 \alias{rbind.RowLinkedMatrix}
 \title{Combine matrix-like objects by rows.}
 \usage{
-rbind.RowLinkedMatrix(..., deparse.level = 1)
+\method{rbind}{RowLinkedMatrix}(..., deparse.level = 1)
 }
 \arguments{
 \item{...}{Matrix-like objects to be combined by rows.}
@@ -12,12 +12,9 @@ rbind.RowLinkedMatrix(..., deparse.level = 1)
 \item{deparse.level}{Currently unused, defaults to 0.}
 }
 \description{
-Compared to the
-\code{\link[=initialize,RowLinkedMatrix-method]{RowLinkedMatrix}}
-constructor, nested \code{\link[=LinkedMatrix-class]{LinkedMatrix}} objects
-that are passed via \code{...} will not be treated as matrix-like objects,
-but their nodes will be extracted and merged with the new
-\code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} object for a more
+Compared to the \code{[RowLinkedMatrix][initialize,RowLinkedMatrix-method]}
+constructor, nested \linkS4class{LinkedMatrix} objects that are passed via \code{...}
+will not be treated as matrix-like objects, but their nodes will be
+extracted and merged with the new \linkS4class{RowLinkedMatrix} object for a more
 compact representation.
 }
-

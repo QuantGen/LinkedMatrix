@@ -4,7 +4,7 @@
 \alias{cbind.ColumnLinkedMatrix}
 \title{Combine matrix-like objects by columns.}
 \usage{
-cbind.ColumnLinkedMatrix(..., deparse.level = 0)
+\method{cbind}{ColumnLinkedMatrix}(..., deparse.level = 0)
 }
 \arguments{
 \item{...}{Matrix-like objects to be combined by columns.}
@@ -12,12 +12,9 @@ cbind.ColumnLinkedMatrix(..., deparse.level = 0)
 \item{deparse.level}{Currently unused, defaults to 0.}
 }
 \description{
-Compared to the
-\code{\link[=initialize,ColumnLinkedMatrix-method]{ColumnLinkedMatrix}}
-constructor, nested \code{\link[=LinkedMatrix-class]{LinkedMatrix}} objects
-that are passed via \code{...} will not be treated as matrix-like objects,
-but their nodes will be extracted and merged with the new
-\code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} object for a
+Compared to the \code{[ColumnLinkedMatrix][initialize,ColumnLinkedMatrix-method]}
+constructor, nested \linkS4class{LinkedMatrix} objects that are passed via \code{...}
+will not be treated as matrix-like objects, but their nodes will be
+extracted and merged with the new \linkS4class{ColumnLinkedMatrix} object for a
 more compact representation.
 }
-

@@ -3,31 +3,25 @@
 \docType{methods}
 \name{initialize,ColumnLinkedMatrix-method}
 \alias{initialize,ColumnLinkedMatrix-method}
-\title{Creates a new \code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}}
-instance.}
+\title{Creates a new \linkS4class{ColumnLinkedMatrix} instance.}
 \usage{
 \S4method{initialize}{ColumnLinkedMatrix}(.Object, ...)
 }
 \arguments{
-\item{.Object}{The
-\code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} instance to be
-initialized. This argument is passed in by R and can be ignored, but still
-needs to be documented.}
+\item{.Object}{The \linkS4class{ColumnLinkedMatrix} instance to be initialized.
+This argument is passed in by R and can be ignored, but still needs to be
+documented.}
 
 \item{...}{A sequence of matrix-like objects of the same row-dimension.}
 }
 \description{
-This method is run when a
-\code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} object is created
-using
-\code{\link[=initialize,ColumnLinkedMatrix-method]{ColumnLinkedMatrix(...)}}
-or
-\code{\link[=initialize,ColumnLinkedMatrix-method]{new("ColumnLinkedMatrix",...)}}
-and accepts a list of matrix-like objects as \code{...}. A matrix-like object
-is one that has two dimensions and implements at least \code{dim} and
-\code{[}. \code{\link[=LinkedMatrix-class]{LinkedMatrix}} objects can be
-nested as long as they are conformable. Each object needs to have the same
-number of rows to be linked together. If no matrix-like objects are given, a
-single 1x1 node of type \code{matrix} filled with \code{NA} is returned.
-}
+This method is run when a \linkS4class{ColumnLinkedMatrix} object is created using
+\code{ColumnLinkedMatrix(...)} or \code{new("ColumnLinkedMatrix", ...)} and accepts a
+list of matrix-like objects as \code{...}. A matrix-like object is one that has
+two dimensions and implements at least \code{dim} and \code{[}. [LinkedMatrix] objects
+can be nested as long as they are conformable. Each object needs to have the
+same number of rows to be linked together. If no matrix-like objects are
+given, a single 1x1 node of type \code{matrix} filled with \code{NA} is returned.
 
+[`. [LinkedMatrix]: R:%60.%20[LinkedMatrix
+}

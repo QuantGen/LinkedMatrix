@@ -3,17 +3,14 @@
 \docType{methods}
 \name{show,LinkedMatrix-method}
 \alias{show,LinkedMatrix-method}
-\title{Show a \code{\link[=LinkedMatrix-class]{LinkedMatrix}} object.}
+\title{Show a \linkS4class{LinkedMatrix} object.}
 \usage{
 \S4method{show}{LinkedMatrix}(object)
 }
 \arguments{
-\item{object}{Either a
-\code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} or a
-\code{\link[=RowLinkedMatrix-class]{RowLinkedMatrix}} object.}
+\item{object}{Either a \linkS4class{ColumnLinkedMatrix} or a
+\linkS4class{RowLinkedMatrix} object.}
 }
 \description{
-This method is run when a \code{\link[=LinkedMatrix-class]{LinkedMatrix}}
-object is printed.
+This method is run when a \linkS4class{LinkedMatrix} object is printed.
 }
-

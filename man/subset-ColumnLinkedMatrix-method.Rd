@@ -3,8 +3,7 @@
 \docType{methods}
 \name{[<-,ColumnLinkedMatrix-method}
 \alias{[<-,ColumnLinkedMatrix-method}
-\title{Replace parts of a
-\code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}}.}
+\title{Replace parts of a \linkS4class{ColumnLinkedMatrix}.}
 \usage{
 \S4method{[}{ColumnLinkedMatrix}(x, i, j, ...) <- value
 }
@@ -45,6 +44,5 @@
 }
 \description{
 This method is run when the \code{[]} operator is used in an assignment on a
-\code{\link[=ColumnLinkedMatrix-class]{ColumnLinkedMatrix}} object.
+\linkS4class{ColumnLinkedMatrix} object.
 }
-
