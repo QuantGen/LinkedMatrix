@@ -2,7 +2,7 @@
 % Please edit documentation in R/RowLinkedMatrix.R
 \name{rbind.RowLinkedMatrix}
 \alias{rbind.RowLinkedMatrix}
-\title{Combine matrix-like objects by rows.}
+\title{Combine Matrix-Like Objects by Rows.}
 \usage{
 \method{rbind}{RowLinkedMatrix}(..., deparse.level = 1)
 }

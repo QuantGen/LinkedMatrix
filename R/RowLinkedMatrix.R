@@ -172,7 +172,7 @@ dimnames.RowLinkedMatrix <- function(x) {
 }
 
 
-#' Combine matrix-like objects by columns.
+#' Combine Matrix-Like Objects by Columns.
 #'
 #' This method is currently undefined for [RowLinkedMatrix-class] objects.
 #'
@@ -184,7 +184,7 @@ cbind.RowLinkedMatrix <- function(..., deparse.level = 0) {
 }
 
 
-#' Combine matrix-like objects by rows.
+#' Combine Matrix-Like Objects by Rows.
 #'
 #' Compared to the `[RowLinkedMatrix][initialize,RowLinkedMatrix-method]`
 #' constructor, nested [LinkedMatrix-class] objects that are passed via `...`
@@ -252,7 +252,7 @@ index.RowLinkedMatrix <- function(x, i = NULL, ...) {
 }
 
 
-#' An S4 class to represent a row-linked [LinkedMatrix-class].
+#' An S4 Class to Represent a Row-Linked LinkedMatrix.
 #'
 #' This class treats a list of matrix-like objects that are linked together by
 #' rows and have the same number of columns similarly to a regular `matrix` by
@@ -274,7 +274,7 @@ index.RowLinkedMatrix <- function(x, i = NULL, ...) {
 RowLinkedMatrix <- setClass("RowLinkedMatrix", contains = "list")
 
 
-#' Creates a new [RowLinkedMatrix-class] instance.
+#' Creates a New RowLinkedMatrix Instance.
 #'
 #' This method is run when a [RowLinkedMatrix-class] object is created using
 #' `RowLinkedMatrix(...)` or `new("RowLinkedMatrix", ...)` and accepts a list
@@ -310,7 +310,7 @@ setMethod("initialize", signature(.Object = "RowLinkedMatrix"), function(.Object
 })
 
 
-#' Extract parts of a [RowLinkedMatrix-class].
+#' Extract Parts of a RowLinkedMatrix.
 #'
 #' This method is run when the `[]` operator is used on a
 #' [RowLinkedMatrix-class] object.
@@ -322,7 +322,7 @@ setMethod("initialize", signature(.Object = "RowLinkedMatrix"), function(.Object
 setMethod("[", signature(x = "RowLinkedMatrix"), subset.RowLinkedMatrix)
 
 
-#' Replace parts of a [RowLinkedMatrix-class].
+#' Replace Parts of a RowLinkedMatrix.
 #'
 #' This method is run when the `[]` operator is used in an assignment on a
 #' [RowLinkedMatrix-class] object.

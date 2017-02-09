@@ -3,7 +3,7 @@
 \docType{methods}
 \name{initialize,ColumnLinkedMatrix-method}
 \alias{initialize,ColumnLinkedMatrix-method}
-\title{Creates a new \linkS4class{ColumnLinkedMatrix} instance.}
+\title{Creates a New ColumnLinkedMatrix Instance.}
 \usage{
 \S4method{initialize}{ColumnLinkedMatrix}(.Object, ...)
 }

@@ -4,7 +4,7 @@
 \name{ColumnLinkedMatrix-class}
 \alias{ColumnLinkedMatrix-class}
 \alias{ColumnLinkedMatrix}
-\title{An S4 class to represent a column-linked \linkS4class{LinkedMatrix}.}
+\title{An S4 Class to Represent a Column-Linked LinkedMatrix.}
 \description{
 This class treats a list of matrix-like objects that are linked together by
 columns and have the same number of rows similarly to a regular \code{matrix} by

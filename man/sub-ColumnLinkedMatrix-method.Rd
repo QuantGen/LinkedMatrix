@@ -3,7 +3,7 @@
 \docType{methods}
 \name{[,ColumnLinkedMatrix-method}
 \alias{[,ColumnLinkedMatrix-method}
-\title{Extract parts of a \linkS4class{ColumnLinkedMatrix}.}
+\title{Extract Parts of a ColumnLinkedMatrix.}
 \usage{
 \S4method{[}{ColumnLinkedMatrix}(x, i, j, ..., drop = TRUE)
 }

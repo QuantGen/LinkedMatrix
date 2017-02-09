@@ -172,7 +172,7 @@ dimnames.ColumnLinkedMatrix <- function(x) {
 }
 
 
-#' Combine matrix-like objects by columns.
+#' Combine Matrix-Like Objects by Columns.
 #'
 #' Compared to the `[ColumnLinkedMatrix][initialize,ColumnLinkedMatrix-method]`
 #' constructor, nested [LinkedMatrix-class] objects that are passed via `...`
@@ -199,7 +199,7 @@ cbind.ColumnLinkedMatrix <- function(..., deparse.level = 0) {
 }
 
 
-#' Combine matrix-like objects by rows.
+#' Combine Matrix-Like Objects by Rows.
 #'
 #' @param ... Matrix-like objects to be combined by rows.
 #' @param deparse.level Currently unused, defaults to 0.
@@ -250,7 +250,7 @@ index.ColumnLinkedMatrix <- function(x, j = NULL, ...) {
 }
 
 
-#' An S4 class to represent a column-linked [LinkedMatrix-class].
+#' An S4 Class to Represent a Column-Linked LinkedMatrix.
 #'
 #' This class treats a list of matrix-like objects that are linked together by
 #' columns and have the same number of rows similarly to a regular `matrix` by
@@ -272,7 +272,7 @@ index.ColumnLinkedMatrix <- function(x, j = NULL, ...) {
 ColumnLinkedMatrix <- setClass("ColumnLinkedMatrix", contains = "list")
 
 
-#' Creates a new [ColumnLinkedMatrix-class] instance.
+#' Creates a New ColumnLinkedMatrix Instance.
 #'
 #' This method is run when a [ColumnLinkedMatrix-class] object is created using
 #' `ColumnLinkedMatrix(...)` or `new("ColumnLinkedMatrix", ...)` and accepts a
@@ -308,7 +308,7 @@ setMethod("initialize", signature(.Object = "ColumnLinkedMatrix"), function(.Obj
 })
 
 
-#' Extract parts of a [ColumnLinkedMatrix-class].
+#' Extract Parts of a ColumnLinkedMatrix.
 #'
 #' This method is run when the `[]` operator is used on a
 #' [ColumnLinkedMatrix-class] object.
@@ -320,7 +320,7 @@ setMethod("initialize", signature(.Object = "ColumnLinkedMatrix"), function(.Obj
 setMethod("[", signature(x = "ColumnLinkedMatrix"), subset.ColumnLinkedMatrix)
 
 
-#' Replace parts of a [ColumnLinkedMatrix-class].
+#' Replace Parts of a ColumnLinkedMatrix.
 #'
 #' This method is run when the `[]` operator is used in an assignment on a
 #' [ColumnLinkedMatrix-class] object.

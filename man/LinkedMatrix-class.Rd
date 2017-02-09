@@ -3,8 +3,7 @@
 \docType{class}
 \name{LinkedMatrix-class}
 \alias{LinkedMatrix-class}
-\title{An abstract S4 class union of \linkS4class{ColumnLinkedMatrix} and
-\linkS4class{RowLinkedMatrix}.}
+\title{An Abstract S4 Class Union of ColumnLinkedMatrix and RowLinkedMatrix.}
 \description{
 This class is a class union and can therefore not be initialized. It can be
 used to check whether an object is either of type \linkS4class{ColumnLinkedMatrix}

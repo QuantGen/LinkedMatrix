@@ -2,7 +2,7 @@
 % Please edit documentation in R/LinkedMatrix.R
 \name{as.matrix.LinkedMatrix}
 \alias{as.matrix.LinkedMatrix}
-\title{Converts a LinkedMatrix instance to a matrix (if small enough).}
+\title{Converts a LinkedMatrix Instance to a Matrix (if Small Enough).}
 \usage{
 \method{as.matrix}{LinkedMatrix}(x, ...)
 }
@@ -13,5 +13,5 @@ object.}
 \item{...}{Additional arguments (unused).}
 }
 \description{
-Converts a LinkedMatrix instance to a matrix (if small enough).
+Converts a LinkedMatrix Instance to a Matrix (if Small Enough).
 }

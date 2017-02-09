@@ -3,7 +3,7 @@
 \docType{methods}
 \name{[<-,ColumnLinkedMatrix-method}
 \alias{[<-,ColumnLinkedMatrix-method}
-\title{Replace parts of a \linkS4class{ColumnLinkedMatrix}.}
+\title{Replace Parts of a ColumnLinkedMatrix.}
 \usage{
 \S4method{[}{ColumnLinkedMatrix}(x, i, j, ...) <- value
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ColumnLinkedMatrix.R
 \name{cbind.ColumnLinkedMatrix}
 \alias{cbind.ColumnLinkedMatrix}
-\title{Combine matrix-like objects by columns.}
+\title{Combine Matrix-Like Objects by Columns.}
 \usage{
 \method{cbind}{ColumnLinkedMatrix}(..., deparse.level = 0)
 }

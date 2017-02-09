@@ -3,7 +3,7 @@
 \docType{methods}
 \name{initialize,RowLinkedMatrix-method}
 \alias{initialize,RowLinkedMatrix-method}
-\title{Creates a new \linkS4class{RowLinkedMatrix} instance.}
+\title{Creates a New RowLinkedMatrix Instance.}
 \usage{
 \S4method{initialize}{RowLinkedMatrix}(.Object, ...)
 }

@@ -4,7 +4,7 @@
 \name{RowLinkedMatrix-class}
 \alias{RowLinkedMatrix-class}
 \alias{RowLinkedMatrix}
-\title{An S4 class to represent a row-linked \linkS4class{LinkedMatrix}.}
+\title{An S4 Class to Represent a Row-Linked LinkedMatrix.}
 \description{
 This class treats a list of matrix-like objects that are linked together by
 rows and have the same number of columns similarly to a regular \code{matrix} by

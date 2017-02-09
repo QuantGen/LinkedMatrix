@@ -3,7 +3,7 @@
 \docType{methods}
 \name{[,RowLinkedMatrix-method}
 \alias{[,RowLinkedMatrix-method}
-\title{Extract parts of a \linkS4class{RowLinkedMatrix}.}
+\title{Extract Parts of a RowLinkedMatrix.}
 \usage{
 \S4method{[}{RowLinkedMatrix}(x, i, j, ..., drop = TRUE)
 }

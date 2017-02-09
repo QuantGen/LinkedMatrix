@@ -2,8 +2,8 @@
 NULL
 
 
-#' Initializes either a [ColumnLinkedMatrix-class] or [RowLinkedMatrix-class]
-#' instance of certain dimensions with a configurable number and type of nodes.
+#' Initializes Either a ColumnLinkedMatrix or RowLinkedMatrix Instance of
+#' Certain Dimensions with a Configurable Number and Type of Nodes.
 #'
 #' @param nrow The number of rows.
 #' @param ncol The number of columns.
@@ -64,7 +64,7 @@ length.LinkedMatrix <- function(x) {
 }
 
 
-#' Converts a LinkedMatrix instance to a matrix (if small enough).
+#' Converts a LinkedMatrix Instance to a Matrix (if Small Enough).
 #'
 #' @param x Either a [ColumnLinkedMatrix-class] or a [RowLinkedMatrix-class]
 #' object.
@@ -75,7 +75,7 @@ as.matrix.LinkedMatrix <- function(x, ...) {
 }
 
 
-#' Returns the number of nodes.
+#' Returns the Number of Nodes.
 #'
 #' @param x Either a [ColumnLinkedMatrix-class] or a [RowLinkedMatrix-class]
 #' object.
@@ -85,7 +85,7 @@ nNodes <- function(x) {
 }
 
 
-#' Returns the column or row indexes at which each node starts and ends.
+#' Returns the Column or Row Indexes at Which Each Node Starts and Ends.
 #'
 #' @param x Either a [ColumnLinkedMatrix-class] or a [RowLinkedMatrix-class]
 #' object.
@@ -96,8 +96,8 @@ nodes <- function(x) {
 }
 
 
-#' Maps each column or row index of a linked matrix to the column or row index
-#' of its corresponding node.
+#' Maps Each Column or Row Index of a Linked Matrix to the Column or Row Index
+#' of Its Corresponding Node.
 #'
 #' If `j` for [ColumnLinkedMatrix-class] or `i` for [RowLinkedMatrix-class] is
 #' passed, it will only generate entries for the given indices.
@@ -112,8 +112,7 @@ index <- function(x, ...) {
 }
 
 
-#' An abstract S4 class union of [ColumnLinkedMatrix-class] and
-#' [RowLinkedMatrix-class].
+#' An Abstract S4 Class Union of ColumnLinkedMatrix and RowLinkedMatrix.
 #'
 #' This class is a class union and can therefore not be initialized. It can be
 #' used to check whether an object is either of type [ColumnLinkedMatrix-class]
@@ -130,7 +129,7 @@ index <- function(x, ...) {
 setClassUnion("LinkedMatrix", c("ColumnLinkedMatrix", "RowLinkedMatrix"))
 
 
-#' Show a [LinkedMatrix-class] object.
+#' Show a LinkedMatrix Object.
 #'
 #' This method is run when a [LinkedMatrix-class] object is printed.
 #'

@@ -2,8 +2,8 @@
 % Please edit documentation in R/LinkedMatrix.R
 \name{LinkedMatrix}
 \alias{LinkedMatrix}
-\title{Initializes either a \linkS4class{ColumnLinkedMatrix} or \linkS4class{RowLinkedMatrix}
-instance of certain dimensions with a configurable number and type of nodes.}
+\title{Initializes Either a ColumnLinkedMatrix or RowLinkedMatrix Instance of
+Certain Dimensions with a Configurable Number and Type of Nodes.}
 \usage{
 LinkedMatrix(nrow, ncol, nNodes, linkedBy, nodeInitializer, ...)
 }
@@ -25,6 +25,6 @@ initialize \code{ff} objects.}
 \item{...}{Additional arguments passed into \code{nodeInitializer}.}
 }
 \description{
-Initializes either a \linkS4class{ColumnLinkedMatrix} or \linkS4class{RowLinkedMatrix}
-instance of certain dimensions with a configurable number and type of nodes.
+Initializes Either a ColumnLinkedMatrix or RowLinkedMatrix Instance of
+Certain Dimensions with a Configurable Number and Type of Nodes.
 }

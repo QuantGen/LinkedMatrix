@@ -2,7 +2,7 @@
 % Please edit documentation in R/LinkedMatrix.R
 \name{nodes}
 \alias{nodes}
-\title{Returns the column or row indexes at which each node starts and ends.}
+\title{Returns the Column or Row Indexes at Which Each Node Starts and Ends.}
 \usage{
 nodes(x)
 }
@@ -14,5 +14,5 @@ object.}
 A matrix.
 }
 \description{
-Returns the column or row indexes at which each node starts and ends.
+Returns the Column or Row Indexes at Which Each Node Starts and Ends.
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/LinkedMatrix.R
 \name{nNodes}
 \alias{nNodes}
-\title{Returns the number of nodes.}
+\title{Returns the Number of Nodes.}
 \usage{
 nNodes(x)
 }
@@ -11,5 +11,5 @@ nNodes(x)
 object.}
 }
 \description{
-Returns the number of nodes.
+Returns the Number of Nodes.
 }

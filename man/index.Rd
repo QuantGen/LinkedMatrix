@@ -2,8 +2,8 @@
 % Please edit documentation in R/LinkedMatrix.R
 \name{index}
 \alias{index}
-\title{Maps each column or row index of a linked matrix to the column or row index
-of its corresponding node.}
+\title{Maps Each Column or Row Index of a Linked Matrix to the Column or Row Index
+of Its Corresponding Node.}
 \usage{
 index(x, ...)
 }
