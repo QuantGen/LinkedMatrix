@@ -8,9 +8,8 @@
 \S4method{show}{LinkedMatrix}(object)
 }
 \arguments{
-\item{object}{Either a \linkS4class{ColumnLinkedMatrix} or a
-\linkS4class{RowLinkedMatrix} object.}
+\item{object}{A \linkS4class{LinkedMatrix} object.}
 }
 \description{
-This method is run when a \linkS4class{LinkedMatrix} object is printed.
+Display the object, by printing, plotting or whatever suits its class.
 }

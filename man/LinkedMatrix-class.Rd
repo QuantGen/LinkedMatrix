@@ -3,16 +3,24 @@
 \docType{class}
 \name{LinkedMatrix-class}
 \alias{LinkedMatrix-class}
-\title{An Abstract S4 Class Union of ColumnLinkedMatrix and RowLinkedMatrix.}
+\title{A Class Union of ColumnLinkedMatrix and RowLinkedMatrix.}
 \description{
-This class is a class union and can therefore not be initialized. It can be
-used to check whether an object is either of type \linkS4class{ColumnLinkedMatrix}
-or of type \linkS4class{RowLinkedMatrix} using \code{is(x, "LinkedMatrix")} and to
-assign methods for both \linkS4class{ColumnLinkedMatrix} and
-\linkS4class{RowLinkedMatrix} classes, e.g.  \code{show}.
+This class is abstract and no objects can be created from it. It can be used
+to check whether an object is either of type \linkS4class{ColumnLinkedMatrix} or
+of type \linkS4class{RowLinkedMatrix} using \code{is(x, "LinkedMatrix")} and to assign
+methods for both \code{ColumnLinkedMatrix} and \code{RowLinkedMatrix} classes, e.g.
+\code{show}.
 }
+\section{Methods}{
+
+\itemize{
+\item \code{length}
+\item \code{as.matrix}
+\item \code{show}
+}
+}
+
 \seealso{
-\linkS4class{ColumnLinkedMatrix} or \linkS4class{RowLinkedMatrix} for
-implementations of column-linked matrices or row-linked matrices,
-respectively.
+\linkS4class{ColumnLinkedMatrix} and \linkS4class{RowLinkedMatrix} for
+implementations of column-linked and row-linked matrices, respectively.
 }

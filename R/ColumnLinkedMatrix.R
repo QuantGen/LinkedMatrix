@@ -174,11 +174,12 @@ dimnames.ColumnLinkedMatrix <- function(x) {
 
 #' Combine Matrix-Like Objects by Columns.
 #'
-#' Compared to the `[ColumnLinkedMatrix][initialize,ColumnLinkedMatrix-method]`
-#' constructor, nested [LinkedMatrix-class] objects that are passed via `...`
-#' will not be treated as matrix-like objects, but their nodes will be
-#' extracted and merged with the new [ColumnLinkedMatrix-class] object for a
-#' more compact representation.
+#' Compared to the [initialize()][initialize,ColumnLinkedMatrix-method()]
+#' method, nested [LinkedMatrix-class] objects that are passed via `...` will
+#' not be treated as matrix-like objects, but their nodes will be extracted and
+#' merged with the new [ColumnLinkedMatrix-class] object for a more compact
+#' representation. This method will currently only work for
+#' [ColumnLinkedMatrix-class] objects.
 #'
 #' @param ... Matrix-like objects to be combined by columns.
 #' @param deparse.level Currently unused, defaults to 0.
@@ -199,10 +200,7 @@ cbind.ColumnLinkedMatrix <- function(..., deparse.level = 0) {
 }
 
 
-#' Combine Matrix-Like Objects by Rows.
-#'
-#' @param ... Matrix-like objects to be combined by rows.
-#' @param deparse.level Currently unused, defaults to 0.
+#' @rdname rbind.RowLinkedMatrix
 #' @export
 rbind.ColumnLinkedMatrix <- function(..., deparse.level = 1) {
     stop("rbind is currently undefined for ColumnLinkedMatrix")
@@ -250,43 +248,64 @@ index.ColumnLinkedMatrix <- function(x, j = NULL, ...) {
 }
 
 
-#' An S4 Class to Represent a Column-Linked LinkedMatrix.
+#' A Class for Linking Matrices by Columns or Rows.
 #'
 #' This class treats a list of matrix-like objects that are linked together by
-#' columns and have the same number of rows similarly to a regular `matrix` by
-#' implementing key methods such as `[` and `[<-` for extracting and replacing
-#' matrix elements, `dim` to retrieve dimensions, and `dimnames` and
-#' `dimnames<-` to retrieve and set dimnames. Each list element is called a
-#' node and can be extracted or replaced using `[[` and `[[<-`. A matrix-like
-#' object is one that has two dimensions and implements at least `dim` and `[`.
+#' columns (`ColumnLinkedMatrix`) or rows (`RowLinkedMatrix`) and have the same
+#' number of rows similarly to a regular `matrix` by implementing key methods
+#' such as `[` and `[<-` for extracting and replacing matrix elements, `dim` to
+#' retrieve dimensions, and `dimnames` and `dimnames<-` to retrieve and set
+#' dimnames. Each list element is called a node and can be extracted or
+#' replaced using `[[` and `[[<-`. A matrix-like object is one that has two
+#' dimensions and implements at least `dim` and `[`.
 #'
-#' There are several ways to create an instance of this class: either by using
-#' one of the constructors
-#' `[ColumnLinkedMatrix(...)][initialize,ColumnLinkedMatrix-method]` or
-#' `[new("ColumnLinkedMatrix", ...)][initialize,ColumnLinkedMatrix-method]`, or
-#' by using the more general [LinkedMatrix()] function that constructs objects
-#' of certain dimensions with a configurable number and type of nodes.
+#' Internally, this class is an S4 class that contains `list`. Each node can be
+#' accessed using the `[[` operator. `lapply` is also possible.
+#' `ColumnLinkedMatrix` and `RowLinkedMatrix` form a class union called
+#' [LinkedMatrix-class].
 #'
+#' @section Methods:
+#' - `[`
+#' - `[<-`
+#' - `dim`
+#' - `dimnames`
+#' - `dimnames<-`
+#' - `as.matrix`
+#' - `is.matrix`
+#' - `length`
+#' - `print`
+#' - `str`
+#' - `cbind` (for `ColumnLinkedMatrix`)
+#' - `rbind` (for `RowLinkedMatrix`)
+#'
+#' @seealso [initialize()][initialize,ColumnLinkedMatrix-method()] to create a
+#' `ColumnLinkedMatrix` or `RowLinkedMatrix` object, [LinkedMatrix()] to create
+#' an empty, prespecified `LinkedMatrix` object, [nNodes()] to get the number
+#' of nodes of a `LinkedMatrix` object.
 #' @export ColumnLinkedMatrix
 #' @exportClass ColumnLinkedMatrix
 ColumnLinkedMatrix <- setClass("ColumnLinkedMatrix", contains = "list")
 
 
-#' Creates a New ColumnLinkedMatrix Instance.
+#' Create a LinkedMatrix Object.
 #'
-#' This method is run when a [ColumnLinkedMatrix-class] object is created using
-#' `ColumnLinkedMatrix(...)` or `new("ColumnLinkedMatrix", ...)` and accepts a
-#' list of matrix-like objects as `...`. A matrix-like object is one that has
-#' two dimensions and implements at least `dim` and `[`. [LinkedMatrix] objects
-#' can be nested as long as they are conformable. Each object needs to have the
-#' same number of rows to be linked together. If no matrix-like objects are
-#' given, a single 1x1 node of type `matrix` filled with `NA` is returned.
+#' This function constructs a new [ColumnLinkedMatrix-class] or
+#' [RowLinkedMatrix-class] object from a list of matrix-like objects.
+#'
+#' A matrix-like object is one that has two dimensions and implements at least
+#' `dim` and `[`. Each object needs to have the same number of rows (for
+#' `ColumnLinkedMatrix`) or columns (for `RowLinkedMatrix`) to be linked
+#' together. If no matrix-like objects are given, a single 1x1 node of type
+#' `matrix` filled with `NA` is returned. [LinkedMatrix-class] objects can be
+#' nested as long as they are conformable.
 #'
 #' @inheritParams base::list
-#' @param .Object The [ColumnLinkedMatrix-class] instance to be initialized.
-#' This argument is passed in by R and can be ignored, but still needs to be
-#' documented.
-#' @param ... A sequence of matrix-like objects of the same row-dimension.
+#' @param .Object Internal, used by [methods::initialize()] generic.
+#' @param ... A sequence of matrix-like objects of the same row-dimension (for
+#' `ColumnLinkedMatrix`) or column-dimension (for `RowLinkedMatrix`).
+#' @return Either a `ColumnLinkedMatrix` or a `RowLinkedMatrix` object.
+#' @seealso [LinkedMatrix()] to create an empty, prespecified
+#' [LinkedMatrix-class] object.
 #' @export
 setMethod("initialize", signature(.Object = "ColumnLinkedMatrix"), function(.Object, ...) {
     nodes <- list(...)
@@ -308,25 +327,27 @@ setMethod("initialize", signature(.Object = "ColumnLinkedMatrix"), function(.Obj
 })
 
 
-#' Extract Parts of a ColumnLinkedMatrix.
+#' Extract Parts of a LinkedMatrix Object.
 #'
 #' This method is run when the `[]` operator is used on a
-#' [ColumnLinkedMatrix-class] object.
+#' [ColumnLinkedMatrix-class] or [RowLinkedMatrix-class] object.
 #'
 #' @inheritParams base::`[`
 #' @param j Column indices.
 #' @param ... Additional arguments
+#' @return A subset.
 #' @export
 setMethod("[", signature(x = "ColumnLinkedMatrix"), subset.ColumnLinkedMatrix)
 
 
-#' Replace Parts of a ColumnLinkedMatrix.
+#' Replace Parts of a LinkedMatrix Object.
 #'
 #' This method is run when the `[]` operator is used in an assignment on a
-#' [ColumnLinkedMatrix-class] object.
+#' [ColumnLinkedMatrix-class] or [RowLinkedMatrix-class] object.
 #'
 #' @inheritParams base::`[<-`
 #' @param j Column indices.
 #' @param ... Additional arguments
+#' @return A subset.
 #' @export
 setReplaceMethod("[", signature(x = "ColumnLinkedMatrix"), replace.ColumnLinkedMatrix)

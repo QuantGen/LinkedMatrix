@@ -10,6 +10,9 @@ nNodes(x)
 \item{x}{Either a \linkS4class{ColumnLinkedMatrix} or a \linkS4class{RowLinkedMatrix}
 object.}
 }
+\value{
+The number of nodes.
+}
 \description{
 Returns the Number of Nodes.
 }

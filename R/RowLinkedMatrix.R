@@ -172,12 +172,7 @@ dimnames.RowLinkedMatrix <- function(x) {
 }
 
 
-#' Combine Matrix-Like Objects by Columns.
-#'
-#' This method is currently undefined for [RowLinkedMatrix-class] objects.
-#'
-#' @param ... Matrix-like objects to be combined by columns.
-#' @param deparse.level Currently unused, defaults to 0.
+#' @rdname cbind.ColumnLinkedMatrix
 #' @export
 cbind.RowLinkedMatrix <- function(..., deparse.level = 0) {
     stop("cbind is currently undefined for RowLinkedMatrix")
@@ -186,11 +181,12 @@ cbind.RowLinkedMatrix <- function(..., deparse.level = 0) {
 
 #' Combine Matrix-Like Objects by Rows.
 #'
-#' Compared to the `[RowLinkedMatrix][initialize,RowLinkedMatrix-method]`
-#' constructor, nested [LinkedMatrix-class] objects that are passed via `...`
-#' will not be treated as matrix-like objects, but their nodes will be
-#' extracted and merged with the new [RowLinkedMatrix-class] object for a more
-#' compact representation.
+#' Compared to the [initialize()][initialize,RowLinkedMatrix-method()] method,
+#' nested [LinkedMatrix-class] objects that are passed via `...` will not be
+#' treated as matrix-like objects, but their nodes will be extracted and merged
+#' with the new [RowLinkedMatrix-class] object for a more compact
+#' representation. This method will currently only work for
+#' [RowLinkedMatrix-class] objects.
 #'
 #' @param ... Matrix-like objects to be combined by rows.
 #' @param deparse.level Currently unused, defaults to 0.
@@ -252,43 +248,13 @@ index.RowLinkedMatrix <- function(x, i = NULL, ...) {
 }
 
 
-#' An S4 Class to Represent a Row-Linked LinkedMatrix.
-#'
-#' This class treats a list of matrix-like objects that are linked together by
-#' rows and have the same number of columns similarly to a regular `matrix` by
-#' implementing key methods such as `[` and `[<-` for extracting and replacing
-#' matrix elements, `dim` to retrieve dimensions, and `dimnames` and
-#' `dimnames<-` to retrieve and set dimnames. Each list element is called a
-#' node and can be extracted or replaced using `[[` and `[[<-`. A matrix-like
-#' object is one that has two dimensions and implements at least `dim` and `[`.
-#'
-#' There are several ways to create an instance of this class: either by using
-#' one of the constructors
-#' `[RowLinkedMatrix(...)][initialize,RowLinkedMatrix-method]` or
-#' `[new("RowLinkedMatrix", ...)][initialize,RowLinkedMatrix-method]`, or by
-#' using the more general [LinkedMatrix()] function that constructs objects of
-#' certain dimensions with a configurable number and type of nodes.
-#'
+#' @rdname ColumnLinkedMatrix-class
 #' @export RowLinkedMatrix
 #' @exportClass RowLinkedMatrix
 RowLinkedMatrix <- setClass("RowLinkedMatrix", contains = "list")
 
 
-#' Creates a New RowLinkedMatrix Instance.
-#'
-#' This method is run when a [RowLinkedMatrix-class] object is created using
-#' `RowLinkedMatrix(...)` or `new("RowLinkedMatrix", ...)` and accepts a list
-#' of matrix-like objects as `...`. A matrix-like object is one that has two
-#' dimensions and implements at least `dim` and `[`. Each object needs to have
-#' the same number of columns to be linked together. [LinkedMatrix] can be
-#' nested as long as they are conformable. If no matrix-like objects are given,
-#' a single 1x1 node of type `matrix` filled with `NA` is returned.
-#'
-#' @inheritParams base::list
-#' @param .Object The [RowLinkedMatrix-class] instance to be initialized. This
-#' argument is passed in by R and can be ignored, but still needs to be
-#' documented.
-#' @param ... A sequence of matrix-like objects of the same column-dimension.
+#' @rdname initialize-ColumnLinkedMatrix-method
 #' @export
 setMethod("initialize", signature(.Object = "RowLinkedMatrix"), function(.Object, ...) {
     nodes <- list(...)
@@ -310,25 +276,11 @@ setMethod("initialize", signature(.Object = "RowLinkedMatrix"), function(.Object
 })
 
 
-#' Extract Parts of a RowLinkedMatrix.
-#'
-#' This method is run when the `[]` operator is used on a
-#' [RowLinkedMatrix-class] object.
-#'
-#' @inheritParams base::`[`
-#' @param j Column indices.
-#' @param ... Additional arguments
+#' @rdname sub-ColumnLinkedMatrix-method
 #' @export
 setMethod("[", signature(x = "RowLinkedMatrix"), subset.RowLinkedMatrix)
 
 
-#' Replace Parts of a RowLinkedMatrix.
-#'
-#' This method is run when the `[]` operator is used in an assignment on a
-#' [RowLinkedMatrix-class] object.
-#'
-#' @inheritParams base::`[<-`
-#' @param j Column indices.
-#' @param ... Additional arguments
+#' @rdname subset-ColumnLinkedMatrix-method
 #' @export
 setReplaceMethod("[", signature(x = "RowLinkedMatrix"), replace.RowLinkedMatrix)

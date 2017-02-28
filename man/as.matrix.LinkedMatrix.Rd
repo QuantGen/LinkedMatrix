@@ -12,6 +12,9 @@ object.}
 
 \item{...}{Additional arguments (unused).}
 }
+\value{
+A matrix.
+}
 \description{
 Converts a LinkedMatrix Instance to a Matrix (if Small Enough).
 }

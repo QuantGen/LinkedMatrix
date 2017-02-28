@@ -2,29 +2,39 @@
 % Please edit documentation in R/LinkedMatrix.R
 \name{LinkedMatrix}
 \alias{LinkedMatrix}
-\title{Initializes Either a ColumnLinkedMatrix or RowLinkedMatrix Instance of
-Certain Dimensions with a Configurable Number and Type of Nodes.}
+\title{Create an Empty, Prespecified LinkedMatrix Object.}
 \usage{
 LinkedMatrix(nrow, ncol, nNodes, linkedBy, nodeInitializer, ...)
 }
 \arguments{
-\item{nrow}{The number of rows.}
+\item{nrow}{The number of rows of the whole matrix.}
 
-\item{ncol}{The number of columns.}
+\item{ncol}{The number of columns of the whole matrix.}
 
 \item{nNodes}{The number of nodes.}
 
-\item{linkedBy}{Whether the matrix is linked by \code{rows} or \code{columns}.}
+\item{linkedBy}{Whether the matrix is linked by \code{columns} or \code{rows}.}
 
-\item{nodeInitializer}{The name of a function or a function with four
-parameters \code{nodeIndex}, \code{ncol}, \code{nrow}, and \code{...} that initializes each node
-by returning a matrix-like object Pre-defined node initializers include
+\item{nodeInitializer}{The name of a function or a function \code{(nodeIndex, nrow, ncol, ...)} where \code{nodeIndex} is the index of the node, \code{nrow} is a
+partition of the total number of rows, \code{ncol} is a partition of the total
+number of columns, and \code{...} are additional parameters passed into the
+function. The function is expected to return a matrix-like object of
+dimensions \code{nrow} and \code{ncol}. Pre-defined node initializers include
 \code{matrixNodeInitializer} to initialize matrices and \code{ffNodeInitializer} to
 initialize \code{ff} objects.}
 
-\item{...}{Additional arguments passed into \code{nodeInitializer}.}
+\item{...}{Additional arguments passed into the \code{nodeInitializer} function.}
+}
+\value{
+A \linkS4class{ColumnLinkedMatrix} object if \code{linkedBy} is \code{columns} or a
+\linkS4class{RowLinkedMatrix} object if \code{linkedBy} is \code{rows}.
 }
 \description{
-Initializes Either a ColumnLinkedMatrix or RowLinkedMatrix Instance of
-Certain Dimensions with a Configurable Number and Type of Nodes.
+This function creates an empty \linkS4class{LinkedMatrix} object of a certain
+size, a certain number of nodes, and certain types of nodes.
+}
+\seealso{
+\link[=initialize,ColumnLinkedMatrix-method]{initialize()} to create a
+\linkS4class{ColumnLinkedMatrix} or \linkS4class{RowLinkedMatrix} object from a list of
+matrix-like objects.
 }

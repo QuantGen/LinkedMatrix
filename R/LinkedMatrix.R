@@ -2,19 +2,29 @@
 NULL
 
 
-#' Initializes Either a ColumnLinkedMatrix or RowLinkedMatrix Instance of
-#' Certain Dimensions with a Configurable Number and Type of Nodes.
+#' Create an Empty, Prespecified LinkedMatrix Object.
 #'
-#' @param nrow The number of rows.
-#' @param ncol The number of columns.
+#' This function creates an empty [LinkedMatrix-class] object of a certain
+#' size, a certain number of nodes, and certain types of nodes.
+#'
+#' @param nrow The number of rows of the whole matrix.
+#' @param ncol The number of columns of the whole matrix.
 #' @param nNodes The number of nodes.
-#' @param linkedBy Whether the matrix is linked by `rows` or `columns`.
-#' @param nodeInitializer The name of a function or a function with four
-#' parameters `nodeIndex`, `ncol`, `nrow`, and `...` that initializes each node
-#' by returning a matrix-like object Pre-defined node initializers include
+#' @param linkedBy Whether the matrix is linked by `columns` or `rows`.
+#' @param nodeInitializer The name of a function or a function `(nodeIndex,
+#' nrow, ncol, ...)` where `nodeIndex` is the index of the node, `nrow` is a
+#' partition of the total number of rows, `ncol` is a partition of the total
+#' number of columns, and `...` are additional parameters passed into the
+#' function. The function is expected to return a matrix-like object of
+#' dimensions `nrow` and `ncol`. Pre-defined node initializers include
 #' `matrixNodeInitializer` to initialize matrices and `ffNodeInitializer` to
 #' initialize `ff` objects.
-#' @param ... Additional arguments passed into `nodeInitializer`.
+#' @param ... Additional arguments passed into the `nodeInitializer` function.
+#' @return A [ColumnLinkedMatrix-class] object if `linkedBy` is `columns` or a
+#' [RowLinkedMatrix-class] object if `linkedBy` is `rows`.
+#' @seealso [initialize()][initialize,ColumnLinkedMatrix-method()] to create a
+#' [ColumnLinkedMatrix-class] or [RowLinkedMatrix-class] object from a list of
+#' matrix-like objects.
 #' @export
 LinkedMatrix <- function(nrow, ncol, nNodes, linkedBy, nodeInitializer, ...) {
     class <- ifelse(linkedBy == "columns", "ColumnLinkedMatrix", "RowLinkedMatrix")
@@ -69,6 +79,7 @@ length.LinkedMatrix <- function(x) {
 #' @param x Either a [ColumnLinkedMatrix-class] or a [RowLinkedMatrix-class]
 #' object.
 #' @param ... Additional arguments (unused).
+#' @return A matrix.
 #' @export
 as.matrix.LinkedMatrix <- function(x, ...) {
     x[, , drop = FALSE]
@@ -79,6 +90,7 @@ as.matrix.LinkedMatrix <- function(x, ...) {
 #'
 #' @param x Either a [ColumnLinkedMatrix-class] or a [RowLinkedMatrix-class]
 #' object.
+#' @return The number of nodes.
 #' @export
 nNodes <- function(x) {
     length(slot(x, ".Data"))
@@ -112,28 +124,31 @@ index <- function(x, ...) {
 }
 
 
-#' An Abstract S4 Class Union of ColumnLinkedMatrix and RowLinkedMatrix.
+#' A Class Union of ColumnLinkedMatrix and RowLinkedMatrix.
 #'
-#' This class is a class union and can therefore not be initialized. It can be
-#' used to check whether an object is either of type [ColumnLinkedMatrix-class]
-#' or of type [RowLinkedMatrix-class] using `is(x, "LinkedMatrix")` and to
-#' assign methods for both [ColumnLinkedMatrix-class] and
-#' [RowLinkedMatrix-class] classes, e.g.  `show`.
+#' This class is abstract and no objects can be created from it. It can be used
+#' to check whether an object is either of type [ColumnLinkedMatrix-class] or
+#' of type [RowLinkedMatrix-class] using `is(x, "LinkedMatrix")` and to assign
+#' methods for both `ColumnLinkedMatrix` and `RowLinkedMatrix` classes, e.g.
+#' `show`.
 #'
+#' @section Methods:
+#' - `length`
+#' - `as.matrix`
+#' - `show`
+#'
+#' @seealso [ColumnLinkedMatrix-class] and [RowLinkedMatrix-class] for
+#' implementations of column-linked and row-linked matrices, respectively.
 #' @name LinkedMatrix-class
 #' @docType class
-#' @seealso [ColumnLinkedMatrix-class] or [RowLinkedMatrix-class] for
-#' implementations of column-linked matrices or row-linked matrices,
-#' respectively.
 #' @exportClass LinkedMatrix
 setClassUnion("LinkedMatrix", c("ColumnLinkedMatrix", "RowLinkedMatrix"))
 
 
 #' Show a LinkedMatrix Object.
 #'
-#' This method is run when a [LinkedMatrix-class] object is printed.
+#' Display the object, by printing, plotting or whatever suits its class.
 #'
-#' @param object Either a [ColumnLinkedMatrix-class] or a
-#' [RowLinkedMatrix-class] object.
+#' @param object A [LinkedMatrix-class] object.
 #' @export
 setMethod("show", signature(object = "LinkedMatrix"), show)
