@@ -1,3 +1,7 @@
+# LinkedMatrix 1.3.0.9000
+
+* Add examples.
+
 # LinkedMatrix 1.2.0
 
 * Fix wrong order in result when subsetting using unordered positive integers.

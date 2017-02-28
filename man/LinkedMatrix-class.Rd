@@ -20,6 +20,20 @@ methods for both \code{ColumnLinkedMatrix} and \code{RowLinkedMatrix} classes, e
 }
 }
 
+\examples{
+# Create an example RowLinkedMatrix from various matrix-like objects that
+# correspond in dimensions
+m <- RowLinkedMatrix(
+    ff::ff(initdata = rnorm(50), dim = c(5, 10)),
+    bigmemory::big.matrix(init = rnorm(50), nrow = 5, ncol = 10),
+    matrix(data = rnorm(50), nrow = 5, ncol = 10)
+)
+
+# Test if m is an object of either type ColumnLinkedMatrix or RowLinkedMatrix
+if (is(m, "LinkedMatrix")) {
+    message("m is a LinkedMatrix")
+}
+}
 \seealso{
 \linkS4class{ColumnLinkedMatrix} and \linkS4class{RowLinkedMatrix} for
 implementations of column-linked and row-linked matrices, respectively.

@@ -282,6 +282,7 @@ index.ColumnLinkedMatrix <- function(x, j = NULL, ...) {
 #' `ColumnLinkedMatrix` or `RowLinkedMatrix` object, [LinkedMatrix()] to create
 #' an empty, prespecified `LinkedMatrix` object, [nNodes()] to get the number
 #' of nodes of a `LinkedMatrix` object.
+#' @example man/examples/ColumnLinkedMatrix.R
 #' @export ColumnLinkedMatrix
 #' @exportClass ColumnLinkedMatrix
 ColumnLinkedMatrix <- setClass("ColumnLinkedMatrix", contains = "list")
@@ -306,6 +307,7 @@ ColumnLinkedMatrix <- setClass("ColumnLinkedMatrix", contains = "list")
 #' @return Either a `ColumnLinkedMatrix` or a `RowLinkedMatrix` object.
 #' @seealso [LinkedMatrix()] to create an empty, prespecified
 #' [LinkedMatrix-class] object.
+#' @example man/examples/initialize.R
 #' @export
 setMethod("initialize", signature(.Object = "ColumnLinkedMatrix"), function(.Object, ...) {
     nodes <- list(...)

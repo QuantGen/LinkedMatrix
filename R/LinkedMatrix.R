@@ -25,6 +25,7 @@ NULL
 #' @seealso [initialize()][initialize,ColumnLinkedMatrix-method()] to create a
 #' [ColumnLinkedMatrix-class] or [RowLinkedMatrix-class] object from a list of
 #' matrix-like objects.
+#' @example man/examples/LinkedMatrix.R
 #' @export
 LinkedMatrix <- function(nrow, ncol, nNodes, linkedBy, nodeInitializer, ...) {
     class <- ifelse(linkedBy == "columns", "ColumnLinkedMatrix", "RowLinkedMatrix")
@@ -91,6 +92,7 @@ as.matrix.LinkedMatrix <- function(x, ...) {
 #' @param x Either a [ColumnLinkedMatrix-class] or a [RowLinkedMatrix-class]
 #' object.
 #' @return The number of nodes.
+#' @example man/examples/nNodes.R
 #' @export
 nNodes <- function(x) {
     length(slot(x, ".Data"))
@@ -139,6 +141,7 @@ index <- function(x, ...) {
 #'
 #' @seealso [ColumnLinkedMatrix-class] and [RowLinkedMatrix-class] for
 #' implementations of column-linked and row-linked matrices, respectively.
+#' @example man/examples/LinkedMatrix-class.R
 #' @name LinkedMatrix-class
 #' @docType class
 #' @exportClass LinkedMatrix

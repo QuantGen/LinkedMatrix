@@ -33,6 +33,25 @@ nested as long as they are conformable.
 
 [\code{. Each object needs to have the same number of rows (for}ColumnLinkedMatrix\code{) or columns (for}RowLinkedMatrix\code{) to be linked together. If no matrix-like objects are given, a single 1x1 node of type}matrix\code{filled with}NA` is returned. [LinkedMatrix-class]: R:%60.%20Each%20object%20needs%20to%20have%20the%20same%20number%20of%20rows%20(for%0A%60ColumnLinkedMatrix%60)%20or%20columns%20(for%20%60RowLinkedMatrix%60)%20to%20be%20linked%0Atogether.%20If%20no%20matrix-like%20objects%20are%20given,%20a%20single%201x1%20node%20of%20type%0A%60matrix%60%20filled%20with%20%60NA%60%20is%20returned.%20[LinkedMatrix-class
 }
+\examples{
+# Create various matrix-like objects that correspond in dimensions
+m1 <- ff::ff(initdata = rnorm(50), dim = c(5, 10))
+m2 <- bigmemory::big.matrix(init = rnorm(50), nrow = 5, ncol = 10)
+m3 <- matrix(data = rnorm(50), nrow = 5, ncol = 10)
+
+# Create a ColumnLinkedMatrix object
+cm1 <- ColumnLinkedMatrix(m1, m2, m3)
+
+# Create a RowLinkedMatrix object
+rm1 <- RowLinkedMatrix(m1, m2, m3)
+
+# Alternatively, a LinkedMatrix object can also be created using the `new`
+# function
+cm2 <- new("ColumnLinkedMatrix", m1, m2, m3)
+
+# To specify the matrix-like objects as a list, use the `do.call` function
+rm2 <- do.call("RowLinkedMatrix", list(m1, m2, m3))
+}
 \seealso{
 \code{\link[=LinkedMatrix]{LinkedMatrix()}} to create an empty, prespecified
 \linkS4class{LinkedMatrix} object.
