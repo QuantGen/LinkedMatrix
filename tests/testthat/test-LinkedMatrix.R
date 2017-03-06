@@ -93,6 +93,28 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
         }
         expect_error(do.call(class, args), "*arguments need the same number of*")
 
+        # Warning if dimnames do not match
+        dimnamesMismatches <- list(
+            list(regexp = NA, dimnames = list(NULL, NULL, NULL)),
+            list(regexp = NA, dimnames = list(letters[1:3], NULL, NULL)),
+            list(regexp = NULL, dimnames = list(letters[1:3], letters[4:6], NULL))
+        )
+        for (dimnamesMismatch in dimnamesMismatches) {
+            if (class == "ColumnLinkedMatrix") {
+                args <- list(
+                    matrix(data = 0, nrow = 3, ncol = 1, dimnames = list(dimnamesMismatch$dimnames[[1]], NULL)),
+                    matrix(data = 0, nrow = 3, ncol = 1, dimnames = list(dimnamesMismatch$dimnames[[2]], NULL)),
+                    matrix(data = 0, nrow = 3, ncol = 1, dimnames = list(dimnamesMismatch$dimnames[[3]], NULL))
+                )
+            } else {
+                args <- list(
+                    matrix(data = 0, nrow = 1, ncol = 3, dimnames = list(NULL, dimnamesMismatch$dimnames[[1]])),
+                    matrix(data = 0, nrow = 1, ncol = 3, dimnames = list(NULL, dimnamesMismatch$dimnames[[2]])),
+                    matrix(data = 0, nrow = 1, ncol = 3, dimnames = list(NULL, dimnamesMismatch$dimnames[[3]]))
+                )
+            }
+            expect_warning(do.call(class, args), regexp = dimnamesMismatch$regexp)
+        }
     })
 
     for (nNodes in seq_len(ifelse(class == "ColumnLinkedMatrix", ncol(dummy), nrow(dummy)))) {

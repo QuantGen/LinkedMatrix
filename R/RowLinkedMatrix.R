@@ -262,13 +262,19 @@ setMethod("initialize", signature(.Object = "RowLinkedMatrix"), function(.Object
     if (length(nodes) == 0) {
         nodes[[1]] <- matrix()
     } else {
-        # Detect non-matrix objects by checking dimensions
+        # Stop if matrices are not matrix-like
         if (any(sapply(nodes, function(x) length(dim(x)) != 2))) {
             stop("arguments need to be matrix-like")
         }
-        # Detect matrices that do not match in dimensions
+        # Stop if dimensions of matrices do not match
         if (length(unique(sapply(nodes, ncol))) != 1) {
             stop("arguments need the same number of columns")
+        }
+        # Warn if colnames of matrices do not match
+        names <- lapply(nodes, colnames)
+        names <- names[!sapply(names, is.null)]
+        if (length(names) > 1 && !all(duplicated(names) | duplicated(names, fromLast = TRUE))) {
+            warning("column names of matrix-like objects do not match")
         }
     }
     .Object <- callNextMethod(.Object, nodes)

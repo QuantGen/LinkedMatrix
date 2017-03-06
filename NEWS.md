@@ -1,5 +1,7 @@
 # LinkedMatrix 1.3.0.9000
 
+* Warn if rownames (for `ColumnLinkedMatrix`) or colnames (for
+  `RowLinkedMatrix`) do not match.
 * Add examples.
 
 # LinkedMatrix 1.2.0
