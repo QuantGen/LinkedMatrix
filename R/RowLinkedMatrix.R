@@ -1,4 +1,4 @@
-subset.RowLinkedMatrix <- function(x, i, j, ..., drop) {
+subset.RowLinkedMatrix <- function(x, i, j, ..., drop = TRUE) {
     # Check indices and dimensions
     nX <- nrow(x)
     pX <- ncol(x)
@@ -282,11 +282,9 @@ setMethod("initialize", signature(.Object = "RowLinkedMatrix"), function(.Object
 })
 
 
-#' @rdname sub-ColumnLinkedMatrix-method
 #' @export
-setMethod("[", signature(x = "RowLinkedMatrix"), subset.RowLinkedMatrix)
+`[.RowLinkedMatrix` <- subset.RowLinkedMatrix
 
 
-#' @rdname subset-ColumnLinkedMatrix-method
 #' @export
-setReplaceMethod("[", signature(x = "RowLinkedMatrix"), replace.RowLinkedMatrix)
+`[<-.RowLinkedMatrix` <- replace.RowLinkedMatrix

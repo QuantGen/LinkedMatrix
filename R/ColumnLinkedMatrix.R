@@ -1,4 +1,4 @@
-subset.ColumnLinkedMatrix <- function(x, i, j, ..., drop) {
+subset.ColumnLinkedMatrix <- function(x, i, j, ..., drop = TRUE) {
     # Check indices and dimensions
     nX <- nrow(x)
     pX <- ncol(x)
@@ -335,27 +335,9 @@ setMethod("initialize", signature(.Object = "ColumnLinkedMatrix"), function(.Obj
 })
 
 
-#' Extract Parts of a LinkedMatrix Object.
-#'
-#' This method is run when the `[]` operator is used on a
-#' [ColumnLinkedMatrix-class] or [RowLinkedMatrix-class] object.
-#'
-#' @inheritParams base::`[`
-#' @param j Column indices.
-#' @param ... Additional arguments
-#' @return A subset.
 #' @export
-setMethod("[", signature(x = "ColumnLinkedMatrix"), subset.ColumnLinkedMatrix)
+`[.ColumnLinkedMatrix` <- subset.ColumnLinkedMatrix
 
 
-#' Replace Parts of a LinkedMatrix Object.
-#'
-#' This method is run when the `[]` operator is used in an assignment on a
-#' [ColumnLinkedMatrix-class] or [RowLinkedMatrix-class] object.
-#'
-#' @inheritParams base::`[<-`
-#' @param j Column indices.
-#' @param ... Additional arguments
-#' @return A subset.
 #' @export
-setReplaceMethod("[", signature(x = "ColumnLinkedMatrix"), replace.ColumnLinkedMatrix)
+`[<-.ColumnLinkedMatrix` <- replace.ColumnLinkedMatrix
