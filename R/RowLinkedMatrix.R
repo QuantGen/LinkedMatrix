@@ -29,7 +29,7 @@ subset.RowLinkedMatrix <- function(x, i, j, ..., drop = TRUE) {
     # result matrix later (avoiding a copy)
     isUnsorted <- is.unsorted(i)
     if (isUnsorted) {
-        # Reorder rows for sequential retrieval by chunk
+        # Reorder rows for sequential retrieval by node
         originalOrder <- rank(i, ties.method = "first")
         sortedRows <- sort(i)
     } else {
@@ -37,17 +37,17 @@ subset.RowLinkedMatrix <- function(x, i, j, ..., drop = TRUE) {
     }
     # Compute node inventory
     globalIndex <- index(x, sortedRows)
-    whatChunks <- unique(globalIndex[, 1])
-    # If there are several chunks involved, aggregate the result in a separate
+    whichNodes <- unique(globalIndex[, 1])
+    # If there are several nodes involved, aggregate the result in a separate
     # matrix, otherwise pass through result
-    if (length(whatChunks) > 1) {
+    if (length(whichNodes) > 1) {
         # Initialize result matrix as integer matrix because it does not take up as
         # much space as double() but is more useful than logical()
         Z <- matrix(data = integer(), nrow = n, ncol = p)
         # Use dimnames instead of rownames and colnames to avoid copy
         dimnames(Z) <- list(rownames(x)[sortedRows], colnames(x)[j])
         end <- 0
-        for (k in whatChunks) {
+        for (k in whichNodes) {
             localIndex <- globalIndex[globalIndex[, 1] == k, , drop = FALSE]
             ini <- end + 1
             end <- ini + nrow(localIndex) - 1
@@ -55,7 +55,7 @@ subset.RowLinkedMatrix <- function(x, i, j, ..., drop = TRUE) {
             Z[ini:end, ] <- as.matrix(x[[k]][localIndex[, 3], j, drop = FALSE])
         }
     } else {
-        Z <- as.matrix(x[[whatChunks]][globalIndex[, 3], j, drop = FALSE])
+        Z <- as.matrix(x[[whichNodes]][globalIndex[, 3], j, drop = FALSE])
     }
     if (isUnsorted) {
         # Return to original order
