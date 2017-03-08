@@ -224,27 +224,19 @@ nodes.RowLinkedMatrix <- function(x) {
 #' @export
 index.RowLinkedMatrix <- function(x, i = NULL, ...) {
     nodes <- nodes(x)
-    n <- nodes[nrow(nodes), 3]
     if (!is.null(i)) {
         i <- as.integer(i)
         if (is.unsorted(i)) {
             i <- sort(i)
         }
     } else {
-        i <- seq_len(n)
+        i <- seq_len(nodes[nrow(nodes), 3])
     }
     index <- matrix(data = integer(), nrow = length(i), ncol = 3, dimnames = list(NULL, c("node", "row.global", "row.local")))
+    whichNode <- .bincode(i, breaks = c(0, nodes[, 3]))
+    index[, 1] <- whichNode
     index[, 2] <- i
-    for (node in 1:nrow(nodes)) {
-        globalIdx <- which(i >= nodes[node, 2] & i <= nodes[node, 3])
-        if (node > 1) {
-            localIdx <- i[globalIdx] - nodes[node - 1, 3]
-        } else {
-            localIdx <- i[globalIdx]
-        }
-        index[globalIdx, 1] <- node
-        index[globalIdx, 3] <- localIdx
-    }
+    index[, 3] <- i - nodes[whichNode, 2] + 1L
     return(index)
 }
 
