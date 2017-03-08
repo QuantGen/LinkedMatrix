@@ -210,14 +210,14 @@ rbind.RowLinkedMatrix <- function(..., deparse.level = 1) {
 #' @export
 nodes.RowLinkedMatrix <- function(x) {
     n <- nNodes(x)
-    OUT <- matrix(integer(), nrow = n, ncol = 3, dimnames = list(NULL, c("node", "row.ini", "row.end")))
-    end <- 0
+    nodes <- matrix(integer(), nrow = n, ncol = 3, dimnames = list(NULL, c("node", "row.ini", "row.end")))
+    end <- 0L
     for (node in seq_len(n)) {
-        ini <- end + 1
-        end <- ini + nrow(x[[node]]) - 1
-        OUT[node, ] <- c(node, ini, end)
+        ini <- end + 1L
+        end <- ini + nrow(x[[node]]) - 1L
+        nodes[node, ] <- c(node, ini, end)
     }
-    return(OUT)
+    return(nodes)
 }
 
 
