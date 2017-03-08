@@ -102,7 +102,7 @@ replace.ColumnLinkedMatrix <- function(x, i, j, ..., value) {
 #' @export
 dim.ColumnLinkedMatrix <- function(x) {
     n <- nrow(x[[1]])
-    p <- 0
+    p <- 0L
     for (i in 1:nNodes(x)) {
         p <- p + ncol(x[[i]])
     }

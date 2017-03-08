@@ -102,7 +102,7 @@ replace.RowLinkedMatrix <- function(x, i, j, ..., value) {
 #' @export
 dim.RowLinkedMatrix <- function(x) {
     p <- ncol(x[[1]])
-    n <- 0
+    n <- 0L
     for (i in 1:nNodes(x)) {
         n <- n + nrow(x[[i]])
     }
