@@ -226,14 +226,15 @@ index.ColumnLinkedMatrix <- function(x, j = NULL, ...) {
     nodes <- nodes(x)
     p <- nodes[nrow(nodes), 3]
     if (!is.null(j)) {
+        j <- as.integer(j)
         if (is.unsorted(j)) {
             j <- sort(j)
         }
     } else {
         j <- seq_len(p)
     }
-    OUT <- matrix(nrow = length(j), ncol = 3, dimnames = list(NULL, c("node", "col.global", "col.local")))
-    OUT[, 2] <- j
+    index <- matrix(data = integer(), nrow = length(j), ncol = 3, dimnames = list(NULL, c("node", "col.global", "col.local")))
+    index[, 2] <- j
     for (node in 1:nrow(nodes)) {
         globalIdx <- which(j >= nodes[node, 2] & j <= nodes[node, 3])
         if (node > 1) {
@@ -241,10 +242,10 @@ index.ColumnLinkedMatrix <- function(x, j = NULL, ...) {
         } else {
             localIdx <- j[globalIdx]
         }
-        OUT[globalIdx, 1] <- node
-        OUT[globalIdx, 3] <- localIdx
+        index[globalIdx, 1] <- node
+        index[globalIdx, 3] <- localIdx
     }
-    return(OUT)
+    return(index)
 }
 
 
