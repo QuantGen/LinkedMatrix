@@ -112,23 +112,22 @@ dim.RowLinkedMatrix <- function(x) {
 
 # This function looks like an S3 method, but isn't one.
 rownames.RowLinkedMatrix <- function(x) {
-    out <- NULL
+    names <- NULL
     if (!is.null(rownames(x[[1]]))) {
         n <- dim(x)[1]
-        out <- rep("", n)
+        names <- rep("", n)
         nodes <- nodes(x)
         for (i in 1:nrow(nodes)) {
-            out[(nodes[i, 2]:nodes[i, 3])] <- rownames(x[[i]])
+            names[(nodes[i, 2]:nodes[i, 3])] <- rownames(x[[i]])
         }
     }
-    return(out)
+    return(names)
 }
 
 
 # This function looks like an S3 method, but isn't one.
 colnames.RowLinkedMatrix <- function(x) {
-    out <- colnames(x[[1]])
-    return(out)
+    colnames(x[[1]])
 }
 
 
