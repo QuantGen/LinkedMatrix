@@ -5,7 +5,7 @@ chunkRanges <- function(a, n, i = NULL) {
     k <- as.integer(a / n)
     r <- as.integer(a %% n)
     range <- function(i, k, r) {
-        c((i - 1) * k + min(i - 1, r) + 1, i * k + min(i, r))
+        c((i - 1L) * k + min(i - 1L, r) + 1L, i * k + min(i, r))
     }
     if (!is.null(i)) {
         range(i, k, r)

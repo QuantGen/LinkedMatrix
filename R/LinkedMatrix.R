@@ -28,6 +28,8 @@ NULL
 #' @example man/examples/LinkedMatrix.R
 #' @export
 LinkedMatrix <- function(nrow, ncol, nNodes, linkedBy, nodeInitializer, ...) {
+    nrow <- as.integer(nrow)
+    ncol <- as.integer(ncol)
     class <- ifelse(linkedBy == "columns", "ColumnLinkedMatrix", "RowLinkedMatrix")
     # Look for an internal function first
     ex <- try(nodeInitializer <- get(nodeInitializer), silent = TRUE)
@@ -38,11 +40,11 @@ LinkedMatrix <- function(nrow, ncol, nNodes, linkedBy, nodeInitializer, ...) {
     ranges <- chunkRanges(ifelse(class == "ColumnLinkedMatrix", ncol, nrow), nNodes)
     for (i in seq_len(nNodes)) {
         if (class == "RowLinkedMatrix") {
-            n <- ranges[2, i] - ranges[1, i] + 1
+            n <- ranges[2L, i] - ranges[1L, i] + 1L
             p <- ncol
         } else {
             n <- nrow
-            p <- ranges[2, i] - ranges[1, i] + 1
+            p <- ranges[2L, i] - ranges[1L, i] + 1L
         }
         linkedMatrix[[i]] <- nodeInitializer(nodeIndex = i, nrow = n, ncol = p, ...)
     }
@@ -65,7 +67,7 @@ ffNodeInitializer <- function(nodeIndex, nrow, ncol, vmode, ...) {
 
 show <- function(object) {
     d <- dim(object)
-    cat(d[1], "x", d[2], "linked matrix of class", class(object), "\n")
+    cat(d[1L], "x", d[2L], "linked matrix of class", class(object), "\n")
 }
 
 

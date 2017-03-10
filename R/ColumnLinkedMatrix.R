@@ -37,31 +37,31 @@ subset.ColumnLinkedMatrix <- function(x, i, j, ..., drop = TRUE) {
     }
     # Compute node inventory
     globalIndex <- index(x, sortedColumns)
-    whichNodes <- unique(globalIndex[, 1])
+    whichNodes <- unique(globalIndex[, 1L])
     # If there are several nodes involved, aggregate the result in a separate
     # matrix, otherwise pass through result
-    if (length(whichNodes) > 1) {
+    if (length(whichNodes) > 1L) {
         # Initialize result matrix as integer matrix because it does not take up as
         # much space as double() but is more useful than logical()
         Z <- matrix(data = integer(), nrow = n, ncol = p)
         # Use dimnames instead of rownames and colnames to avoid copy
         dimnames(Z) <- list(rownames(x)[i], colnames(x)[sortedColumns])
-        end <- 0
+        end <- 0L
         for (k in whichNodes) {
-            localIndex <- globalIndex[globalIndex[, 1] == k, , drop = FALSE]
-            ini <- end + 1
-            end <- ini + nrow(localIndex) - 1
+            localIndex <- globalIndex[globalIndex[, 1L] == k, , drop = FALSE]
+            ini <- end + 1L
+            end <- ini + nrow(localIndex) - 1L
             # Convert to matrix to support data frames
-            Z[, ini:end] <- as.matrix(x[[k]][i, localIndex[, 3], drop = FALSE])
+            Z[, ini:end] <- as.matrix(x[[k]][i, localIndex[, 3L], drop = FALSE])
         }
     } else {
-        Z <- as.matrix(x[[whichNodes]][i, globalIndex[, 3], drop = FALSE])
+        Z <- as.matrix(x[[whichNodes]][i, globalIndex[, 3L], drop = FALSE])
     }
     if (isUnsorted) {
         # Return to original order
         Z <- Z[, originalOrder, drop = FALSE]
     }
-    if (drop == TRUE && (n == 1 || p == 1)) {
+    if (drop == TRUE && (n == 1L || p == 1L)) {
         # Let R handle drop behavior
         return(Z[, ])
     } else {
@@ -91,8 +91,8 @@ replace.ColumnLinkedMatrix <- function(x, i, j, ..., value) {
         index <- dotdotdot$index
     }
     for (k in 1:nrow(nodes)) {
-        col_z <- (j >= nodes[k, 2]) & (j <= nodes[k, 3])
-        colLocal <- index[j[col_z], 3]
+        col_z <- (j >= nodes[k, 2L]) & (j <= nodes[k, 3L])
+        colLocal <- index[j[col_z], 3L]
         x[[k]][i, colLocal] <- Z[, col_z]
     }
     return(x)
@@ -101,7 +101,7 @@ replace.ColumnLinkedMatrix <- function(x, i, j, ..., value) {
 
 #' @export
 dim.ColumnLinkedMatrix <- function(x) {
-    n <- nrow(x[[1]])
+    n <- nrow(x[[1L]])
     p <- 0L
     for (i in 1:nNodes(x)) {
         p <- p + ncol(x[[i]])
@@ -112,19 +112,19 @@ dim.ColumnLinkedMatrix <- function(x) {
 
 # This function looks like an S3 method, but isn't one.
 rownames.ColumnLinkedMatrix <- function(x) {
-    rownames(x[[1]])
+    rownames(x[[1L]])
 }
 
 
 # This function looks like an S3 method, but isn't one.
 colnames.ColumnLinkedMatrix <- function(x) {
     names <- NULL
-    if (!is.null(colnames(x[[1]]))) {
-        p <- dim(x)[2]
+    if (!is.null(colnames(x[[1L]]))) {
+        p <- dim(x)[2L]
         names <- rep("", p)
         nodes <- nodes(x)
         for (i in 1:nrow(nodes)) {
-            names[(nodes[i, 2]:nodes[i, 3])] <- colnames(x[[i]])
+            names[(nodes[i, 2L]:nodes[i, 3L])] <- colnames(x[[i]])
         }
     }
     return(names)
@@ -150,7 +150,7 @@ dimnames.ColumnLinkedMatrix <- function(x) {
 `colnames<-.ColumnLinkedMatrix` <- function(x, value) {
     nodes <- nodes(x)
     for (i in 1:nrow(nodes)) {
-        colnames(x[[i]]) <- value[(nodes[i, 2]:nodes[i, 3])]
+        colnames(x[[i]]) <- value[(nodes[i, 2L]:nodes[i, 3L])]
     }
     return(x)
 }
@@ -159,10 +159,10 @@ dimnames.ColumnLinkedMatrix <- function(x) {
 #' @export
 `dimnames<-.ColumnLinkedMatrix` <- function(x, value) {
     d <- dim(x)
-    rownames <- value[[1]]
-    colnames <- value[[2]]
-    if (!is.list(value) || length(value) != 2 || !(is.null(rownames) || length(rownames) == d[1]) || !(is.null(colnames) ||
-        length(colnames) == d[2])) {
+    rownames <- value[[1L]]
+    colnames <- value[[2L]]
+    if (!is.list(value) || length(value) != 2L || !(is.null(rownames) || length(rownames) == d[1L]) || !(is.null(colnames) ||
+        length(colnames) == d[2L])) {
         stop("invalid dimnames")
     }
     x <- `rownames<-.ColumnLinkedMatrix`(x, rownames)
@@ -183,7 +183,7 @@ dimnames.ColumnLinkedMatrix <- function(x) {
 #' @param ... Matrix-like objects to be combined by columns.
 #' @param deparse.level Currently unused, defaults to 0.
 #' @export
-cbind.ColumnLinkedMatrix <- function(..., deparse.level = 0) {
+cbind.ColumnLinkedMatrix <- function(..., deparse.level = 0L) {
     dotdotdot <- list(...)
     nodes <- list()
     for (i in seq_len(length(dotdotdot))) {
@@ -201,7 +201,7 @@ cbind.ColumnLinkedMatrix <- function(..., deparse.level = 0) {
 
 #' @rdname rbind.RowLinkedMatrix
 #' @export
-rbind.ColumnLinkedMatrix <- function(..., deparse.level = 1) {
+rbind.ColumnLinkedMatrix <- function(..., deparse.level = 1L) {
     stop("rbind is currently undefined for ColumnLinkedMatrix")
 }
 
@@ -209,7 +209,7 @@ rbind.ColumnLinkedMatrix <- function(..., deparse.level = 1) {
 #' @export
 nodes.ColumnLinkedMatrix <- function(x) {
     n <- nNodes(x)
-    nodes <- matrix(integer(), nrow = n, ncol = 3, dimnames = list(NULL, c("node", "col.ini", "col.end")))
+    nodes <- matrix(integer(), nrow = n, ncol = 3L, dimnames = list(NULL, c("node", "col.ini", "col.end")))
     end <- 0L
     for (node in 1:n) {
         ini <- end + 1L
@@ -229,13 +229,13 @@ index.ColumnLinkedMatrix <- function(x, j = NULL, ...) {
             j <- sort(j)
         }
     } else {
-        j <- seq_len(nodes[nrow(nodes), 3])
+        j <- seq_len(nodes[nrow(nodes), 3L])
     }
-    index <- matrix(data = integer(), nrow = length(j), ncol = 3, dimnames = list(NULL, c("node", "col.global", "col.local")))
-    whichNode <- .bincode(j, breaks = c(0, nodes[, 3]))
-    index[, 1] <- whichNode
-    index[, 2] <- j
-    index[, 3] <- j - nodes[whichNode, 2] + 1L
+    index <- matrix(data = integer(), nrow = length(j), ncol = 3L, dimnames = list(NULL, c("node", "col.global", "col.local")))
+    whichNode <- .bincode(j, breaks = c(0L, nodes[, 3L]))
+    index[, 1L] <- whichNode
+    index[, 2L] <- j
+    index[, 3L] <- j - nodes[whichNode, 2L] + 1L
     return(index)
 }
 
@@ -304,21 +304,21 @@ ColumnLinkedMatrix <- setClass("ColumnLinkedMatrix", contains = "list")
 setMethod("initialize", signature(.Object = "ColumnLinkedMatrix"), function(.Object, ...) {
     nodes <- list(...)
     # Append at least one matrix
-    if (length(nodes) == 0) {
-        nodes[[1]] <- matrix()
+    if (length(nodes) == 0L) {
+        nodes[[1L]] <- matrix()
     } else {
         # Stop if matrices are not matrix-like
-        if (any(sapply(nodes, function(x) length(dim(x)) != 2))) {
+        if (any(sapply(nodes, function(x) length(dim(x)) != 2L))) {
             stop("arguments need to be matrix-like")
         }
         # Stop if dimensions of matrices do not match
-        if (length(unique(sapply(nodes, nrow))) != 1) {
+        if (length(unique(sapply(nodes, nrow))) != 1L) {
             stop("arguments need the same number of rows")
         }
         # Warn if rownames of matrices do not match
         names <- lapply(nodes, rownames)
         names <- names[!sapply(names, is.null)]
-        if (length(names) > 1 && !all(duplicated(names) | duplicated(names, fromLast = TRUE))) {
+        if (length(names) > 1L && !all(duplicated(names) | duplicated(names, fromLast = TRUE))) {
             warning("row names of matrix-like objects do not match")
         }
     }
