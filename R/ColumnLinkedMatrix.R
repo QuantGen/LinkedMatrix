@@ -3,10 +3,10 @@ subset.ColumnLinkedMatrix <- function(x, i, j, ..., drop = TRUE) {
     nX <- nrow(x)
     pX <- ncol(x)
     if (missing(i)) {
-        i <- 1:nX
+        i <- 1L:nX
     }
     if (missing(j)) {
-        j <- 1:pX
+        j <- 1L:pX
     }
     if (class(i) == "logical") {
         i <- rep_len(i, nX)
@@ -72,10 +72,10 @@ subset.ColumnLinkedMatrix <- function(x, i, j, ..., drop = TRUE) {
 
 replace.ColumnLinkedMatrix <- function(x, i, j, ..., value) {
     if (missing(i)) {
-        i <- 1:nrow(x)
+        i <- 1L:nrow(x)
     }
     if (missing(j)) {
-        j <- 1:ncol(x)
+        j <- 1L:ncol(x)
     }
     Z <- matrix(nrow = length(i), ncol = length(j), data = value)
     # Retrieve nodes and index from ... to speed up sequential writes
@@ -90,7 +90,7 @@ replace.ColumnLinkedMatrix <- function(x, i, j, ..., value) {
     } else {
         index <- dotdotdot$index
     }
-    for (k in 1:nrow(nodes)) {
+    for (k in 1L:nrow(nodes)) {
         col_z <- (j >= nodes[k, 2L]) & (j <= nodes[k, 3L])
         colLocal <- index[j[col_z], 3L]
         x[[k]][i, colLocal] <- Z[, col_z]
@@ -103,7 +103,7 @@ replace.ColumnLinkedMatrix <- function(x, i, j, ..., value) {
 dim.ColumnLinkedMatrix <- function(x) {
     n <- nrow(x[[1L]])
     p <- 0L
-    for (i in 1:nNodes(x)) {
+    for (i in 1L:nNodes(x)) {
         p <- p + ncol(x[[i]])
     }
     return(c(n, p))
@@ -123,7 +123,7 @@ colnames.ColumnLinkedMatrix <- function(x) {
         p <- dim(x)[2L]
         names <- rep("", p)
         nodes <- nodes(x)
-        for (i in 1:nrow(nodes)) {
+        for (i in 1L:nrow(nodes)) {
             names[(nodes[i, 2L]:nodes[i, 3L])] <- colnames(x[[i]])
         }
     }
@@ -139,7 +139,7 @@ dimnames.ColumnLinkedMatrix <- function(x) {
 
 # This function looks like an S3 method, but isn't one.
 `rownames<-.ColumnLinkedMatrix` <- function(x, value) {
-    for (i in 1:nNodes(x)) {
+    for (i in 1L:nNodes(x)) {
         rownames(x[[i]]) <- value
     }
     return(x)
@@ -149,7 +149,7 @@ dimnames.ColumnLinkedMatrix <- function(x) {
 # This function looks like an S3 method, but isn't one.
 `colnames<-.ColumnLinkedMatrix` <- function(x, value) {
     nodes <- nodes(x)
-    for (i in 1:nrow(nodes)) {
+    for (i in 1L:nrow(nodes)) {
         colnames(x[[i]]) <- value[(nodes[i, 2L]:nodes[i, 3L])]
     }
     return(x)
@@ -211,7 +211,7 @@ nodes.ColumnLinkedMatrix <- function(x) {
     n <- nNodes(x)
     nodes <- matrix(integer(), nrow = n, ncol = 3L, dimnames = list(NULL, c("node", "col.ini", "col.end")))
     end <- 0L
-    for (node in 1:n) {
+    for (node in 1L:n) {
         ini <- end + 1L
         end <- ini + ncol(x[[node]]) - 1L
         nodes[node, ] <- c(node, ini, end)
