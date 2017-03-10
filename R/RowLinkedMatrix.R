@@ -8,17 +8,21 @@ subset.RowLinkedMatrix <- function(x, i, j, ..., drop = TRUE) {
     if (missing(j)) {
         j <- 1L:pX
     }
-    if (class(i) == "logical") {
+    if (typeof(i) == "logical") {
         i <- rep_len(i, nX)
         i <- which(i)
-    } else if (class(i) == "character") {
+    } else if (typeof(i) == "character") {
         i <- match(i, rownames(x))
+    } else if (typeof(i) == "double") {
+        i <- as.integer(i)
     }
-    if (class(j) == "logical") {
+    if (typeof(j) == "logical") {
         j <- rep_len(j, pX)
         j <- which(j)
-    } else if (class(j) == "character") {
+    } else if (typeof(j) == "character") {
         j <- match(j, colnames(x))
+    } else if (typeof(j) == "double") {
+        j <- as.integer(j)
     }
     n <- length(i)
     p <- length(j)
