@@ -36,3 +36,6 @@ rm[1:3, 1:3]
 # Get a reference to one of the nodes
 n <- cm[[2]]
 class(n) == "big.matrix"
+
+# LinkedMatrix objects are matrix-like and can be nested
+rcm <- RowLinkedMatrix(cm, cm)
