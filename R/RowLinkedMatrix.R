@@ -244,17 +244,14 @@ index.RowLinkedMatrix <- function(x, i = NULL, ...) {
 }
 
 
-#' Converts an Object to a RowLinkedMatrix Object.
-#'
-#' @param x An object to convert to a [RowLinkedMatrix-class] object.
-#' @param ... Additional arguments.
-#' @return A [RowLinkedMatrix-class] object.
+#' @rdname as.ColumnLinkedMatrix
 #' @export
 as.RowLinkedMatrix <- function(x, ...) {
     UseMethod("as.RowLinkedMatrix")
 }
 
 
+#' @rdname as.ColumnLinkedMatrix
 #' @export
 as.RowLinkedMatrix.list <- function(x, ...) {
     do.call("RowLinkedMatrix", x, ...)
