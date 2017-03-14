@@ -15,30 +15,15 @@ This package is deliberately kept simple. For computational methods that use Lin
 Example
 -------
 
-The following code generates two random memory-mapped matrices using `ff` and links them together by rows in a `RowLinkedMatrix`. The `LinkedMatrix` instance can then be treated like any other regular matrix.
+The following code generates three different matrix-like objects and links them together by rows in a `RowLinkedMatrix`. The `LinkedMatrix` instance can then be treated like any other regular matrix.
 
 ```R
 library(LinkedMatrix)
-library(ff)
 
-ff1 <- ff(dim = c(5, 10), vmode = "double", initdata = rnorm(50))
-ff2 <- ff(dim = c(5, 10), vmode = "double", initdata = rnorm(50))
-m <- RowLinkedMatrix(ff1, ff2)
-
-dim(m)
-m[1, ]
-m[, 1]
-```
-
-This can also be expressed as:
-
-```R
-library(LinkedMatrix)
-library(ff)
-
-m <- LinkedMatrix(nrow = 10, ncol = 10, nNodes = 2, linkedBy = "rows",
-                  nodeInitializer = "ffNodeInitializer", vmode = "double")
-m[] <- rnorm(100)
+m1 <- ff::ff(initdata = rnorm(50), dim = c(5, 10))
+m2 <- bigmemory::big.matrix(init = rnorm(50), nrow = 5, ncol = 10)
+m3 <- matrix(data = rnorm(50), nrow = 5, ncol = 10)
+m <- RowLinkedMatrix(m1, m2, m3)
 
 dim(m)
 m[1, ]
