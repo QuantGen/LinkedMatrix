@@ -5,9 +5,9 @@
 \alias{cbind.RowLinkedMatrix}
 \title{Combine Matrix-Like Objects by Columns.}
 \usage{
-\method{cbind}{ColumnLinkedMatrix}(..., deparse.level = 0)
+\method{cbind}{ColumnLinkedMatrix}(..., deparse.level = 0L)
 
-\method{cbind}{RowLinkedMatrix}(..., deparse.level = 0)
+\method{cbind}{RowLinkedMatrix}(..., deparse.level = 0L)
 }
 \arguments{
 \item{...}{Matrix-like objects to be combined by columns.}

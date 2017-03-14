@@ -244,6 +244,23 @@ index.ColumnLinkedMatrix <- function(x, j = NULL, ...) {
 }
 
 
+#' Converts an Object to a ColumnLinkedMatrix Object.
+#'
+#' @param x An object to convert to a [ColumnLinkedMatrix-class] object.
+#' @param ... Additional arguments.
+#' @return A [ColumnLinkedMatrix-class] object.
+#' @export
+as.ColumnLinkedMatrix <- function(x, ...) {
+    UseMethod("as.ColumnLinkedMatrix")
+}
+
+
+#' @export
+as.ColumnLinkedMatrix.list <- function(x, ...) {
+    do.call("ColumnLinkedMatrix", x, ...)
+}
+
+
 #' A Class for Linking Matrices by Columns or Rows.
 #'
 #' This class treats a list of matrix-like objects that are linked together by
