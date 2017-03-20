@@ -294,9 +294,11 @@ as.ColumnLinkedMatrix.list <- function(x, ...) {
 #' - `rbind` (for `RowLinkedMatrix`)
 #'
 #' @seealso [initialize()][initialize,ColumnLinkedMatrix-method()] to create a
-#' `ColumnLinkedMatrix` or `RowLinkedMatrix` object, [LinkedMatrix()] to create
-#' an empty, prespecified `LinkedMatrix` object, [nNodes()] to get the number
-#' of nodes of a `LinkedMatrix` object.
+#' `ColumnLinkedMatrix` or `RowLinkedMatrix` object from scratch,
+#' [as.ColumnLinkedMatrix()] to create a `ColumnLinkedMatrix` or
+#' `RowLinkedMatrix` object from other objects, [LinkedMatrix()] to create an
+#' empty, prespecified `LinkedMatrix` object, [nNodes()] to get the number of
+#' nodes of a `LinkedMatrix` object.
 #' @example man/examples/ColumnLinkedMatrix.R
 #' @export ColumnLinkedMatrix
 #' @exportClass ColumnLinkedMatrix

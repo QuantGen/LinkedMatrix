@@ -89,7 +89,9 @@ rcm <- RowLinkedMatrix(cm, cm)
 }
 \seealso{
 \link[=initialize,ColumnLinkedMatrix-method]{initialize()} to create a
-\code{ColumnLinkedMatrix} or \code{RowLinkedMatrix} object, \code{\link[=LinkedMatrix]{LinkedMatrix()}} to create
-an empty, prespecified \code{LinkedMatrix} object, \code{\link[=nNodes]{nNodes()}} to get the number
-of nodes of a \code{LinkedMatrix} object.
+\code{ColumnLinkedMatrix} or \code{RowLinkedMatrix} object from scratch,
+\code{\link[=as.ColumnLinkedMatrix]{as.ColumnLinkedMatrix()}} to create a \code{ColumnLinkedMatrix} or
+\code{RowLinkedMatrix} object from other objects, \code{\link[=LinkedMatrix]{LinkedMatrix()}} to create an
+empty, prespecified \code{LinkedMatrix} object, \code{\link[=nNodes]{nNodes()}} to get the number of
+nodes of a \code{LinkedMatrix} object.
 }
