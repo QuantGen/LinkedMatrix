@@ -36,13 +36,13 @@ Installation
 
 To get the current released version from CRAN:
 
-```r
+```R
 install.packages("LinkedMatrix")
 ```
 
 To get the current development version from GitHub:
 
-```r
+```R
 # install.packages("devtools")
 devtools::install_github("QuantGen/LinkedMatrix")
 ```
