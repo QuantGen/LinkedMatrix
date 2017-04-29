@@ -273,7 +273,7 @@ setMethod("initialize", signature(.Object = "RowLinkedMatrix"), function(.Object
         nodes[[1L]] <- matrix()
     } else {
         # Stop if matrices are not matrix-like
-        if (any(sapply(nodes, function(x) length(dim(x)) != 2L))) {
+        if (!all(sapply(nodes, isMatrixLike))) {
             stop("arguments need to be matrix-like")
         }
         # Stop if dimensions of matrices do not match
