@@ -12,6 +12,7 @@ BugReports: https://github.com/QuantGen/LinkedMatrix/issues
 Imports:
     methods
 Suggests:
+    BGData,
     ff,
     bigmemory,
     testthat,
