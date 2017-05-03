@@ -2,8 +2,9 @@ Package: LinkedMatrix
 Version: 1.3.0.9000
 License: MIT + file LICENSE
 Title: Column-Linked and Row-Linked Matrices
-Description: Matrices implemented as ordered collections of matrix-like nodes,
-    linked by columns or rows. Particularly useful for memory-mapped matrices.
+Description: A class that links matrix-like objects (nodes) by rows or by
+    columns while behaving similarly to a base R matrix. Very large matrices
+    are supported if the nodes are memory-mapped objects.
 Authors@R: c(
     person("Gustavo", "de los Campos", email = "gustavoc@msu.edu", role = c("aut")),
     person("Alexander", "Grueneberg", email = "alexander.grueneberg@googlemail.com", role = c("aut", "cre")))
