@@ -31,16 +31,16 @@ m[, 1]
 ```
 
 
-Installation Instructions
--------------------------
+Installation
+------------
 
-To get the current stable version from CRAN:
+Install the stable version from CRAN:
 
 ```R
 install.packages("LinkedMatrix")
 ```
 
-To get the current development version from GitHub:
+Alternatively, install the development version from GitHub:
 
 ```R
 # install.packages("devtools")
