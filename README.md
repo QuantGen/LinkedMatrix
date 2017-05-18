@@ -48,6 +48,13 @@ devtools::install_github("QuantGen/LinkedMatrix")
 ```
 
 
+Contribute
+----------
+
+- Issue Tracker: https://github.com/QuantGen/LinkedMatrix/issues
+- Source Code: https://github.com/QuantGen/LinkedMatrix
+
+
 Documentation
 -------------
 
