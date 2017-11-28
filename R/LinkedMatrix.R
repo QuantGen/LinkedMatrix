@@ -72,6 +72,16 @@ show <- function(object) {
 
 
 #' @export
+str.LinkedMatrix <- function(object, ...) {
+    show(object)
+    for (i in 1:nNodes(object)) {
+        d <- dim(object[[i]])
+        cat("  * Node ", i, ": ", d[1L], " x ", d[2L], " matrix-like object of class ", class(object[[i]]), "\n", sep = "")
+    }
+}
+
+
+#' @export
 length.LinkedMatrix <- function(x) {
     prod(dim(x))
 }
