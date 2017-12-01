@@ -1,76 +1,83 @@
-subset.ColumnLinkedMatrix <- function(x, i, j, ..., drop = TRUE) {
-    # Check indices and dimensions
-    nX <- nrow(x)
-    pX <- ncol(x)
-    if (missing(i)) {
-        i <- 1L:nX
-    }
-    if (missing(j)) {
-        j <- 1L:pX
-    }
-    if (typeof(i) == "logical") {
-        i <- rep_len(i, nX)
-        i <- which(i)
-    } else if (typeof(i) == "character") {
-        i <- match(i, rownames(x))
-    } else if (typeof(i) == "double") {
-        i <- as.integer(i)
-    }
-    if (typeof(j) == "logical") {
-        j <- rep_len(j, pX)
-        j <- which(j)
-    } else if (typeof(j) == "character") {
-        j <- match(j, colnames(x))
-    } else if (typeof(j) == "double") {
-        j <- as.integer(j)
-    }
-    n <- length(i)
-    p <- length(j)
-    if (p > pX || n > nX) {
-        stop("Either the number of columns or number of rows requested exceed the number of rows or columns in x, try dim(x)...")
-    }
-    # Providing a sorted column index will eliminate the need to reorder the
-    # result matrix later (avoiding a copy)
-    isUnsorted <- is.unsorted(j)
-    if (isUnsorted) {
-        # Reorder columns for sequential retrieval by node
-        originalOrder <- rank(j, ties.method = "first")
-        sortedColumns <- sort(j)
+extract_matrix.ColumnLinkedMatrix <- function(x, i, j, ...) {
+    # Handle x[, FALSE]
+    if (length(j) == 0L) {
+        Z <- matrix(integer(), nrow = length(i), ncol = 0L, dimnames = list(rownames(x)[i], NULL))
     } else {
-        sortedColumns <- j
-    }
-    # Compute node inventory
-    globalIndex <- index(x, j = sortedColumns, sort = FALSE)
-    whichNodes <- unique(globalIndex[, 1L])
-    # If there are several nodes involved, aggregate the result in a separate
-    # matrix, otherwise pass through result
-    if (length(whichNodes) > 1L) {
-        # Initialize result matrix as integer matrix because it does not take up as
-        # much space as double() but is more useful than logical()
-        Z <- matrix(data = integer(), nrow = n, ncol = p)
-        # Use dimnames instead of rownames and colnames to avoid copy
-        dimnames(Z) <- list(rownames(x)[i], colnames(x)[sortedColumns])
-        end <- 0L
-        for (k in whichNodes) {
-            localIndex <- globalIndex[globalIndex[, 1L] == k, , drop = FALSE]
-            ini <- end + 1L
-            end <- ini + nrow(localIndex) - 1L
-            # Convert to matrix to support data frames
-            Z[, ini:end] <- as.matrix(x[[k]][i, localIndex[, 3L], drop = FALSE])
+        # Determine nodes and node boundaries for query
+        index <- index(x, j = j, sort = FALSE)
+        nodeList <- unique(index[, 1L])
+        # If there are several nodes involved in the query, aggregate the
+        # result in a separate matrix, otherwise pass through result
+        if (length(nodeList) > 1L) {
+            # Initialize result matrix as integer() because it does not take up
+            # as much space as double() but is more common than logical()
+            Z <- matrix(data = integer(), nrow = length(i), ncol = length(j), dimnames = list(rownames(x)[i], colnames(x)[j]))
+            for (curNode in nodeList) {
+                if (is.na(curNode)) {
+                    nodeIndex = is.na(index[, 1L])
+                    Z[, nodeIndex] <- NA_integer_
+                } else {
+                    nodeIndex <- index[, 1L] == curNode
+                    nodeIndex[is.na(nodeIndex)] <- FALSE
+                    # Convert to matrix to support data frames
+                    Z[, nodeIndex] <- as.matrix(x[[curNode]][i, index[nodeIndex, 3L], drop = FALSE])
+                }
+            }
+        } else {
+            # Handle x[, NA]
+            if (is.na(nodeList)) {
+                Z <- matrix(NA_integer_, nrow = length(i), ncol = length(j), dimnames = list(rownames(x)[i], rep(NA_character_, length(j))))
+            } else {
+                # Convert to matrix to support data frames
+                Z <- as.matrix(x[[nodeList]][i, index[, 3L], drop = FALSE])
+            }
         }
+    }
+    return(Z)
+}
+
+
+extract_vector.ColumnLinkedMatrix <- function(x, i, ...) {
+    if (length(i) == 0L) {
+        Z <- integer(0L)
     } else {
-        Z <- as.matrix(x[[whichNodes]][i, globalIndex[, 3L], drop = FALSE])
+        # Determine nodes and node boundaries for query (in this case index()
+        # cannot be used as it is easier to go by the number of elements per
+        # block rather than the number of columns because of column-major
+        # nature of the matrix)
+        # Note that length() could be used here, but it is not required as per
+        # our definition of a matrix-like object.
+        elementsPerNode <- apply(sapply(x, dim), 2, prod)
+        nodeBoundaries <- c(0L, cumsum(elementsPerNode))
+        nodeMembership <- .bincode(i, nodeBoundaries)
+        nodeList <- unique(nodeMembership)
+        # If there are several nodes involved in the query, aggregate the
+        # result in a separate matrix, otherwise pass through result
+        if (length(nodeList) > 1L) {
+            # Initialize result vector as integer() because it does not take up
+            # as much space as double() but is more common than logical()
+            Z <- vector(mode = "integer", length = length(i))
+            for (curNode in nodeList) {
+                if (is.na(curNode)) {
+                    nodeIndex <- is.na(nodeMembership)
+                    Z[nodeIndex] <- NA_integer_
+                } else {
+                    nodeIndex <- nodeMembership == curNode
+                    nodeIndex[is.na(nodeIndex)] <- FALSE
+                    localIndex <- i[nodeIndex] - nodeBoundaries[curNode]
+                    Z[nodeIndex] <- x[[curNode]][localIndex]
+                }
+            }
+        } else {
+            # Handle x[NA]
+            if (is.na(nodeList)) {
+                Z <- rep(NA_integer_, length(i))
+            } else {
+                Z <- x[[nodeList]][i - nodeBoundaries[nodeList]]
+            }
+        }
     }
-    if (isUnsorted) {
-        # Return to original order
-        Z <- Z[, originalOrder, drop = FALSE]
-    }
-    if (drop == TRUE && (n == 1L || p == 1L)) {
-        # Let R handle drop behavior
-        return(Z[, ])
-    } else {
-        return(Z)
-    }
+    return(Z)
 }
 
 
@@ -232,11 +239,9 @@ index.ColumnLinkedMatrix <- function(x, j = NULL, sort = TRUE, ...) {
     } else {
         j <- seq_len(nodes[nrow(nodes), 3L])
     }
-    index <- matrix(data = integer(), nrow = length(j), ncol = 3L, dimnames = list(NULL, c("node", "col.global", "col.local")))
-    whichNode <- .bincode(j, breaks = c(0L, nodes[, 3L]))
-    index[, 1L] <- whichNode
-    index[, 2L] <- j
-    index[, 3L] <- j - nodes[whichNode, 2L] + 1L
+    nodeBoundaries <- c(0L, nodes[, 3L])
+    nodeMembership <- .bincode(j, breaks = nodeBoundaries)
+    index <- matrix(c(nodeMembership, j, j - nodeBoundaries[nodeMembership]), nrow = length(j), ncol = 3L, dimnames = list(NULL, c("node", "col.global", "col.local")))
     return(index)
 }
 
@@ -350,7 +355,7 @@ setMethod("initialize", signature(.Object = "ColumnLinkedMatrix"), function(.Obj
 
 
 #' @export
-`[.ColumnLinkedMatrix` <- subset.ColumnLinkedMatrix
+`[.ColumnLinkedMatrix` <- crochet::extract(extract_vector = extract_vector.ColumnLinkedMatrix, extract_matrix = extract_matrix.ColumnLinkedMatrix)
 
 
 #' @export

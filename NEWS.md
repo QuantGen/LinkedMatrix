@@ -1,5 +1,6 @@
 # LinkedMatrix 1.3.0.9000
 
+* Add [crochet](https://cran.r-project.org/package=crochet) subsetting support.
 * Add generic `as.ColumnLinkedMatrix` and `as.RowLinkedMatrix` for easy
   creation of `LinkedMatrix` objects from `list`s of matrix-like objects
   without `do.call`.

@@ -6,9 +6,8 @@ colnames(dummy) <- paste0("col_", seq_len(ncol(dummy)))
 createLinkedMatrix <- function(class, nNodes) {
     linkedBy <- ifelse(class == "ColumnLinkedMatrix", "columns", "rows")
     linkedMatrix <- LinkedMatrix(nrow = nrow(dummy), ncol = ncol(dummy), nNodes = nNodes, linkedBy = linkedBy, nodeInitializer = "matrixNodeInitializer")
-    rownames(linkedMatrix) <- paste0("row_", seq_len(nrow(dummy)))
-    colnames(linkedMatrix) <- paste0("col_", seq_len(ncol(dummy)))
     linkedMatrix[] <- dummy
+    dimnames(linkedMatrix) <- dimnames(dummy)
     return(linkedMatrix)
 }
 
@@ -123,109 +122,6 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
 
         # Prepare LinkedMatrix object
         linkedMatrix <- createLinkedMatrix(class, nNodes)
-
-        test_that("subsetting", {
-
-            idx2 <- expand.grid(seq_len(nrow(dummy)), seq_len(ncol(dummy)))
-            idx4r <- expand.grid(seq_len(nrow(dummy)), seq_len(nrow(dummy)), seq_len(nrow(dummy)), seq_len(nrow(dummy)))
-            idx4c <- expand.grid(seq_len(ncol(dummy)), seq_len(ncol(dummy)), seq_len(ncol(dummy)), seq_len(ncol(dummy)))
-
-            expect_equal(linkedMatrix[], dummy)
-
-            for (i in seq_len(nrow(dummy))) {
-                expect_equal(linkedMatrix[i, ], dummy[i, ])
-                expect_equal(linkedMatrix[i, , drop = FALSE], dummy[i, , drop = FALSE])
-            }
-
-            for (i in seq_len(ncol(dummy))) {
-                expect_equal(linkedMatrix[, i], dummy[, i])
-                expect_equal(linkedMatrix[, i, drop = FALSE], dummy[, i, drop = FALSE])
-            }
-
-            for (i in seq_len(nrow(idx2))) {
-                expect_equal(linkedMatrix[idx2[i, 1], idx2[i, 2]], dummy[idx2[i, 1], idx2[i, 2]])
-                expect_equal(linkedMatrix[idx2[i, 1], idx2[i, 2], drop = FALSE], dummy[idx2[i, 1], idx2[i, 2], drop = FALSE])
-            }
-
-            for (i in seq_len(nrow(idx2))) {
-
-                expect_equal(linkedMatrix[idx2[i, 1]:idx2[i, 2], ], dummy[idx2[i, 1]:idx2[i, 2], ])
-                expect_equal(linkedMatrix[idx2[i, 1]:idx2[i, 2], , drop = FALSE], dummy[idx2[i, 1]:idx2[i, 2], , drop = FALSE])
-
-                expect_equal(linkedMatrix[, idx2[i, 1]:idx2[i, 2]], dummy[, idx2[i, 1]:idx2[i, 2]])
-                expect_equal(linkedMatrix[, idx2[i, 1]:idx2[i, 2], drop = FALSE], dummy[, idx2[i, 1]:idx2[i, 2], drop = FALSE])
-
-                expect_equal(linkedMatrix[idx2[i, 1]:idx2[i, 2], idx2[i, 1]:idx2[i, 2]], dummy[idx2[i, 1]:idx2[i, 2], idx2[i, 1]:idx2[i, 2]])
-                expect_equal(linkedMatrix[idx2[i, 1]:idx2[i, 2], idx2[i, 1]:idx2[i, 2], drop = FALSE], dummy[idx2[i, 1]:idx2[i, 2], idx2[i, 1]:idx2[i, 2], drop = FALSE])
-
-                expect_equal(linkedMatrix[c(idx2[i, 1], idx2[i, 2]), ], dummy[c(idx2[i, 1], idx2[i, 2]), ])
-                expect_equal(linkedMatrix[c(idx2[i, 1], idx2[i, 2]), , drop = FALSE], dummy[c(idx2[i, 1], idx2[i, 2]), , drop = FALSE])
-
-                expect_equal(linkedMatrix[, c(idx2[i, 1], idx2[i, 2])], dummy[, c(idx2[i, 1], idx2[i, 2])])
-                expect_equal(linkedMatrix[, c(idx2[i, 1], idx2[i, 2]), drop = FALSE], dummy[, c(idx2[i, 1], idx2[i, 2]), drop = FALSE])
-
-                expect_equal(linkedMatrix[c(idx2[i, 1], idx2[i, 2]), c(idx2[i, 1], idx2[i, 2])], dummy[c(idx2[i, 1], idx2[i, 2]), c(idx2[i, 1], idx2[i, 2])])
-                expect_equal(linkedMatrix[c(idx2[i, 1], idx2[i, 2]), c(idx2[i, 1], idx2[i, 2]), drop = FALSE], dummy[c(idx2[i, 1], idx2[i, 2]), c(idx2[i, 1], idx2[i, 2]), drop = FALSE])
-
-                expect_equal(linkedMatrix[c(idx2[i, 1], idx2[i, 2]), c(idx2[i, 1], idx2[i, 2])], dummy[c(idx2[i, 1], idx2[i, 2]), c(idx2[i, 1], idx2[i, 2])])
-                expect_equal(linkedMatrix[c(idx2[i, 1], idx2[i, 2]), c(idx2[i, 1], idx2[i, 2]), drop = FALSE], dummy[c(idx2[i, 1], idx2[i, 2]), c(idx2[i, 1], idx2[i, 2]), drop = FALSE])
-
-            }
-
-            for (i in seq_len(nrow(idx4r))) {
-                expect_equal(linkedMatrix[c(idx4r[i, 1], idx4r[i, 2], idx4r[i, 3], idx4r[i, 4]), ], dummy[c(idx4r[i, 1], idx4r[i, 2], idx4r[i, 3], idx4r[i, 4]), ], info = paste(idx4r[i, ], collapse = ", "))
-                expect_equal(linkedMatrix[c(idx4r[i, 1], idx4r[i, 2], idx4r[i, 3], idx4r[i, 4]), , drop = FALSE], dummy[c(idx4r[i, 1], idx4r[i, 2], idx4r[i, 3], idx4r[i, 4]), , drop = FALSE], info = paste(idx4r[i, ], collapse = ", "))
-            }
-
-            for (i in seq_len(nrow(idx4c))) {
-                expect_equal(linkedMatrix[, c(idx4c[i, 1], idx4c[i, 2], idx4c[i, 3], idx4c[i, 4])], dummy[, c(idx4c[i, 1], idx4c[i, 2], idx4c[i, 3], idx4c[i, 4])], info = paste(idx4r[i, ], collapse = ", "))
-                expect_equal(linkedMatrix[, c(idx4c[i, 1], idx4c[i, 2], idx4c[i, 3], idx4c[i, 4]), drop = FALSE], dummy[, c(idx4c[i, 1], idx4c[i, 2], idx4c[i, 3], idx4c[i, 4]), drop = FALSE], info = paste(idx4r[i, ], collapse = ", "))
-            }
-
-            expect_equal(linkedMatrix[c(TRUE, FALSE), ], dummy[c(TRUE, FALSE), ])
-            expect_equal(linkedMatrix[, c(TRUE, FALSE)], dummy[, c(TRUE, FALSE)])
-            expect_equal(linkedMatrix[c(TRUE, FALSE), c(TRUE, FALSE)], dummy[c(TRUE, FALSE), c(TRUE, FALSE)])
-            expect_equal(linkedMatrix[c(TRUE, FALSE), , drop = FALSE], dummy[c(TRUE, FALSE), , drop = FALSE])
-            expect_equal(linkedMatrix[, c(TRUE, FALSE), drop = FALSE], dummy[, c(TRUE, FALSE), drop = FALSE])
-            expect_equal(linkedMatrix[c(TRUE, FALSE), c(TRUE, FALSE), drop = FALSE], dummy[c(TRUE, FALSE), c(TRUE, FALSE), drop = FALSE])
-
-            expect_equal(linkedMatrix["row_1", ], dummy["row_1", ])
-            expect_equal(linkedMatrix[, "col_1"], dummy[, "col_1"])
-            expect_equal(linkedMatrix["row_1", "col_1"], dummy["row_1", "col_1"])
-            expect_equal(linkedMatrix["row_1", , drop = FALSE], dummy["row_1", , drop = FALSE])
-            expect_equal(linkedMatrix[, "col_1", drop = FALSE], dummy[, "col_1", drop = FALSE])
-            expect_equal(linkedMatrix["row_1", "col_1", drop = FALSE], dummy["row_1", "col_1", drop = FALSE])
-
-            expect_equal(linkedMatrix[c("row_1", "row_2"), ], dummy[c("row_1", "row_2"), ])
-            expect_equal(linkedMatrix[, c("col_1", "col_2")], dummy[, c("col_1", "col_2")])
-            expect_equal(linkedMatrix[c("row_1", "row_2"), c("col_1", "col_2")], dummy[c("row_1", "row_2"), c("col_1", "col_2")])
-            expect_equal(linkedMatrix[c("row_1", "row_2"), , drop = FALSE], dummy[c("row_1", "row_2"), , drop = FALSE])
-            expect_equal(linkedMatrix[, c("col_1", "col_2"), drop = FALSE], dummy[, c("col_1", "col_2"), drop = FALSE])
-            expect_equal(linkedMatrix[c("row_1", "row_2"), c("col_1", "col_2"), drop = FALSE], dummy[c("row_1", "row_2"), c("col_1", "col_2"), drop = FALSE])
-
-            expect_equal(linkedMatrix[c("row_2", "row_1"), ], dummy[c("row_2", "row_1"), ])
-            expect_equal(linkedMatrix[, c("col_2", "col_1")], dummy[, c("col_2", "col_1")])
-            expect_equal(linkedMatrix[c("row_2", "row_1"), c("col_2", "col_1")], dummy[c("row_2", "row_1"), c("col_2", "col_1")])
-            expect_equal(linkedMatrix[c("row_2", "row_1"), , drop = FALSE], dummy[c("row_2", "row_1"), , drop = FALSE])
-            expect_equal(linkedMatrix[, c("col_2", "col_1"), drop = FALSE], dummy[, c("col_2", "col_1"), drop = FALSE])
-            expect_equal(linkedMatrix[c("row_2", "row_1"), c("col_2", "col_1"), drop = FALSE], dummy[c("row_2", "row_1"), c("col_2", "col_1"), drop = FALSE])
-
-            expect_equal(linkedMatrix[c("row_3", "row_1"), ], dummy[c("row_3", "row_1"), ])
-            expect_equal(linkedMatrix[, c("col_3", "col_1")], dummy[, c("col_3", "col_1")])
-            expect_equal(linkedMatrix[c("row_3", "row_1"), c("col_3", "col_1")], dummy[c("row_3", "row_1"), c("col_3", "col_1")])
-            expect_equal(linkedMatrix[c("row_3", "row_1"), , drop = FALSE], dummy[c("row_3", "row_1"), , drop = FALSE])
-            expect_equal(linkedMatrix[, c("col_3", "col_1"), drop = FALSE], dummy[, c("col_3", "col_1"), drop = FALSE])
-            expect_equal(linkedMatrix[c("row_3", "row_1"), c("col_3", "col_1"), drop = FALSE], dummy[c("row_3", "row_1"), c("col_3", "col_1"), drop = FALSE])
-
-            # data frame subset
-            expect_equal(new(class, mtcars)[], as.matrix(mtcars))
-
-            # expect_equal(linkedMatrix[1], dummy[1]) Not implemented yet
-            # expect_equal(linkedMatrix[x:y], dummy[x:y]) Not implemented yet
-            # expect_equal(linkedMatrix[c(x, y)], dummy[c(x, y)]) Not implemented yet
-            # expect_equal(linkedMatrix[dummy > 1], dummy[dummy > 1]) Not implemented yet
-
-        })
 
         test_that("replacement", {
 
