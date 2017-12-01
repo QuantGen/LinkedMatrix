@@ -5,6 +5,7 @@
   without `do.call`.
 * Warn if rownames (for `ColumnLinkedMatrix`) or colnames (for
   `RowLinkedMatrix`) do not match.
+* Implement `str` method.
 * Add examples.
 
 # LinkedMatrix 1.2.0
