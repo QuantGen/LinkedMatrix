@@ -212,14 +212,11 @@ rbind.ColumnLinkedMatrix <- function(..., deparse.level = 1L) {
 
 #' @export
 nodes.ColumnLinkedMatrix <- function(x) {
-    n <- nNodes(x)
-    nodes <- matrix(integer(), nrow = n, ncol = 3L, dimnames = list(NULL, c("node", "col.ini", "col.end")))
-    end <- 0L
-    for (node in 1L:n) {
-        ini <- end + 1L
-        end <- ini + ncol(x[[node]]) - 1L
-        nodes[node, ] <- c(node, ini, end)
-    }
+    colsPerNode <- sapply(x, ncol)
+    colUpperBoundaries <- cumsum(colsPerNode)
+    colLowerBoundaries <- colUpperBoundaries - colsPerNode + 1
+    n <- length(colsPerNode)
+    nodes <- matrix(c(1:n, colLowerBoundaries, colUpperBoundaries), nrow = n, ncol = 3L, dimnames = list(NULL, c("node", "col.ini", "col.end")))
     return(nodes)
 }
 
