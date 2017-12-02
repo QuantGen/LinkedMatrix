@@ -214,7 +214,7 @@ rbind.RowLinkedMatrix <- function(..., deparse.level = 1L) {
 nodes.RowLinkedMatrix <- function(x) {
     rowsPerNode <- sapply(x, nrow)
     rowUpperBoundaries <- cumsum(rowsPerNode)
-    rowLowerBoundaries <- rowUpperBoundaries - rowsPerNode - 1
+    rowLowerBoundaries <- rowUpperBoundaries - rowsPerNode + 1
     n <- length(rowsPerNode)
     nodes <- matrix(c(1:n, rowLowerBoundaries, rowUpperBoundaries), nrow = n, ncol = 3L, dimnames = list(NULL, c("node", "row.ini", "row.end")))
     return(nodes)
