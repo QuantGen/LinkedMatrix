@@ -7,6 +7,7 @@
   `RowLinkedMatrix`) do not match.
 * Implement `str` method.
 * Slight performance improvements in `nodes` methods.
+* New `sort` parameter in `index()` which is set by default.
 * Add examples.
 
 # LinkedMatrix 1.2.0

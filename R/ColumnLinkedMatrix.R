@@ -40,7 +40,7 @@ subset.ColumnLinkedMatrix <- function(x, i, j, ..., drop = TRUE) {
         sortedColumns <- j
     }
     # Compute node inventory
-    globalIndex <- index(x, sortedColumns)
+    globalIndex <- index(x, j = sortedColumns, sort = FALSE)
     whichNodes <- unique(globalIndex[, 1L])
     # If there are several nodes involved, aggregate the result in a separate
     # matrix, otherwise pass through result
@@ -222,11 +222,11 @@ nodes.ColumnLinkedMatrix <- function(x) {
 
 
 #' @export
-index.ColumnLinkedMatrix <- function(x, j = NULL, ...) {
+index.ColumnLinkedMatrix <- function(x, j = NULL, sort = TRUE, ...) {
     nodes <- nodes(x)
     if (!is.null(j)) {
         j <- as.integer(j)
-        if (is.unsorted(j)) {
+        if (sort) {
             j <- sort(j)
         }
     } else {

@@ -126,7 +126,9 @@ nodes <- function(x) {
 #' of Its Corresponding Node.
 #'
 #' If `j` for [ColumnLinkedMatrix-class] or `i` for [RowLinkedMatrix-class] is
-#' passed, it will only generate entries for the given indices.
+#' passed, it will only generate entries for the given indices. `sort`, which
+#' is set by default, determines whether `j` or `i` should be sorted before
+#' building the index.
 #'
 #' @param x Either a [ColumnLinkedMatrix-class] or a [RowLinkedMatrix-class]
 #' object.

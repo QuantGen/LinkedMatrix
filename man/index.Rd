@@ -18,5 +18,7 @@ A matrix.
 }
 \description{
 If \code{j} for \linkS4class{ColumnLinkedMatrix} or \code{i} for \linkS4class{RowLinkedMatrix} is
-passed, it will only generate entries for the given indices.
+passed, it will only generate entries for the given indices. \code{sort}, which
+is set by default, determines whether \code{j} or \code{i} should be sorted before
+building the index.
 }
