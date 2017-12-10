@@ -8,30 +8,24 @@ if (extract_tests == "") {
 
 } else {
 
-    # Prepare dummy data
-    dummy <- matrix(data = seq_len(16), nrow = 4, ncol = 4)
-    rownames(dummy) <- paste0("row_", seq_len(nrow(dummy)))
-    colnames(dummy) <- paste0("col_", seq_len(ncol(dummy)))
-
-    createLinkedMatrix <- function(class, nNodes) {
-        linkedBy <- ifelse(class == "ColumnLinkedMatrix", "columns", "rows")
-        linkedMatrix <- LinkedMatrix(nrow = nrow(dummy), ncol = ncol(dummy), nNodes = nNodes, linkedBy = linkedBy, nodeInitializer = "matrixNodeInitializer")
-        linkedMatrix[] <- dummy
-        dimnames(linkedMatrix) <- dimnames(dummy)
-        return(linkedMatrix)
-    }
+    n <- 4L
+    p <- 4L
+    dimnames <- list(
+        paste0("row_", seq_len(n)),
+        paste0("col_", seq_len(p))
+    )
 
     CROCHET_EXTRACT_ENV <- new.env()
-    CROCHET_EXTRACT_ENV$COMPARE_OBJECT <- dummy
-    CROCHET_EXTRACT_ENV$OUT_OF_BOUNDS_INT <- length(dummy) + 1
+    CROCHET_EXTRACT_ENV$COMPARE_OBJECT <- createMatrix(n, p, dimnames)
+    CROCHET_EXTRACT_ENV$OUT_OF_BOUNDS_INT <- (n * p) + 1L
     CROCHET_EXTRACT_ENV$OUT_OF_BOUNDS_CHAR <- "col_1000"
 
     context("ColumnLinkedMatrix with 2 nodes")
-    CROCHET_EXTRACT_ENV$CUSTOM_OBJECT <- createLinkedMatrix("ColumnLinkedMatrix", 2)
+    CROCHET_EXTRACT_ENV$CUSTOM_OBJECT <- createLinkedMatrix(n, p, dimnames, "ColumnLinkedMatrix", 2L)
     source(extract_tests, local = TRUE)
 
     context("RowLinkedMatrix with 2 nodes")
-    CROCHET_EXTRACT_ENV$CUSTOM_OBJECT <- createLinkedMatrix("RowLinkedMatrix", 2)
+    CROCHET_EXTRACT_ENV$CUSTOM_OBJECT <- createLinkedMatrix(n, p, dimnames, "RowLinkedMatrix", 2L)
     source(extract_tests, local = TRUE)
 
 }

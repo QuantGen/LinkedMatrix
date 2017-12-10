@@ -82,30 +82,40 @@ extract_vector.RowLinkedMatrix <- function(x, i, ...) {
 }
 
 
-replace.RowLinkedMatrix <- function(x, i, j, ..., value) {
-    if (missing(i)) {
-        i <- 1L:nrow(x)
-    }
-    if (missing(j)) {
-        j <- 1L:ncol(x)
-    }
-    Z <- matrix(nrow = length(i), ncol = length(j), data = value)
-    # Retrieve nodes and index from ... to speed up sequential writes
+replace_matrix.RowLinkedMatrix <- function(x, i, j, ..., value) {
+    # Retrieve index from ... to speed up sequential writes
     dotdotdot <- list(...)
-    if (is.null(dotdotdot$nodes)) {
-        nodes <- nodes(x)
-    } else {
-        nodes <- dotdotdot$nodes
-    }
     if (is.null(dotdotdot$index)) {
-        index <- index(x)
+        index <- index(x, i = i, sort = FALSE)
     } else {
         index <- dotdotdot$index
     }
-    for (k in 1L:nrow(nodes)) {
-        rows_z <- (i >= nodes[k, 2L]) & (i <= nodes[k, 3L])
-        rowLocal <- index[i[rows_z], 3L]
-        x[[k]][rowLocal, j] <- Z[rows_z, ]
+    # Convert value vector to matrix
+    dim(value) <- c(length(i), length(j))
+    nodeList <- unique(index[, 1L])
+    for (curNode in nodeList) {
+        nodeIndex <- index[, 1L] == curNode
+        x[[curNode]][index[nodeIndex, 3L], j] <- value[nodeIndex, ]
+    }
+    return(x)
+}
+
+
+replace_vector.RowLinkedMatrix <- function(x, i, ..., value) {
+    # Convert one-dimensional index to two-dimensional index
+    ij <- crochet:::ktoij(x, i)
+    # Determine nodes and node boundaries for query (in this case we cannot
+    # use index() as rowsPerNode is needed to recalculate the single index)
+    rowsPerNode <- sapply(x, nrow)
+    nodeBoundaries <- c(0L, cumsum(rowsPerNode))
+    nodeMembership <- .bincode(ij$i, nodeBoundaries)
+    nodeList <- unique(nodeMembership)
+    # Replace elements in each node
+    for (curNode in nodeList) {
+        nodeIndex <- nodeMembership == curNode
+        # Convert two-dimensional index back to one-dimensional index
+        localIndex <- ((ij$j[nodeIndex] - 1L) * rowsPerNode[curNode] + ij$i[nodeIndex]) - nodeBoundaries[curNode]
+        x[[curNode]][localIndex] <- value[nodeIndex]
     }
     return(x)
 }
@@ -300,4 +310,4 @@ setMethod("initialize", signature(.Object = "RowLinkedMatrix"), function(.Object
 
 
 #' @export
-`[<-.RowLinkedMatrix` <- replace.RowLinkedMatrix
+`[<-.RowLinkedMatrix` <- crochet::replace(replace_vector = replace_vector.RowLinkedMatrix, replace_matrix = replace_matrix.RowLinkedMatrix)

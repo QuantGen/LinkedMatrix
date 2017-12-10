@@ -81,30 +81,41 @@ extract_vector.ColumnLinkedMatrix <- function(x, i, ...) {
 }
 
 
-replace.ColumnLinkedMatrix <- function(x, i, j, ..., value) {
-    if (missing(i)) {
-        i <- 1L:nrow(x)
-    }
-    if (missing(j)) {
-        j <- 1L:ncol(x)
-    }
-    Z <- matrix(nrow = length(i), ncol = length(j), data = value)
-    # Retrieve nodes and index from ... to speed up sequential writes
+replace_matrix.ColumnLinkedMatrix <- function(x, i, j, ..., value) {
+    # Retrieve index from ... to speed up sequential writes
     dotdotdot <- list(...)
-    if (is.null(dotdotdot$nodes)) {
-        nodes <- nodes(x)
-    } else {
-        nodes <- dotdotdot$nodes
-    }
     if (is.null(dotdotdot$index)) {
-        index <- index(x)
+        index <- index(x, j = j, sort = FALSE)
     } else {
         index <- dotdotdot$index
     }
-    for (k in 1L:nrow(nodes)) {
-        col_z <- (j >= nodes[k, 2L]) & (j <= nodes[k, 3L])
-        colLocal <- index[j[col_z], 3L]
-        x[[k]][i, colLocal] <- Z[, col_z]
+    # Convert value vector to matrix
+    dim(value) <- c(length(i), length(j))
+    nodeList <- unique(index[, 1L])
+    for (curNode in nodeList) {
+        nodeIndex <- index[, 1L] == curNode
+        x[[curNode]][i, index[nodeIndex, 3L]] <- value[, nodeIndex]
+    }
+    return(x)
+}
+
+
+replace_vector.ColumnLinkedMatrix <- function(x, i, ..., value) {
+    # Determine nodes and node boundaries for query (in this case index()
+    # cannot be used as it is easier to go by the number of elements per
+    # block rather than the number of columns because of column-major
+    # nature of the matrix)
+    # Note that length() could be used here, but it is not required as per
+    # our definition of a matrix-like object.
+    elementsPerNode <- apply(sapply(x, dim), 2, prod)
+    nodeBoundaries <- c(0L, cumsum(elementsPerNode))
+    nodeMembership <- .bincode(i, nodeBoundaries)
+    nodeList <- unique(nodeMembership)
+    # Replace elements in each node
+    for (curNode in nodeList) {
+        nodeIndex <- nodeMembership == curNode
+        localIndex <- i[nodeIndex] - nodeBoundaries[curNode]
+        x[[curNode]][localIndex] <- value[nodeIndex]
     }
     return(x)
 }
@@ -359,4 +370,4 @@ setMethod("initialize", signature(.Object = "ColumnLinkedMatrix"), function(.Obj
 
 
 #' @export
-`[<-.ColumnLinkedMatrix` <- replace.ColumnLinkedMatrix
+`[<-.ColumnLinkedMatrix` <- crochet::replace(replace_vector = replace_vector.ColumnLinkedMatrix, replace_matrix = replace_matrix.ColumnLinkedMatrix)
