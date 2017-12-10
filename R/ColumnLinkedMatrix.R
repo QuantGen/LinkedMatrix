@@ -24,7 +24,7 @@ extract_matrix.ColumnLinkedMatrix <- function(x, i, j, ...) {
                 }
             }
         } else {
-            # Handle x[, NA]
+            # Handle x[, NA] or out of bounds
             if (is.na(nodeList)) {
                 Z <- matrix(data = NA_integer_, nrow = length(i), ncol = length(j), dimnames = list(rownames(x)[i], rep(NA_character_, length(j))))
             } else {
@@ -69,7 +69,7 @@ extract_vector.ColumnLinkedMatrix <- function(x, i, ...) {
                 }
             }
         } else {
-            # Handle x[NA]
+            # Handle x[NA] or out of bounds
             if (is.na(nodeList)) {
                 Z <- rep(NA_integer_, length(i))
             } else {
