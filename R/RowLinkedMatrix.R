@@ -1,7 +1,7 @@
 extract_matrix.RowLinkedMatrix <- function(x, i, j, ...) {
     # Handle x[FALSE, ]
     if (length(i) == 0L) {
-        Z <- matrix(integer(), nrow = 0L, ncol = length(j), dimnames = list(NULL, colnames(x)[j]))
+        Z <- matrix(data = integer(), nrow = 0L, ncol = length(j), dimnames = list(NULL, colnames(x)[j]))
     } else {
         # Determine nodes and node boundaries for query
         index <- index(x, i = i, sort = FALSE)
@@ -26,7 +26,7 @@ extract_matrix.RowLinkedMatrix <- function(x, i, j, ...) {
         } else {
             # Handle x[NA, ]
             if (is.na(nodeList)) {
-                Z <- matrix(NA_integer_, nrow = length(i), ncol = length(j), dimnames = list(rep(NA_character_, length(i)), colnames(x)[j]))
+                Z <- matrix(data = NA_integer_, nrow = length(i), ncol = length(j), dimnames = list(rep(NA_character_, length(i)), colnames(x)[j]))
             } else {
                 # Convert to matrix to support data frames
                 Z <- as.matrix(x[[nodeList]][index[, 3L], j, drop = FALSE])
@@ -234,7 +234,7 @@ nodes.RowLinkedMatrix <- function(x) {
     rowUpperBoundaries <- cumsum(rowsPerNode)
     rowLowerBoundaries <- rowUpperBoundaries - rowsPerNode + 1
     n <- length(rowsPerNode)
-    nodes <- matrix(c(1:n, rowLowerBoundaries, rowUpperBoundaries), nrow = n, ncol = 3L, dimnames = list(NULL, c("node", "row.ini", "row.end")))
+    nodes <- matrix(data = c(1:n, rowLowerBoundaries, rowUpperBoundaries), nrow = n, ncol = 3L, dimnames = list(NULL, c("node", "row.ini", "row.end")))
     return(nodes)
 }
 
@@ -252,7 +252,7 @@ index.RowLinkedMatrix <- function(x, i = NULL, sort = TRUE, ...) {
     }
     nodeBoundaries <- c(0L, nodes[, 3L])
     nodeMembership <- .bincode(i, breaks = nodeBoundaries)
-    index <- matrix(c(nodeMembership, i, i - nodeBoundaries[nodeMembership]), nrow = length(i), ncol = 3L, dimnames = list(NULL, c("node", "row.global", "row.local")))
+    index <- matrix(data = c(nodeMembership, i, i - nodeBoundaries[nodeMembership]), nrow = length(i), ncol = 3L, dimnames = list(NULL, c("node", "row.global", "row.local")))
     return(index)
 }
 
