@@ -82,16 +82,12 @@ extract_vector.ColumnLinkedMatrix <- function(x, i, ...) {
 
 
 replace_matrix.ColumnLinkedMatrix <- function(x, i, j, ..., value) {
-    # Retrieve index from ... to speed up sequential writes
-    dotdotdot <- list(...)
-    if (is.null(dotdotdot$index)) {
-        index <- index(x, j = j, sort = FALSE)
-    } else {
-        index <- dotdotdot$index
-    }
     # Convert value vector to matrix
     dim(value) <- c(length(i), length(j))
+    # Determine node boundaries
+    index <- index(x, j = j, sort = FALSE)
     nodeList <- unique(index[, 1L])
+    # Replace elements in each node
     for (curNode in nodeList) {
         nodeIndex <- index[, 1L] == curNode
         x[[curNode]][i, index[nodeIndex, 3L]] <- value[, nodeIndex]
