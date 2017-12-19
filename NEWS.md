@@ -8,6 +8,7 @@
 * Warn if rownames (for `ColumnLinkedMatrix`) or colnames (for
   `RowLinkedMatrix`) do not match.
 * Implement `str` method.
+* Implement `is.matrix` method.
 * Slight performance improvements in `nodes` methods.
 * New `sort` parameter in `index()` which is set by default.
 * Add examples.

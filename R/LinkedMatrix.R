@@ -87,6 +87,12 @@ length.LinkedMatrix <- function(x) {
 }
 
 
+#' @export
+is.matrix.LinkedMatrix <- function(x) {
+    TRUE # needed for diag()
+}
+
+
 #' Converts a LinkedMatrix Instance to a Matrix (if Small Enough).
 #'
 #' @param x Either a [ColumnLinkedMatrix-class] or a [RowLinkedMatrix-class]
