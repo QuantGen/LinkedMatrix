@@ -268,7 +268,7 @@ as.ColumnLinkedMatrix <- function(x, ...) {
 #' @rdname as.ColumnLinkedMatrix
 #' @export
 as.ColumnLinkedMatrix.list <- function(x, ...) {
-    do.call("ColumnLinkedMatrix", x, ...)
+    do.call(ColumnLinkedMatrix, x, ...)
 }
 
 

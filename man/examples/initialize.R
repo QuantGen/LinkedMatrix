@@ -14,4 +14,4 @@ rm1 <- RowLinkedMatrix(m1, m2, m3)
 cm2 <- new("ColumnLinkedMatrix", m1, m2, m3)
 
 # To specify the matrix-like objects as a list, use the `do.call` function
-rm2 <- do.call("RowLinkedMatrix", list(m1, m2, m3))
+rm2 <- do.call(RowLinkedMatrix, list(m1, m2, m3))
