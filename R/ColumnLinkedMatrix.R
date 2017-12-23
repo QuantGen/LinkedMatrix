@@ -362,8 +362,16 @@ setMethod("initialize", signature(.Object = "ColumnLinkedMatrix"), function(.Obj
 
 
 #' @export
-`[.ColumnLinkedMatrix` <- crochet::extract(extract_vector = extract_vector.ColumnLinkedMatrix, extract_matrix = extract_matrix.ColumnLinkedMatrix)
+`[.ColumnLinkedMatrix` <- crochet::extract(
+    extract_vector = extract_vector.ColumnLinkedMatrix,
+    extract_matrix = extract_matrix.ColumnLinkedMatrix,
+    allowDoubles = TRUE # this may not be compatible with all matrix-like objects
+)
 
 
 #' @export
-`[<-.ColumnLinkedMatrix` <- crochet::replace(replace_vector = replace_vector.ColumnLinkedMatrix, replace_matrix = replace_matrix.ColumnLinkedMatrix)
+`[<-.ColumnLinkedMatrix` <- crochet::replace(
+    replace_vector = replace_vector.ColumnLinkedMatrix,
+    replace_matrix = replace_matrix.ColumnLinkedMatrix,
+    allowDoubles = TRUE # this may not be compatible with all matrix-like objects
+)
