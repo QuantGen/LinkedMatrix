@@ -42,7 +42,7 @@ extract_vector.RowLinkedMatrix <- function(x, i, ...) {
         Z <- integer(0L)
     } else {
         # Convert one-dimensional index to two-dimensional index
-        ij <- crochet:::ktoij(x, i)
+        ij <- crochet::ktoij(x, i)
         # Determine nodes and node boundaries for query (in this case we cannot
         # use index() as rowsPerNode is needed to recalculate the single index)
         rowsPerNode <- sapply(x, nrow)
@@ -99,7 +99,7 @@ replace_matrix.RowLinkedMatrix <- function(x, i, j, ..., value) {
 
 replace_vector.RowLinkedMatrix <- function(x, i, ..., value) {
     # Convert one-dimensional index to two-dimensional index
-    ij <- crochet:::ktoij(x, i)
+    ij <- crochet::ktoij(x, i)
     # Determine nodes and node boundaries for query (in this case we cannot
     # use index() as rowsPerNode is needed to recalculate the single index)
     rowsPerNode <- sapply(x, nrow)
