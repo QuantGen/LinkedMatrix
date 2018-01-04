@@ -1,15 +1,15 @@
 ## Test environments
 
-* Local Arch Linux install, R 3.3.1
-* Ubuntu 12.04.5 LTS on Travis CI, R 3.3.1
-* win-builder, R-release and R-devel
+* Local Arch Linux install: R 3.4.3
+* Travis CI: R 3.4.2
+* win-builder: R-release and R-devel
 
 
 ## R CMD check results
 
-There were no ERRORs, WARNINGs, or NOTEs.
+0 errors | 0 warnings | 0 notes
 
 
-## Downstream dependencies
+## revdep_check results
 
 There are currently no downstream dependencies for this package.
