@@ -1,3 +1,11 @@
+## Resubmission
+
+This is a resubmission. In this version I have:
+
+- Fixed a bug in a dependency (crochet) that caused a problem during the
+  revdep_check (in the BGData package).
+
+
 ## Test environments
 
 * Local Arch Linux install: R 3.4.3
@@ -12,4 +20,4 @@
 
 ## revdep_check results
 
-There are currently no downstream dependencies for this package.
+0 packages with problems
