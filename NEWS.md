@@ -1,4 +1,4 @@
-# LinkedMatrix 1.4.0
+# LinkedMatrix 1.3.0
 
 * Add [crochet](https://cran.r-project.org/package=crochet) subsetting and
   replacement support.
