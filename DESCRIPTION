@@ -17,7 +17,8 @@ Suggests:
     BGData,
     ff,
     bigmemory,
-    testthat
+    testthat,
+    covr
 Collate:
     'ColumnLinkedMatrix.R'
     'RowLinkedMatrix.R'
