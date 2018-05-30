@@ -136,14 +136,16 @@ rownames.ColumnLinkedMatrix <- function(x) {
 
 # This function looks like an S3 method, but isn't one.
 colnames.ColumnLinkedMatrix <- function(x) {
-    names <- NULL
-    if (!is.null(colnames(x[[1L]]))) {
-        p <- dim(x)[2L]
-        names <- rep("", p)
-        nodes <- nodes(x)
-        for (i in 1L:nrow(nodes)) {
-            names[(nodes[i, 2L]:nodes[i, 3L])] <- colnames(x[[i]])
+    nodes <- nodes(x)
+    names <- rep("", nodes[nrow(nodes), 3L])
+    for (i in seq_len(nrow(nodes))) {
+        nodeNames <- colnames(x[[i]])
+        if (!is.null(nodeNames)) {
+            names[(nodes[i, 2L]:nodes[i, 3L])] <- nodeNames
         }
+    }
+    if (all(names == "")) {
+        names <- NULL
     }
     return(names)
 }

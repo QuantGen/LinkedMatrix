@@ -1,5 +1,9 @@
 # LinkedMatrix 1.3.0.9999
 
+* Fix `rownames()` (for `RowLinkedMatrix`) or `colnames()` (for
+  `ColumnLinkedMatrix`) returning `NULL` if first node does not have dimnames,
+  but other nodes do. Missing entries will be denoted empty string, just like in
+  base `dimnames()`.
 * Do not exclude NULL when checking if rownames (for `ColumnLinkedMatrix`) or
   colnames (for `RowLinkedMatrix`) do not match.
 
