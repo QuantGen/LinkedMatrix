@@ -1,4 +1,4 @@
-# LinkedMatrix 1.3.0.9999
+# LinkedMatrix 1.3.0.9000
 
 * Fix `rownames()` (for `RowLinkedMatrix`) or `colnames()` (for
   `ColumnLinkedMatrix`) returning `NULL` if first node does not have dimnames,
