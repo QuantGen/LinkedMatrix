@@ -1,3 +1,9 @@
+# LinkedMatrix 1.3.0.9999
+
+* Do not exclude NULL when checking if rownames (for `ColumnLinkedMatrix`) or
+  colnames (for `RowLinkedMatrix`) do not match.
+
+
 # LinkedMatrix 1.3.0
 
 * Add [crochet](https://cran.r-project.org/package=crochet) subsetting and

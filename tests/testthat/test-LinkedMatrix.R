@@ -91,7 +91,8 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
         # Warning if dimnames do not match
         dimnamesMismatches <- list(
             list(regexp = NA, dimnames = list(NULL, NULL, NULL)),
-            list(regexp = NA, dimnames = list(letters[1:3], NULL, NULL)),
+            list(regexp = NA, dimnames = list(letters[1:3], letters[1:3], letters[1:3])),
+            list(regexp = NULL, dimnames = list(letters[1:3], NULL, NULL)),
             list(regexp = NULL, dimnames = list(letters[1:3], letters[4:6], NULL))
         )
         for (dimnamesMismatch in dimnamesMismatches) {

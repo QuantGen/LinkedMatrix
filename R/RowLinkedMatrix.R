@@ -291,9 +291,8 @@ setMethod("initialize", signature(.Object = "RowLinkedMatrix"), function(.Object
         }
         # Warn if colnames of matrices do not match
         names <- lapply(nodes, colnames)
-        names <- names[!sapply(names, is.null)]
         if (length(names) > 1L && !all(duplicated(names) | duplicated(names, fromLast = TRUE))) {
-            warning("column names of matrix-like objects do not match")
+            warning("column names of matrix-like objects do not match: colnames() only uses the column names of the first node")
         }
     }
     .Object <- callNextMethod(.Object, nodes)
