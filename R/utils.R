@@ -1,3 +1,9 @@
+# Incomplete check if x is matrix-like. Should check for length as well.
+isMatrixLike <- function(x) {
+    length(dim(x)) == 2L
+}
+
+
 chunkRanges <- function(a, n, i = NULL) {
     if (n > a) {
         stop(paste("Cannot split", a, "into", n, "chunks. Reduce the number of chunks."))
