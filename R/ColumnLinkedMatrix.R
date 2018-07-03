@@ -206,7 +206,7 @@ dimnames.ColumnLinkedMatrix <- function(x) {
 cbind.ColumnLinkedMatrix <- function(..., deparse.level = 0L) {
     dotdotdot <- list(...)
     nodes <- list()
-    for (i in seq_len(length(dotdotdot))) {
+    for (i in seq_along(dotdotdot)) {
         node <- dotdotdot[[i]]
         if (is(node, "LinkedMatrix")) {
             # Extract nodes from LinkedMatrix object
