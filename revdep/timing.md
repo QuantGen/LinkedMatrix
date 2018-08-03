@@ -2,6 +2,6 @@
 
 |package |version | check_time|
 |:-------|:-------|----------:|
-|BGData  |1.0.0   |       28.5|
+|BGData  |1.0.0   |       44.5|
 
 
