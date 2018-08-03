@@ -21,10 +21,7 @@ dimensions and implements at least \code{dim} and \code{[}.
 Internally, this class is an S4 class that contains \code{list}. Each node can be
 accessed using the \code{[[} operator. \code{lapply} is also possible.
 \code{ColumnLinkedMatrix} and \code{RowLinkedMatrix} form a class union called
-[LinkedMatrix-class].
-
-[[\code{operator.}lapply\code{is also possible.}ColumnLinkedMatrix\code{and}RowLinkedMatrix` form a class union called
-[LinkedMatrix-class]: R:[%60%20operator.%20%60lapply%60%20is%20also%20possible.%0A%60ColumnLinkedMatrix%60%20and%20%60RowLinkedMatrix%60%20form%20a%20class%20union%20called%0A[LinkedMatrix-class
+\linkS4class{LinkedMatrix}.
 }
 \section{Methods}{
 

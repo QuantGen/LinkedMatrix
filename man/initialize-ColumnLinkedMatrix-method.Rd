@@ -28,10 +28,8 @@ A matrix-like object is one that has two dimensions and implements at least
 \code{dim} and \code{[}. Each object needs to have the same number of rows (for
 \code{ColumnLinkedMatrix}) or columns (for \code{RowLinkedMatrix}) to be linked
 together. If no matrix-like objects are given, a single 1x1 node of type
-\code{matrix} filled with \code{NA} is returned. [LinkedMatrix-class] objects can be
+\code{matrix} filled with \code{NA} is returned. \linkS4class{LinkedMatrix} objects can be
 nested as long as they are conformable.
-
-[\code{. Each object needs to have the same number of rows (for}ColumnLinkedMatrix\code{) or columns (for}RowLinkedMatrix\code{) to be linked together. If no matrix-like objects are given, a single 1x1 node of type}matrix\code{filled with}NA` is returned. [LinkedMatrix-class]: R:%60.%20Each%20object%20needs%20to%20have%20the%20same%20number%20of%20rows%20(for%0A%60ColumnLinkedMatrix%60)%20or%20columns%20(for%20%60RowLinkedMatrix%60)%20to%20be%20linked%0Atogether.%20If%20no%20matrix-like%20objects%20are%20given,%20a%20single%201x1%20node%20of%20type%0A%60matrix%60%20filled%20with%20%60NA%60%20is%20returned.%20[LinkedMatrix-class
 }
 \examples{
 # Create various matrix-like objects that correspond in dimensions
