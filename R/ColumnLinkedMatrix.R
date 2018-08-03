@@ -344,7 +344,7 @@ setMethod("initialize", signature(.Object = "ColumnLinkedMatrix"), function(.Obj
         nodes[[1L]] <- matrix()
     } else {
         # Stop if matrices are not matrix-like
-        if (!all(sapply(nodes, isMatrixLike))) {
+        if (!all(sapply(nodes, crochet:::isMatrixLike))) {
             stop("arguments need to be matrix-like")
         }
         # Stop if dimensions of matrices do not match
