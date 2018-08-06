@@ -23,12 +23,14 @@
 * New `sort` parameter in `index()` which is set by default.
 * Add examples.
 
+
 # LinkedMatrix 1.2.0
 
 * Fix wrong order in result when subsetting using unordered positive integers.
 * Add `i` and `j` parameters in `index` to only generate entries for those
   indexes.
 * Various subsetting optimizations.
+
 
 # LinkedMatrix 1.1.0
 
@@ -42,6 +44,7 @@
 * Only allow matrix-like objects with matching row or column dimensions (same
   number of rows in case of `ColumnLinkedMatrix` and same number of columns in
   case of `RowLinkedMatrix`) when creating linked matrices.
+
 
 # LinkedMatrix 1.0.0
 
