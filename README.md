@@ -4,6 +4,7 @@ LinkedMatrix
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/LinkedMatrix)](https://CRAN.R-project.org/package=LinkedMatrix)
 [![Rdoc](http://www.rdocumentation.org/badges/version/LinkedMatrix)](http://www.rdocumentation.org/packages/LinkedMatrix)
 [![Travis-CI Build Status](https://travis-ci.org/QuantGen/LinkedMatrix.svg?branch=master)](https://travis-ci.org/QuantGen/LinkedMatrix)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/QuantGen/LinkedMatrix?branch=master&svg=true)](https://ci.appveyor.com/project/QuantGen/LinkedMatrix)
 [![Coverage status](https://codecov.io/gh/QuantGen/LinkedMatrix/branch/master/graph/badge.svg)](https://codecov.io/github/QuantGen/LinkedMatrix?branch=master)
 
 LinkedMatrix is an R package that provides matrices implemented as lists of matrix-like nodes, linked by columns or rows.
