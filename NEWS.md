@@ -1,5 +1,7 @@
 # LinkedMatrix 1.3.1.9000
 
+* Update citation instructions.
+
 
 # LinkedMatrix 1.3.1
 
