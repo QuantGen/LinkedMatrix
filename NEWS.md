@@ -1,3 +1,6 @@
+# LinkedMatrix 1.3.1.9000
+
+
 # LinkedMatrix 1.3.1
 
 * Fix `rownames()` (for `RowLinkedMatrix`) or `colnames()` (for
