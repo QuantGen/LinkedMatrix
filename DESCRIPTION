@@ -23,7 +23,4 @@ Collate:
     'ColumnLinkedMatrix.R'
     'RowLinkedMatrix.R'
     'LinkedMatrix.R'
-    'package.R'
     'utils.R'
-RoxygenNote: 6.1.0
-Roxygen: list(markdown = TRUE)

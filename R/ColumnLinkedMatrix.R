@@ -36,7 +36,6 @@ extract_matrix.ColumnLinkedMatrix <- function(x, i, j, ...) {
     return(Z)
 }
 
-
 extract_vector.ColumnLinkedMatrix <- function(x, i, ...) {
     if (length(i) == 0L) {
         Z <- integer(0L)
@@ -80,7 +79,6 @@ extract_vector.ColumnLinkedMatrix <- function(x, i, ...) {
     return(Z)
 }
 
-
 replace_matrix.ColumnLinkedMatrix <- function(x, i, j, ..., value) {
     # Convert value vector to matrix
     dim(value) <- c(length(i), length(j))
@@ -94,7 +92,6 @@ replace_matrix.ColumnLinkedMatrix <- function(x, i, j, ..., value) {
     }
     return(x)
 }
-
 
 replace_vector.ColumnLinkedMatrix <- function(x, i, ..., value) {
     # Determine nodes and node boundaries for query (in this case index()
@@ -116,8 +113,6 @@ replace_vector.ColumnLinkedMatrix <- function(x, i, ..., value) {
     return(x)
 }
 
-
-#' @export
 dim.ColumnLinkedMatrix <- function(x) {
     n <- nrow(x[[1L]])
     p <- 0L
@@ -127,12 +122,10 @@ dim.ColumnLinkedMatrix <- function(x) {
     return(c(n, p))
 }
 
-
 # This function looks like an S3 method, but isn't one.
 rownames.ColumnLinkedMatrix <- function(x) {
     rownames(x[[1L]])
 }
-
 
 # This function looks like an S3 method, but isn't one.
 colnames.ColumnLinkedMatrix <- function(x) {
@@ -150,12 +143,9 @@ colnames.ColumnLinkedMatrix <- function(x) {
     return(names)
 }
 
-
-#' @export
 dimnames.ColumnLinkedMatrix <- function(x) {
     list(rownames.ColumnLinkedMatrix(x), colnames.ColumnLinkedMatrix(x))
 }
-
 
 # This function looks like an S3 method, but isn't one.
 `rownames<-.ColumnLinkedMatrix` <- function(x, value) {
@@ -164,7 +154,6 @@ dimnames.ColumnLinkedMatrix <- function(x) {
     }
     return(x)
 }
-
 
 # This function looks like an S3 method, but isn't one.
 `colnames<-.ColumnLinkedMatrix` <- function(x, value) {
@@ -175,8 +164,6 @@ dimnames.ColumnLinkedMatrix <- function(x) {
     return(x)
 }
 
-
-#' @export
 `dimnames<-.ColumnLinkedMatrix` <- function(x, value) {
     d <- dim(x)
     rownames <- value[[1L]]
@@ -190,19 +177,6 @@ dimnames.ColumnLinkedMatrix <- function(x) {
     return(x)
 }
 
-
-#' Combine Matrix-Like Objects by Columns.
-#'
-#' Compared to the [initialize()][initialize,ColumnLinkedMatrix-method()]
-#' method, nested [LinkedMatrix-class] objects that are passed via `...` will
-#' not be treated as matrix-like objects, but their nodes will be extracted and
-#' merged with the new [ColumnLinkedMatrix-class] object for a more compact
-#' representation. This method will currently only work for
-#' [ColumnLinkedMatrix-class] objects.
-#'
-#' @param ... Matrix-like objects to be combined by columns.
-#' @param deparse.level Currently unused, defaults to 0.
-#' @export
 cbind.ColumnLinkedMatrix <- function(..., deparse.level = 0L) {
     dotdotdot <- list(...)
     nodes <- list()
@@ -218,15 +192,10 @@ cbind.ColumnLinkedMatrix <- function(..., deparse.level = 0L) {
     do.call(ColumnLinkedMatrix, nodes)
 }
 
-
-#' @rdname rbind.RowLinkedMatrix
-#' @export
 rbind.ColumnLinkedMatrix <- function(..., deparse.level = 1L) {
     stop("rbind is currently undefined for ColumnLinkedMatrix")
 }
 
-
-#' @export
 nodes.ColumnLinkedMatrix <- function(x) {
     colsPerNode <- sapply(x, ncol)
     colUpperBoundaries <- cumsum(colsPerNode)
@@ -236,8 +205,6 @@ nodes.ColumnLinkedMatrix <- function(x) {
     return(nodes)
 }
 
-
-#' @export
 index.ColumnLinkedMatrix <- function(x, j = NULL, sort = TRUE, ...) {
     nodes <- nodes(x)
     if (!is.null(j)) {
@@ -254,89 +221,16 @@ index.ColumnLinkedMatrix <- function(x, j = NULL, sort = TRUE, ...) {
     return(index)
 }
 
-
-#' Converts an Object to a LinkedMatrix Object.
-#'
-#' @param x An object to convert to a [LinkedMatrix-class] object.
-#' @param ... Additional arguments.
-#' @return A [LinkedMatrix-class] object.
-#' @example man/examples/as.ColumnLinkedMatrix.R
-#' @export
 as.ColumnLinkedMatrix <- function(x, ...) {
     UseMethod("as.ColumnLinkedMatrix")
 }
 
-
-#' @rdname as.ColumnLinkedMatrix
-#' @export
 as.ColumnLinkedMatrix.list <- function(x, ...) {
     do.call(ColumnLinkedMatrix, x, ...)
 }
 
-
-#' A Class for Linking Matrices by Columns or Rows.
-#'
-#' This class treats a list of matrix-like objects that are linked together by
-#' columns (`ColumnLinkedMatrix`) or rows (`RowLinkedMatrix`) and have the same
-#' number of rows similarly to a regular `matrix` by implementing key methods
-#' such as `[` and `[<-` for extracting and replacing matrix elements, `dim` to
-#' retrieve dimensions, and `dimnames` and `dimnames<-` to retrieve and set
-#' dimnames. Each list element is called a node and can be extracted or
-#' replaced using `[[` and `[[<-`. A matrix-like object is one that has two
-#' dimensions and implements at least `dim` and `[`.
-#'
-#' Internally, this class is an S4 class that contains `list`. Each node can be
-#' accessed using the `[[` operator. `lapply` is also possible.
-#' `ColumnLinkedMatrix` and `RowLinkedMatrix` form a class union called
-#' [LinkedMatrix-class].
-#'
-#' @section Methods:
-#' - `[`
-#' - `[<-`
-#' - `dim`
-#' - `dimnames`
-#' - `dimnames<-`
-#' - `as.matrix`
-#' - `is.matrix`
-#' - `length`
-#' - `print`
-#' - `str`
-#' - `cbind` (for `ColumnLinkedMatrix`)
-#' - `rbind` (for `RowLinkedMatrix`)
-#'
-#' @seealso [initialize()][initialize,ColumnLinkedMatrix-method()] to create a
-#' `ColumnLinkedMatrix` or `RowLinkedMatrix` object from scratch,
-#' [as.ColumnLinkedMatrix()] to create a `ColumnLinkedMatrix` or
-#' `RowLinkedMatrix` object from other objects, [LinkedMatrix()] to create an
-#' empty, prespecified `LinkedMatrix` object, [nNodes()] to get the number of
-#' nodes of a `LinkedMatrix` object.
-#' @example man/examples/ColumnLinkedMatrix.R
-#' @export ColumnLinkedMatrix
-#' @exportClass ColumnLinkedMatrix
 ColumnLinkedMatrix <- setClass("ColumnLinkedMatrix", contains = "list")
 
-
-#' Create a LinkedMatrix Object.
-#'
-#' This function constructs a new [ColumnLinkedMatrix-class] or
-#' [RowLinkedMatrix-class] object from a list of matrix-like objects.
-#'
-#' A matrix-like object is one that has two dimensions and implements at least
-#' `dim` and `[`. Each object needs to have the same number of rows (for
-#' `ColumnLinkedMatrix`) or columns (for `RowLinkedMatrix`) to be linked
-#' together. If no matrix-like objects are given, a single 1x1 node of type
-#' `matrix` filled with `NA` is returned. [LinkedMatrix-class] objects can be
-#' nested as long as they are conformable.
-#'
-#' @inheritParams base::list
-#' @param .Object Internal, used by [methods::initialize()] generic.
-#' @param ... A sequence of matrix-like objects of the same row-dimension (for
-#' `ColumnLinkedMatrix`) or column-dimension (for `RowLinkedMatrix`).
-#' @return Either a `ColumnLinkedMatrix` or a `RowLinkedMatrix` object.
-#' @seealso [LinkedMatrix()] to create an empty, prespecified
-#' [LinkedMatrix-class] object.
-#' @example man/examples/initialize.R
-#' @export
 setMethod("initialize", signature(.Object = "ColumnLinkedMatrix"), function(.Object, ...) {
     nodes <- list(...)
     # Append at least one matrix
@@ -361,16 +255,12 @@ setMethod("initialize", signature(.Object = "ColumnLinkedMatrix"), function(.Obj
     return(.Object)
 })
 
-
-#' @export
 `[.ColumnLinkedMatrix` <- crochet::extract(
     extract_vector = extract_vector.ColumnLinkedMatrix,
     extract_matrix = extract_matrix.ColumnLinkedMatrix,
     allowDoubles = TRUE # this may not be compatible with all matrix-like objects
 )
 
-
-#' @export
 `[<-.ColumnLinkedMatrix` <- crochet::replace(
     replace_vector = replace_vector.ColumnLinkedMatrix,
     replace_matrix = replace_matrix.ColumnLinkedMatrix,

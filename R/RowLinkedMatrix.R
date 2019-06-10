@@ -36,7 +36,6 @@ extract_matrix.RowLinkedMatrix <- function(x, i, j, ...) {
     return(Z)
 }
 
-
 extract_vector.RowLinkedMatrix <- function(x, i, ...) {
     if (length(i) == 0L) {
         Z <- integer(0L)
@@ -81,7 +80,6 @@ extract_vector.RowLinkedMatrix <- function(x, i, ...) {
     return(Z)
 }
 
-
 replace_matrix.RowLinkedMatrix <- function(x, i, j, ..., value) {
     # Convert value vector to matrix
     dim(value) <- c(length(i), length(j))
@@ -95,7 +93,6 @@ replace_matrix.RowLinkedMatrix <- function(x, i, j, ..., value) {
     }
     return(x)
 }
-
 
 replace_vector.RowLinkedMatrix <- function(x, i, ..., value) {
     # Convert one-dimensional index to two-dimensional index
@@ -116,8 +113,6 @@ replace_vector.RowLinkedMatrix <- function(x, i, ..., value) {
     return(x)
 }
 
-
-#' @export
 dim.RowLinkedMatrix <- function(x) {
     p <- ncol(x[[1L]])
     n <- 0L
@@ -126,7 +121,6 @@ dim.RowLinkedMatrix <- function(x) {
     }
     return(c(n, p))
 }
-
 
 # This function looks like an S3 method, but isn't one.
 rownames.RowLinkedMatrix <- function(x) {
@@ -144,18 +138,14 @@ rownames.RowLinkedMatrix <- function(x) {
     return(names)
 }
 
-
 # This function looks like an S3 method, but isn't one.
 colnames.RowLinkedMatrix <- function(x) {
     colnames(x[[1L]])
 }
 
-
-#' @export
 dimnames.RowLinkedMatrix <- function(x) {
     list(rownames.RowLinkedMatrix(x), colnames.RowLinkedMatrix(x))
 }
-
 
 # This function looks like an S3 method, but isn't one.
 `rownames<-.RowLinkedMatrix` <- function(x, value) {
@@ -166,7 +156,6 @@ dimnames.RowLinkedMatrix <- function(x) {
     return(x)
 }
 
-
 # This function looks like an S3 method, but isn't one.
 `colnames<-.RowLinkedMatrix` <- function(x, value) {
     for (i in 1L:nNodes(x)) {
@@ -175,8 +164,6 @@ dimnames.RowLinkedMatrix <- function(x) {
     return(x)
 }
 
-
-#' @export
 `dimnames<-.RowLinkedMatrix` <- function(x, value) {
     d <- dim(x)
     rownames <- value[[1L]]
@@ -190,26 +177,10 @@ dimnames.RowLinkedMatrix <- function(x) {
     return(x)
 }
 
-
-#' @rdname cbind.ColumnLinkedMatrix
-#' @export
 cbind.RowLinkedMatrix <- function(..., deparse.level = 0L) {
     stop("cbind is currently undefined for RowLinkedMatrix")
 }
 
-
-#' Combine Matrix-Like Objects by Rows.
-#'
-#' Compared to the [initialize()][initialize,RowLinkedMatrix-method()] method,
-#' nested [LinkedMatrix-class] objects that are passed via `...` will not be
-#' treated as matrix-like objects, but their nodes will be extracted and merged
-#' with the new [RowLinkedMatrix-class] object for a more compact
-#' representation. This method will currently only work for
-#' [RowLinkedMatrix-class] objects.
-#'
-#' @param ... Matrix-like objects to be combined by rows.
-#' @param deparse.level Currently unused, defaults to 0.
-#' @export
 rbind.RowLinkedMatrix <- function(..., deparse.level = 1L) {
     dotdotdot <- list(...)
     nodes <- list()
@@ -225,8 +196,6 @@ rbind.RowLinkedMatrix <- function(..., deparse.level = 1L) {
     do.call(RowLinkedMatrix, nodes)
 }
 
-
-#' @export
 nodes.RowLinkedMatrix <- function(x) {
     rowsPerNode <- sapply(x, nrow)
     rowUpperBoundaries <- cumsum(rowsPerNode)
@@ -236,8 +205,6 @@ nodes.RowLinkedMatrix <- function(x) {
     return(nodes)
 }
 
-
-#' @export
 index.RowLinkedMatrix <- function(x, i = NULL, sort = TRUE, ...) {
     nodes <- nodes(x)
     if (!is.null(i)) {
@@ -254,29 +221,16 @@ index.RowLinkedMatrix <- function(x, i = NULL, sort = TRUE, ...) {
     return(index)
 }
 
-
-#' @rdname as.ColumnLinkedMatrix
-#' @export
 as.RowLinkedMatrix <- function(x, ...) {
     UseMethod("as.RowLinkedMatrix")
 }
 
-
-#' @rdname as.ColumnLinkedMatrix
-#' @export
 as.RowLinkedMatrix.list <- function(x, ...) {
     do.call(RowLinkedMatrix, x, ...)
 }
 
-
-#' @rdname ColumnLinkedMatrix-class
-#' @export RowLinkedMatrix
-#' @exportClass RowLinkedMatrix
 RowLinkedMatrix <- setClass("RowLinkedMatrix", contains = "list")
 
-
-#' @rdname initialize-ColumnLinkedMatrix-method
-#' @export
 setMethod("initialize", signature(.Object = "RowLinkedMatrix"), function(.Object, ...) {
     nodes <- list(...)
     # Append at least one matrix
@@ -301,16 +255,12 @@ setMethod("initialize", signature(.Object = "RowLinkedMatrix"), function(.Object
     return(.Object)
 })
 
-
-#' @export
 `[.RowLinkedMatrix` <- crochet::extract(
     extract_vector = extract_vector.RowLinkedMatrix,
     extract_matrix = extract_matrix.RowLinkedMatrix,
     allowDoubles = TRUE # this may not be compatible with all matrix-like objects
 )
 
-
-#' @export
 `[<-.RowLinkedMatrix` <- crochet::replace(
     replace_vector = replace_vector.RowLinkedMatrix,
     replace_matrix = replace_matrix.RowLinkedMatrix,
