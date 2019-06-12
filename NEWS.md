@@ -2,8 +2,7 @@
 
 * Follow [Bioconductor S4 practices][2]. If you have used `new()` to create
   `ColumnLinkedMatrix` and `RowLinkedMatrix` instances, please use the
-  `ColumnLinkedMatrix()` and `RowLinkedMatrix()` constructor respectively
-  instead.
+  `ColumnLinkedMatrix()` and `RowLinkedMatrix()` constructor functions instead.
 * Drop defunct `cbind.RowLinkedMatrix` and `rbind.ColumnLinkedMatrix` methods.
 * Update citation instructions.
 

@@ -19,7 +19,7 @@ for both \code{ColumnLinkedMatrix} and \code{RowLinkedMatrix} classes, e.g.
 }
 \seealso{
 \code{\link{ColumnLinkedMatrix-class}} and \code{\link{RowLinkedMatrix-class}}
-for implementations of column-linked and row-linked matrices, respectively.
+for implementations of column-linked and row-linked matrices.
 }
 \examples{
 # Create an example RowLinkedMatrix from various matrix-like objects that

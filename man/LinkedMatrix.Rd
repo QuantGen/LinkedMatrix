@@ -40,9 +40,9 @@ A \code{ColumnLinkedMatrix} object if \code{linkedBy} is \code{columns} or a
 \code{RowLinkedMatrix} object if \code{linkedBy} is \code{rows}.
 }
 \seealso{
-\code{\link{ColumnLinkedMatrix}} and \code{\link{RowLinkedMatrix}} to create a
-\code{ColumnLinkedMatrix} and \code{RowLinkedMatrix} object from a list of
-matrix-like objects, respectively.
+\code{\link{ColumnLinkedMatrix}} and \code{\link{RowLinkedMatrix}} to create
+\code{ColumnLinkedMatrix} and \code{RowLinkedMatrix} objects from a list of
+matrix-like objects.
 }
 \examples{
 # Create an empty 15x10 RowLinkedMatrix with 3 matrix nodes
