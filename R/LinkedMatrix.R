@@ -7,7 +7,7 @@ LinkedMatrix <- function(nrow, ncol, nNodes, linkedBy, nodeInitializer, ...) {
     if (class(ex) == "try-error") {
         nodeInitializer <- match.fun(nodeInitializer)
     }
-    linkedMatrix <- new(class)
+    linkedMatrix <- get(class)() # call default contructor
     ranges <- chunkRanges(ifelse(class == "ColumnLinkedMatrix", ncol, nrow), nNodes)
     for (i in seq_len(nNodes)) {
         if (class == "RowLinkedMatrix") {

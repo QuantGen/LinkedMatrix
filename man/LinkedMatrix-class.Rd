@@ -4,10 +4,10 @@
 \alias{show,LinkedMatrix-method}
 \title{A Class Union of ColumnLinkedMatrix and RowLinkedMatrix}
 \description{
-This class is abstract and no objects can be created from it. It can be used
-to check whether an object is either of type \code{ColumnLinkedMatrix} or
-of type \code{RowLinkedMatrix} using \code{is(x, "LinkedMatrix")} and to assign
-methods for both \code{ColumnLinkedMatrix} and \code{RowLinkedMatrix} classes, e.g.
+This class is abstract and no objects can be created from it. It can be used to
+check whether an object is either of type \code{ColumnLinkedMatrix} or of type
+\code{RowLinkedMatrix} using \code{is(x, "LinkedMatrix")} and to assign methods
+for both \code{ColumnLinkedMatrix} and \code{RowLinkedMatrix} classes, e.g.
 \code{show}.
 }
 \section{Methods}{
@@ -35,3 +35,4 @@ if (is(m, "LinkedMatrix")) {
     message("m is a LinkedMatrix")
 }
 }
+\keyword{classes}

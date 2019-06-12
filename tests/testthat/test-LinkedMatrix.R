@@ -33,25 +33,27 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
 
     test_that(paste(class, "creation"), {
 
-        expect_error(new(class, c(1, 2, 3)), "*arguments need to be matrix-like*")
+        constructor <- get(class)
+
+        expect_error(constructor(c(1, 2, 3)), "*arguments need to be matrix-like*")
 
         # No input
-        linkedMatrix <- new(class)
+        linkedMatrix <- constructor()
         expect_equal(nNodes(linkedMatrix), 1)
         expect_true(is.na(linkedMatrix[1, 1]))
 
         # Single matrix input
-        linkedMatrix <- new(class, matrix(data = 0, nrow = 1, ncol = 1))
+        linkedMatrix <- constructor(matrix(data = 0, nrow = 1, ncol = 1))
         expect_equal(nNodes(linkedMatrix), 1)
         expect_equal(dim(linkedMatrix), c(1, 1))
 
         # Single LinkedMatrix input
-        linkedMatrix <- new(class, createLinkedMatrix(n, p, dimnames, class, 2))
+        linkedMatrix <- constructor(createLinkedMatrix(n, p, dimnames, class, 2))
         expect_equal(nNodes(linkedMatrix), 1)
         expect_equal(dim(linkedMatrix), dim(dummy))
 
         # Multiple matrix inputs of same order
-        linkedMatrix <- new(class, matrix(data = 0, nrow = 1, ncol = 1), matrix(data = 0, nrow = 1, ncol = 1))
+        linkedMatrix <- constructor(matrix(data = 0, nrow = 1, ncol = 1), matrix(data = 0, nrow = 1, ncol = 1))
         expect_equal(nNodes(linkedMatrix), 2)
         if (class == "ColumnLinkedMatrix") {
             expect_equal(dim(linkedMatrix), c(1, 2))
@@ -60,7 +62,7 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
         }
 
         # Multiple LinkedMatrix inputs of same order
-        linkedMatrix <- new(class, createLinkedMatrix(n, p, dimnames, class, 2), createLinkedMatrix(n, p, dimnames, class, 2))
+        linkedMatrix <- constructor(createLinkedMatrix(n, p, dimnames, class, 2), createLinkedMatrix(n, p, dimnames, class, 2))
         expect_equal(nNodes(linkedMatrix), 2)
         if (class == "ColumnLinkedMatrix") {
             expect_equal(dim(linkedMatrix), c(n, p * 2))

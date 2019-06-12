@@ -3,11 +3,11 @@
 \alias{cbind.RowLinkedMatrix}
 \title{Combine Matrix-Like Objects by Columns}
 \description{
-Compared to the \link[=initialize,ColumnLinkedMatrix-method]{initialize()}
-method, nested \code{LinkedMatrix} objects that are passed via \code{...} will
-not be treated as matrix-like objects, but their nodes will be extracted and
-merged with the new \code{ColumnLinkedMatrix} object for a more compact
-representation. This method will currently only work for
+Compared to the \code{ColumnLinkedMatrix} and \code{RowLinkedMatrix}
+constructor functions, nested \code{LinkedMatrix} objects that are passed via
+\code{...} will not be treated as matrix-like objects, but their nodes will be
+extracted and merged with the new \code{ColumnLinkedMatrix} object for a more
+compact representation. This method will currently only work for
 \code{ColumnLinkedMatrix} objects.
 }
 \usage{

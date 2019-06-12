@@ -1,9 +1,7 @@
 \docType{class}
 \name{ColumnLinkedMatrix-class}
 \alias{ColumnLinkedMatrix-class}
-\alias{ColumnLinkedMatrix}
 \alias{RowLinkedMatrix-class}
-\alias{RowLinkedMatrix}
 \title{A Class for Linking Matrices by Columns or Rows}
 \description{
 This class treats a list of matrix-like objects that are linked together by
@@ -38,12 +36,13 @@ accessed using the \code{[[} operator. \code{lapply} is also possible.
 }
 }
 \seealso{
-\link[=initialize,ColumnLinkedMatrix-method]{initialize()} to create a
-\code{ColumnLinkedMatrix} or \code{RowLinkedMatrix} object from scratch,
-\code{\link[=as.ColumnLinkedMatrix]{as.ColumnLinkedMatrix()}} to create a \code{ColumnLinkedMatrix} or
-\code{RowLinkedMatrix} object from other objects, \code{\link[=LinkedMatrix]{LinkedMatrix()}} to create an
-empty, prespecified \code{LinkedMatrix} object, \code{\link[=nNodes]{nNodes()}} to get the number of
-nodes of a \code{LinkedMatrix} object.
+\code{\link{ColumnLinkedMatrix}} and \code{\link{RowLinkedMatrix}} to create a
+\code{ColumnLinkedMatrix} and \code{RowLinkedMatrix} object from scratch,
+respectively. \code{\link[=as.ColumnLinkedMatrix]{as.ColumnLinkedMatrix()}} to
+create a \code{ColumnLinkedMatrix} or \code{RowLinkedMatrix} object from other
+objects, \code{\link[=LinkedMatrix]{LinkedMatrix()}} to create an empty,
+prespecified \code{LinkedMatrix} object, \code{\link[=nNodes]{nNodes()}} to get
+the number of nodes of a \code{LinkedMatrix} object.
 }
 \examples{
 # Create various matrix-like objects that correspond in dimensions
@@ -88,3 +87,4 @@ class(n) == "big.matrix"
 # LinkedMatrix objects are matrix-like and can be nested
 rcm <- RowLinkedMatrix(cm, cm)
 }
+\keyword{classes}

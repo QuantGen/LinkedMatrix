@@ -1,5 +1,9 @@
 # LinkedMatrix 1.3.1.9000
 
+* Follow [Bioconductor S4 practices][2]. If you have used `new()` to create
+  `ColumnLinkedMatrix` and `RowLinkedMatrix` instances, please use the
+  `ColumnLinkedMatrix()` and `RowLinkedMatrix()` constructor respectively
+  instead.
 * Update citation instructions.
 
 
@@ -15,8 +19,7 @@
 
 # LinkedMatrix 1.3.0
 
-* Add [crochet](https://cran.r-project.org/package=crochet) subsetting and
-  replacement support.
+* Add [crochet][1] subsetting and replacement support.
 * Add generic `as.ColumnLinkedMatrix` and `as.RowLinkedMatrix` for easy
   creation of `LinkedMatrix` objects from `list`s of matrix-like objects
   without `do.call`.
@@ -54,3 +57,6 @@
 # LinkedMatrix 1.0.0
 
 Initial release.
+
+[1]: https://CRAN.R-project.org/package=crochet
+[2]: https://bioconductor.org/help/course-materials/2017/Zurich/S4-classes-and-methods.html

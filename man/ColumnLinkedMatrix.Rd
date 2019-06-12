@@ -1,21 +1,17 @@
-\docType{methods}
-\name{initialize,ColumnLinkedMatrix-method}
-\alias{initialize,ColumnLinkedMatrix-method}
-\alias{initialize,RowLinkedMatrix-method}
+\name{ColumnLinkedMatrix}
+\alias{ColumnLinkedMatrix}
+\alias{RowLinkedMatrix}
 \title{Create a LinkedMatrix Object}
 \description{
 This function constructs a new \code{ColumnLinkedMatrix} or
 \code{RowLinkedMatrix} object from a list of matrix-like objects.
 }
 \usage{
-\S4method{initialize}{ColumnLinkedMatrix}(.Object, ...)
+ColumnLinkedMatrix(...)
 
-\S4method{initialize}{RowLinkedMatrix}(.Object, ...)
+RowLinkedMatrix(...)
 }
 \arguments{
-  \item{.Object}{
-    Internal, used by \code{\link[methods:initialize]{methods::initialize()}} generic.
-  }
   \item{...}{
     A sequence of matrix-like objects of the same row-dimension (for
     \code{ColumnLinkedMatrix}) or column-dimension (for
@@ -44,15 +40,8 @@ m2 <- bigmemory::big.matrix(init = rnorm(50), nrow = 5, ncol = 10)
 m3 <- matrix(data = rnorm(50), nrow = 5, ncol = 10)
 
 # Create a ColumnLinkedMatrix object
-cm1 <- ColumnLinkedMatrix(m1, m2, m3)
-
-# Create a RowLinkedMatrix object
-rm1 <- RowLinkedMatrix(m1, m2, m3)
-
-# Alternatively, a LinkedMatrix object can also be created using the `new`
-# function
-cm2 <- new("ColumnLinkedMatrix", m1, m2, m3)
+cm <- ColumnLinkedMatrix(m1, m2, m3)
 
 # To specify the matrix-like objects as a list, use the `do.call` function
-rm2 <- do.call(RowLinkedMatrix, list(m1, m2, m3))
+rm <- do.call(RowLinkedMatrix, list(m1, m2, m3))
 }

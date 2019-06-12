@@ -229,9 +229,9 @@ as.ColumnLinkedMatrix.list <- function(x, ...) {
     do.call(ColumnLinkedMatrix, x, ...)
 }
 
-ColumnLinkedMatrix <- setClass("ColumnLinkedMatrix", contains = "list")
+setClass("ColumnLinkedMatrix", contains = "list")
 
-setMethod("initialize", signature(.Object = "ColumnLinkedMatrix"), function(.Object, ...) {
+ColumnLinkedMatrix <- function(...) {
     nodes <- list(...)
     # Append at least one matrix
     if (length(nodes) == 0L) {
@@ -251,9 +251,9 @@ setMethod("initialize", signature(.Object = "ColumnLinkedMatrix"), function(.Obj
             warning("row names of matrix-like objects do not match: rownames() only uses the row names of the first node")
         }
     }
-    .Object <- callNextMethod(.Object, nodes)
-    return(.Object)
-})
+    obj <- new("ColumnLinkedMatrix", nodes)
+    return(obj)
+}
 
 `[.ColumnLinkedMatrix` <- crochet::extract(
     extract_vector = extract_vector.ColumnLinkedMatrix,
