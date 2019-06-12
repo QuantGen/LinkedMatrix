@@ -4,7 +4,7 @@
 \alias{ColumnLinkedMatrix}
 \alias{RowLinkedMatrix-class}
 \alias{RowLinkedMatrix}
-\title{A Class for Linking Matrices by Columns or Rows.}
+\title{A Class for Linking Matrices by Columns or Rows}
 \description{
 This class treats a list of matrix-like objects that are linked together by
 columns (\code{ColumnLinkedMatrix}) or rows (\code{RowLinkedMatrix}) and have the same

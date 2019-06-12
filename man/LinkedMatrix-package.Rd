@@ -1,7 +1,7 @@
 \docType{package}
 \name{LinkedMatrix-package}
 \alias{LinkedMatrix-package}
-\title{A Package for Linking Matrices by Columns or Rows.}
+\title{A Package for Linking Matrices by Columns or Rows}
 \description{
 The \code{LinkedMatrix} package provides classes that behave similarly to regular
 matrices, but represent a sequence of matrix-like objects linked together by

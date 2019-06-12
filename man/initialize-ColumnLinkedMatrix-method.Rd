@@ -2,7 +2,7 @@
 \name{initialize,ColumnLinkedMatrix-method}
 \alias{initialize,ColumnLinkedMatrix-method}
 \alias{initialize,RowLinkedMatrix-method}
-\title{Create a LinkedMatrix Object.}
+\title{Create a LinkedMatrix Object}
 \usage{
 \S4method{initialize}{ColumnLinkedMatrix}(.Object, ...)
 

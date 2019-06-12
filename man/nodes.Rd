@@ -1,6 +1,6 @@
 \name{nodes}
 \alias{nodes}
-\title{Returns the Column or Row Indexes at Which Each Node Starts and Ends.}
+\title{Returns the Column or Row Indexes at Which Each Node Starts and Ends}
 \usage{
 nodes(x)
 }

@@ -1,7 +1,7 @@
 \docType{class}
 \name{LinkedMatrix-class}
 \alias{LinkedMatrix-class}
-\title{A Class Union of ColumnLinkedMatrix and RowLinkedMatrix.}
+\title{A Class Union of ColumnLinkedMatrix and RowLinkedMatrix}
 \description{
 This class is abstract and no objects can be created from it. It can be used
 to check whether an object is either of type \linkS4class{ColumnLinkedMatrix} or

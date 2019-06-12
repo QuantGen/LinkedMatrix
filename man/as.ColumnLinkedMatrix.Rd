@@ -3,7 +3,7 @@
 \alias{as.ColumnLinkedMatrix.list}
 \alias{as.RowLinkedMatrix}
 \alias{as.RowLinkedMatrix.list}
-\title{Converts an Object to a LinkedMatrix Object.}
+\title{Converts an Object to a LinkedMatrix Object}
 \usage{
 as.ColumnLinkedMatrix(x, ...)
 

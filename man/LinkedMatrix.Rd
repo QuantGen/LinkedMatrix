@@ -1,6 +1,6 @@
 \name{LinkedMatrix}
 \alias{LinkedMatrix}
-\title{Create an Empty, Prespecified LinkedMatrix Object.}
+\title{Create an Empty, Prespecified LinkedMatrix Object}
 \usage{
 LinkedMatrix(nrow, ncol, nNodes, linkedBy, nodeInitializer, ...)
 }

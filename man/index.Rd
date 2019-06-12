@@ -1,7 +1,7 @@
 \name{index}
 \alias{index}
 \title{Maps Each Column or Row Index of a Linked Matrix to the Column or Row Index
-of Its Corresponding Node.}
+of Its Corresponding Node}
 \usage{
 index(x, ...)
 }

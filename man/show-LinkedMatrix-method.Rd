@@ -1,7 +1,7 @@
 \docType{methods}
 \name{show,LinkedMatrix-method}
 \alias{show,LinkedMatrix-method}
-\title{Show a LinkedMatrix Object.}
+\title{Show a LinkedMatrix Object}
 \usage{
 \S4method{show}{LinkedMatrix}(object)
 }

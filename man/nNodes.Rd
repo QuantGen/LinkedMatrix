@@ -1,6 +1,6 @@
 \name{nNodes}
 \alias{nNodes}
-\title{Returns the Number of Nodes.}
+\title{Returns the Number of Nodes}
 \usage{
 nNodes(x)
 }

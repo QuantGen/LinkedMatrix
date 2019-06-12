@@ -1,7 +1,7 @@
 \name{cbind.ColumnLinkedMatrix}
 \alias{cbind.ColumnLinkedMatrix}
 \alias{cbind.RowLinkedMatrix}
-\title{Combine Matrix-Like Objects by Columns.}
+\title{Combine Matrix-Like Objects by Columns}
 \usage{
 \method{cbind}{ColumnLinkedMatrix}(..., deparse.level = 0L)
 

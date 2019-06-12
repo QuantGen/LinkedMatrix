@@ -1,6 +1,6 @@
 \name{as.matrix.LinkedMatrix}
 \alias{as.matrix.LinkedMatrix}
-\title{Converts a LinkedMatrix Instance to a Matrix (if Small Enough).}
+\title{Converts a LinkedMatrix Instance to a Matrix (if Small Enough)}
 \usage{
 \method{as.matrix}{LinkedMatrix}(x, ...)
 }
