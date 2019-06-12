@@ -15,11 +15,6 @@ if (replace_tests == "") {
         paste0("col_", seq_len(p))
     )
 
-    reset <- function() {
-        .GlobalEnv$Y <- createMatrix(n, p, dimnames)
-        .GlobalEnv$X <- createLinkedMatrix(n, p, dimnames, "ColumnLinkedMatrix", 2L)
-    }
-
     CROCHET_REPLACE_ENV <- new.env()
     CROCHET_REPLACE_ENV$COMPARE_OBJECT <- createMatrix(n, p, dimnames)
     CROCHET_REPLACE_ENV$VALUE_POOL <- 0:9
