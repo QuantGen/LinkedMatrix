@@ -1,6 +1,9 @@
 \name{nodes}
 \alias{nodes}
 \title{Returns the Column or Row Indexes at Which Each Node Starts and Ends}
+\description{
+Returns the Column or Row Indexes at Which Each Node Starts and Ends.
+}
 \usage{
 nodes(x)
 }
@@ -10,7 +13,4 @@ object.}
 }
 \value{
 A matrix.
-}
-\description{
-Returns the Column or Row Indexes at Which Each Node Starts and Ends.
 }

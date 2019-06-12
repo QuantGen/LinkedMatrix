@@ -4,6 +4,9 @@
 \alias{as.RowLinkedMatrix}
 \alias{as.RowLinkedMatrix.list}
 \title{Converts an Object to a LinkedMatrix Object}
+\description{
+Converts an Object to a LinkedMatrix Object.
+}
 \usage{
 as.ColumnLinkedMatrix(x, ...)
 
@@ -20,9 +23,6 @@ as.RowLinkedMatrix(x, ...)
 }
 \value{
 A \linkS4class{LinkedMatrix} object.
-}
-\description{
-Converts an Object to a LinkedMatrix Object.
 }
 \examples{
 m1 <- ff::ff(initdata = rnorm(50), dim = c(5, 10))

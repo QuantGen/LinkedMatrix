@@ -17,7 +17,10 @@ methods for both \code{ColumnLinkedMatrix} and \code{RowLinkedMatrix} classes, e
 \item \code{show}
 }
 }
-
+\seealso{
+\linkS4class{ColumnLinkedMatrix} and \linkS4class{RowLinkedMatrix} for
+implementations of column-linked and row-linked matrices, respectively.
+}
 \examples{
 # Create an example RowLinkedMatrix from various matrix-like objects that
 # correspond in dimensions
@@ -31,8 +34,4 @@ m <- RowLinkedMatrix(
 if (is(m, "LinkedMatrix")) {
     message("m is a LinkedMatrix")
 }
-}
-\seealso{
-\linkS4class{ColumnLinkedMatrix} and \linkS4class{RowLinkedMatrix} for
-implementations of column-linked and row-linked matrices, respectively.
 }

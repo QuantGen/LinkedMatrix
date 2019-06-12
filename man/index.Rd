@@ -2,6 +2,12 @@
 \alias{index}
 \title{Maps Each Column or Row Index of a Linked Matrix to the Column or Row Index
 of Its Corresponding Node}
+\description{
+If \code{j} for \linkS4class{ColumnLinkedMatrix} or \code{i} for \linkS4class{RowLinkedMatrix} is
+passed, it will only generate entries for the given indices. \code{sort}, which
+is set by default, determines whether \code{j} or \code{i} should be sorted before
+building the index.
+}
 \usage{
 index(x, ...)
 }
@@ -13,10 +19,4 @@ object.}
 }
 \value{
 A matrix.
-}
-\description{
-If \code{j} for \linkS4class{ColumnLinkedMatrix} or \code{i} for \linkS4class{RowLinkedMatrix} is
-passed, it will only generate entries for the given indices. \code{sort}, which
-is set by default, determines whether \code{j} or \code{i} should be sorted before
-building the index.
 }

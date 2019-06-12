@@ -38,7 +38,14 @@ accessed using the \code{[[} operator. \code{lapply} is also possible.
 \item \code{rbind} (for \code{RowLinkedMatrix})
 }
 }
-
+\seealso{
+\link[=initialize,ColumnLinkedMatrix-method]{initialize()} to create a
+\code{ColumnLinkedMatrix} or \code{RowLinkedMatrix} object from scratch,
+\code{\link[=as.ColumnLinkedMatrix]{as.ColumnLinkedMatrix()}} to create a \code{ColumnLinkedMatrix} or
+\code{RowLinkedMatrix} object from other objects, \code{\link[=LinkedMatrix]{LinkedMatrix()}} to create an
+empty, prespecified \code{LinkedMatrix} object, \code{\link[=nNodes]{nNodes()}} to get the number of
+nodes of a \code{LinkedMatrix} object.
+}
 \examples{
 # Create various matrix-like objects that correspond in dimensions
 m1 <- ff::ff(initdata = rnorm(50), dim = c(5, 10))
@@ -81,12 +88,4 @@ class(n) == "big.matrix"
 
 # LinkedMatrix objects are matrix-like and can be nested
 rcm <- RowLinkedMatrix(cm, cm)
-}
-\seealso{
-\link[=initialize,ColumnLinkedMatrix-method]{initialize()} to create a
-\code{ColumnLinkedMatrix} or \code{RowLinkedMatrix} object from scratch,
-\code{\link[=as.ColumnLinkedMatrix]{as.ColumnLinkedMatrix()}} to create a \code{ColumnLinkedMatrix} or
-\code{RowLinkedMatrix} object from other objects, \code{\link[=LinkedMatrix]{LinkedMatrix()}} to create an
-empty, prespecified \code{LinkedMatrix} object, \code{\link[=nNodes]{nNodes()}} to get the number of
-nodes of a \code{LinkedMatrix} object.
 }

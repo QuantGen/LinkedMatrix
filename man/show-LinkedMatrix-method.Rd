@@ -2,12 +2,12 @@
 \name{show,LinkedMatrix-method}
 \alias{show,LinkedMatrix-method}
 \title{Show a LinkedMatrix Object}
+\description{
+Display the object, by printing, plotting or whatever suits its class.
+}
 \usage{
 \S4method{show}{LinkedMatrix}(object)
 }
 \arguments{
 \item{object}{A \linkS4class{LinkedMatrix} object.}
-}
-\description{
-Display the object, by printing, plotting or whatever suits its class.
 }

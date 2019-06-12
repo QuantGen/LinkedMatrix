@@ -1,6 +1,9 @@
 \name{nNodes}
 \alias{nNodes}
 \title{Returns the Number of Nodes}
+\description{
+Returns the Number of Nodes.
+}
 \usage{
 nNodes(x)
 }
@@ -10,9 +13,6 @@ object.}
 }
 \value{
 The number of nodes.
-}
-\description{
-Returns the Number of Nodes.
 }
 \examples{
 # Create an example RowLinkedMatrix from various matrix-like objects that

@@ -2,6 +2,14 @@
 \alias{cbind.ColumnLinkedMatrix}
 \alias{cbind.RowLinkedMatrix}
 \title{Combine Matrix-Like Objects by Columns}
+\description{
+Compared to the \link[=initialize,ColumnLinkedMatrix-method]{initialize()}
+method, nested \linkS4class{LinkedMatrix} objects that are passed via \code{...} will
+not be treated as matrix-like objects, but their nodes will be extracted and
+merged with the new \linkS4class{ColumnLinkedMatrix} object for a more compact
+representation. This method will currently only work for
+\linkS4class{ColumnLinkedMatrix} objects.
+}
 \usage{
 \method{cbind}{ColumnLinkedMatrix}(..., deparse.level = 0L)
 
@@ -11,12 +19,4 @@
 \item{...}{Matrix-like objects to be combined by columns.}
 
 \item{deparse.level}{Currently unused, defaults to 0.}
-}
-\description{
-Compared to the \link[=initialize,ColumnLinkedMatrix-method]{initialize()}
-method, nested \linkS4class{LinkedMatrix} objects that are passed via \code{...} will
-not be treated as matrix-like objects, but their nodes will be extracted and
-merged with the new \linkS4class{ColumnLinkedMatrix} object for a more compact
-representation. This method will currently only work for
-\linkS4class{ColumnLinkedMatrix} objects.
 }

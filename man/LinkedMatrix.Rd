@@ -1,6 +1,10 @@
 \name{LinkedMatrix}
 \alias{LinkedMatrix}
 \title{Create an Empty, Prespecified LinkedMatrix Object}
+\description{
+This function creates an empty \linkS4class{LinkedMatrix} object of a certain
+size, a certain number of nodes, and certain types of nodes.
+}
 \usage{
 LinkedMatrix(nrow, ncol, nNodes, linkedBy, nodeInitializer, ...)
 }
@@ -27,9 +31,10 @@ initialize \code{ff} objects.}
 A \linkS4class{ColumnLinkedMatrix} object if \code{linkedBy} is \code{columns} or a
 \linkS4class{RowLinkedMatrix} object if \code{linkedBy} is \code{rows}.
 }
-\description{
-This function creates an empty \linkS4class{LinkedMatrix} object of a certain
-size, a certain number of nodes, and certain types of nodes.
+\seealso{
+\link[=initialize,ColumnLinkedMatrix-method]{initialize()} to create a
+\linkS4class{ColumnLinkedMatrix} or \linkS4class{RowLinkedMatrix} object from a list of
+matrix-like objects.
 }
 \examples{
 # Create an empty 15x10 RowLinkedMatrix with 3 matrix nodes
@@ -54,9 +59,4 @@ m3 <- LinkedMatrix(nrow = 15, ncol = 10, nNodes = 3, linkedBy = "rows",
 dim(m3)
 nNodes(m3)
 all(sapply(m3, class) == "big.matrix")
-}
-\seealso{
-\link[=initialize,ColumnLinkedMatrix-method]{initialize()} to create a
-\linkS4class{ColumnLinkedMatrix} or \linkS4class{RowLinkedMatrix} object from a list of
-matrix-like objects.
 }
