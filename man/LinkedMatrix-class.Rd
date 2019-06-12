@@ -1,6 +1,7 @@
 \docType{class}
 \name{LinkedMatrix-class}
 \alias{LinkedMatrix-class}
+\alias{show,LinkedMatrix-method}
 \title{A Class Union of ColumnLinkedMatrix and RowLinkedMatrix}
 \description{
 This class is abstract and no objects can be created from it. It can be used
