@@ -192,10 +192,6 @@ cbind.ColumnLinkedMatrix <- function(..., deparse.level = 0L) {
     do.call(ColumnLinkedMatrix, nodes)
 }
 
-rbind.ColumnLinkedMatrix <- function(..., deparse.level = 1L) {
-    stop("rbind is currently undefined for ColumnLinkedMatrix")
-}
-
 nodes.ColumnLinkedMatrix <- function(x) {
     colsPerNode <- sapply(x, ncol)
     colUpperBoundaries <- cumsum(colsPerNode)

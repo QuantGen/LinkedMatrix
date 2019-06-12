@@ -1,7 +1,5 @@
 \name{cbind.ColumnLinkedMatrix}
 \alias{cbind.ColumnLinkedMatrix}
-\alias{cbind.RowLinkedMatrix}
-\alias{rbind.ColumnLinkedMatrix}
 \alias{rbind.RowLinkedMatrix}
 \title{Combine Matrix-Like Objects by Columns or Rows}
 \description{
@@ -11,16 +9,9 @@ constructor functions, nested \code{LinkedMatrix} objects that are passed via
 extracted and merged with the new \code{ColumnLinkedMatrix} (for
 \code{cbind.ColumnLinkedMatrix}) or \code{RowLinkedMatrix} (for
 \code{rbind.RowLinkedMatrix}) object for a more compact representation.
-\code{cbind.ColumnLinkedMatrix} currently only works for
-\code{ColumnLinkedMatrix} objects, \code{rbind.RowLinkedMatrix} only for
-\code{RowLinkedMatrix}.
 }
 \usage{
 \method{cbind}{ColumnLinkedMatrix}(..., deparse.level = 0L)
-
-\method{cbind}{RowLinkedMatrix}(..., deparse.level = 0L)
-
-\method{rbind}{ColumnLinkedMatrix}(..., deparse.level = 1L)
 
 \method{rbind}{RowLinkedMatrix}(..., deparse.level = 1L)
 }
@@ -31,6 +22,11 @@ extracted and merged with the new \code{ColumnLinkedMatrix} (for
   \item{deparse.level}{
     Currently unused, defaults to 0.
   }
+}
+\details{
+\code{cbind.ColumnLinkedMatrix} currently only works for
+\code{ColumnLinkedMatrix} objects, \code{rbind.RowLinkedMatrix} only for
+\code{RowLinkedMatrix}.
 }
 \seealso{
 \code{\link{ColumnLinkedMatrix-class}}, \code{\link{RowLinkedMatrix-class}},

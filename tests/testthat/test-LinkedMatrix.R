@@ -142,15 +142,11 @@ for (class in c("ColumnLinkedMatrix", "RowLinkedMatrix")) {
                 expect_equal(dim(boundLinkedMatrix), c(n * 2, p))
                 expect_equal(nNodes(boundLinkedMatrix), nNodes * 2)
 
-                expect_error(cbind(linkedMatrix, linkedMatrix))
-
             } else {
 
                 boundLinkedMatrix <- cbind(linkedMatrix, linkedMatrix)
                 expect_equal(dim(boundLinkedMatrix), c(n, p * 2))
                 expect_equal(nNodes(boundLinkedMatrix), nNodes * 2)
-
-                expect_error(rbind(linkedMatrix, linkedMatrix))
 
             }
 

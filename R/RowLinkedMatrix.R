@@ -177,10 +177,6 @@ dimnames.RowLinkedMatrix <- function(x) {
     return(x)
 }
 
-cbind.RowLinkedMatrix <- function(..., deparse.level = 0L) {
-    stop("cbind is currently undefined for RowLinkedMatrix")
-}
-
 rbind.RowLinkedMatrix <- function(..., deparse.level = 1L) {
     dotdotdot <- list(...)
     nodes <- list()

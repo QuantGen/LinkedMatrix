@@ -4,6 +4,7 @@
   `ColumnLinkedMatrix` and `RowLinkedMatrix` instances, please use the
   `ColumnLinkedMatrix()` and `RowLinkedMatrix()` constructor respectively
   instead.
+* Drop defunct `cbind.RowLinkedMatrix` and `rbind.ColumnLinkedMatrix` methods.
 * Update citation instructions.
 
 
