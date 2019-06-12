@@ -4,11 +4,10 @@
 \title{Combine Matrix-Like Objects by Rows}
 \description{
 Compared to the \link[=initialize,RowLinkedMatrix-method]{initialize()} method,
-nested \linkS4class{LinkedMatrix} objects that are passed via \code{...} will not be
+nested \code{LinkedMatrix} objects that are passed via \code{...} will not be
 treated as matrix-like objects, but their nodes will be extracted and merged
-with the new \linkS4class{RowLinkedMatrix} object for a more compact
-representation. This method will currently only work for
-\linkS4class{RowLinkedMatrix} objects.
+with the new \code{RowLinkedMatrix} object for a more compact representation.
+This method will currently only work for \code{RowLinkedMatrix} objects.
 }
 \usage{
 \method{rbind}{ColumnLinkedMatrix}(..., deparse.level = 1L)
@@ -19,4 +18,10 @@ representation. This method will currently only work for
 \item{...}{Matrix-like objects to be combined by rows.}
 
 \item{deparse.level}{Currently unused, defaults to 0.}
+}
+\seealso{
+\code{\link{ColumnLinkedMatrix-class}}, \code{\link{RowLinkedMatrix-class}},
+and \code{\link{LinkedMatrix}} for more information on the
+\code{ColumnLinkedMatrix}, \code{RowLinkedMatrix}, and \code{LinkedMatrix}
+classes.
 }

@@ -8,11 +8,17 @@ Returns the Number of Nodes.
 nNodes(x)
 }
 \arguments{
-\item{x}{Either a \linkS4class{ColumnLinkedMatrix} or a \linkS4class{RowLinkedMatrix}
+\item{x}{Either a \code{ColumnLinkedMatrix} or a \code{RowLinkedMatrix}
 object.}
 }
 \value{
 The number of nodes.
+}
+\seealso{
+\code{\link{ColumnLinkedMatrix-class}}, \code{\link{RowLinkedMatrix-class}},
+and \code{\link{LinkedMatrix-class}} for more information on the
+\code{ColumnLinkedMatrix}, \code{RowLinkedMatrix}, and \code{LinkedMatrix}
+classes.
 }
 \examples{
 # Create an example RowLinkedMatrix from various matrix-like objects that

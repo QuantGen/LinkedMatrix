@@ -4,8 +4,8 @@
 \title{A Class Union of ColumnLinkedMatrix and RowLinkedMatrix}
 \description{
 This class is abstract and no objects can be created from it. It can be used
-to check whether an object is either of type \linkS4class{ColumnLinkedMatrix} or
-of type \linkS4class{RowLinkedMatrix} using \code{is(x, "LinkedMatrix")} and to assign
+to check whether an object is either of type \code{ColumnLinkedMatrix} or
+of type \code{RowLinkedMatrix} using \code{is(x, "LinkedMatrix")} and to assign
 methods for both \code{ColumnLinkedMatrix} and \code{RowLinkedMatrix} classes, e.g.
 \code{show}.
 }
@@ -18,8 +18,8 @@ methods for both \code{ColumnLinkedMatrix} and \code{RowLinkedMatrix} classes, e
 }
 }
 \seealso{
-\linkS4class{ColumnLinkedMatrix} and \linkS4class{RowLinkedMatrix} for
-implementations of column-linked and row-linked matrices, respectively.
+\code{\link{ColumnLinkedMatrix-class}} and \code{\link{RowLinkedMatrix-class}}
+for implementations of column-linked and row-linked matrices, respectively.
 }
 \examples{
 # Create an example RowLinkedMatrix from various matrix-like objects that

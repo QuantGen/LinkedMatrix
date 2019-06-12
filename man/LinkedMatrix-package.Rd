@@ -11,5 +11,8 @@ packages such as \link[bigmemory:big.matrix-class]{bigmemory}, \link[ff:ff]{ff},
 \link[BEDMatrix:BEDMatrix-class]{BEDMatrix::BEDMatrix}.
 }
 \seealso{
-The \linkS4class{ColumnLinkedMatrix} and \linkS4class{RowLinkedMatrix} classes.
+\code{\link{ColumnLinkedMatrix-class}}, \code{\link{RowLinkedMatrix-class}},
+and \code{\link{LinkedMatrix-class}} for more information on the
+\code{ColumnLinkedMatrix}, \code{RowLinkedMatrix}, and \code{LinkedMatrix}
+classes.
 }

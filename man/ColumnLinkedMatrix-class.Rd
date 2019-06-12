@@ -19,7 +19,7 @@ dimensions and implements at least \code{dim} and \code{[}.
 Internally, this class is an S4 class that contains \code{list}. Each node can be
 accessed using the \code{[[} operator. \code{lapply} is also possible.
 \code{ColumnLinkedMatrix} and \code{RowLinkedMatrix} form a class union called
-\linkS4class{LinkedMatrix}.
+\code{LinkedMatrix}.
 }
 \section{Methods}{
 

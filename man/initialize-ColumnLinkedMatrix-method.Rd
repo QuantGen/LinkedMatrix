@@ -4,8 +4,8 @@
 \alias{initialize,RowLinkedMatrix-method}
 \title{Create a LinkedMatrix Object}
 \description{
-This function constructs a new \linkS4class{ColumnLinkedMatrix} or
-\linkS4class{RowLinkedMatrix} object from a list of matrix-like objects.
+This function constructs a new \code{ColumnLinkedMatrix} or
+\code{RowLinkedMatrix} object from a list of matrix-like objects.
 }
 \usage{
 \S4method{initialize}{ColumnLinkedMatrix}(.Object, ...)
@@ -23,15 +23,15 @@ A matrix-like object is one that has two dimensions and implements at least
 \code{dim} and \code{[}. Each object needs to have the same number of rows (for
 \code{ColumnLinkedMatrix}) or columns (for \code{RowLinkedMatrix}) to be linked
 together. If no matrix-like objects are given, a single 1x1 node of type
-\code{matrix} filled with \code{NA} is returned. \linkS4class{LinkedMatrix} objects can be
-nested as long as they are conformable.
+\code{matrix} filled with \code{NA} is returned. \code{LinkedMatrix} objects
+can be nested as long as they are conformable.
 }
 \value{
 Either a \code{ColumnLinkedMatrix} or a \code{RowLinkedMatrix} object.
 }
 \seealso{
 \code{\link[=LinkedMatrix]{LinkedMatrix()}} to create an empty, prespecified
-\linkS4class{LinkedMatrix} object.
+\code{LinkedMatrix} object.
 }
 \examples{
 # Create various matrix-like objects that correspond in dimensions

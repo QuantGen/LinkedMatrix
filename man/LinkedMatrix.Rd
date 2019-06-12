@@ -2,8 +2,8 @@
 \alias{LinkedMatrix}
 \title{Create an Empty, Prespecified LinkedMatrix Object}
 \description{
-This function creates an empty \linkS4class{LinkedMatrix} object of a certain
-size, a certain number of nodes, and certain types of nodes.
+This function creates an empty \code{LinkedMatrix} object of a certain size, a
+certain number of nodes, and certain types of nodes.
 }
 \usage{
 LinkedMatrix(nrow, ncol, nNodes, linkedBy, nodeInitializer, ...)
@@ -28,12 +28,12 @@ initialize \code{ff} objects.}
 \item{...}{Additional arguments passed into the \code{nodeInitializer} function.}
 }
 \value{
-A \linkS4class{ColumnLinkedMatrix} object if \code{linkedBy} is \code{columns} or a
-\linkS4class{RowLinkedMatrix} object if \code{linkedBy} is \code{rows}.
+A \code{ColumnLinkedMatrix} object if \code{linkedBy} is \code{columns} or a
+\code{RowLinkedMatrix} object if \code{linkedBy} is \code{rows}.
 }
 \seealso{
 \link[=initialize,ColumnLinkedMatrix-method]{initialize()} to create a
-\linkS4class{ColumnLinkedMatrix} or \linkS4class{RowLinkedMatrix} object from a list of
+\code{ColumnLinkedMatrix} or \code{RowLinkedMatrix} object from a list of
 matrix-like objects.
 }
 \examples{
