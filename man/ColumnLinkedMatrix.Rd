@@ -30,8 +30,8 @@ can be nested as long as they are conformable.
 Either a \code{ColumnLinkedMatrix} or a \code{RowLinkedMatrix} object.
 }
 \seealso{
-\code{\link[=LinkedMatrix]{LinkedMatrix()}} to create an empty, prespecified
-\code{LinkedMatrix} object.
+\code{\link{LinkedMatrix}} to create an empty, prespecified \code{LinkedMatrix}
+object.
 }
 \examples{
 # Create various matrix-like objects that correspond in dimensions
