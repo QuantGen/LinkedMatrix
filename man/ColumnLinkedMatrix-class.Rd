@@ -37,12 +37,12 @@ accessed using the \code{[[} operator. \code{lapply} is also possible.
 }
 \seealso{
 \code{\link{ColumnLinkedMatrix}} and \code{\link{RowLinkedMatrix}} to create a
-\code{ColumnLinkedMatrix} and \code{RowLinkedMatrix} object from scratch,
-respectively. \code{\link{as.ColumnLinkedMatrix}} to create a
-\code{ColumnLinkedMatrix} or \code{RowLinkedMatrix} object from other objects,
-\code{\link{LinkedMatrix}} to create an empty, prespecified \code{LinkedMatrix}
-object, \code{\link{nNodes}} to get the number of nodes of a
-\code{LinkedMatrix} object.
+\code{ColumnLinkedMatrix} and \code{RowLinkedMatrix} objects from scratch.
+\code{\link{as.ColumnLinkedMatrix}} and \code{\link{as.RowLinkedMatrix}} to
+create a \code{ColumnLinkedMatrix} and \code{RowLinkedMatrix} objects from
+other objects. \code{\link{LinkedMatrix}} to create an empty, prespecified
+\code{LinkedMatrix} object.  \code{\link{nNodes}} to get the number of nodes of
+a \code{LinkedMatrix} object.
 }
 \examples{
 # Create various matrix-like objects that correspond in dimensions
