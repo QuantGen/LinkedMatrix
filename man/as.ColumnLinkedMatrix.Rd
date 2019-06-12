@@ -17,9 +17,12 @@ as.RowLinkedMatrix(x, ...)
 \method{as.RowLinkedMatrix}{list}(x, ...)
 }
 \arguments{
-\item{x}{An object to convert to a \code{LinkedMatrix} object.}
-
-\item{...}{Additional arguments.}
+  \item{x}{
+    An object to convert to a \code{LinkedMatrix} object.
+  }
+  \item{...}{
+    Additional arguments.
+  }
 }
 \value{
 A \code{LinkedMatrix} object.

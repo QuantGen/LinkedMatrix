@@ -22,20 +22,19 @@ accessed using the \code{[[} operator. \code{lapply} is also possible.
 \code{LinkedMatrix}.
 }
 \section{Methods}{
-
 \itemize{
-\item \code{[}
-\item \code{[<-}
-\item \code{dim}
-\item \code{dimnames}
-\item \code{dimnames<-}
-\item \code{as.matrix}
-\item \code{is.matrix}
-\item \code{length}
-\item \code{print}
-\item \code{str}
-\item \code{cbind} (for \code{ColumnLinkedMatrix})
-\item \code{rbind} (for \code{RowLinkedMatrix})
+  \item \code{[}
+  \item \code{[<-}
+  \item \code{dim}
+  \item \code{dimnames}
+  \item \code{dimnames<-}
+  \item \code{as.matrix}
+  \item \code{is.matrix}
+  \item \code{length}
+  \item \code{print}
+  \item \code{str}
+  \item \code{cbind} (for \code{ColumnLinkedMatrix})
+  \item \code{rbind} (for \code{RowLinkedMatrix})
 }
 }
 \seealso{

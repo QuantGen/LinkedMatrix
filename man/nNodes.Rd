@@ -8,8 +8,9 @@ Returns the Number of Nodes.
 nNodes(x)
 }
 \arguments{
-\item{x}{Either a \code{ColumnLinkedMatrix} or a \code{RowLinkedMatrix}
-object.}
+  \item{x}{
+    Either a \code{ColumnLinkedMatrix} or a \code{RowLinkedMatrix} object.
+  }
 }
 \value{
 The number of nodes.

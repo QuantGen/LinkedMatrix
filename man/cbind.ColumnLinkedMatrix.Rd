@@ -16,9 +16,12 @@ representation. This method will currently only work for
 \method{cbind}{RowLinkedMatrix}(..., deparse.level = 0L)
 }
 \arguments{
-\item{...}{Matrix-like objects to be combined by columns.}
-
-\item{deparse.level}{Currently unused, defaults to 0.}
+  \item{...}{
+    Matrix-like objects to be combined by columns.
+  }
+  \item{deparse.level}{
+    Currently unused, defaults to 0.
+  }
 }
 \seealso{
 \code{\link{ColumnLinkedMatrix-class}}, \code{\link{RowLinkedMatrix-class}},

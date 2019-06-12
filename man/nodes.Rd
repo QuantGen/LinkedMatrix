@@ -8,8 +8,9 @@ Returns the Column or Row Indexes at Which Each Node Starts and Ends.
 nodes(x)
 }
 \arguments{
-\item{x}{Either a \code{ColumnLinkedMatrix} or a \code{RowLinkedMatrix}
-object.}
+  \item{x}{
+    Either a \code{ColumnLinkedMatrix} or a \code{RowLinkedMatrix} object.
+  }
 }
 \value{
 A matrix.

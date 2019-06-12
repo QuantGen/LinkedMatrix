@@ -13,10 +13,14 @@ This function constructs a new \code{ColumnLinkedMatrix} or
 \S4method{initialize}{RowLinkedMatrix}(.Object, ...)
 }
 \arguments{
-\item{.Object}{Internal, used by \code{\link[methods:initialize]{methods::initialize()}} generic.}
-
-\item{...}{A sequence of matrix-like objects of the same row-dimension (for
-\code{ColumnLinkedMatrix}) or column-dimension (for \code{RowLinkedMatrix}).}
+  \item{.Object}{
+    Internal, used by \code{\link[methods:initialize]{methods::initialize()}} generic.
+  }
+  \item{...}{
+    A sequence of matrix-like objects of the same row-dimension (for
+    \code{ColumnLinkedMatrix}) or column-dimension (for
+    \code{RowLinkedMatrix}).
+  }
 }
 \details{
 A matrix-like object is one that has two dimensions and implements at least

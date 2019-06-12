@@ -15,9 +15,12 @@ This method will currently only work for \code{RowLinkedMatrix} objects.
 \method{rbind}{RowLinkedMatrix}(..., deparse.level = 1L)
 }
 \arguments{
-\item{...}{Matrix-like objects to be combined by rows.}
-
-\item{deparse.level}{Currently unused, defaults to 0.}
+  \item{...}{
+    Matrix-like objects to be combined by rows.
+  }
+  \item{deparse.level}{
+    Currently unused, defaults to 0.
+  }
 }
 \seealso{
 \code{\link{ColumnLinkedMatrix-class}}, \code{\link{RowLinkedMatrix-class}},

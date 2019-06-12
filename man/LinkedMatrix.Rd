@@ -9,23 +9,31 @@ certain number of nodes, and certain types of nodes.
 LinkedMatrix(nrow, ncol, nNodes, linkedBy, nodeInitializer, ...)
 }
 \arguments{
-\item{nrow}{The number of rows of the whole matrix.}
-
-\item{ncol}{The number of columns of the whole matrix.}
-
-\item{nNodes}{The number of nodes.}
-
-\item{linkedBy}{Whether the matrix is linked by \code{columns} or \code{rows}.}
-
-\item{nodeInitializer}{The name of a function or a function \code{(nodeIndex, nrow, ncol, ...)} where \code{nodeIndex} is the index of the node, \code{nrow} is a
-partition of the total number of rows, \code{ncol} is a partition of the total
-number of columns, and \code{...} are additional parameters passed into the
-function. The function is expected to return a matrix-like object of
-dimensions \code{nrow} and \code{ncol}. Pre-defined node initializers include
-\code{matrixNodeInitializer} to initialize matrices and \code{ffNodeInitializer} to
-initialize \code{ff} objects.}
-
-\item{...}{Additional arguments passed into the \code{nodeInitializer} function.}
+  \item{nrow}{
+    The number of rows of the whole matrix.
+  }
+  \item{ncol}{
+    The number of columns of the whole matrix.
+  }
+  \item{nNodes}{
+    The number of nodes.
+  }
+  \item{linkedBy}{
+    Whether the matrix is linked by \code{columns} or \code{rows}.
+  }
+  \item{nodeInitializer}{
+    The name of a function or a function \code{(nodeIndex, nrow, ncol, ...)}
+    where \code{nodeIndex} is the index of the node, \code{nrow} is a partition
+    of the total number of rows, \code{ncol} is a partition of the total number
+    of columns, and \code{...} are additional parameters passed into the
+    function. The function is expected to return a matrix-like object of
+    dimensions \code{nrow} and \code{ncol}. Pre-defined node initializers
+    include \code{matrixNodeInitializer} to initialize matrices and
+    \code{ffNodeInitializer} to initialize \code{ff} objects.
+  }
+  \item{...}{
+    Additional arguments passed into the \code{nodeInitializer} function.
+  }
 }
 \value{
 A \code{ColumnLinkedMatrix} object if \code{linkedBy} is \code{columns} or a

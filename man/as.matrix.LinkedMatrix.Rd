@@ -8,10 +8,12 @@ Converts a LinkedMatrix Instance to a Matrix (if Small Enough).
 \method{as.matrix}{LinkedMatrix}(x, ...)
 }
 \arguments{
-\item{x}{Either a \code{ColumnLinkedMatrix} or a \code{RowLinkedMatrix}
-object.}
-
-\item{...}{Additional arguments (unused).}
+  \item{x}{
+    Either a \code{ColumnLinkedMatrix} or a \code{RowLinkedMatrix} object.
+  }
+  \item{...}{
+    Additional arguments (unused).
+  }
 }
 \value{
 A matrix.

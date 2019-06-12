@@ -10,11 +10,10 @@ methods for both \code{ColumnLinkedMatrix} and \code{RowLinkedMatrix} classes, e
 \code{show}.
 }
 \section{Methods}{
-
 \itemize{
-\item \code{length}
-\item \code{as.matrix}
-\item \code{show}
+  \item \code{length}
+  \item \code{as.matrix}
+  \item \code{show}
 }
 }
 \seealso{

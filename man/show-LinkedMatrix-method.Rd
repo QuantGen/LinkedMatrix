@@ -9,7 +9,9 @@ Display the object, by printing, plotting or whatever suits its class.
 \S4method{show}{LinkedMatrix}(object)
 }
 \arguments{
-\item{object}{A \code{LinkedMatrix} object.}
+  \item{object}{
+    A \code{LinkedMatrix} object.
+  }
 }
 \seealso{
 \code{\link{ColumnLinkedMatrix-class}}, \code{\link{RowLinkedMatrix-class}},

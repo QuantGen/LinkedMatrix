@@ -12,10 +12,12 @@ indices. \code{sort}, which is set by default, determines whether \code{j} or
 index(x, ...)
 }
 \arguments{
-\item{x}{Either a \code{ColumnLinkedMatrix} or a \code{RowLinkedMatrix}
-object.}
-
-\item{...}{Additional arguments (see Details).}
+  \item{x}{
+    Either a \code{ColumnLinkedMatrix} or a \code{RowLinkedMatrix} object.
+  }
+  \item{...}{
+    Additional arguments (see Details).
+  }
 }
 \value{
 A matrix.
