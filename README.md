@@ -45,8 +45,8 @@ install.packages("LinkedMatrix")
 Alternatively, install the development version from GitHub:
 
 ```R
-# install.packages("devtools")
-devtools::install_github("QuantGen/LinkedMatrix")
+# install.packages("remotes")
+remotes::install_github("QuantGen/LinkedMatrix")
 ```
 
 
