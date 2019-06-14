@@ -232,24 +232,27 @@ RowLinkedMatrix <- function(...) {
     # Append at least one matrix
     if (length(nodes) == 0L) {
         nodes[[1L]] <- matrix()
-    } else {
-        # Stop if matrices are not matrix-like
-        if (!all(sapply(nodes, crochet:::isMatrixLike))) {
-            stop("arguments need to be matrix-like")
-        }
-        # Stop if dimensions of matrices do not match
-        if (length(unique(sapply(nodes, ncol))) != 1L) {
-            stop("arguments need the same number of columns")
-        }
-        # Warn if colnames of matrices do not match
-        names <- lapply(nodes, colnames)
-        if (length(names) > 1L && !all(duplicated(names) | duplicated(names, fromLast = TRUE))) {
-            warning("column names of matrix-like objects do not match: colnames() only uses the column names of the first node")
-        }
     }
     obj <- new("RowLinkedMatrix", nodes)
     return(obj)
 }
+
+setValidity("RowLinkedMatrix", function(object) {
+    # Stop if matrices are not matrix-like
+    if (!all(sapply(object, crochet:::isMatrixLike))) {
+        return("arguments need to be matrix-like")
+    }
+    # Stop if dimensions of matrices do not match
+    if (length(unique(sapply(object, ncol))) != 1L) {
+        return("arguments need the same number of columns")
+    }
+    # Warn if colnames of matrices do not match
+    names <- lapply(object, colnames)
+    if (length(names) > 1L && !all(duplicated(names) | duplicated(names, fromLast = TRUE))) {
+        warning("column names of matrix-like objects do not match: colnames() only uses the column names of the first node")
+    }
+    return(TRUE)
+})
 
 `[.RowLinkedMatrix` <- crochet::extract(
     extract_vector = extract_vector.RowLinkedMatrix,
