@@ -5,7 +5,7 @@
 \alias{as.RowLinkedMatrix.list}
 \title{Converts an Object to a LinkedMatrix Object}
 \description{
-Converts an Object to a LinkedMatrix Object.
+    Converts an Object to a LinkedMatrix Object.
 }
 \usage{
 as.ColumnLinkedMatrix(x, ...)
@@ -17,21 +17,21 @@ as.RowLinkedMatrix(x, ...)
 \method{as.RowLinkedMatrix}{list}(x, ...)
 }
 \arguments{
-  \item{x}{
-    An object to convert to a \code{LinkedMatrix} object.
-  }
-  \item{...}{
-    Additional arguments.
-  }
+    \item{x}{
+        An object to convert to a \code{LinkedMatrix} object.
+    }
+    \item{...}{
+        Additional arguments.
+    }
 }
 \value{
-A \code{LinkedMatrix} object.
+    A \code{LinkedMatrix} object.
 }
 \seealso{
-\code{\link{ColumnLinkedMatrix-class}}, \code{\link{RowLinkedMatrix-class}},
-and \code{\link{LinkedMatrix-class}} for more information on the
-\code{ColumnLinkedMatrix}, \code{RowLinkedMatrix}, and \code{LinkedMatrix}
-classes.
+    \code{\link{ColumnLinkedMatrix-class}}, \code{\link{RowLinkedMatrix-class}},
+    and \code{\link{LinkedMatrix-class}} for more information on the
+    \code{ColumnLinkedMatrix}, \code{RowLinkedMatrix}, and \code{LinkedMatrix}
+    classes.
 }
 \examples{
 m1 <- ff::ff(initdata = rnorm(50), dim = c(5, 10))

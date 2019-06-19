@@ -2,24 +2,24 @@
 \alias{nNodes}
 \title{Returns the Number of Nodes}
 \description{
-Returns the Number of Nodes.
+    Returns the number of nodes.
 }
 \usage{
 nNodes(x)
 }
 \arguments{
-  \item{x}{
-    Either a \code{ColumnLinkedMatrix} or a \code{RowLinkedMatrix} object.
-  }
+    \item{x}{
+        Either a \code{ColumnLinkedMatrix} or a \code{RowLinkedMatrix} object.
+    }
 }
 \value{
-The number of nodes.
+    The number of nodes.
 }
 \seealso{
-\code{\link{ColumnLinkedMatrix-class}}, \code{\link{RowLinkedMatrix-class}},
-and \code{\link{LinkedMatrix-class}} for more information on the
-\code{ColumnLinkedMatrix}, \code{RowLinkedMatrix}, and \code{LinkedMatrix}
-classes.
+    \code{\link{ColumnLinkedMatrix-class}},
+    \code{\link{RowLinkedMatrix-class}}, and \code{\link{LinkedMatrix-class}}
+    for more information on the \code{ColumnLinkedMatrix},
+    \code{RowLinkedMatrix}, and \code{LinkedMatrix} classes.
 }
 \examples{
 # Create an example RowLinkedMatrix from various matrix-like objects that
