@@ -254,13 +254,13 @@ setValidity("ColumnLinkedMatrix", function(object) {
     return(TRUE)
 })
 
-`[.ColumnLinkedMatrix` <- crochet::extract(
+`[.ColumnLinkedMatrix` <- extract(
     extract_vector = extract_vector.ColumnLinkedMatrix,
     extract_matrix = extract_matrix.ColumnLinkedMatrix,
     allowDoubles = TRUE # this may not be compatible with all matrix-like objects
 )
 
-`[<-.ColumnLinkedMatrix` <- crochet::replace(
+`[<-.ColumnLinkedMatrix` <- replace(
     replace_vector = replace_vector.ColumnLinkedMatrix,
     replace_matrix = replace_matrix.ColumnLinkedMatrix,
     allowDoubles = TRUE # this may not be compatible with all matrix-like objects

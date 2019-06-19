@@ -41,7 +41,7 @@ extract_vector.RowLinkedMatrix <- function(x, i, ...) {
         Z <- integer(0L)
     } else {
         # Convert one-dimensional index to two-dimensional index
-        ij <- crochet::ktoij(x, i)
+        ij <- ktoij(x, i)
         # Determine nodes and node boundaries for query (in this case we cannot
         # use index() as rowsPerNode is needed to recalculate the single index)
         rowsPerNode <- sapply(x, nrow)
@@ -96,7 +96,7 @@ replace_matrix.RowLinkedMatrix <- function(x, i, j, ..., value) {
 
 replace_vector.RowLinkedMatrix <- function(x, i, ..., value) {
     # Convert one-dimensional index to two-dimensional index
-    ij <- crochet::ktoij(x, i)
+    ij <- ktoij(x, i)
     # Determine nodes and node boundaries for query (in this case we cannot
     # use index() as rowsPerNode is needed to recalculate the single index)
     rowsPerNode <- sapply(x, nrow)
@@ -254,13 +254,13 @@ setValidity("RowLinkedMatrix", function(object) {
     return(TRUE)
 })
 
-`[.RowLinkedMatrix` <- crochet::extract(
+`[.RowLinkedMatrix` <- extract(
     extract_vector = extract_vector.RowLinkedMatrix,
     extract_matrix = extract_matrix.RowLinkedMatrix,
     allowDoubles = TRUE # this may not be compatible with all matrix-like objects
 )
 
-`[<-.RowLinkedMatrix` <- crochet::replace(
+`[<-.RowLinkedMatrix` <- replace(
     replace_vector = replace_vector.RowLinkedMatrix,
     replace_matrix = replace_matrix.RowLinkedMatrix,
     allowDoubles = TRUE # this may not be compatible with all matrix-like objects
