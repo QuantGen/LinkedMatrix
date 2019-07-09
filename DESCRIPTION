@@ -10,6 +10,8 @@ Authors@R: c(
     person("Alexander", "Grueneberg", email = "alexander.grueneberg@googlemail.com", role = c("aut", "cre")))
 URL: https://github.com/QuantGen/LinkedMatrix
 BugReports: https://github.com/QuantGen/LinkedMatrix/issues
+Depends:
+    R (>= 3.0.2)
 Imports:
     methods,
     crochet (>= 2.2.0)
