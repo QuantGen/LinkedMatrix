@@ -4,7 +4,7 @@ LinkedMatrix <- function(nrow, ncol, nNodes, linkedBy, nodeInitializer, ...) {
     class <- ifelse(linkedBy == "columns", "ColumnLinkedMatrix", "RowLinkedMatrix")
     # Look for an internal function first
     ex <- try(nodeInitializer <- get(nodeInitializer), silent = TRUE)
-    if (class(ex) == "try-error") {
+    if (inherits(ex, "try-error")) {
         nodeInitializer <- match.fun(nodeInitializer)
     }
     linkedMatrix <- get(class)() # call default contructor

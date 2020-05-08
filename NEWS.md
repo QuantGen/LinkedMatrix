@@ -5,6 +5,7 @@
   `ColumnLinkedMatrix()` and `RowLinkedMatrix()` constructor functions instead.
 * Drop defunct `cbind.RowLinkedMatrix` and `rbind.ColumnLinkedMatrix` methods.
 * Update citation instructions.
+* Use `inherits(., *)` instead of `class(.) == *` (R4 compat).
 
 
 # LinkedMatrix 1.3.1
