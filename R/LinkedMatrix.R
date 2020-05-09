@@ -35,14 +35,14 @@ ffNodeInitializer <- function(nodeIndex, nrow, ncol, vmode, ...) {
 
 show <- function(object) {
     d <- dim(object)
-    cat(d[1L], "x", d[2L], "linked matrix of class", class(object), "\n")
+    cat(d[1L], "x", d[2L], "linked matrix of class", class(object)[1L], "\n")
 }
 
 str.LinkedMatrix <- function(object, ...) {
     show(object)
     for (i in 1:nNodes(object)) {
         d <- dim(object[[i]])
-        cat("  * Node ", i, ": ", d[1L], " x ", d[2L], " matrix-like object of class ", class(object[[i]]), "\n", sep = "")
+        cat("  * Node ", i, ": ", d[1L], " x ", d[2L], " matrix-like object of class ", class(object[[i]])[1L], "\n", sep = "")
     }
 }
 
