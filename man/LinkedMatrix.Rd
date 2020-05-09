@@ -51,7 +51,7 @@ m1 <- LinkedMatrix(nrow = 15, ncol = 10, nNodes = 3, linkedBy = "rows",
                    nodeInitializer = "matrixNodeInitializer")
 dim(m1)
 nNodes(m1)
-all(sapply(m1, class) == "matrix")
+all(sapply(m1, inherits, "matrix"))
 
 # Create an empty 15x10 RowLinkedMatrix with 3 ff nodes
 m2 <- LinkedMatrix(nrow = 15, ncol = 10, nNodes = 3, linkedBy = "rows",
@@ -67,5 +67,5 @@ m3 <- LinkedMatrix(nrow = 15, ncol = 10, nNodes = 3, linkedBy = "rows",
                    })
 dim(m3)
 nNodes(m3)
-all(sapply(m3, class) == "big.matrix")
+all(sapply(m3, inherits, "big.matrix"))
 }
