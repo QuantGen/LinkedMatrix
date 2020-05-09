@@ -1,6 +1,7 @@
 \docType{class}
 \name{LinkedMatrix-class}
 \alias{LinkedMatrix-class}
+\alias{initialize,LinkedMatrix-method}
 \alias{show,LinkedMatrix-method}
 \title{A Class Union of ColumnLinkedMatrix and RowLinkedMatrix}
 \description{
@@ -8,13 +9,14 @@
     used to check whether an object is either of type \code{ColumnLinkedMatrix}
     or of type \code{RowLinkedMatrix} using \code{is(x, "LinkedMatrix")} and to
     assign methods for both \code{ColumnLinkedMatrix} and
-    \code{RowLinkedMatrix} classes, e.g.  \code{show}.
+    \code{RowLinkedMatrix} classes, e.g. \code{show}.
 }
 \section{Methods}{
     \itemize{
         \item \code{length}
         \item \code{as.matrix}
         \item \code{show}
+        \item \code{initialize}
     }
 }
 \seealso{

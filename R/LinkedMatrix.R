@@ -72,4 +72,16 @@ index <- function(x, ...) {
 
 setClassUnion("LinkedMatrix", c("ColumnLinkedMatrix", "RowLinkedMatrix"))
 
+# The default initialize method may simplify some of its inputs
+setMethod("initialize", "LinkedMatrix", function(.Object, ...) {
+    nodes <- list(...)
+    # Append at least one matrix
+    if (length(nodes) == 0L) {
+        nodes[[1L]] <- matrix()
+    }
+    .Object@.Data <- nodes
+    validObject(.Object)
+    return(.Object)
+})
+
 setMethod("show", signature(object = "LinkedMatrix"), show)

@@ -225,17 +225,7 @@ as.ColumnLinkedMatrix.list <- function(x, ...) {
     do.call(ColumnLinkedMatrix, x, ...)
 }
 
-setClass("ColumnLinkedMatrix", contains = "list")
-
-ColumnLinkedMatrix <- function(...) {
-    nodes <- list(...)
-    # Append at least one matrix
-    if (length(nodes) == 0L) {
-        nodes[[1L]] <- matrix()
-    }
-    obj <- new("ColumnLinkedMatrix", nodes)
-    return(obj)
-}
+ColumnLinkedMatrix <- setClass("ColumnLinkedMatrix", contains = "list")
 
 setValidity("ColumnLinkedMatrix", function(object) {
     # Stop if matrices are not matrix-like
