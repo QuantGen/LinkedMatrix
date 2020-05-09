@@ -228,16 +228,21 @@ as.RowLinkedMatrix.list <- function(x, ...) {
 RowLinkedMatrix <- setClass("RowLinkedMatrix", contains = "list")
 
 setValidity("RowLinkedMatrix", function(object) {
+    nodes <- object@.Data
+    # Stop unless there is more than one node
+    if (length(nodes) == 0L) {
+        return("there needs to be at least one node")
+    }
     # Stop if matrices are not matrix-like
-    if (!all(sapply(object, crochet:::isMatrixLike))) {
+    if (!all(sapply(nodes, crochet:::isMatrixLike))) {
         return("arguments need to be matrix-like")
     }
     # Stop if dimensions of matrices do not match
-    if (length(unique(sapply(object, ncol))) != 1L) {
+    if (length(unique(sapply(nodes, ncol))) != 1L) {
         return("arguments need the same number of columns")
     }
     # Warn if colnames of matrices do not match
-    names <- lapply(object, colnames)
+    names <- lapply(nodes, colnames)
     if (length(names) > 1L && !all(duplicated(names) | duplicated(names, fromLast = TRUE))) {
         warning("column names of matrix-like objects do not match: colnames() only uses the column names of the first node")
     }
