@@ -6,6 +6,7 @@
 * Drop defunct `cbind.RowLinkedMatrix` and `rbind.ColumnLinkedMatrix` methods.
 * Update citation instructions.
 * Use `inherits(., *)` instead of `class(.) == *` (R4 compat).
+* Use tinytest instead of testthat.
 
 
 # LinkedMatrix 1.3.1

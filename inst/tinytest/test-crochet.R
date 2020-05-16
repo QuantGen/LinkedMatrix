@@ -1,3 +1,5 @@
+source("setup.R")
+
 n <- 4L
 p <- 4L
 dimnames <- list(
@@ -11,14 +13,14 @@ extractionTests$COMPARE_OBJECT <- createMatrix(n, p, dimnames)
 extractionTests$OUT_OF_BOUNDS_INT <- (n * p) + 1L
 extractionTests$OUT_OF_BOUNDS_CHAR <- "col_1000"
 
-context("ColumnLinkedMatrix with 2 nodes")
+# ColumnLinkedMatrix with 2 nodes
 extractionTests$CUSTOM_OBJECT <- createLinkedMatrix(n, p, dimnames, "ColumnLinkedMatrix", 2L)
 source(
     file = system.file("test-suite", "crochet-extract.R", package = "crochet"),
     local = extractionTests
 )
 
-context("RowLinkedMatrix with 2 nodes")
+# RowLinkedMatrix with 2 nodes
 extractionTests$CUSTOM_OBJECT <- createLinkedMatrix(n, p, dimnames, "RowLinkedMatrix", 2L)
 source(
     file = system.file("test-suite", "crochet-extract.R", package = "crochet"),
@@ -34,7 +36,7 @@ replacementTests$OUT_OF_BOUNDS_INT <- (n * p) + 1L
 replacementTests$OUT_OF_BOUNDS_CHAR <- "snp1000_U"
 replacementTests$SKIP_OUT_OF_BOUNDS_TESTS <- TRUE
 
-context("ColumnLinkedMatrix with 2 nodes")
+# ColumnLinkedMatrix with 2 nodes
 replacementTests$CUSTOM_OBJECT <- createLinkedMatrix(n, p, dimnames, "ColumnLinkedMatrix", 2L)
 replacementTests$RESET <- function() {
     replacementTests$COMPARE_OBJECT <- createMatrix(n, p, dimnames)
@@ -45,7 +47,7 @@ source(
     local = replacementTests
 )
 
-context("RowLinkedMatrix with 2 nodes")
+# RowLinkedMatrix with 2 nodes
 replacementTests$CUSTOM_OBJECT <- createLinkedMatrix(n, p, dimnames, "RowLinkedMatrix", 2L)
 replacementTests$RESET <- function() {
     replacementTests$COMPARE_OBJECT <- createMatrix(n, p, dimnames)
