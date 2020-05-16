@@ -6,40 +6,52 @@ dimnames <- list(
 )
 
 # Test extraction
-CROCHET_EXTRACT_ENV <- new.env()
-CROCHET_EXTRACT_ENV$COMPARE_OBJECT <- createMatrix(n, p, dimnames)
-CROCHET_EXTRACT_ENV$OUT_OF_BOUNDS_INT <- (n * p) + 1L
-CROCHET_EXTRACT_ENV$OUT_OF_BOUNDS_CHAR <- "col_1000"
+extractionTests <- new.env()
+extractionTests$COMPARE_OBJECT <- createMatrix(n, p, dimnames)
+extractionTests$OUT_OF_BOUNDS_INT <- (n * p) + 1L
+extractionTests$OUT_OF_BOUNDS_CHAR <- "col_1000"
 
 context("ColumnLinkedMatrix with 2 nodes")
-CROCHET_EXTRACT_ENV$CUSTOM_OBJECT <- createLinkedMatrix(n, p, dimnames, "ColumnLinkedMatrix", 2L)
-source(system.file("test-suite", "crochet-extract.R", package = "crochet"), local = TRUE)
+extractionTests$CUSTOM_OBJECT <- createLinkedMatrix(n, p, dimnames, "ColumnLinkedMatrix", 2L)
+source(
+    file = system.file("test-suite", "crochet-extract.R", package = "crochet"),
+    local = extractionTests
+)
 
 context("RowLinkedMatrix with 2 nodes")
-CROCHET_EXTRACT_ENV$CUSTOM_OBJECT <- createLinkedMatrix(n, p, dimnames, "RowLinkedMatrix", 2L)
-source(system.file("test-suite", "crochet-extract.R", package = "crochet"), local = TRUE)
+extractionTests$CUSTOM_OBJECT <- createLinkedMatrix(n, p, dimnames, "RowLinkedMatrix", 2L)
+source(
+    file = system.file("test-suite", "crochet-extract.R", package = "crochet"),
+    local = extractionTests
+)
 
 
 # Test replacement
-CROCHET_REPLACE_ENV <- new.env()
-CROCHET_REPLACE_ENV$COMPARE_OBJECT <- createMatrix(n, p, dimnames)
-CROCHET_REPLACE_ENV$VALUE_POOL <- 0:9
-CROCHET_REPLACE_ENV$OUT_OF_BOUNDS_INT <- (n * p) + 1L
-CROCHET_REPLACE_ENV$OUT_OF_BOUNDS_CHAR <- "snp1000_U"
-CROCHET_REPLACE_ENV$SKIP_OUT_OF_BOUNDS_TESTS <- TRUE
+replacementTests <- new.env()
+replacementTests$COMPARE_OBJECT <- createMatrix(n, p, dimnames)
+replacementTests$VALUE_POOL <- 0:9
+replacementTests$OUT_OF_BOUNDS_INT <- (n * p) + 1L
+replacementTests$OUT_OF_BOUNDS_CHAR <- "snp1000_U"
+replacementTests$SKIP_OUT_OF_BOUNDS_TESTS <- TRUE
 
 context("ColumnLinkedMatrix with 2 nodes")
-CROCHET_REPLACE_ENV$CUSTOM_OBJECT <- createLinkedMatrix(n, p, dimnames, "ColumnLinkedMatrix", 2L)
-CROCHET_REPLACE_ENV$RESET <- function() {
-    CROCHET_REPLACE_ENV$COMPARE_OBJECT <- createMatrix(n, p, dimnames)
-    CROCHET_REPLACE_ENV$CUSTOM_OBJECT <- createLinkedMatrix(n, p, dimnames, "ColumnLinkedMatrix", 2L)
+replacementTests$CUSTOM_OBJECT <- createLinkedMatrix(n, p, dimnames, "ColumnLinkedMatrix", 2L)
+replacementTests$RESET <- function() {
+    replacementTests$COMPARE_OBJECT <- createMatrix(n, p, dimnames)
+    replacementTests$CUSTOM_OBJECT <- createLinkedMatrix(n, p, dimnames, "ColumnLinkedMatrix", 2L)
 }
-source(system.file("test-suite", "crochet-replace.R", package = "crochet"), local = TRUE)
+source(
+    file = system.file("test-suite", "crochet-replace.R", package = "crochet"),
+    local = replacementTests
+)
 
 context("RowLinkedMatrix with 2 nodes")
-CROCHET_REPLACE_ENV$CUSTOM_OBJECT <- createLinkedMatrix(n, p, dimnames, "RowLinkedMatrix", 2L)
-CROCHET_REPLACE_ENV$RESET <- function() {
-    CROCHET_REPLACE_ENV$COMPARE_OBJECT <- createMatrix(n, p, dimnames)
-    CROCHET_REPLACE_ENV$CUSTOM_OBJECT <- createLinkedMatrix(n, p, dimnames, "RowLinkedMatrix", 2L)
+replacementTests$CUSTOM_OBJECT <- createLinkedMatrix(n, p, dimnames, "RowLinkedMatrix", 2L)
+replacementTests$RESET <- function() {
+    replacementTests$COMPARE_OBJECT <- createMatrix(n, p, dimnames)
+    replacementTests$CUSTOM_OBJECT <- createLinkedMatrix(n, p, dimnames, "RowLinkedMatrix", 2L)
 }
-source(system.file("test-suite", "crochet-replace.R", package = "crochet"), local = TRUE)
+source(
+    file = system.file("test-suite", "crochet-replace.R", package = "crochet"),
+    local = replacementTests
+)
