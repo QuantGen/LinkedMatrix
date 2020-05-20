@@ -228,7 +228,7 @@ as.ColumnLinkedMatrix.list <- function(x, ...) {
 ColumnLinkedMatrix <- setClass("ColumnLinkedMatrix", contains = "list")
 
 setValidity("ColumnLinkedMatrix", function(object) {
-    nodes <- object@.Data
+    nodes <- slot(object, ".Data")
     # Stop unless there is more than one node
     if (length(nodes) == 0L) {
         return("there needs to be at least one node")

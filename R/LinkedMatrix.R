@@ -79,7 +79,7 @@ setMethod("initialize", "LinkedMatrix", function(.Object, ...) {
     if (length(nodes) == 0L) {
         nodes[[1L]] <- matrix()
     }
-    .Object@.Data <- nodes
+    slot(.Object, ".Data") <- nodes
     validObject(.Object)
     return(.Object)
 })
