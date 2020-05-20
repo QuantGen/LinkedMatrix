@@ -13,3 +13,8 @@ chunkRanges <- function(a, n, i = NULL) {
         sapply(seq_len(n), range, k, r)
     }
 }
+
+# Incomplete check if x is matrix-like. Should check for length as well.
+isMatrixLike <- function(x) {
+    length(dim(x)) == 2L
+}

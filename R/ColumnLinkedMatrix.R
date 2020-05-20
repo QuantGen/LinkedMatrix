@@ -234,7 +234,7 @@ setValidity("ColumnLinkedMatrix", function(object) {
         return("there needs to be at least one node")
     }
     # Stop if matrices are not matrix-like
-    if (!all(sapply(nodes, crochet:::isMatrixLike))) {
+    if (!all(sapply(nodes, isMatrixLike))) {
         return("arguments need to be matrix-like")
     }
     # Stop if dimensions of matrices do not match
