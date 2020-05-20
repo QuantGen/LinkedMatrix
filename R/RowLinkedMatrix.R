@@ -46,7 +46,7 @@ extract_vector.RowLinkedMatrix <- function(x, i, ...) {
         # use index() as rowsPerNode is needed to recalculate the single index)
         rowsPerNode <- sapply(x, nrow)
         nodeBoundaries <- c(0L, cumsum(rowsPerNode))
-        nodeMembership <- .bincode(ij$i, nodeBoundaries)
+        nodeMembership <- .bincode(ij[["i"]], nodeBoundaries)
         nodeList <- unique(nodeMembership)
         # If there are several nodes involved in the query, aggregate the
         # result in a separate matrix, otherwise pass through result
@@ -62,7 +62,7 @@ extract_vector.RowLinkedMatrix <- function(x, i, ...) {
                     nodeIndex <- nodeMembership == curNode
                     nodeIndex[is.na(nodeIndex)] <- FALSE
                     # Convert two-dimensional index back to one-dimensional index
-                    localIndex <- ((ij$j[nodeIndex] - 1L) * rowsPerNode[curNode] + ij$i[nodeIndex]) - nodeBoundaries[curNode]
+                    localIndex <- ((ij[["j"]][nodeIndex] - 1L) * rowsPerNode[curNode] + ij[["i"]][nodeIndex]) - nodeBoundaries[curNode]
                     Z[nodeIndex] <- x[[curNode]][localIndex]
                 }
             }
@@ -72,7 +72,7 @@ extract_vector.RowLinkedMatrix <- function(x, i, ...) {
                 Z <- rep(NA_integer_, length(i))
             } else {
                 # Convert two-dimensional index back to one-dimensional index
-                localIndex <- ((ij$j - 1L) * rowsPerNode[nodeList] + ij$i) - nodeBoundaries[nodeList]
+                localIndex <- ((ij[["j"]] - 1L) * rowsPerNode[nodeList] + ij[["i"]]) - nodeBoundaries[nodeList]
                 Z <- x[[nodeList]][localIndex]
             }
         }
@@ -101,13 +101,13 @@ replace_vector.RowLinkedMatrix <- function(x, i, ..., value) {
     # use index() as rowsPerNode is needed to recalculate the single index)
     rowsPerNode <- sapply(x, nrow)
     nodeBoundaries <- c(0L, cumsum(rowsPerNode))
-    nodeMembership <- .bincode(ij$i, nodeBoundaries)
+    nodeMembership <- .bincode(ij[["i"]], nodeBoundaries)
     nodeList <- unique(nodeMembership)
     # Replace elements in each node
     for (curNode in nodeList) {
         nodeIndex <- nodeMembership == curNode
         # Convert two-dimensional index back to one-dimensional index
-        localIndex <- ((ij$j[nodeIndex] - 1L) * rowsPerNode[curNode] + ij$i[nodeIndex]) - nodeBoundaries[curNode]
+        localIndex <- ((ij[["j"]][nodeIndex] - 1L) * rowsPerNode[curNode] + ij[["i"]][nodeIndex]) - nodeBoundaries[curNode]
         x[[curNode]][localIndex] <- value[nodeIndex]
     }
     return(x)
