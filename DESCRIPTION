@@ -1,5 +1,5 @@
 Package: LinkedMatrix
-Version: 1.3.1.9000
+Version: 1.4.0
 License: MIT + file LICENSE
 Title: Column-Linked and Row-Linked Matrices
 Description: A class that links matrix-like objects (nodes) by rows or by

@@ -1,4 +1,4 @@
-# LinkedMatrix 1.3.1.9000
+# LinkedMatrix 1.4.0
 
 * Follow [Bioconductor S4 practices][2]. If you have used `new()` to create
   `ColumnLinkedMatrix` and `RowLinkedMatrix` instances, please use the
